@@ -33,32 +33,37 @@ This knowledgebase is a collection of articles, tutorials, and other resources t
 - [1.6 Enterprise Security](level_1.md#1.6)
 
 ## Level 2 - Domain-Level (Solution) Architecture and Patterns
-### 2.1 Information and Data Architecture
-- [2.1.1 Domain glossary](level_2.md#2.1.1)
-- [2.1.2 Domain data and warehouse models](level_2.md#2.1.2)
+- [2.1 Business architecture](level_2.md#2.1)
+    - [2.1.1 Business processes](level_2.md#2.1.1)
+    - [2.1.2 Business glossary](level_2.md#2.1.2)
+    - [2.1.3 Business metrics](level_2.md#2.1.3)
+ 
+- [2.2 Information and Data Architecture](level_2.md#2.2)
+    - [2.2.1 Domain glossary](level_2.md#2.2.1)
+    - [2.2.2 Domain data and warehouse models](level_2.md#2.2.2)
 
-### 2.2 Infrastructure
-- [2.2.1 Environments, Workspaces + Clusters](level_2.md#2.2.1)
-- [2.2.2 Secrets](level_2.md#2.2.2)
-- [2.2.3 Storage](level_2.md#2.2.3)
-- [2.2.4 CICD + Repository](level_2.md#2.2.4)
-- [2.2.5 Observability](level_2.md#2.2.5)
-- [2.2.6 Networking](level_2.md#2.2.6)
-- [2.2.7 Orchestration](level_2.md#2.2.7)
+- [2.3 Infrastructure](level_2.md#2.3)
+    - [2.3.1 Environments, Workspaces + Clusters](level_2.md#2.3.1)
+    - [2.3.2 Secrets](level_2.md#2.3.2)
+    - [2.3.3 Storage](level_2.md#2.3.3)
+    - [2.3.4 CICD + Repository](level_2.md#2.3.4)
+    - [2.3.5 Observability](level_2.md#2.3.5)
+    - [2.3.6 Networking](level_2.md#2.3.6)
+    - [2.3.7 Orchestration](level_2.md#2.3.7)
 
-### 2.3 Data Engineering
-- [2.3.1 Ingestion](level_2.md#2.3.1)
-- [2.3.2 Transformation](level_2.md#2.3.2)
-  - [dbt standards](dbt_standards.md)
-- [2.3.3 Delivery](level_2.md#2.3.3)
+- [2.4 Data Engineering](level_2.md#2.4)
+    - [2.4.1 Ingestion](level_2.md#2.4.1)
+    - [2.4.2 Transformation](level_2.md#2.4.2)
+        - [dbt standards](dbt_standards.md)
+    - [2.4.3 Delivery](level_2.md#2.4.3)
 
-### 2.4 Data Product Architecture and Patterns
-- [2.4.1 Data Zone Architecture](level_2.md#2.4.1)
-- [2.4.2 Lakehouse Catalog to Storage Mapping](level_2.md#2.4.2)
+- [2.5 Data Product Architecture and Patterns](level_2.md#2.5)
+    - [2.5.1 Data Zone Architecture](level_2.md#2.5.1)
+    - [2.5.2 Lakehouse Catalog to Storage Mapping](level_2.md#2.5.2)
 
-### 2.5 Data access and governance 
-- [2.5.1 Data Access](level_2.md#2.5.1)
-- [2.5.2 Data Governance](level_2.md#2.5.2)
+- [2.6 Data access and governance](level_2.md#2.6)
+    - [2.6.1 Data Access](level_2.md#2.6.1)
+    - [2.6.2 Data Governance](level_2.md#2.6.2)
 
 
 

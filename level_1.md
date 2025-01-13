@@ -62,7 +62,19 @@ Allowing domains to access gold data from other domains and, where necessary, si
 
 
 ### 1.2 Enterprise Data Platform Reference Architecture
+
+
+
+
 ### 1.3 Enterprise (Logical) Data Warehouse Reference Architecture
+
+**Logical Data Warehouse**
+Provides access to data warehouse products from across data domains.
+
+<a href="images/enterprise_logical_data_warehouse_architecture.png" target="_blank">
+    <img src="images/enterprise_logical_data_warehouse_architecture.png" width="700" alt="Enterprise logical data warehouse architecture">
+</a>
+
 ### 1.4 Enterprise Metadata Architecture
 ### 1.5 Enterprise Information and Data Architecture
 ### 1.6 Enterprise Security
