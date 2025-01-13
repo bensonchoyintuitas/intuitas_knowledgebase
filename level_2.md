@@ -41,14 +41,15 @@ Data and analytics pipelines flow through data zones and stages. Conventions var
 
 **_Bronze_**
 
-Data is maintained in a primarily raw format, with the possibility of adding extra fields that might be useful later, such as for identifying duplicates. These fields could include the source file name and the load date.
-
 *Landing*
 
 Initial storage area for raw data from source systems.
+
+Data is maintained in a primarily raw format, with the possibility of adding extra fields that might be useful later, such as for identifying duplicates. These fields could include the source file name and the load date.
+
 - Partitioned by load date (YYYY/MM/DD/HH)
 - Raw data preserved in original format
-- Typically append-only for event data
+- Append-only immitable data.
 - Schema changes tracked but not enforced
 
 *ODS (Operational Data Store)*
@@ -86,8 +87,8 @@ Models represent business processes and entities, abstracted from the data sourc
 More complex business logic and transformations are applied e.g. common calculations and derivations. By separating enrichment from core staging, we can schedule these processes independently. This allows for flexibility in updating or refreshing only the parts of the data pipeline that need it, reducing unnecessary computation and improving efficiency. It also allows for change and versioning of those business rules with minimal impact on core staging objects.
 
 *Silver EDW Models*
-
 Silver - common Enterprise Data Warehoused models - fit for downstream consumption
+e.g Raw Vault, Business Vault, Enterprise and Domain base facts and dimensions.
 
 **_Gold_**
 
