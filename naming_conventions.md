@@ -21,7 +21,7 @@ All lower case: {organisation}_{functional area/domain}
 
 ## Databricks Catalog
 ### Catalog Names
-All lower case: {Domain}_{dev/test/prod/ext}
+All lower case: {Domain}_{dev/test/prod}
 
 *e.g. intuitas_domain3_dev*
 
@@ -34,17 +34,16 @@ All lower case: {Domain}_ext__{source_system}
 ### Schema and object names
 
 * Bronze schema naming: bronze__{sub-zone: ods/pds}__{source name}__{source channel}
+* Bronze object naming: {source object name}
 
 * Silver schema naming: silver__{source name}__{source name}__{source channel}
-
+...object naming:
+  
 * Silver edw schema naming: silver__{edw}__{domain_name}
-
+...object naming:
+  
 * Gold schema naming: gold__{domain name} optional: __{subdomain name(s)}
-
-
-
-
-- **Table Names**
+...object naming:
 
 ## Streaming
 - **Topic Names**
@@ -56,7 +55,7 @@ All lower case: {Domain}_ext__{source_system}
 ## dbt
 * All lower case
 
-### Documentation and Model Metadata
+### Documentation and model metadata
 
 Within each respective model folder (as needed)
 
@@ -69,7 +68,7 @@ Within each respective model folder (as needed)
 * yml: {schema}__sources.yml (one for each source schema) *e.g. bronze__ods__ambo_sim__kafka__local__sources.yml*
 
 ### Model Names
-* Bronze object naming: {source object name}
+* Bronze objects are likely to be referenced in sources/bronze
 * Silver base object naming: base__{source name}__{source channel}__{source object name}
 * Silver stage object naming: stg__{source name}__{source channel}__{source object name}__{ordinal}_{transformation description}
 * Silver enriched object naming: enr__  optional:__{source name}  optional:__{source channel} __{description} // alternatively - just use stg or edw
@@ -104,7 +103,6 @@ sources/gold/
 ├── models/bronze [domain/enterprise] 
 │   ├── _bronze.md
 │   ├── [domain/enterprise] sources
-.....
 ├── models/silver
 │   ├── _silver.md
 │   ├── edw__[domain_name] 
@@ -177,6 +175,7 @@ example
 
 
 ## CI/CD
+- Repo naming 
 - **Databricks Asset Bundles**
 
 ## Security
