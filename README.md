@@ -1,8 +1,12 @@
-# Intuitas Knowledgebase
+
+
+<a href="images/intuitas.png" target="_blank">
+    <img src="images/intuitas.png" width="200" alt="Intuitas Logo">
+</a> Knowledgebase
 
 This knowledgebase is a collection of articles, tutorials, and other resources that describe Intuitas' approach to designing and delivering Data and AI solutions.
 
-# Intuitas Knowledgebase Table of Contents
+# Table of Contents
 
 ## Standards and conventions
 - [Naming](naming_conventions.md)   
