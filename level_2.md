@@ -26,7 +26,9 @@
 #### 2.3.3 Delivery
 
 ### 2.4 Data Architecture and Patterns
+
 #### 2.4.1 Data zones and stages 
+
 Data and analytics pipelines flow through data zones and stages. Conventions vary across organisations, however the following is an effective approach:
 
 * Top level zones follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
@@ -39,69 +41,114 @@ Data and analytics pipelines flow through data zones and stages. Conventions var
 <br>
 <br>
 
-**_Bronze_**
+#### **Metadata**
 
-*Landing*
+Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets
 
-Initial storage area for raw data from source systems.
 
-Data is maintained in a primarily raw format, with the possibility of adding extra fields that might be useful later, such as for identifying duplicates. These fields could include the source file name and the load date.
+#### **Bronze**
 
-- Partitioned by load date (YYYY/MM/DD/HH)
-- Raw data preserved in original format
-- Append-only immitable data.
-- Schema changes tracked but not enforced
+The Bronze layer stores raw, immutable data as it is ingested from source systems.
+
+*(Persistent) Landing*
+
+- Initial storage area for raw data from source systems.
+- Stores raw events as JSON or CDC/tabular change records.
+- Data is maintained in a primarily raw format, with the possibility of adding extra fields that might be useful later, such as for identifying duplicates. These fields could include the source file name and the load date.
+
+    - Partitioned by load date (YYYY/MM/DD/HH)
+    - Raw data preserved in original format
+    - Append-only immitable data.
+    - Schema changes tracked but not enforced
 
 *ODS (Operational Data Store)*
 
-Current state of source system data with latest changes applied.
-- Maintains latest version of each record
-- Supports merge operations for change data capture (CDC)
-- Preserves source system relationships
+- Current state of source system data with latest changes applied.
+    - Maintains latest version of each record
+    - Supports merge operations for change data capture (CDC)
+    - Preserves source system relationships
 
 *PDS (Persistent Data Store)*
 
-Historical storage of all changes over time.
-- Append-only for all changes
-- Supports point-in-time analysis
-- Configurable retention periods
+- Historical storage of all changes over time.
+    - Append-only for all changes
+    - Supports point-in-time analysis
+    - Configurable retention periods
+    - As these may be available in landing - may be realised through views over landing
 
 
-**_Silver_**
-
-Data from different source systems (aside from reference data) remains source-centric and is generally not combined yet.
+#### **Silver**
+The Silver layer is source centric and focuses on transforming raw data into cleaned, enriched, and validated datasets.
 
 *Base Models*
 
-Focus on data cleaning and standardisation from the source system of base objects.
-Data is filtered, cleaned, and augmented. This process may involve deduplicating the data, handling missing information, removing incorrect data, or fixing corrupted entries.
-Data validation rules are applied, which may include ensuring there are no null values, verifying the uniqueness of data, confirming that data is of the correct type and format, and conducting logical checks.
+- Representation of source data with no changes. Used as a foundation for staging models as well as data quality checks.
+
 
 *Staging Models*
 
-Initial transformations are applied, preparing data for consumption or optional enrichment.
-Models represent business processes and entities, abstracted from the data sources that they are based on. Desensitized views may be provided.
+- Source-system and object centric transformations that are core to all downstream consumption.
+
+- Examples of transformations:
+    - `01_renamed_and_typed`
+    - `02_deduped`
+    - `03_cleaned`
+    - `04_filtered/split`
+    - `05_column_selected`
+    - `06_business_validated`
+    - `07_desensitised`
 
 *Enrichment Models*
 
-More complex business logic and transformations are applied e.g. common calculations and derivations. By separating enrichment from core staging, we can schedule these processes independently. This allows for flexibility in updating or refreshing only the parts of the data pipeline that need it, reducing unnecessary computation and improving efficiency. It also allows for change and versioning of those business rules with minimal impact on core staging objects.
+Still source-centric, however:
+- more complex business logic and transformations are applied e.g. common calculations and derivations. 
+- may combine multiple staging objects from the same source
 
-*Silver EDW Models*
-Silver - common Enterprise Data Warehoused models - fit for downstream consumption
-e.g Raw Vault, Business Vault, Enterprise and Domain base facts and dimensions.
+- By separating enrichment from core staging, we can schedule these processes independently. This allows for flexibility in updating or refreshing only the parts of the data pipeline that need it, reducing unnecessary computation and improving efficiency. It also allows for change and versioning of those business rules with minimal impact on core staging objects.
 
-**_Gold_**
+*Source Reference Data*
 
-Business-Domain level transformation and aggregation is applied for specific use cases.
+- For convenience, reference data specific to the source can be segregated here and aligned to standards and downstream needs.
 
+*Raw Vault*
+
+- Data vault 2.0 aligned raw data warehouse.
+
+#### **Gold**
+
+The Gold layer focuses on business-ready datasets, aggregations, and reporting structures.
+
+*Business Vault*
+
+- Data vault 2.0 aligned business data warehouse where business rules and transformations are applied.
 
 *Intermediate Models*
-These act as building blocks for marts, transforming and aggregating data further. Then be thought of as mart staging
 
-*Mart Models*
-Marts deliver data in a format ready for analysis and reporting. Splitting them by domain (e.g., finance, marketing) helps maintain clarity.
+- These act as building blocks for marts, transforming and aggregating data further. Then be thought of as mart staging  https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate
 
-One domain may reference marts from other domains.
+- Business-specific transformations such as:
+    - Pivoting
+    - Aggregation
+    - Joining
+    - Funnel creation
+    - Conformance
+    - Desensitization
+
+*Enterprise Reference Data*
+
+- Reference data, independent of source can be aggregated here for broad consumption.
+
+*Marts - Facts and dimensions*
+
+- Kimball style marts that represent business entities and processes. They may 
+    * serve foundational or narrow requirements. 
+    * be scoped to specific systems or conformed across the enterprise
+
+*Marts - Denormalised*
+
+- Single table / view objects that combine data from multiple objects (e.g. facts and dimensions) 
+
+
 
 
 #### 2.4.2 Lakehouse Catalog to Storage Mapping

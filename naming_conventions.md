@@ -4,7 +4,7 @@
 ## Mesh
 ### Domain Names
 
-All lower case: {organisation}_{functional area/domain}
+All lower case: {organisation}_{functional area/domain}_{subdomain}
 
 *e.g. intuitas_domain3*
 
@@ -33,17 +33,86 @@ All lower case: {Domain}_ext__{source_system}
 
 ### Schema and object names
 
-* Bronze schema naming: bronze__{sub-zone: ods/pds}__{source name}__{source channel}
-* Bronze object naming: {source object name}
+#### Metadata
 
-* Silver schema naming: silver__{source name}__{source name}__{source channel}
-...object naming:
-  
-* Silver edw schema naming: silver__{edw}__{domain_name}
-...object naming:
-  
-* Gold schema naming: gold__{domain name} optional: __{subdomain name(s)}
-...object naming:
+Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets
+
+1. **Engineering - ingestion framework**:
+   - Naming convention: `meta__[domain]__[function/descriptor]`
+   
+
+#### Bronze (Raw)
+The Bronze layer stores raw, immutable data as it is ingested from source systems.
+
+All schemas are may be optionally prefixed with `bronze__`
+
+1. **Persistent Landing**:
+   - N/A (see file naming)
+
+2. **Operational Data Store (ODS)**:
+   - Naming convention: `ods__[source_system]__[source_channel]__[object]`
+
+3. **Persistent Data Store (PDS)**:
+   - Naming convention: `pds__[source_system]__[source_channel]__[object]`
+
+
+#### Silver (Source-Centric - Filtered, Cleaned, Augmented)
+The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets.
+
+All schemas are may be optionally prefixed with `silver__`
+
+1. **Base Views**:
+   - Naming convention: `base__[source_system]__[source_channel]__[object]`
+
+2. **Staging Objects (Optional)**:
+   - Naming convention: `stg__[source_system]__[source_channel]__[object]__[n]__[transformation]`
+   - Examples of transformations:
+     - `01_renamed_and_typed`
+     - `02_deduped`
+     - `03_cleaned`
+     - `04_filtered/split`
+     - `05_column_selected`
+     - `06_business_validated`
+     - `07_desensitised`
+
+3. **Enriched Data**:
+   - Naming convention: `enr__[source_system]__[source_channel]__[new_object]`
+
+4. **Reference Data**:
+   - Naming convention: `ref__[source]__[entity]`
+
+5. **Raw Vault**:
+   - Naming convention: `edw_rv__[object(s)]`
+
+
+#### Gold (Business-Centric - Optionally Source-Decomposed)
+The Gold layer focuses on business-ready datasets, aggregations, and reporting structures.
+
+All schemas are may be optionally prefixed with `gold__`
+
+1. **Business Vault**:
+   - Naming convention: `edw_bv__[object(s)]`
+
+2. **Intermediate Models**:
+   - Naming convention: `int__[domain]__[entity]__[optional_transformation]`
+   - Purpose: Business-specific transformations such as:
+     - Pivoting
+     - Aggregation
+     - Joining
+     - Funnel creation
+     - Conformance
+     - Desensitization
+
+3. **Dimensions and Facts**:
+   - Naming convention: `dim__[domain]__[object]__[optional_source_system]__[optional_source_channel]`
+   - Fact tables follow the same convention: `fact__[domain]__[object]`
+
+3. **Denormalized Views (One Big Table)**:
+   - Naming convention: `mart__[domain]__[product]__[optional_source_system]__[optional_source_channel]__[transformation]`
+
+4. **Reference Data**:
+   - Naming convention: `ref__[domain]__[entity]`
+
 
 ## Streaming
 - **Topic Names**
@@ -51,6 +120,10 @@ All lower case: {Domain}_ext__{source_system}
 ## Storage Account
 - **File**
 - **Folder**
+
+
+
+
 
 ## dbt
 * All lower case
@@ -75,7 +148,6 @@ Within each respective model folder (as needed)
 * Silver edw object naming: edw___{domain_name}__{description}
 * Gold object name: mart__{domain name} optional: __{subdomain name(s)}__{description}
 
-### Zone and stage folder structures
 
 ```yml
 models/bronze/
