@@ -23,7 +23,10 @@ This knowledgebase is a collection of articles, tutorials, and other resources t
 ### 1.6 Enterprise Security
 
 ## Level 2 - Domain-Level (Solution) Architecture and Patterns
-![Platform and Pipeline reference architecture](./images/platform_and_pipeline_reference_architecture.png)
+<a href="images/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+    <img src="images/logical_platform_and_pipeline_reference_architecture.png" width="500" alt="Platform and Pipeline Reference Architecture">
+</a>
+
 ### 2.1 Information and Data Architecture
 ### 2.1.1 Domain glossary
 ### 2.1.2 Domain data and warehouse models
