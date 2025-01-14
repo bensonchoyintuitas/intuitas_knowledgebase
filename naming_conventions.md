@@ -1,6 +1,26 @@
 # Naming Conventions
 [Return to home](README.md)
 
+## Table of Contents
+- [Mesh](#mesh)
+   - [Domain Names](#domain-names)
+- [Platform](#platform)
+   - [Cloud Resource Names](#cloud-resource-names)
+   - [Storage Account Names](#storage-account-names)
+   - [File Names](#file-names)
+   - [Folder Names](#folder-names)
+- [Databricks Engineering](#databricks-engineering)
+   - [Workspace Names](#workspace-names)
+   - [Workflow Names](#workflow-names)
+   - [Cluster Names](#cluster-names)
+- [Databricks Catalog](#databricks-catalog)
+   - [Catalog Names](#catalog-names)
+   - [External (federated) Catalog Names](#external-federated-catalog-names)
+   - [Schema and object names](#schema-and-object-names)
+   - [Metadata](#metadata)
+   - [Bronze (Raw)](#bronze-raw)
+
+
 ## Mesh
 ### Domain Names
 
@@ -13,6 +33,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 - **Storage Account Names**
 - **File Names**
 - **Folder Names**
+
 
 ## Databricks Engineering
 - **Workspace Names**
