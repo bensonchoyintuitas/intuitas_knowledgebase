@@ -1,11 +1,34 @@
-
 # Level 1 - Enterprise-Level 
 [Return to home](README.md)
 
-## 1.1 Enterprise Domain Topology
+# Table of Contents
+
+- [Enterprise Domain Topology](#enterprise-domain-topology)
+    - [Key concepts](#key-concepts)
+        - [Domain](#domain)
+        - [Subdomain](#subdomain)
+        - [Domain-Centric Design](#domain-centric-design) 
+        - [Data Mesh](#data-mesh)
+        - [Domain Topology](#domain-topology)
+        - [Data Fabric](#data-fabric)
+        - [Data Mesh vs Fabric](#data-mesh-vs-fabric)
+    - [Reference topologies](#reference-topologies)
+    - [Hybrid federated mesh topology](#hybrid-federated-mesh-topology)
+
+- [Enterprise Data Platform Reference Architecture](#enterprise-data-platform-reference-architecture)
+
+- [Enterprise (Logical) Data Warehouse Reference Architecture](#enterprise-logical-data-warehouse-reference-architecture)
+    - [Logical Data Warehouse topology](#logical-data-warehouse-topology)
+
+- [Enterprise Information and Data Architecture](#enterprise-information-and-data-architecture)
+
+- [Enterprise Metadata Architecture](#enterprise-metadata-architecture)
+    - [Databricks Unity Catalog Metastore](#databricks-unity-catalog-metastore)
+
+- [Enterprise Security](#enterprise-security)
 
 
-### **1.1.1 Key concepts**
+### Key concepts
 
 **Domain**: 
 
@@ -49,7 +72,7 @@ A data fabric is a unified platform that integrates data from various sources an
 A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.
 
 
-### **1.1.2 Reference topologies**
+### Reference topologies
 
 - Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
 - The arrangement of domains:
@@ -66,7 +89,7 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 <br>
 
 
-### **1.1.2 Hybrid federated mesh topology**
+### Hybrid federated mesh topology
 
 
 **Hybrid of Data Fabric and Data Mesh:**
@@ -102,7 +125,7 @@ Maintaining a local bronze layer for non-enterprise-distributed data enables dom
 Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.
 
 
-## 1.2 Enterprise Data Platform Reference Architecture
+## Enterprise Data Platform Reference Architecture
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
 Example:
@@ -112,7 +135,7 @@ Example:
 <br>
 <br>
 
-## 1.3 Enterprise (Logical) Data Warehouse Reference Architecture
+## Enterprise (Logical) Data Warehouse Reference Architecture
 
 
 **Logical Data Warehouse topology**
@@ -125,7 +148,7 @@ Example:
     <img src="images/enterprise_logical_data_warehouse_architecture.png" width="700" alt="Enterprise logical data warehouse architecture">
 </a>
 
-## 1.4 Enterprise Information and Data Architecture
+## Enterprise Information and Data Architecture
 
 Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
 - Existing enterprise information, conceptual and logical models
@@ -141,13 +164,22 @@ Other secondary considerations:
 - Integration models
 
 
-## 1.5 Enterprise Metadata Architecture
+## Enterprise Metadata Architecture
 
 - Description of applicable metadata standards
 - Enterprise Metadata Architecture and Metamodel
 - Description of metadata governance, stewards and processes
 
-## 1.6 Enterprise Security
+### Databricks Unity Catalog Metastore
+
+- Only one metastore exists per region
+[Documentation](https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/create-metastore#add-storage)
+
+- Metastore-level storage accounts are used to store the metastore and its associated data. 
+- Recommendation:
+    - Use a dedicated storage account at the catalog level instead of metastore-level storage accounts.
+
+## Enterprise Security
 
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.

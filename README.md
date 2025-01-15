@@ -1,5 +1,3 @@
-
-
 <a href="images/intuitas.png" target="_blank">
     <img src="images/intuitas.png" width="200" alt="Intuitas Logo">
 </a> 
@@ -24,53 +22,66 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 
 
 ## Level 0 - Organisational and Domain-Level Context
-- [0.1 Org + Domain Definition](level_0.md#0.1)
-- [0.2 Strategies and Objectives](level_0.md#0.2)
-- [0.3 Key Systems and Data Assets](level_0.md#0.3)
-- [0.4 Team Capabilities and Roles](level_0.md#0.4)
-- [0.5 Governance Structures](level_0.md#0.5)
+- [Org + Domain Definition](level_0.md#org-domain-definition)
+- [Strategies and Objectives](level_0.md#strategies-and-objectives)
+- [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
+- [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
+- [Governance Structures](level_0.md#governance-structures)
 
 ## Level 1 - Enterprise-Level architectures
-- [1.1 Enterprise Domain Topology](level_1.md#1.1)
-    - [1.1.1 Key concepts](level_1.md#1.1.1)    
-    - [1.1.2 Reference topologies](level_1.md#1.1.2)
-    - [1.1.3 Hybrid federated mesh topology](level_1.md#1.1.3)
+- [Enterprise Domain Topology](level_1.md#enterprise-domain-topology)
+    - [Key concepts](level_1.md#key-concepts)
+        - [Domain](level_1.md#domain)
+        - [Subdomain](level_1.md#subdomain)
+        - [Domain-Centric Design](level_1.md#domain-centric-design) 
+        - [Data Mesh](level_1.md#data-mesh)
+        - [Domain Topology](level_1.md#domain-topology)
+        - [Data Fabric](#level_1.md#data-fabric)
+        - [Data Mesh vs Fabric](#level_1.md#data-mesh-vs-fabric)
+    - [Reference topologies](level_1.md#reference-topologies)
+    - [Hybrid federated mesh topology](level_1.md#hybrid-federated-mesh-topology)
 
-- [1.2 Enterprise Data Platform Reference Architecture](level_1.md#1.2)
-- [1.3 Enterprise (Logical) Data Warehouse Reference Architecture](level_1.md#1.3)
-- [1.4 Enterprise Information and Data Architecture](level_1.md#1.4)
-- [1.5 Enterprise Metadata Architecture](level_1.md#1.5)
-- [1.6 Enterprise Security](level_1.md#1.6)
+- [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture)
+
+- [Enterprise (Logical) Data Warehouse Reference Architecture](level_1.md#enterprise-logical-data-warehouse-reference-architecture)
+    - [Logical Data Warehouse topology](level_1.md#logical-data-warehouse-topology)
+
+- [Enterprise Information and Data Architecture](level_1.md#enterprise-information-and-data-architecture)
+
+- [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)
+    - [Databricks Unity Catalog Metastore](level_1.md#databricks-unity-catalog-metastore)
+
+- [Enterprise Security](level_1.md#enterprise-security)
 
 ## Level 2 - Domain-Level (Solution) architectures
-- [2.1 Business architecture](level_2.md#2.1)
-    - [2.1.1 Business processes](level_2.md#2.1.1)
-    - [2.1.2 Business glossary](level_2.md#2.1.2)
-    - [2.1.3 Business metrics](level_2.md#2.1.3)
+- [Business architecture](level_2.md#business-architecture)
+    - [Business processes](level_2.md#business-processes)
+    - [Business glossary](level_2.md#business-glossary)
+    - [Business metrics](level_2.md#business-metrics)
 
-- [2.2 Infrastructure](level_2.md#2.2)
-    - [2.2.1 Environments, Workspaces + Clusters](level_2.md#2.2.1)
-    - [2.2.2 Secrets](level_2.md#2.2.2)
-    - [2.2.3 Storage](level_2.md#2-2-3)
-    - [2.2.4 CICD + Repository](level_2.md#2.2.4)
-    - [2.2.5 Observability](level_2.md#2.2.5)
-    - [2.2.6 Networking](level_2.md#2.2.6)
-    - [2.2.7 Orchestration](level_2.md#2.2.7)
+- [Infrastructure](level_2.md#infrastructure)
+    - [Environments, Workspaces + Clusters](level_2.md#environments-workspaces-clusters)
+    - [Secrets](level_2.md#secrets)
+    - [Storage](level_2.md#storage)
+    - [CICD + Repository](level_2.md#cicd-repository)
+    - [Observability](level_2.md#observability)
+    - [Networking](level_2.md#networking)
+    - [Orchestration](level_2.md#orchestration)
 
-- [2.3 Data and information models](level_2.md#2.3)
-    - [2.3.1 Domain glossary](level_2.md#2.3.1)
-    - [2.3.2 Domain data and warehouse models](level_2.md#2.3.2)
+- [Data and information models](level_2.md#data-and-information-models)
+    - [Domain glossary](level_2.md#domain-glossary)
+    - [Domain data and warehouse models](level_2.md#domain-data-warehouse-models)
 
-- [2.4 Data Architecture](level_2.md#2.4)
-    - [2.4.1 Data zones and stages](level_2.md#2.4.1)
-    - [2.4.2 Lakehouse Catalog to Storage Mapping](level_2.md#2.4.2)
+- [Data Architecture](level_2.md#data-architecture)
+    - [Data zones and stages](level_2.md#data-zones-stages)
+    - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-storage-mapping)
 
-- [2.5 Data Engineering](level_2.md#2.5)
-    - [2.5.1 Ingestion](level_2.md#2.5.1)
-    - [2.5.2 Transformation](level_2.md#2.5.2)
-    - [2.5.3 Delivery](level_2.md#2.5.3)
+- [Data Engineering](level_2.md#data-engineering)
+    - [Ingestion](level_2.md#ingestion)
+    - [Transformation](level_2.md#transformation)
+    - [Delivery](level_2.md#delivery)
 
-- [2.6 Data access and governance](level_2.md#2.6)
+- [Data access and governance](level_2.md#data-access-governance)
 
 
 ## Naming standards and conventions
