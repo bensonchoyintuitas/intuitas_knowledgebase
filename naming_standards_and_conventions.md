@@ -41,19 +41,66 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
 ## **Cloud Resources**
 
+## VNET
+
+- Name: vn-{organisation_name}-{domain_name}
+
+   *e.g. vn-intuitas-domain3*
+
+### Resource Groups
+
+- Name: rg-{organisation_name}-{domain_name}
+
+   *e.g. rg-intuitas-domain3*
+
+### Databricks workspace
+
+- Name: ws-{organisation_name}-{domain_name}
+   
+   *e.g. ws-intuitas-domain3*
+
+### Key vault
+
+- Name: kv-{organisation_name}-{domain_name}
+
+   *e.g. kv-intuitas-domain3*
+
+#### Secrets
+
+- Name: {secret_name}
+
+
+### Entra Group Names
+
+- Name: eg-{organisation_name}-{domain_name}
+
+   *e.g. eg-intuitas-domain3*
+
+
+### Azure Data Factory (ADF)
+
+- Name: adf-{organisation_name}-{domain_name}
+
+   *e.g. adf-intuitas-domain3*
+
+### SQL Server
+
+- Name: sql-{organisation_name}-{domain_name}
+
+   *e.g. sql-intuitas-domain3*
+
+#### SQL Database
+
+- Name: sqldb-{purpose}-{organisation_name}-{domain_name}
+
+   *e.g. sqldb-metadata-intuitas-domain3*
+
+
 ### Storage
 
 #### Lakehouse storage
 
-Lakehouse data for all environments and zones, by default, share a single storage account with LRS or GRS redundancy.
-This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
-
-- Resource: ADLSGen2
-- Generic storage account name: dl{organisation_name}{domain_name}
-- Tier: Standard/Premium (depends on workload)
-- Redundancy: 
-   - Minimum ZRS or GRS for prod
-   - Minimum LRS for poc, dev, test and preprod
+- Lakehouse storage account name: dl{organisation_name}{domain_name}
 
 ##### Lakehouse storage containers
 - Name: {environment} (dev/test/preprod/prod)
@@ -88,6 +135,7 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 No standard naming conventions for files and folders.
 
 
+
 ## Databricks
 
 - Workspace name: ws-{organisation_name}_{domain_name}
@@ -119,8 +167,7 @@ Recommendations:
 
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 
-- Ensure dbt’s dbt_project.yml and environment variables align with storage location.
-
+- Ensure dbt’s dbt_project.yml and environment variables align with storage locations.
 
 
 #### Metadata Schemas and Objects
@@ -280,9 +327,7 @@ Within each respective model folder (as needed)
 
    *e.g. bronze__ods__ambo_sim__kafka__local__sources.yml*
 
-
-
-### Model Folders
+### Model folders
 
 ```yml
 models/bronze/
@@ -395,13 +440,63 @@ example
 
 
 ## CI/CD
-- Repo naming 
-- **Databricks Asset Bundles**
+
+### Repository naming 
+
+- All lowercase with hyphens as separators
+- Format: {org}-{domain}-{purpose}-{optional:descriptor}
+
+   Examples:
+   - intuitas-domain3-dbt
+   - intuitas-domain3-ingestion-framework  
+   - intuitas-domain3-cicd-templates
+   - intuitas-domain3-infrastructure
+
+### Branch naming
+
+- All lowercase with hyphens as separators
+- Naming convention: {type}-{optional:ticket-id}-{description}
+
+   Types:
+   - feature: New functionality
+   - bugfix: Bug fixes
+   - hotfix: Critical fixes for production
+   - release: Release branches
+   - docs: Documentation updates only
+   - refactor: Code improvements with no functional changes
+   - test: Test-related changes
+
+   Examples:
+   - feature-eng123-add-new-data-source
+   - bugfix-eng456-fix-null-values
+   - hotfix-prod-outage-fix
+   - release-v2.1.0
+   - docs-update-readme
+   - refactor-optimize-transforms
+   - test-add-integration-tests
+
+### Branch lifecycle
+
+#### Simple branch lifecycle:
+- main/master: Primary branch
+- branch: Short-lived branches development branch, merged or rebased to main/master
+
+#### Comprehensive team branch lifecycle:
+1. Main/master: Primary branch
+2. Development: Active development branch
+3. Feature/bugfix: Short-lived branches merged to development
+4. Release: Created from development, merged to main/master
+5. Hotfix: Created from main/master for urgent fixes
+
+
+
+## Databricks Asset Bundles
+
+Databricks asset bundles are encouraged for all Databricks projects.
 
 ## Security
-- **Key Vault Names**
-- **Secret Names**
-- **Entra Group Names**
+### Entra Group Names
+TBC
 
 ## Policies
 - **Data Retention**

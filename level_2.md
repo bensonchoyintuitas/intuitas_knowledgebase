@@ -1,45 +1,204 @@
 # Level 2 - Domain-Level (Solution) Architecture and Patterns
 [Return to home](README.md)
 
+## Table of Contents
+- [2.1 Business architecture](level_2.md#21)
+    - [2.1.1 Business processes](level_2.md#211)
+    - [2.1.2 Business glossary](level_2.md#212)
+    - [2.1.3 Business metrics](level_2.md#213)
+
+- [2.2 Infrastructure](level_2.md#22)
+    - [2.2.1 Environments, Workspaces + Clusters](level_2.md#221)
+    - [2.2.2 Secrets](level_2.md#222)
+    - [2.2.3 Storage](level_2.md#storage)
+    - [2.2.4 CICD + Repository](level_2.md#224)
+    - [2.2.5 Observability](level_2.md#225)
+    - [2.2.6 Networking](level_2.md#226)
+    - [2.2.7 Orchestration](level_2.md#227)
+
+- [2.3 Data and information models](level_2.md#23)
+    - [2.3.1 Domain glossary](level_2.md#231)
+    - [2.3.2 Domain data and warehouse models](level_2.md#232)
+
+- [2.4 Data Architecture](level_2.md#24)
+    - [2.4.1 Data zones and stages](level_2.md#241)
+    - [2.4.2 Lakehouse Catalog to Storage Mapping](level_2.md#242)
+
+- [2.5 Data Engineering](level_2.md#25)
+    - [2.5.1 Ingestion](level_2.md#251)
+    - [2.5.2 Transformation](level_2.md#252)
+    - [2.5.3 Delivery](level_2.md#253)
+
+- [2.6 Data access and governance](level_2.md#26)
+
+
 Domain-level solutions are instantiations of the enterprise-level reference architecture. (See [1.2 Enterprise Data Platform Reference Architecture](level_1.md#1.2))
 
-Example:
+Example reference architecture:
+
 <a href="images/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
     <img src="images/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
 </a>
 
-
-## 2.1 Infrastructure
-### 2.1.1 Environments, Workspaces + Clusters
-### 2.1.2 Secrets
-### 2.1.3 Storage
-### 2.1.4 CICD + Repository
-### 2.1.5 Observability
-### 2.1.6 Networking
-### 2.1.7 Orchestration
+## 2.1 Business architecture
+### 2.1.1 Business processes
+Business processes are the activities and tasks that are performed to achieve the goals of the business.
+Understanding them is necessary to understand:
+- the context in which data is captured and used
+- concepts and entities that are relevant to the domain
+- the relationships between different processes and data
 
 
+### 2.1.2 Business glossary
 
-## 2.2 Data and information models
+A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
+
+### 2.1.3 Business metrics
+Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
+- name
+- definition
+- formula (with reference to data elements and definitions in the business glossary)
+- dimensions
+- source(s)
+- metric owner
+- frequency
+
+## 2.2 Infrastructure
+> This section is a work in progress
+### 2.2.1 Environments, Workspaces + Storage
+<a href="images/workspaces_environments_storage.png" target="_blank">
+    <img src="images/workspaces_environments_storage.png" width="700" alt="Workspaces, Environments and Storage">
+</a>
+<br>
+<br>
+
+This diagram illustrates a **data lakehouse architecture** with the following components and flow:
+
+
+#### **1. Data Sources**
+- Data originates from multiple sources such as:
+  - Databases
+  - Kafka or event streaming
+  - APIs or Python scripts
+  - SharePoint (or similar sources)
+
+
+#### **2. Enterprise Engineering Layer**
+- Centralized enterprise workspaces are managed here with multiple environments. 
+While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:
+- Each workspace contains:
+- Data from prod catalogs can be **shared** to other domains.
+
+
+#### **3. Domain-Specific Layer**
+- Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. **PROD**, **TEST**, and **DEV** storage containers within a single lakehouse storage account for domain-specific data management.
+  - Local **Bronze** for domain-specific engineering of domain-local data (not managed by enterprise engineering)
+- Data from prod catalogs can be **shared** to other domains.
+
+#### **4. Data Catalog**
+- A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:
+  - Enables discovery and governance of data.
+- Optional external catalog storage.
+
+
+---
+
+### 2.2.2 Secrets
+> This section is a work in progress
+- Management
+- Areas of use
+
+
+### Storage
+
+#### Lakehouse storage
+
+Lakehouse data for all environments and zones, by default, share a single storage account with LRS or GRS redundancy.
+This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
+
+- Resource: ADLSGen2
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+
+#### Generic Blob storage
+
+Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.
+
+- Resource: ADLSGen2
+- Generic storage account name: sa{organisation_name}{domain_name}{functional_description}
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+
+### 2.2.4 CICD + Repository
+> This section is a work in progress
+
+#### Tools
+- Github
+- Azure Devops
+
+#### Repositories
+
+- Infrastructure
+- dbt projects (separate for each domain)
+- Data engineering code (separate for each domain) using Databricks Asset Bundles
+
+### 2.2.5 Observability
+
+#### Tools
+
+- dbt observability - Elementary
+- Databricks observability - Databricks monitoring dashboards
+- ADF - Native adf monitoring
+
+### 2.2.6 Networking
+
+By default - all resources reside within the same VNet with private endpoints.
+
+Service endpoints and policies are enabled.
+
+### 2.2.7 Orchestration
+
+#### Tools
+
+- Azure Data Factory (if needed)
+- Databricks Workflows (for both databricks and dbt)
+
+
+### 2.2.8 Security
+
+#### Tools
+
+- Azure Entra
+- Azure Key Vault
+- Unity Catalog 
+    - System access reports
+
+## 2.3 Data and information models
 
 Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. 
 
 See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
-### 2.2.1 Domain glossary
+### 2.3.1 Domain glossary
 - Expand on the enterprise glossary and add domain specific terms and definitions.
     - In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.
     - In cases where definitions are conflicting, governance should be applied to resolve the conflict.
 
-### 2.2.2 Domain data and warehouse models
+### 2.3.2 Domain data and warehouse models
 - Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.
 - Conformed dimensions may serve as a bridge between domains for common entities.
 
 
 
-## 2.3 Data Architecture
+## 2.4 Data Architecture
 
-### 2.3.1 Data zones and stages 
+### 2.4.1 Data zones and stages 
 
 Data and analytics pipelines flow through data zones and stages. Conventions vary across organisations, however the following is an effective approach:
 
@@ -161,7 +320,7 @@ The Gold layer focuses on business-ready datasets, aggregations, and reporting s
 - Single table / view objects that combine data from multiple objects (e.g. facts and dimensions) 
 
 
-### 2.3.2 Lakehouse Catalog to Storage Mapping
+### 2.4.2 Lakehouse Catalog to Storage Mapping
 
 Unity catalog objects (catalogs, schemas, objects) are mapped to:
 - Storage accounts
@@ -178,8 +337,12 @@ Example:
 <br>
 <br>
 
-## 2.4 Data Engineering
-### 2.4.1 Ingestion
+## 2.5 Data Engineering
+### 2.5.1 Ingestion
+
+
+> This section is a work in progress
+
 
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing zone.
 
@@ -206,12 +369,13 @@ Rejected patterns:
 1. ADF -> Deltalake (does not support unity catalog)
 
 
-### 2.4.2 Transformation
+### 2.5.2 Transformation
+> This section is a work in progress
 - [dbt standards](dbt_standards.md)
-### 2.4.3 Delivery
+### 2.5.3 Delivery
+> This section is a work in progress
 
-
-### 2.5 Data access and governance
-
+### 2.6 Data access and governance
+> This section is a work in progress
 
 
