@@ -42,19 +42,20 @@ Example reference architecture:
 
 ## Business architecture
 ### Business processes
+---
 Business processes are the activities and tasks that are performed to achieve the goals of the business.
 Understanding them is necessary to understand:
 - the context in which data is captured and used
 - concepts and entities that are relevant to the domain
 - the relationships between different processes and data
 
----
 ### Business glossary
+---
 
 A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
 
----
 ### Business metrics
+---
 Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
 - name
 - definition
@@ -64,7 +65,6 @@ Metrics are the measurements of the performance of the business processes. They 
 - metric owner
 - frequency
 
----
 ## Infrastructure
 > This section is a work in progress
 ### Environments, Workspaces + Storage
@@ -103,14 +103,14 @@ While work can be achieved within a single workspace and lakehouse storage accou
 - Optional external catalog storage.
 
 
----
 ### Secrets
+---
 > This section is a work in progress
 - Management
 - Areas of use
 
----
 ### Storage
+---
 
 #### Lakehouse storage
 
@@ -135,8 +135,8 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
    - Minimum ZRS or GRS for prod
    - Minimum LRS for poc, dev, test and preprod
 
----
 ### CICD + Repository
+---
 > This section is a work in progress
 
 #### Tools
@@ -149,8 +149,8 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 - dbt projects (separate for each domain)
 - Data engineering code (separate for each domain) using Databricks Asset Bundles
 
----
 ### Observability
+---
 
 #### Tools
 
@@ -159,21 +159,21 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 - ADF - Native adf monitoring
 
 ### Networking
-
+---
 By default - all resources reside within the same VNet with private endpoints.
 
 Service endpoints and policies are enabled.
 
----
 ### Orchestration
+---
 
 #### Tools
 
 - Azure Data Factory (if needed)
 - Databricks Workflows (for both databricks and dbt)
 
----
 ### Security
+---
 
 #### Tools
 
@@ -198,10 +198,10 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 - Conformed dimensions may serve as a bridge between domains for common entities.
 
 
----
 ## Data Architecture
 
 ### Data zones and stages 
+---
 
 Data and analytics pipelines flow through data zones and stages. Conventions vary across organisations, however the following is an effective approach:
 
@@ -342,7 +342,7 @@ Example:
 
 ## Data Engineering
 ### Ingestion
-
+---
 
 > This section is a work in progress
 
@@ -373,12 +373,15 @@ Rejected patterns:
 
 
 ### Transformation
+---
 > This section is a work in progress
 - [dbt standards](dbt_standards.md)
 ### Delivery
+---
 > This section is a work in progress
 
 ### Data access and governance
+---
 > This section is a work in progress
 
 
