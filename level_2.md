@@ -346,10 +346,7 @@ Example:
 
 > This section is a work in progress
 > Improved diagrams and assessments of:
-> - batch: adf -> jdbc sql endpoint -> ods
-> - batch: adf + databricks notebook -> landing, ods, pds
-> - batch: adf -> landing -> databricks autoloader -> ods
-> - batch: databricks lakehouse federation -> landing -> landing, ods, pds
+
 > - streaming: kafka -> landing -> databricks autoloader -> ods
 > - streaming: kafka -> iceberg
 > assessed in terms of:
@@ -358,6 +355,8 @@ Example:
 > - resilience
 > - maintainability
 > - governance
+> CDC patterns
+> sql-server (ct tables, datatyping via views, custom init vs change sources and handling)
 
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing zone.
 
@@ -377,18 +376,29 @@ Example batch ingestion options:
 
 #### Pattern specific notes:
 
-Pattern 1: SQL Server source -> ADF -> Landing | Databricks Autoloader merge to ODS
+- Pattern 1: batch: source -> adf -> landing -> databricks autoloader merge to ods
+> built and working
 
+- Pattern 2: batch: source -> databricks lakehouse federation -> databricks workflows -> landing, ods, pds
+> 50% built
+
+- Pattern 3: batch: source -> databricks lakehouse federation -> databricks workflows -> landing -> databricks autoloader -> ods, pds
+> 50% built
+
+- Pattern 4: batch: source -> custom python -> deltalake -> external table
+> todo
 
 Rejected patterns:
-1. ADF -> Deltalake (does not support unity catalog)
-
+- batch: adf -> deltalake -> ods (does not support unity catalog, requires target tables to be pre-initialised)
+- batch: adf -> databricks sql endpoint -> ods (no linked service for databricks)
+- batch: adf + databricks notebook -> landing, ods, pds (more undesireable coupling of adf and databricks an associated risks)
 
 ### Transformation
 ---
 > This section is a work in progress
 - [dbt standards](dbt_standards.md)
-### Delivery
+
+### Delivery / sharing
 ---
 > This section is a work in progress
 
