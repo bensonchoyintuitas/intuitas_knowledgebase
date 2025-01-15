@@ -177,7 +177,7 @@ Other secondary considerations:
 
 - Metastore-level storage accounts are used to store the metastore and its associated data. 
 - Recommendation:
-    - Use a dedicated storage account at the catalog level instead of metastore-level storage accounts.
+    - [Databricks recommends](https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html) that you assign managed storage at the catalog level for logical data isolation, with metastore-level and schema-level as options.
 
 ## Enterprise Security
 
