@@ -5,20 +5,28 @@
 - [Mesh](#mesh)
    - [Domain Names](#domain-names)
 - [Platform](#platform)
-   - [Cloud Resource Names](#cloud-resource-names)
-   - [Storage Account Names](#storage-account-names)
-   - [File Names](#file-names)
-   - [Folder Names](#folder-names)
-- [Databricks Engineering](#databricks-engineering)
-   - [Workspace Names](#workspace-names)
-   - [Workflow Names](#workflow-names)
-   - [Cluster Names](#cluster-names)
-- [Databricks Catalog](#databricks-catalog)
-   - [Catalog Names](#catalog-names)
-   - [External (federated) Catalog Names](#external-federated-catalog-names)
-   - [Schema and object names](#schema-and-object-names)
-   - [Metadata](#metadata)
-   - [Bronze (Raw)](#bronze-raw)
+   - [Cloud Resources](#cloud-resources)
+   - [Storage](#storage)
+      - [Lakehouse Storage](#lakehouse-storage)
+      - [Generic Blob Storage](#generic-blob-storage)
+- [Databricks](#databricks)
+   - [Workspace and Cluster Names](#workspace-and-cluster-names)
+   - [Catalog](#catalog)
+   - [Schema and Object Conventions](#schema-and-object-conventions)
+      - [Metadata](#metadata)
+      - [Bronze (Raw)](#bronze-raw)
+      - [Silver](#silver)
+      - [Gold](#gold)
+- [Streaming](#streaming)
+- [dbt](#dbt)
+   - [Documentation and Model Metadata](#documentation-and-model-metadata)
+   - [Sources](#sources)
+   - [Model Folders](#model-folders)
+   - [Model Names](#model-names)
+- [CI/CD](#cicd)
+- [Security](#security)
+- [Policies](#policies)
+- [Frameworks](#frameworks)
 
 
 ## Mesh
@@ -26,35 +34,96 @@
 
 All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
-   *e.g. intuitas_domain3_dev*
+   *e.g. intuitas_domain3*
 
 ## Platform
-- **Cloud Resource Names**
-- **Storage Account Names**
-- **File Names**
-- **Folder Names**
+- Environment: dev/test/prod (pat - production acceptance testing is optional as prepred)
+
+## **Cloud Resources**
+
+### Storage
+
+#### Lakehouse storage
+
+Lakehouse data for all environments and zones, by default, share a single storage account with LRS or GRS redundancy.
+This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
+
+- Resource: ADLSGen2
+- Generic storage account name: dl{organisation_name}{domain_name}
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+##### Lakehouse storage containers
+- Name: {environment} (dev/test/preprod/prod)
+
+##### Lakehouse storage folders
+- Level 1 Name: {zone} (bronze/silver/gold) // if using medallion approach
+- Level 2 Name: {stage_name}
+   - bronze/landing
+   --- tbc --- might be managed by databricks within the catalog storage root
+   - silver/base
+   - silver/staging
+   - silver/enriched
+   - silver/edw_rv
+   - silver/edw_bv
+   - gold/mart
 
 
-## Databricks Engineering
-- **Workspace Names**
-- **Workflow Names**
-- **Cluster Names**
 
-## Databricks Catalog
-### Catalog Names
-All lower case: {Domain}_{dev/test/prod}
+#### Generic Blob storage
+
+Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.
+
+- Resource: ADLSGen2
+- Generic storage account name: sa{organisation_name}{domain_name}{functional_description}
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+#### Generic Blob files and folders
+
+No standard naming conventions for files and folders.
+
+
+## Databricks
+
+- Workspace name: ws-{organisation_name}_{domain_name}
+- Cluster name: {personal_name/shared_name} Cluster
+- Workflow name: {dev/test} {workflow_name}
+
+### Catalog 
+- Catalog name: {domain_name}_{environment}
 
    *e.g. intuitas_domain3_dev*
 
-### External (federated) Catalog Names
-All lower case: {Domain}_ext__{source_system}
+- Catalog storage root: abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog
+
+### Externally mounted (lakehouse federation) Catalog Names
+
+- All lower case: {Domain}_ext__{source_system}
 
    *e.g. intuitas_domain3_ext__sqlonpremsource*
 
+### Schema and object conventions
 
-### Schema and object names
+#### Schema level external storage locations
 
-#### Metadata
+Recommendations:
+
+- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root.
+
+   *e.g. abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
+
+- For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
+
+- Ensure dbt’s dbt_project.yml and environment variables align with storage location.
+
+
+
+#### Metadata Schemas and Objects
 
 Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets
 
@@ -64,7 +133,7 @@ Contains metadata that supports engineering and governance. This will vary depen
 
    *e.g. intuitas_domain3_dev.meta__ingestion.ingestion_control*
 
-#### Bronze (Raw)
+#### Bronze (Raw) Schemas and Objects
 The Bronze layer stores raw, immutable data as it is ingested from source systems.
 
 All schemas are may be optionally prefixed with `bronze__`
@@ -179,18 +248,19 @@ All schemas are may be optionally prefixed with `gold__`
    *e.g. intuitas_domain3_dev.ref.ref__account_code*
 
 ## Streaming
-- **Topic Names**
 
-## Storage Account
-- **File**
-- **Folder**
+The following are in lower case:
 
+- Cluster name: {domain_name}__cluster__{optional:environment}
+- Topic names: {domain_name}__{object/entity?}__{optional:source_system}___{optional:source_channel}__{optional:environment}
+- Consumer group names: {domain_name}__{unique_group_name}__{optional:environment}
 
 
 
 
 ## dbt
-All the following are in lower case:
+
+The following are in lower case:
 
 ### Documentation and model metadata
 

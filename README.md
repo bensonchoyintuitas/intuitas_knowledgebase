@@ -2,9 +2,23 @@
 
 <a href="images/intuitas.png" target="_blank">
     <img src="images/intuitas.png" width="200" alt="Intuitas Logo">
-</a> Knowledgebase
+</a> 
+<br>
+<br>
+
+
+# Intuitas knowledgebase
 
 This knowledgebase is a collection of articles, tutorials, and other resources that describe Intuitas' approach to designing and delivering Data and AI solutions.
+
+
+## Copyright
+
+This knowledge base and its contents are © Intuitas PTY LTD, 2025. All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
+
+## Licence
+
+Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given to the original author(s). Referenced third-party content is subject to the copyright terms of their respective owners.
 
 # Table of Contents
 
@@ -13,20 +27,28 @@ This knowledgebase is a collection of articles, tutorials, and other resources t
   - [Mesh](naming_conventions.md#mesh)
     - [Domain Names](naming_conventions.md#domain-names)
   - [Platform](naming_conventions.md#platform)
-    - [Cloud Resource Names](naming_conventions.md#cloud-resource-names)
-    - [Storage Account Names](naming_conventions.md#storage-account-names)
-    - [File Names](naming_conventions.md#file-names)
-    - [Folder Names](naming_conventions.md#folder-names)
-  - [Databricks Engineering](naming_conventions.md#databricks-engineering)
-    - [Workspace Names](naming_conventions.md#workspace-names)
-    - [Workflow Names](naming_conventions.md#workflow-names)
-    - [Cluster Names](naming_conventions.md#cluster-names)
-  - [Databricks Catalog](naming_conventions.md#databricks-catalog)
-    - [Catalog Names](naming_conventions.md#catalog-names)
-    - [External (federated) Catalog Names](naming_conventions.md#external-federated-catalog-names)
-    - [Schema and object names](naming_conventions.md#schema-and-object-names)
+    - [Cloud Resources](naming_conventions.md#cloud-resources)
+    - [Storage](naming_conventions.md#storage)
+      - [Lakehouse Storage](naming_conventions.md#lakehouse-storage)
+      - [Generic Blob Storage](naming_conventions.md#generic-blob-storage)
+  - [Databricks](naming_conventions.md#databricks)
+    - [Workspace and Cluster Names](naming_conventions.md#workspace-and-cluster-names)
+    - [Catalog](naming_conventions.md#catalog)
+    - [Schema and Object Conventions](naming_conventions.md#schema-and-object-conventions)
       - [Metadata](naming_conventions.md#metadata)
       - [Bronze (Raw)](naming_conventions.md#bronze-raw)
+      - [Silver](naming_conventions.md#silver)
+      - [Gold](naming_conventions.md#gold)
+  - [Streaming](naming_conventions.md#streaming)
+  - [dbt](naming_conventions.md#dbt)
+    - [Documentation and Model Metadata](naming_conventions.md#documentation-and-model-metadata)
+    - [Sources](naming_conventions.md#sources)
+    - [Model Folders](naming_conventions.md#model-folders)
+    - [Model Names](naming_conventions.md#model-names)
+  - [CI/CD](naming_conventions.md#cicd)
+  - [Security](naming_conventions.md#security)
+  - [Policies](naming_conventions.md#policies)
+  - [Frameworks](naming_conventions.md#frameworks)
 
 ## Level 0 - Organisational and Domain-Level Context
 - [0.1 Org + Domain Definition](level_0.md#0.1)
@@ -83,8 +105,5 @@ This knowledgebase is a collection of articles, tutorials, and other resources t
 - [2.5 Data access and governance](level_2.md#2.5)
     - [2.5.1 Data Access](level_2.md#2.5.1)
     - [2.5.2 Data Governance](level_2.md#2.5.2)
-
-
-
 
 
