@@ -345,7 +345,19 @@ Example:
 ---
 
 > This section is a work in progress
-
+> Improved diagrams and assessments of:
+> - batch: adf -> jdbc sql endpoint -> ods
+> - batch: adf + databricks notebook -> landing, ods, pds
+> - batch: adf -> landing -> databricks autoloader -> ods
+> - batch: databricks lakehouse federation -> landing -> landing, ods, pds
+> - streaming: kafka -> landing -> databricks autoloader -> ods
+> - streaming: kafka -> iceberg
+> assessed in terms of:
+> - cost
+> - performance
+> - resilience
+> - maintainability
+> - governance
 
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing zone.
 
