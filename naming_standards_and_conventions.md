@@ -514,6 +514,55 @@ example
 
 Databricks asset bundles are encouraged for all Databricks projects.
 
+- project/bundle name: 
+   - {domain_name}__databricks (for general databricks projects)
+   - {domain_name}__dbt (for dbt databricks bundles)
+
+- Resources:
+   - Folder level 1: {meaningful sub-project name}
+   - Folder level 2: 
+      - notebooks
+      - workflows
+
+- Databricks.yml
+   - For both dev and prod: root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}
+
+Example databicks.yml
+```yml
+# This is a Databricks asset bundle definition for health_lakehouse__engineering.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: health_lakehouse__engineering__databricks
+
+variables:
+  default_cluster_id:
+    value: "-----"  
+
+
+include:
+  - resources/*.yml
+  - resources/**/*.yml
+  - resources/**/**/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://------.15.azuredatabricks.net
+      root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}
+  prod:
+    mode: production
+    workspace:
+      host: https://------.15.azuredatabricks.net
+      root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: engineering-engineer@intuitas.com
+        level: CAN_MANAGE
+    run_as:
+      user_name: engineering-engineer@intuitas.com
+```
+
 ## Security
 ### Entra Group Names
 TBC
