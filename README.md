@@ -101,6 +101,7 @@ Permission is granted for free use, reproduction, and adaptation of this materia
       - [Bronze (Raw)](naming_standards_and_conventions.md#bronze-raw)
       - [Silver](naming_standards_and_conventions.md#silver)
       - [Gold](naming_standards_and_conventions.md#gold)
+- [Azure Data Factory](naming_standards_and_conventions.md#azure-data-factory)
   - [Streaming](naming_standards_and_conventions.md#streaming)
   - [dbt](naming_standards_and_conventions.md#dbt)
     - [Documentation and Model Metadata](naming_standards_and_conventions.md#documentation-and-model-metadata)

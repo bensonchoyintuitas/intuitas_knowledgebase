@@ -17,6 +17,7 @@
       - [Bronze (Raw)](#bronze-raw)
       - [Silver](#silver)
       - [Gold](#gold)
+- [Azure Data Factory](#azure-data-factory)
 - [Streaming](#streaming)
 - [dbt](#dbt)
    - [Documentation and Model Metadata](#documentation-and-model-metadata)
@@ -91,7 +92,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
 #### SQL Database
 
-- Name: sqldb-{purpose}-{organisation_name}-{domain_name}
+- Name: sqldb-{purpose}-{organisation_name}-{domain_name}-{optional:environment}
 
    *e.g. sqldb-metadata-intuitas-domain3*
 
@@ -151,9 +152,14 @@ No standard naming conventions for files and folders.
 
 ### Externally mounted (lakehouse federation) Catalog Names
 
-- All lower case: {Domain}_ext__{source_system}
+- All lower case: {Domain (owner)}_ext__{source_system}{optional:__other_useful_descriptors}
 
    *e.g. intuitas_domain3_ext__sqlonpremsource*
+
+- Metadata tags:
+   - Key: domain (owner): {domain_name}
+   - Key: environment: {environment}
+   - Key: managing_domain: {domain_name} e.g. if delegating to engineering domain
 
 ### Schema and object conventions
 
@@ -293,6 +299,20 @@ All schemas are may be optionally prefixed with `gold__`
    - Object naming convention: `ref__[entity (singular)]`
 
    *e.g. intuitas_domain3_dev.ref.ref__account_code*
+
+## Azure Data Factory
+
+   The following are in lower case:
+
+   - Linked service names: ls_{database_name}(if not in database_name:{_organisation_name}_{domain_name})
+   *e.g. ls_financedb_intuitas_domain3*
+
+   - Dataset names: ds_{database_name}_{object_name}
+   - Pipeline names: pl_{description: e.g copy_{source_name}_to_{destination_name}}
+   - Trigger names: tr_{pipeline_name}_{optional:start_time / frequency}
+
+
+
 
 ## Streaming
 

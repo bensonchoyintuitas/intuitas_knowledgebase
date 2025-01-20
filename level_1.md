@@ -178,6 +178,9 @@ Other secondary considerations:
 - Metastore-level storage accounts are used to store the metastore and its associated data. 
 - Recommendation:
     - [Databricks recommends](https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html) that you assign managed storage at the catalog level for logical data isolation, with metastore-level and schema-level as options.
+    - [Catalog layouts](https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351)
+        - Metastore admin is optional - all cases, the metastore admin role should be assigned to a group instead of an individual. 
+- The enterprise domain topology has a direct bearing on UC catalog layout and design.
 
 ## Enterprise Security
 

@@ -396,11 +396,13 @@ Rejected patterns:
 ### Transformation
 ---
 > This section is a work in progress
-- [dbt standards](dbt_standards.md)
+- [dbt standards](naming_standards_and_conventions.md#dbt)
 
 ### Delivery / sharing
 ---
 > This section is a work in progress
+> delta share
+> duckdb
 
 ### Data access and governance
 ---
