@@ -21,7 +21,7 @@
     - [Domain data and warehouse models](level_2.md#domain-data-warehouse-models)
 
 - [Data Architecture](level_2.md#data-architecture)
-    - [Data zones and stages](level_2.md#data-zones-stages)
+    - [Data layers and stages](level_2.md#data-layers-stages)
     - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-storage-mapping)
 
 - [Data Engineering](level_2.md#data-engineering)
@@ -114,7 +114,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 
 #### Lakehouse storage
 
-Lakehouse data for all environments and zones, by default, share a single storage account with LRS or GRS redundancy.
+Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
 This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
 
 - Resource: ADLSGen2
@@ -200,17 +200,17 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
 ## Data Architecture
 
-### Data zones and stages 
+### Data layers and stages 
 ---
 
-Data and analytics pipelines flow through data zones and stages. Conventions vary across organisations, however the following is an effective approach:
+Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:
 
-* Top level zones follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
-* Within each zone, data is transformed through a series of stages.
+* Top level layers follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
+* Within each layer, data is transformed through a series of stages.
 <br>
 <br>
-<a href="images/data_zones_and_stages.png" target="_blank">
-    <img src="images/data_zones_and_stages.png" width="700" alt="Data zones and stages">
+<a href="images/data_layers_and_stages.png" target="_blank">
+    <img src="images/data_layers_and_stages.png" width="700" alt="Data layers and stages">
 </a>
 <br>
 <br>
@@ -328,7 +328,7 @@ The Gold layer focuses on business-ready datasets, aggregations, and reporting s
 Unity catalog objects (catalogs, schemas, objects) are mapped to:
 - Storage accounts
 - Environments (containers: dev, test, prod)
-- Zones (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)
+- Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)
 - Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)
 
 <br>
@@ -358,7 +358,7 @@ Example:
 > CDC patterns
 > sql-server (ct tables, datatyping via views, custom init vs change sources and handling)
 
-Ingestion is the process of acquiring data from external sources and landing it in the platform landing zone.
+Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.
 
 It should be:
 - Scalable, Resilient, Maintainable, Governed

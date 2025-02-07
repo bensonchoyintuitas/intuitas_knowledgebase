@@ -107,7 +107,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 - Name: {environment} (dev/test/preprod/prod)
 
 ##### Lakehouse storage folders
-- Level 1 Name: {zone} (bronze/silver/gold) // if using medallion approach
+- Level 1 Name: {layer} (bronze/silver/gold) // if using medallion approach
 - Level 2 Name: {stage_name}
    - bronze/landing
    --- tbc --- might be managed by databricks within the catalog storage root
