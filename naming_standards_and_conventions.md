@@ -518,6 +518,27 @@ Databricks asset bundles are encouraged for all Databricks projects.
    - {domain_name}__databricks (for general databricks projects)
    - {domain_name}__dbt (for dbt databricks bundles)
 
+- Bundle tags:
+   - Key: environment: {environment}
+   - Key: manager: {team_name} and or {email_address}
+   - Key: managing_domain: {domain_name} e.g. if delegating to engineering domain
+   - Key: owner: {owner_name}
+   - Key: owning_domain: {domain_name}
+   - Key: dab: {bundle_name}
+   - Key: project: {project_name}
+
+   e.g.
+   ```yml
+   tags:
+      environment: ${bundle.target}
+      project: health-lakehouse
+      dab: health_lakehouse__engineering__databricks
+      owning_domain: intuitas_engineering
+      owner: engineering-admin@intuitas.com
+      manager: engineering-engineer@intuitas.com
+      managing_domain: intuitas_engineering
+   ```
+
 - Resources:
    - Folder level 1: {meaningful sub-project name}
    - Folder level 2: 
@@ -527,7 +548,7 @@ Databricks asset bundles are encouraged for all Databricks projects.
 - Databricks.yml
    - For both dev and prod: root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}
 
-Example databicks.yml
+Example databricks.yml
 ```yml
 # This is a Databricks asset bundle definition for health_lakehouse__engineering.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
