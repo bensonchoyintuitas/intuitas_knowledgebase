@@ -376,17 +376,24 @@ Example batch ingestion options:
 
 #### Pattern specific notes:
 
-- Pattern 1: batch: source -> adf -> landing -> databricks autoloader merge to ods
 > built and working
+- PAttern 1: streaming: kafka -> landing -> databricks autoloader -> ods
+    - see repo [Bronze Landing to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
 
-- Pattern 2: batch: source -> databricks lakehouse federation -> databricks workflows -> landing, ods, pds
-> 50% built
+> built and working
+- Pattern 2: batch: source -> adf -> landing -> databricks autoloader merge to ods
+    - see repo [Bronze landing SQL Server to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
+    - adf requires azure sql and on-premise integration runtime
 
-- Pattern 3: batch: source -> databricks lakehouse federation -> databricks workflows -> landing -> databricks autoloader -> ods, pds
-> 50% built
+> built and working
+- Pattern 3: batch: source -> databricks lakehouse federation -> databricks workflows -> ods, pds
+    - see repo [External Database to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
+    - requires network access to source
 
-- Pattern 4: batch: source -> custom python -> deltalake -> external table
-> todo
+> i.e. poor mans datalake. todo
+- Pattern 4: batch/streaming: source -> custom python -> deltalake -> external table
+
+
 
 Rejected patterns:
 - batch: adf -> deltalake -> ods (does not support unity catalog, requires target tables to be pre-initialised)
