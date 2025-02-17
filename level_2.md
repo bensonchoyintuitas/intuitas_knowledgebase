@@ -27,7 +27,7 @@
 - [Data Engineering](level_2.md#data-engineering)
     - [Ingestion](level_2.md#ingestion)
     - [Transformation](level_2.md#transformation)
-    - [Delivery](level_2.md#delivery)
+    - [Data Sharing and Delivery Patterns](level_2.md#data-sharing-and-delivery-patterns)
 
 - [Data access and governance](level_2.md#data-access-governance)
 
@@ -347,6 +347,7 @@ Example:
 > This section is a work in progress
 > Improved diagrams and assessments of:
 
+> - lakeflow
 > - streaming: kafka -> landing -> databricks autoloader -> ods
 > - streaming: kafka -> iceberg
 > assessed in terms of:
@@ -393,7 +394,9 @@ Example batch ingestion options:
 > i.e. poor mans datalake. todo
 - Pattern 4: batch/streaming: source -> custom python -> deltalake -> external table
 
-
+> Sharepoint ingestion
+- Pattern 5: sharepoint -> fivetran -> databricks sql warehouse (ods)
+- see repo [fivetran](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom)
 
 Rejected patterns:
 - batch: adf -> deltalake -> ods (does not support unity catalog, requires target tables to be pre-initialised)
@@ -403,16 +406,218 @@ Rejected patterns:
 ### Transformation
 ---
 > This section is a work in progress
-- [dbt standards](naming_standards_and_conventions.md#dbt)
+#### Batch and Micro-batch SQL transformation
+- dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
 
-### Delivery / sharing
----
+#### Streaming SQL transformation
 > This section is a work in progress
-> delta share
-> duckdb
 
-### Data access and governance
----
+#### Non SQL transformation
 > This section is a work in progress
 
 
+### Data sharing and delivery patterns
+---
+
+<a href="images/sharing_delivery_visualisation.png" target="_blank">
+    <img src="images/sharing_delivery_visualisation.png" width="700" alt="Sharing and delivery visualisation">
+</a>
+<br>
+<br>
+
+#### Row Level Security
+see [Row Level Security](#row-level-security-1)
+
+#### Pull / direct access
+---
+
+##### Databricks Delta sharing practices
+> - dynamic views to be tested
+
+- Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
+-Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.
+- Costs: In Delta Sharing, the cost of compute is generally borne by the data consumer, not the data provider. Other costs include storage API calls and data transfer.
+- Naming standards and conventions [see naming standards](naming_standards_and_conventions.md#delta-sharing)
+- Tightly scope the share as per the principal of least privilege:
+    - Share only the necessary data
+    - Single purpose, single recipient
+    - Granular access control
+    - Set an expiry
+- Use audit logging to track access and usage
+    ```sql
+    SELECT *
+    FROM system.access.audit
+    WHERE 
+    action_name LIKE 'deltaSharing%'
+    ORDER BY event_time DESC
+    LIMIT 100;
+    ```
+
+- Limitations:
+    - No Row Level Security and Masking support (dynamic views required)
+
+
+- Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html
+
+##### ADLSGen2 access to data
+
+- ADLSGen2 access, while technically possible, is not recommended as it bypasses the unity catalog and associated governance and observability.
+- Given Delta Sharing, then direct ADLS file sharing is usually unnecessary. However, there are still a few edge cases where ADLS file sharing might be preferable, even when Delta Sharing is available:
+    - Unstructured data
+    - Large non delta-file transfer
+    - Consumers that dont support delta-sharing
+
+##### Duckdb access to data (via Unity Catalog)
+
+- Duckdb is a popular open source SQL engine that can be used to access data in the lakehouse. Duckdb can be run on a local machine or in process in a databricks cluster.
+- Costs: Duckdb data access will incur costs of the underlying compute, storage access, data transfer etc as per delta sharing.
+- Opportunities / uses:
+    - Last mile analysis
+    - SQL interface to delta, iceberg, parquet, csv, etc.
+    - dbt compatibility
+    - Local execution and storage of queries and data
+    - Use as feed visualisation tools e.g. Apache Superset
+
+- see repo [Duckdb](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom)
+
+- Limitations:
+    - Unity Catalog not yet supported
+    - Delta Kernel  not yet supported
+
+
+#### SQL Access
+---
+- SQL Access is provided by the Databricks SQL (serverless) endpoint.
+
+#### API Access
+---
+> This section is a work in progress / requires build and write up
+- The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.
+
+https://docs.databricks.com/api/workspace/statementexecution
+
+https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
+
+#### Snowflake Access
+---
+> This section is a work in progress / requires build and write up
+- Snowflake access is provided by Databricks Delta Sharing.
+
+
+#### Microsoft Fabric Access
+---
+> This section is a work in progress / requires build and write up
+
+- Option 1. Share via Delta Sharing
+    - Pros: 
+        - No duplication
+        - Centralised control over access policies
+        - Compute costs on consumer 
+    - Cons: 
+        - Less control over access policies than Delta Sharing
+        - No Row Level Security and Masking support (dynamic views required)
+
+- Option 2. Directlake via ADLSGen2
+    - Pros: 
+        - No duplication
+        - Potentially better PowerBI performance (untested)
+        - Compute costs on consumer 
+    - Cons: 
+        - Less control over access policies than Delta Sharing (outside of Unity Catalog)
+        - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
+        - No Row Level Security and Masking support 
+
+> build and write up
+
+
+- Option 3. PowerBI Access Via SQL Endpoint
+    - Pros: 
+        - No duplication
+        - Potentially better PowerBI performance (untested)
+        - Row Level Security and Masking support 
+    - Cons: 
+        - Compute costs on Databricks as well as Fabric
+
+- Option 3. Replicate into Fabric
+    - Pros:
+        - Possibly reduced networking costs (depending on workload and networking topology)
+    - Cons: 
+        - Duplicated data
+        - Engineering costs and overheads
+        - Latency
+        - Less governance control
+        - No Row Level Security and Masking support 
+
+#### Push
+---
+> This section is a work in progress
+> - adf
+> - databricks
+> - lakeflow
+
+### Visualisation
+---
+> This section is a work in progress
+> - Powerbi
+> - Databricks dashboards
+> - Apps
+
+## AI/ML
+---
+> This section is a work in progress
+> - MLOps
+> - Training
+> - Databricks
+> - Azure ML
+
+## Data governance
+
+
+### Data lifecycle and asset management
+> This section is a work in progress
+> - data contracts and policy
+> - data asset tagging
+
+
+### Data access management
+---
+> This section is a work in progress
+> - data access request management
+> - data contracts
+> - access audit
+> - activity audit
+
+
+### Data quality
+---
+> This section is a work in progress
+> - data quality checking and reporting
+
+
+### Data understandability
+---
+> This section is a work in progress
+> - data lineage
+> - 
+
+
+### Privacy Preservation 
+---
+> This section is a work in progress
+> - row level security
+> - data masking
+> - column level security
+> - data anonymisation
+> - data de-identification
+
+https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations
+
+"If you want to filter data when you share it using Delta Sharing, you must use dynamic views."
+
+Use dynamic views if you need to apply transformation logic, such as filters and masks, to read-only tables and if it is acceptable for users to refer to the dynamic views using different names.
+
+#### Row Level Security
+---
+> This section is a work in progress
+> - dynamic views
+> - precomputed views

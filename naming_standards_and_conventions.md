@@ -17,6 +17,7 @@
       - [Bronze (Raw)](#bronze-raw)
       - [Silver](#silver)
       - [Gold](#gold)
+   - [Delta Sharing](#delta-sharing)
 - [Azure Data Factory](#azure-data-factory)
 - [Streaming](#streaming)
 - [dbt](#dbt)
@@ -300,6 +301,16 @@ All schemas are may be optionally prefixed with `gold__`
    - Object naming convention: `ref__[entity (singular)]`
 
    *e.g. intuitas_domain3_dev.ref.ref__account_code*
+
+## Delta Sharing
+
+   - Share names: {domain_name}__{optional:subdomain_name}__{optional:purpose}__{schema_name or description}__{object_name or description}__{share_purpose and or target_audience}
+
+   *e.g. intuitas_domain3__finance__reporting__account_payments__payments*
+
+
+
+
 
 ## Azure Data Factory
 
