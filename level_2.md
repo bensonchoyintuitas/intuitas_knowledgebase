@@ -502,6 +502,9 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 ---
 > This section is a work in progress / requires build and write up
 - Snowflake access is provided by Databricks Delta Sharing.
+- Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 [see external tables](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta)
+- [tutorial](https://harke-harkema.medium.com/reading-delta-tables-in-snowflake-1396d21bf970)
+
 
 
 #### Microsoft Fabric Access
@@ -522,12 +525,21 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
         - No duplication
         - Potentially better PowerBI performance (untested)
         - Compute costs on consumer 
+        - No views
     - Cons: 
         - Less control over access policies than Delta Sharing (outside of Unity Catalog)
         - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
         - No Row Level Security and Masking support 
 
 > build and write up
+
+- Option 2. Fabric mirrored unity catalog
+    - Pros: 
+        - No duplication
+        - Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)
+    - Cons: 
+        - not GA
+        - lots of limitations
 
 
 - Option 3. PowerBI Access Via SQL Endpoint
