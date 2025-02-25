@@ -36,8 +36,8 @@ Domain-level solutions are instantiations of the enterprise-level reference arch
 
 Example reference architecture:
 
-<a href="images/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
-    <img src="images/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
+<a href="img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+    <img src="img/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
 </a>
 
 ## Business architecture
@@ -68,8 +68,8 @@ Metrics are the measurements of the performance of the business processes. They 
 ## Infrastructure
 > This section is a work in progress
 ### Environments, Workspaces + Storage
-<a href="images/workspaces_environments_storage.png" target="_blank">
-    <img src="images/workspaces_environments_storage.png" width="700" alt="Workspaces, Environments and Storage">
+<a href="img/workspaces_environments_storage.png" target="_blank">
+    <img src="img/workspaces_environments_storage.png" width="700" alt="Workspaces, Environments and Storage">
 </a>
 <br>
 <br>
@@ -209,8 +209,8 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 * Within each layer, data is transformed through a series of stages.
 <br>
 <br>
-<a href="images/data_layers_and_stages.png" target="_blank">
-    <img src="images/data_layers_and_stages.png" width="700" alt="Data layers and stages">
+<a href="img/data_layers_and_stages.png" target="_blank">
+    <img src="img/data_layers_and_stages.png" width="700" alt="Data layers and stages">
 </a>
 <br>
 <br>
@@ -334,8 +334,8 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 <br>
 <br>
 Example:
-<a href="images/catalog_to_storage_mapping.png" target="_blank">
-    <img src="images/catalog_to_storage_mapping.png" width="700" alt="Catalog to storage mapping">
+<a href="img/catalog_to_storage_mapping.png" target="_blank">
+    <img src="img/catalog_to_storage_mapping.png" width="700" alt="Catalog to storage mapping">
 </a>
 <br>
 <br>
@@ -369,8 +369,8 @@ It should be:
 <br>
 <br>
 Example batch ingestion options:
-<a href="images/ingestion_patterns.png" target="_blank">
-    <img src="images/ingestion_patterns.png" width="700" alt="Ingestion patterns">
+<a href="img/ingestion_patterns.png" target="_blank">
+    <img src="img/ingestion_patterns.png" width="700" alt="Ingestion patterns">
 </a>
 <br>
 <br>
@@ -419,8 +419,8 @@ Rejected patterns:
 ### Data sharing and delivery patterns
 ---
 
-<a href="images/sharing_delivery_visualisation.png" target="_blank">
-    <img src="images/sharing_delivery_visualisation.png" width="700" alt="Sharing and delivery visualisation">
+<a href="img/sharing_delivery_visualisation.png" target="_blank">
+    <img src="img/sharing_delivery_visualisation.png" width="700" alt="Sharing and delivery visualisation">
 </a>
 <br>
 <br>

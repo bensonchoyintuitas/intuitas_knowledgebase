@@ -1,5 +1,5 @@
-<a href="images/intuitas.png" target="_blank">
-    <img src="images/intuitas.png" width="200" alt="Intuitas Logo">
+<a href="img/intuitas.png" target="_blank">
+    <img src="img/intuitas.png" width="200" alt="Intuitas Logo">
 </a> 
 <br>
 <br>

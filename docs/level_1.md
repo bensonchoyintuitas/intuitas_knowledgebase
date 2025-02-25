@@ -81,8 +81,8 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
     - impacts accessibility, costs, support and overall experience.
 
 
-<a href="images/enterprise_domain_reference_topologies.png" target="_blank">
-    <img src="images/enterprise_domain_reference_topologies.png" width="700" alt="Platform and Pipeline Reference Architecture">
+<a href="img/enterprise_domain_reference_topologies.png" target="_blank">
+    <img src="img/enterprise_domain_reference_topologies.png" width="700" alt="Platform and Pipeline Reference Architecture">
 </a>
 <br>
 <br>
@@ -107,8 +107,8 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 - Federated governance: Ensures standards while allowing teams to manage their data locally.
 
 
-<a href="images/hybrid_federated_mesh_topology.png" target="_blank">
-    <img src="images/hybrid_federated_mesh_topology.png" width="700" alt="Hybrid federated mesh topology">
+<a href="img/hybrid_federated_mesh_topology.png" target="_blank">
+    <img src="img/hybrid_federated_mesh_topology.png" width="700" alt="Hybrid federated mesh topology">
 </a>
 
 
@@ -129,8 +129,8 @@ Allowing domains to access gold data from other domains and, where appropriate, 
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
 Example:
-<a href="images/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
-    <img src="images/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
+<a href="img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+    <img src="img/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
 </a>
 <br>
 <br>
@@ -144,8 +144,8 @@ Example:
 - Provides unified access to data warehouse products from across domains via a common catalog.
 
 Example:
-<a href="images/enterprise_logical_data_warehouse_architecture.png" target="_blank">
-    <img src="images/enterprise_logical_data_warehouse_architecture.png" width="700" alt="Enterprise logical data warehouse architecture">
+<a href="img/enterprise_logical_data_warehouse_architecture.png" target="_blank">
+    <img src="img/enterprise_logical_data_warehouse_architecture.png" width="700" alt="Enterprise logical data warehouse architecture">
 </a>
 
 ## Enterprise Information and Data Architecture

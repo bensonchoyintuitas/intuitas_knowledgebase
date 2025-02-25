@@ -1,0 +1,6 @@
+site_name: Intuitas Knowledgebase
+nav:
+  - Home: README.md
+  - About: about.md
+  - Licence: licence.md
+theme: readthedocs
