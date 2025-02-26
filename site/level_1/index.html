@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Level 1 - Enterprise-level architecture - Intuitas Knowledgebase</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../assets/custom.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Intuitas Knowledgebase</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../licence/" class="nav-link">Licence</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#level-1-enterprise-level-architecture" class="nav-link">Level 1 - Enterprise-level architecture</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-concepts" class="nav-link">Key concepts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#reference-topologies" class="nav-link">Reference topologies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#enterprise-data-platform-reference-architecture" class="nav-link">Enterprise Data Platform Reference Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#enterprise-logical-data-warehouse-reference-architecture" class="nav-link">Enterprise (Logical) Data Warehouse Reference Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#enterprise-information-and-data-architecture" class="nav-link">Enterprise Information and Data Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#enterprise-metadata-architecture" class="nav-link">Enterprise Metadata Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#enterprise-security" class="nav-link">Enterprise Security</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="level-1-enterprise-level-architecture">Level 1 - Enterprise-level architecture</h1>
+<p>This section describes enterprise-wide and cross-domain data and data platform architecture concepts.</p>
+<p><br>
+<br></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#key-concepts">Key concepts</a><ul>
+<li><a href="#domain">Domain</a></li>
+<li><a href="#subdomain">Subdomain</a></li>
+<li><a href="#domain-centric-design">Domain-Centric Design</a> </li>
+<li><a href="#data-mesh">Data Mesh</a></li>
+<li><a href="#domain-topology">Domain Topology</a></li>
+<li><a href="#data-fabric">Data Fabric</a></li>
+<li><a href="#data-mesh-vs-fabric">Data Mesh vs Fabric</a></li>
+</ul>
+</li>
+<li><a href="#reference-topologies">Reference topologies</a></li>
+<li><a href="#hybrid-federated-mesh-topology">Hybrid federated mesh topology</a></li>
+<li><a href="#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a></li>
+<li><a href="#enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</a><ul>
+<li><a href="#logical-data-warehouse-topology">Logical Data Warehouse topology</a></li>
+</ul>
+</li>
+<li><a href="#enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</a></li>
+<li><a href="#enterprise-metadata-architecture">Enterprise Metadata Architecture</a><ul>
+<li><a href="#databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</a></li>
+</ul>
+</li>
+<li><a href="#enterprise-security">Enterprise Security</a></li>
+</ul>
+<p><br></p>
+<h2 id="key-concepts">Key concepts</h2>
+<hr />
+<p>The following key concepts are used throughout this knowledgebase.</p>
+<h4 id="domain">Domain</h4>
+<p>Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.</p>
+<ul>
+<li>Each domain encapsulates functional responsibilities, services, processes, information, expertise, and governance.</li>
+<li>Domains serve their own objectives while also offering products and services of value to other domains and the broader enterprise.</li>
+<li>Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles.</li>
+</ul>
+<p>see <a href="https://martinfowler.com/bliki/DomainDrivenDesign.html">Domain driven design</a></p>
+<h4 id="subdomain">Subdomain</h4>
+<p>A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.</p>
+<h4 id="domain-centric-design">Domain-Centric Design</h4>
+<p>Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.</p>
+<h4 id="data-mesh">Data Mesh</h4>
+<p>A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations. It can be described through 4 principles which organisations will embody with varying degrees of maturity and success:
+- <strong>Data as a Product</strong>: Data is treated as a valuable asset that can be bought, sold, and managed like any other product.
+- <strong>Self-Serve Data Consumers</strong>: Data consumers have the autonomy to access and use data without relying on IT support.
+- <strong>Data as a Service</strong>: Data is delivered as a service, allowing for flexible and scalable access to data.
+- <strong>Domain-Driven Governance</strong>: Data is governed by domain experts, ensuring alignment with business objectives and data quality.</p>
+<p>see <a href="https://martinfowler.com/articles/data-mesh-principles.html">Data Mesh: Principles</a></p>
+<h4 id="domain-topology">Domain Topology</h4>
+<p>A Domain Topology is a representation of how domains are structured, positioned in the enterprise, and how they interact with each other. see <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90?gi=631b1b9f4dbb">Data Mesh: Topologies and domain granularity</a></p>
+<h4 id="data-fabric">Data Fabric</h4>
+<p>A data fabric is a unified platform that integrates data from various sources and provides a single source of truth. It enables data sharing and collaboration across domains and supports data mesh principles.</p>
+<h4 id="data-mesh-vs-fabric">Data Mesh vs Fabric</h4>
+<p>A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.</p>
+<p><br></p>
+<h2 id="reference-topologies">Reference topologies</h2>
+<hr />
+<ul>
+<li>Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.</li>
+<li>The arrangement of domains:<ul>
+<li>reflects its operating model </li>
+<li>defines expectations on how data+products are shared, built, managed and governed</li>
+<li>impacts accessibility, costs, support and overall experience.</li>
+</ul>
+</li>
+</ul>
+<p><a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
+    <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
+</a>
+Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&amp;source=user_profile_page---------19-------------97abd6c0aad1---------------">Data Mesh: Topologies and domain granularity</a></p>
+<p><br></p>
+<h3 id="hybrid-federated-mesh-topology">Hybrid federated mesh topology</h3>
+<p><strong>Hybrid of Data Fabric and Data Mesh:</strong>
+- Combines centralised governance with domain-specific autonomy.
+- Offers a unified platform for seamless data integration, alongside domain-driven flexibility.</p>
+<p><strong>Fabric-Like Features:</strong>
+- Scalable, unified platform: Connects diverse data sources across the organisation.
+- Shared infrastructure and standards: Ensures consistency, interoperability, and trusted data.
+- Streamlined access: Simplifies workflows and reduces friction for data usage and insights delivery.</p>
+<p><strong>Mesh-Like Features:</strong>
+- Domain-driven autonomy: Empowers teams to create tailored solutions for their specific data and AI needs.
+- Collaboration-focused: Teams act as both data producers and consumers, fostering reuse and efficiency.
+- Federated governance: Ensures standards while allowing teams to manage their data locally.</p>
+<p><img src="../img/hybrid_federated_mesh_topology.png" ></p>
+<p>Hybrid federated mesh topology reflects a common scenario whereby centralisation occurs upstream for improved consolidation and standardisation around engineering, while federation occurs downstream for improved analytical flexibility and responsiveness. </p>
+<p><strong>Centralising engineering</strong></p>
+<p>Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organization.</p>
+<p><strong>Distributed Local engineering</strong></p>
+<p>Maintaining a local bronze layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.</p>
+<p><strong>Cross-Domain Access</strong></p>
+<p>Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
+<p><br></p>
+<h2 id="enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</h2>
+<hr />
+<p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
+<p>Example:</p>
+<p><img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture"></p>
+<p><br></p>
+<h2 id="enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</h2>
+<hr />
+<p><strong>Logical Data Warehouse topology</strong></p>
+<ul>
+<li>Reflects the domain topology.</li>
+<li>Provides unified access to data warehouse products from across domains via a common catalog.</li>
+</ul>
+<p>Example:</p>
+<p><img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture"></p>
+<p><br></p>
+<h2 id="enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</h2>
+<hr />
+<p>Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
+- Existing enterprise information, conceptual and logical models
+- Legacy warehouse models
+- Domain information models and glossaries
+- Domain business objects and process models
+- Common entities and synonyms (which may form the basis of conformed dimensions)
+- Data standards</p>
+<p>Other secondary considerations:
+- Source system data models
+- Industry models
+- Integration models</p>
+<p><br></p>
+<h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
+<hr />
+<ul>
+<li>Description of applicable metadata standards</li>
+<li>Enterprise Metadata Architecture and Metamodel</li>
+<li>Description of metadata governance, stewards and processes</li>
+</ul>
+<h3 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h3>
+<ul>
+<li>Only one metastore exists per region
+<a href="https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/create-metastore#add-storage">Documentation</a></li>
+<li>Metastore-level storage accounts are used to store the metastore and its associated data. </li>
+<li>Recommendation:<ul>
+<li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Databricks recommends</a> that you assign managed storage at the catalog level for logical data isolation, with metastore-level and schema-level as options.</li>
+<li><a href="https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351">Catalog layouts</a><ul>
+<li>Metastore admin is optional - all cases, the metastore admin role should be assigned to a group instead of an individual. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The enterprise domain topology has a direct bearing on UC catalog layout and design.</li>
+</ul>
+<p><br></p>
+<h2 id="enterprise-security">Enterprise Security</h2>
+<hr />
+<ul>
+<li>Description of security policies and standards for both the organisation and industry</li>
+<li>Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.</li>
+<li>Description of responsibilities and accountabilities.</li>
+<li>Risk and issues register</li>
+<li>Description of security management and monitoring tools incl. system audit logs</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
