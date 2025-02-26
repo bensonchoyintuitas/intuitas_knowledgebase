@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Level 2 - Domain-Level (Solution) Architecture and Patterns - Intuitas Knowledgebase</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../assets/custom.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Intuitas Knowledgebase</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#level-2-domain-level-solution-architecture-and-patterns" class="nav-link">Level 2 - Domain-Level (Solution) Architecture and Patterns</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#business-architecture" class="nav-link">Business architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#infrastructure" class="nav-link">Infrastructure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-and-information-models" class="nav-link">Data and information models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-architecture" class="nav-link">Data Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-engineering" class="nav-link">Data Engineering</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#aiml" class="nav-link">AI/ML</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-governance" class="nav-link">Data governance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="level-2-domain-level-solution-architecture-and-patterns">Level 2 - Domain-Level (Solution) Architecture and Patterns</h1>
+<p><a href="../">Return to home</a></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="./#business-architecture">Business architecture</a><ul>
+<li><a href="./#business-processes">Business processes</a></li>
+<li><a href="./#business-glossary">Business glossary</a></li>
+<li><a href="./#business-metrics">Business metrics</a></li>
+</ul>
+</li>
+<li><a href="./#infrastructure">Infrastructure</a><ul>
+<li><a href="./#environments-workspaces-and-storage">Environments, Workspaces and Storage</a></li>
+<li><a href="./#secrets">Secrets</a></li>
+<li><a href="./#storage">Storage</a></li>
+<li><a href="./#cicd-and-repository">CICD and Repository</a></li>
+<li><a href="./#observability">Observability</a></li>
+<li><a href="./#networking">Networking</a></li>
+<li><a href="./#orchestration">Orchestration</a></li>
+</ul>
+</li>
+<li><a href="./#data-and-information-models">Data and information models</a><ul>
+<li><a href="./#domain-glossary">Domain glossary</a></li>
+<li><a href="./#domain-data-and-warehouse-models">Domain data and warehouse models</a></li>
+</ul>
+</li>
+<li><a href="./#data-architecture">Data Architecture</a><ul>
+<li><a href="./#data-layers-and-stages">Data layers and stages</a></li>
+<li><a href="./#lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</a></li>
+</ul>
+</li>
+<li><a href="./#data-engineering">Data Engineering</a><ul>
+<li><a href="./#ingestion">Ingestion</a></li>
+<li><a href="./#transformation">Transformation</a></li>
+<li><a href="./#data-sharing-and-delivery-patterns">Data Sharing and Delivery Patterns</a></li>
+</ul>
+</li>
+<li><a href="./#data-governance">Data governance</a><ul>
+<li><a href="./#data-lifecycle-and-asset-management">Data lifecycle and asset management</a></li>
+<li><a href="./#data-access-management">Data access management</a></li>
+<li><a href="./#data-quality">Data quality</a></li>
+<li><a href="./#data-understandability">Data understandability</a></li>
+<li><a href="./#privacy-preservation">Privacy Preservation</a></li>
+</ul>
+</li>
+</ul>
+<p>Domain-level solutions are instantiations of the enterprise-level reference architecture. (See <a href="../level_1/#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a>)</p>
+<p>Example reference architecture:</p>
+<p><a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+    <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
+</a></p>
+<p><br></p>
+<h2 id="business-architecture">Business architecture</h2>
+<hr />
+<h3 id="business-processes">Business processes</h3>
+<hr />
+<p>Business processes are the activities and tasks that are performed to achieve the goals of the business.
+Understanding them is necessary to understand:
+- the context in which data is captured and used
+- concepts and entities that are relevant to the domain
+- the relationships between different processes and data</p>
+<h3 id="business-glossary">Business glossary</h3>
+<hr />
+<p>A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.</p>
+<h3 id="business-metrics">Business metrics</h3>
+<hr />
+<p>Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
+- name
+- definition
+- formula (with reference to data elements and definitions in the business glossary)
+- dimensions
+- source(s)
+- metric owner
+- frequency</p>
+<p><br></p>
+<h2 id="infrastructure">Infrastructure</h2>
+<hr />
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<h3 id="environments-workspaces-and-storage">Environments, Workspaces and Storage</h3>
+<p><a href="../img/workspaces_environments_storage.png" target="_blank">
+    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
+</a></p>
+<p>This diagram illustrates a <strong>data lakehouse architecture</strong> with the following components and flow:</p>
+<p><strong>Data Sources</strong></p>
+<p>Data originates from multiple sources such as:
+  - Databases
+  - Kafka or event streaming
+  - APIs or Python scripts
+  - SharePoint (or similar sources)</p>
+<p><strong>Enterprise Engineering Layer</strong></p>
+<ul>
+<li>Centralized enterprise workspaces are managed here with multiple environments. 
+While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:</li>
+<li>Each workspace contains:</li>
+<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
+</ul>
+<p><strong>Domain-Specific Layer</strong></p>
+<ul>
+<li>Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. </li>
+<li><strong>PROD</strong>, <strong>TEST</strong>, and <strong>DEV</strong> storage containers within a single lakehouse storage account for domain-specific data management.</li>
+<li>Local <strong>Bronze</strong> for domain-specific engineering of domain-local data (not managed by enterprise engineering)</li>
+<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
+</ul>
+<p><strong>Data Catalog</strong></p>
+<ul>
+<li>A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:</li>
+<li>Enables discovery and governance of data.</li>
+<li>Optional external catalog storage.</li>
+</ul>
+<h3 id="secrets">Secrets</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- Management
+- Areas of use</p>
+</blockquote>
+<h3 id="storage">Storage</h3>
+<hr />
+<h4 id="lakehouse-storage">Lakehouse storage</h4>
+<p>Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
+This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.</p>
+<ul>
+<li>Resource: ADLSGen2</li>
+<li>Tier: Standard/Premium (depends on workload)</li>
+<li>Redundancy: </li>
+<li>Minimum ZRS or GRS for prod</li>
+<li>Minimum LRS for poc, dev, test and preprod</li>
+</ul>
+<h4 id="generic-blob-storage">Generic Blob storage</h4>
+<p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
+<ul>
+<li>Resource: ADLSGen2</li>
+<li>Generic storage account name: sa{organisation_name}{domain_name}{functional_description}</li>
+<li>Tier: Standard/Premium (depends on workload)</li>
+<li>Redundancy: </li>
+<li>Minimum ZRS or GRS for prod</li>
+<li>Minimum LRS for poc, dev, test and preprod</li>
+</ul>
+<h3 id="cicd-and-repository">CICD and Repository</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<h4 id="tools">Tools</h4>
+<ul>
+<li>Github</li>
+<li>Azure Devops</li>
+</ul>
+<h4 id="repositories">Repositories</h4>
+<ul>
+<li>Infrastructure</li>
+<li>dbt projects (separate for each domain)</li>
+<li>Data engineering code (separate for each domain) using Databricks Asset Bundles</li>
+</ul>
+<h3 id="observability">Observability</h3>
+<hr />
+<h4 id="tools_1">Tools</h4>
+<ul>
+<li>dbt observability - Elementary</li>
+<li>Databricks observability - Databricks monitoring dashboards</li>
+<li>ADF - Native adf monitoring</li>
+</ul>
+<h3 id="networking">Networking</h3>
+<hr />
+<p>By default - all resources reside within the same VNet with private endpoints.</p>
+<p>Service endpoints and policies are enabled.</p>
+<h3 id="orchestration">Orchestration</h3>
+<hr />
+<h4 id="tools_2">Tools</h4>
+<ul>
+<li>Azure Data Factory (if needed)</li>
+<li>Databricks Workflows (for both databricks and dbt)</li>
+</ul>
+<h3 id="security">Security</h3>
+<hr />
+<h4 id="tools_3">Tools</h4>
+<ul>
+<li>Azure Entra</li>
+<li>Azure Key Vault</li>
+<li>Unity Catalog <ul>
+<li>System access reports</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="data-and-information-models">Data and information models</h2>
+<hr />
+<p>Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. </p>
+<p>See <a href="https://martinfowler.com/bliki/BoundedContext.html">Bounded context</a></p>
+<h3 id="domain-glossary">Domain glossary</h3>
+<ul>
+<li>Expand on the enterprise glossary and add domain specific terms and definitions.<ul>
+<li>In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.</li>
+<li>In cases where definitions are conflicting, governance should be applied to resolve the conflict.</li>
+</ul>
+</li>
+</ul>
+<h3 id="domain-data-and-warehouse-models">Domain data and warehouse models</h3>
+<ul>
+<li>Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.</li>
+<li>Conformed dimensions may serve as a bridge between domains for common entities.</li>
+</ul>
+<p><br></p>
+<h2 id="data-architecture">Data Architecture</h2>
+<hr />
+<h3 id="data-layers-and-stages">Data layers and stages</h3>
+<hr />
+<p>Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:</p>
+<ul>
+<li>Top level layers follow the <a href="https://www.databricks.com/glossary/medallion-architecture">Medallion architecture</a>.</li>
+<li>Within each layer, data is transformed through a series of stages.</li>
+</ul>
+<p><a href="../img/data_layers_and_stages.png" target="_blank">
+    <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
+</a></p>
+<h4 id="metadata"><strong>Metadata</strong></h4>
+<p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
+<h4 id="bronze"><strong>Bronze</strong></h4>
+<p>The Bronze layer stores raw, immutable data as it is ingested from source systems.</p>
+<p><em>(Persistent) Landing</em></p>
+<ul>
+<li>Initial storage area for raw data from source systems.</li>
+<li>Stores raw events as JSON or CDC/tabular change records.</li>
+<li>
+<p>Data is maintained in a primarily raw format, with the possibility of adding extra fields that might be useful later, such as for identifying duplicates. These fields could include the source file name and the load date.</p>
+<ul>
+<li>Partitioned by load date (YYYY/MM/DD/HH)</li>
+<li>Raw data preserved in original format</li>
+<li>Append-only immitable data.</li>
+<li>Schema changes tracked but not enforced</li>
+</ul>
+</li>
+</ul>
+<p><em>ODS (Operational Data Store)</em></p>
+<ul>
+<li>Current state of source system data with latest changes applied.<ul>
+<li>Maintains latest version of each record</li>
+<li>Supports merge operations for change data capture (CDC)</li>
+<li>Preserves source system relationships</li>
+</ul>
+</li>
+</ul>
+<p><em>PDS (Persistent Data Store)</em></p>
+<ul>
+<li>Historical storage of all changes over time.<ul>
+<li>Append-only for all changes</li>
+<li>Supports point-in-time analysis</li>
+<li>Configurable retention periods</li>
+<li>As these may be available in landing - may be realised through views over landing</li>
+</ul>
+</li>
+</ul>
+<h4 id="silver"><strong>Silver</strong></h4>
+<p>The Silver layer is source centric and focuses on transforming raw data into cleaned, enriched, and validated datasets.</p>
+<p><em>Base Models</em></p>
+<ul>
+<li>Representation of source data with no changes. Used as a foundation for staging models as well as data quality checks.</li>
+</ul>
+<p><em>Staging Models</em></p>
+<ul>
+<li>
+<p>Source-system and object centric transformations that are core to all downstream consumption.</p>
+</li>
+<li>
+<p>Examples of transformations:</p>
+<ul>
+<li><code>01_renamed_and_typed</code></li>
+<li><code>02_deduped</code></li>
+<li><code>03_cleaned</code></li>
+<li><code>04_filtered/split</code></li>
+<li><code>05_column_selected</code></li>
+<li><code>06_business_validated</code></li>
+<li><code>07_desensitised</code></li>
+</ul>
+</li>
+</ul>
+<p><em>Enrichment Models</em></p>
+<p>Still source-centric, however:
+- more complex business logic and transformations are applied e.g. common calculations and derivations. 
+- may combine multiple staging objects from the same source</p>
+<ul>
+<li>By separating enrichment from core staging, we can schedule these processes independently. This allows for flexibility in updating or refreshing only the parts of the data pipeline that need it, reducing unnecessary computation and improving efficiency. It also allows for change and versioning of those business rules with minimal impact on core staging objects.</li>
+</ul>
+<p><em>Source Reference Data</em></p>
+<ul>
+<li>For convenience, reference data specific to the source can be segregated here and aligned to standards and downstream needs.</li>
+</ul>
+<p><em>Raw Vault</em></p>
+<ul>
+<li>Data vault 2.0 aligned raw data warehouse.</li>
+</ul>
+<h4 id="gold"><strong>Gold</strong></h4>
+<p>The Gold layer focuses on business-ready datasets, aggregations, and reporting structures.</p>
+<p><em>Business Vault</em></p>
+<ul>
+<li>Data vault 2.0 aligned business data warehouse where business rules and transformations are applied.</li>
+</ul>
+<p><em>Intermediate Models</em></p>
+<ul>
+<li>
+<p>These act as building blocks for marts, transforming and aggregating data further. Then be thought of as mart staging  https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate</p>
+</li>
+<li>
+<p>Business-specific transformations such as:</p>
+<ul>
+<li>Pivoting</li>
+<li>Aggregation</li>
+<li>Joining</li>
+<li>Funnel creation</li>
+<li>Conformance</li>
+<li>Desensitization</li>
+</ul>
+</li>
+</ul>
+<p><em>Enterprise Reference Data</em></p>
+<ul>
+<li>Reference data, independent of source can be aggregated here for broad consumption.</li>
+</ul>
+<p><em>Marts - Facts and dimensions</em></p>
+<ul>
+<li>Kimball style marts that represent business entities and processes. They may <ul>
+<li>serve foundational or narrow requirements. </li>
+<li>be scoped to specific systems or conformed across the enterprise</li>
+</ul>
+</li>
+</ul>
+<p><em>Marts - Denormalised</em></p>
+<ul>
+<li>Single table / view objects that combine data from multiple objects (e.g. facts and dimensions) </li>
+</ul>
+<h3 id="lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</h3>
+<p>Unity catalog objects (catalogs, schemas, objects) are mapped to:
+- Storage accounts
+- Environments (containers: dev, test, prod)
+- Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)
+- Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)</p>
+<p><br>
+<br>
+Example:
+<a href="../img/catalog_to_storage_mapping.png" target="_blank">
+    <img src="../img/catalog_to_storage_mapping.png"  alt="Catalog to storage mapping">
+</a></p>
+<p><br></p>
+<h2 id="data-engineering">Data Engineering</h2>
+<hr />
+<h3 id="ingestion">Ingestion</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+Improved diagrams and assessments of:</p>
+<ul>
+<li>lakeflow</li>
+<li>streaming: kafka -&gt; landing -&gt; databricks autoloader -&gt; ods</li>
+<li>streaming: kafka -&gt; iceberg
+assessed in terms of:</li>
+<li>cost</li>
+<li>performance</li>
+<li>resilience</li>
+<li>maintainability</li>
+<li>governance
+CDC patterns
+sql-server (ct tables, datatyping via views, custom init vs change sources and handling)</li>
+</ul>
+</blockquote>
+<p>Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.</p>
+<p>It should be:
+- Scalable, Resilient, Maintainable, Governed
+- Pattern-based, automated and Metadata-driven where possible
+- Batch and stream-based</p>
+<p><br>
+<br>
+Example batch ingestion options:
+<a href="../img/ingestion_patterns.png" target="_blank">
+    <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
+</a></p>
+<h4 id="pattern-specific-notes">Pattern specific notes:</h4>
+<blockquote>
+<p>built and working
+- PAttern 1: streaming: kafka -&gt; landing -&gt; databricks autoloader -&gt; ods
+    - see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks">Bronze Landing to ODS Project</a></p>
+<p>built and working
+- Pattern 2: batch: source -&gt; adf -&gt; landing -&gt; databricks autoloader merge to ods
+    - see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks">Bronze landing SQL Server to ODS Project</a>
+    - adf requires azure sql and on-premise integration runtime</p>
+<p>built and working
+- Pattern 3: batch: source -&gt; databricks lakehouse federation -&gt; databricks workflows -&gt; ods, pds
+    - see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks">External Database to ODS Project</a>
+    - requires network access to source</p>
+<p>i.e. poor mans datalake. todo
+- Pattern 4: batch/streaming: source -&gt; custom python -&gt; deltalake -&gt; external table</p>
+<p>Sharepoint ingestion
+- Pattern 5: sharepoint -&gt; fivetran -&gt; databricks sql warehouse (ods)
+- see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom">fivetran</a></p>
+</blockquote>
+<p>Rejected patterns:
+- batch: adf -&gt; deltalake -&gt; ods (does not support unity catalog, requires target tables to be pre-initialised)
+- batch: adf -&gt; databricks sql endpoint -&gt; ods (no linked service for databricks)
+- batch: adf + databricks notebook -&gt; landing, ods, pds (more undesireable coupling of adf and databricks an associated risks)</p>
+<h3 id="transformation">Transformation</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<h4 id="batch-and-micro-batch-sql-transformation">Batch and Micro-batch SQL transformation</h4>
+<ul>
+<li>dbt <a href="../naming_standards_and_conventions/#dbt">see dbt standards</a></li>
+</ul>
+<h4 id="streaming-sql-transformation">Streaming SQL transformation</h4>
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<h4 id="non-sql-transformation">Non SQL transformation</h4>
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<h3 id="data-sharing-and-delivery-patterns">Data sharing and delivery patterns</h3>
+<hr />
+<p><a href="../img/sharing_delivery_visualisation.png" target="_blank">
+    <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
+</a></p>
+<h4 id="row-level-security">Row Level Security</h4>
+<p>see <a href="#row-level-security">Row Level Security</a></p>
+<h4 id="pull-direct-access">Pull / direct access</h4>
+<hr />
+<h5 id="databricks-delta-sharing-practices">Databricks Delta sharing practices</h5>
+<blockquote>
+<ul>
+<li>dynamic views to be tested</li>
+</ul>
+</blockquote>
+<ul>
+<li>Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
+-Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.</li>
+<li>Costs: In Delta Sharing, the cost of compute is generally borne by the data consumer, not the data provider. Other costs include storage API calls and data transfer.</li>
+<li>Naming standards and conventions <a href="../naming_standards_and_conventions/#delta-sharing">see naming standards</a></li>
+<li>Tightly scope the share as per the principal of least privilege:<ul>
+<li>Share only the necessary data</li>
+<li>Single purpose, single recipient</li>
+<li>Granular access control</li>
+<li>Set an expiry</li>
+</ul>
+</li>
+<li>
+<p>Use audit logging to track access and usage
+    <code>sql
+    SELECT *
+    FROM system.access.audit
+    WHERE 
+    action_name LIKE 'deltaSharing%'
+    ORDER BY event_time DESC
+    LIMIT 100;</code></p>
+</li>
+<li>
+<p>Limitations:</p>
+<ul>
+<li>No Row Level Security and Masking support (dynamic views required)</li>
+</ul>
+</li>
+<li>
+<p>Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html</p>
+</li>
+</ul>
+<h5 id="adlsgen2-access-to-data">ADLSGen2 access to data</h5>
+<ul>
+<li>ADLSGen2 access, while technically possible, is not recommended as it bypasses the unity catalog and associated governance and observability.</li>
+<li>Given Delta Sharing, then direct ADLS file sharing is usually unnecessary. However, there are still a few edge cases where ADLS file sharing might be preferable, even when Delta Sharing is available:<ul>
+<li>Unstructured data</li>
+<li>Large non delta-file transfer</li>
+<li>Consumers that dont support delta-sharing</li>
+</ul>
+</li>
+</ul>
+<h5 id="duckdb-access-to-data-via-unity-catalog">Duckdb access to data (via Unity Catalog)</h5>
+<ul>
+<li>Duckdb is a popular open source SQL engine that can be used to access data in the lakehouse. Duckdb can be run on a local machine or in process in a databricks cluster.</li>
+<li>Costs: Duckdb data access will incur costs of the underlying compute, storage access, data transfer etc as per delta sharing.</li>
+<li>
+<p>Opportunities / uses:</p>
+<ul>
+<li>Last mile analysis</li>
+<li>SQL interface to delta, iceberg, parquet, csv, etc.</li>
+<li>dbt compatibility</li>
+<li>Local execution and storage of queries and data</li>
+<li>Use as feed visualisation tools e.g. Apache Superset</li>
+</ul>
+</li>
+<li>
+<p>see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom">Duckdb</a></p>
+</li>
+<li>
+<p>Limitations:</p>
+<ul>
+<li>Unity Catalog not yet supported</li>
+<li>Delta Kernel  not yet supported</li>
+</ul>
+</li>
+</ul>
+<h4 id="sql-access">SQL Access</h4>
+<hr />
+<ul>
+<li>SQL Access is provided by the Databricks SQL (serverless) endpoint.</li>
+</ul>
+<h4 id="api-access">API Access</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress / requires build and write up
+- The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.</p>
+</blockquote>
+<p>https://docs.databricks.com/api/workspace/statementexecution</p>
+<p>https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html</p>
+<h4 id="snowflake-access">Snowflake Access</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress / requires build and write up
+- Snowflake access is provided by Databricks Delta Sharing.
+- Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 <a href="https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta">see external tables</a>
+- <a href="https://harke-harkema.medium.com/reading-delta-tables-in-snowflake-1396d21bf970">tutorial</a></p>
+</blockquote>
+<h4 id="microsoft-fabric-access">Microsoft Fabric Access</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress / requires build and write up</p>
+</blockquote>
+<ul>
+<li>
+<p>Option 1. Share via Delta Sharing</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Centralised control over access policies</li>
+<li>Compute costs on consumer </li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Less control over access policies than Delta Sharing</li>
+<li>No Row Level Security and Masking support (dynamic views required)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Option 2. Directlake via ADLSGen2</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Potentially better PowerBI performance (untested)</li>
+<li>Compute costs on consumer </li>
+<li>No views</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Less control over access policies than Delta Sharing (outside of Unity Catalog)</li>
+<li>Requires granular ADLSGen2 access controls and service principals, and associated management overhead</li>
+<li>No Row Level Security and Masking support </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>build and write up</p>
+</blockquote>
+<ul>
+<li>
+<p>Option 2. Fabric mirrored unity catalog</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>not GA</li>
+<li>lots of limitations</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Option 3. PowerBI Access Via SQL Endpoint</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Potentially better PowerBI performance (untested)</li>
+<li>Row Level Security and Masking support </li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Compute costs on Databricks as well as Fabric</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Option 3. Replicate into Fabric</p>
+<ul>
+<li>Pros:<ul>
+<li>Possibly reduced networking costs (depending on workload and networking topology)</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Duplicated data</li>
+<li>Engineering costs and overheads</li>
+<li>Latency</li>
+<li>Less governance control</li>
+<li>No Row Level Security and Masking support </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="push">Push</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- adf
+- databricks
+- lakeflow</p>
+</blockquote>
+<h3 id="visualisation">Visualisation</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- Powerbi
+- Databricks dashboards
+- Apps</p>
+</blockquote>
+<p><br></p>
+<h2 id="aiml">AI/ML</h2>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- MLOps
+- Training
+- Databricks
+- Azure ML</p>
+</blockquote>
+<p><br></p>
+<h2 id="data-governance">Data governance</h2>
+<hr />
+<h3 id="data-lifecycle-and-asset-management">Data lifecycle and asset management</h3>
+<blockquote>
+<p>This section is a work in progress
+- data contracts and policy
+- data asset tagging</p>
+</blockquote>
+<h3 id="data-access-management">Data access management</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- data access request management
+- data contracts
+- access audit
+- activity audit</p>
+</blockquote>
+<h3 id="data-quality">Data quality</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- data quality checking and reporting</p>
+</blockquote>
+<h3 id="data-understandability">Data understandability</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- data lineage
+- </p>
+</blockquote>
+<h3 id="privacy-preservation">Privacy Preservation</h3>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- row level security
+- data masking
+- column level security
+- data anonymisation
+- data de-identification</p>
+</blockquote>
+<p>https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations</p>
+<p>"If you want to filter data when you share it using Delta Sharing, you must use dynamic views."</p>
+<p>Use dynamic views if you need to apply transformation logic, such as filters and masks, to read-only tables and if it is acceptable for users to refer to the dynamic views using different names.</p>
+<h4 id="row-level-security_1">Row Level Security</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress
+- dynamic views
+- precomputed views</p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
