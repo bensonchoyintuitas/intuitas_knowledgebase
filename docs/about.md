@@ -1,18 +1,16 @@
-<a href="img/intuitas.png" target="_blank">
-    <img src="img/intuitas.png" width="200" alt="Intuitas Logo">
-</a> 
-<br>
-<br>
+<img src="../img/intuitas.png" width="200"/>
+
+
 # About Intuitas
 
-**Intuitas** helps organisations design and implement scalable, governed, and high-performance data ecosystems. We specialise in **data architecture, real-time analytics, and cloud solutions**, ensuring businesses can make informed decisions with confidence.
+Intuitas provides expertise in **data architecture, governance, and real-time analytics**, helping organisations build scalable and well-structured data systems. Our focus is on designing practical solutions that support efficient data management and decision-making.
 
-### What We Do
+### Areas of Expertise
 - **Enterprise Data Architecture & Governance**  
 - **Cloud & Hybrid Data Solutions**  
 - **Real-Time Data & Streaming Analytics**  
-- **AI-Driven Insights & Decision Intelligence**  
+- **AI-Driven Data Insights**  
 
-Our approach is **practical, strategic, and outcome-focused**, enabling businesses to navigate complex data challenges effectively.
+We take a pragmatic and structured approach to solving complex data challenges, ensuring systems are adaptable and aligned with business needs.
 
-For inquiries, contact us at contact@intuitas.com
+For more information, contact us at office@intuitas.com.

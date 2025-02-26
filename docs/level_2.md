@@ -8,41 +8,50 @@
     - [Business metrics](level_2.md#business-metrics)
 
 - [Infrastructure](level_2.md#infrastructure)
-    - [Environments, Workspaces + Clusters](level_2.md#environments-workspaces-clusters)
+    - [Environments, Workspaces and Storage](level_2.md#environments-workspaces-and-storage)
     - [Secrets](level_2.md#secrets)
     - [Storage](level_2.md#storage)
-    - [CICD + Repository](level_2.md#cicd-repository)
+    - [CICD and Repository](level_2.md#cicd-and-repository)
     - [Observability](level_2.md#observability)
     - [Networking](level_2.md#networking)
     - [Orchestration](level_2.md#orchestration)
 
 - [Data and information models](level_2.md#data-and-information-models)
     - [Domain glossary](level_2.md#domain-glossary)
-    - [Domain data and warehouse models](level_2.md#domain-data-warehouse-models)
+    - [Domain data and warehouse models](level_2.md#domain-data-and-warehouse-models)
 
 - [Data Architecture](level_2.md#data-architecture)
-    - [Data layers and stages](level_2.md#data-layers-stages)
-    - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-storage-mapping)
+    - [Data layers and stages](level_2.md#data-layers-and-stages)
+    - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-to-storage-mapping)
 
 - [Data Engineering](level_2.md#data-engineering)
     - [Ingestion](level_2.md#ingestion)
     - [Transformation](level_2.md#transformation)
     - [Data Sharing and Delivery Patterns](level_2.md#data-sharing-and-delivery-patterns)
 
-- [Data access and governance](level_2.md#data-access-governance)
+- [Data governance](level_2.md#data-governance)
+    - [Data lifecycle and asset management](level_2.md#data-lifecycle-and-asset-management)
+    - [Data access management](level_2.md#data-access-management)
+    - [Data quality](level_2.md#data-quality)
+    - [Data understandability](level_2.md#data-understandability)
+    - [Privacy Preservation](level_2.md#privacy-preservation)
 
 
-Domain-level solutions are instantiations of the enterprise-level reference architecture. (See [1.2 Enterprise Data Platform Reference Architecture](level_1.md#1.2))
+Domain-level solutions are instantiations of the enterprise-level reference architecture. (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
 
 Example reference architecture:
 
 <a href="img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
-    <img src="img/logical_platform_and_pipeline_reference_architecture.png" width="700" alt="Platform and Pipeline Reference Architecture">
+    <img src="img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
+<br>
 ## Business architecture
+---
+
 ### Business processes
 ---
+
 Business processes are the activities and tasks that are performed to achieve the goals of the business.
 Understanding them is necessary to understand:
 - the context in which data is captured and used
@@ -65,20 +74,21 @@ Metrics are the measurements of the performance of the business processes. They 
 - metric owner
 - frequency
 
+<br>
 ## Infrastructure
+---
 > This section is a work in progress
-### Environments, Workspaces + Storage
-<a href="img/workspaces_environments_storage.png" target="_blank">
-    <img src="img/workspaces_environments_storage.png" width="700" alt="Workspaces, Environments and Storage">
+### Environments, Workspaces and Storage
+<a href="../img/workspaces_environments_storage.png" target="_blank">
+    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
 </a>
-<br>
-<br>
 
 This diagram illustrates a **data lakehouse architecture** with the following components and flow:
 
 
 **Data Sources**
-- Data originates from multiple sources such as:
+
+Data originates from multiple sources such as:
   - Databases
   - Kafka or event streaming
   - APIs or Python scripts
@@ -86,6 +96,7 @@ This diagram illustrates a **data lakehouse architecture** with the following co
 
 
 **Enterprise Engineering Layer**
+
 - Centralized enterprise workspaces are managed here with multiple environments. 
 While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:
 - Each workspace contains:
@@ -93,17 +104,21 @@ While work can be achieved within a single workspace and lakehouse storage accou
 
 
 **Domain-Specific Layer**
-- Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. **PROD**, **TEST**, and **DEV** storage containers within a single lakehouse storage account for domain-specific data management.
-  - Local **Bronze** for domain-specific engineering of domain-local data (not managed by enterprise engineering)
+
+- Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. 
+- **PROD**, **TEST**, and **DEV** storage containers within a single lakehouse storage account for domain-specific data management.
+- Local **Bronze** for domain-specific engineering of domain-local data (not managed by enterprise engineering)
 - Data from prod catalogs can be **shared** to other domains.
 
 **Data Catalog**
+
 - A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:
-  - Enables discovery and governance of data.
+- Enables discovery and governance of data.
 - Optional external catalog storage.
 
 
 ### Secrets
+
 ---
 > This section is a work in progress
 - Management
@@ -135,7 +150,7 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
    - Minimum ZRS or GRS for prod
    - Minimum LRS for poc, dev, test and preprod
 
-### CICD + Repository
+### CICD and Repository
 ---
 > This section is a work in progress
 
@@ -182,7 +197,9 @@ Service endpoints and policies are enabled.
 - Unity Catalog 
     - System access reports
 
+<br>
 ## Data and information models
+---
 
 Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. 
 
@@ -198,7 +215,9 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 - Conformed dimensions may serve as a bridge between domains for common entities.
 
 
+<br>
 ## Data Architecture
+---
 
 ### Data layers and stages 
 ---
@@ -207,13 +226,10 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 
 * Top level layers follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
 * Within each layer, data is transformed through a series of stages.
-<br>
-<br>
-<a href="img/data_layers_and_stages.png" target="_blank">
-    <img src="img/data_layers_and_stages.png" width="700" alt="Data layers and stages">
+
+<a href="../img/data_layers_and_stages.png" target="_blank">
+    <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
 </a>
-<br>
-<br>
 
 #### **Metadata**
 
@@ -334,13 +350,14 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 <br>
 <br>
 Example:
-<a href="img/catalog_to_storage_mapping.png" target="_blank">
-    <img src="img/catalog_to_storage_mapping.png" width="700" alt="Catalog to storage mapping">
+<a href="../img/catalog_to_storage_mapping.png" target="_blank">
+    <img src="../img/catalog_to_storage_mapping.png"  alt="Catalog to storage mapping">
 </a>
-<br>
-<br>
 
+<br>
 ## Data Engineering
+---
+
 ### Ingestion
 ---
 
@@ -369,11 +386,9 @@ It should be:
 <br>
 <br>
 Example batch ingestion options:
-<a href="img/ingestion_patterns.png" target="_blank">
-    <img src="img/ingestion_patterns.png" width="700" alt="Ingestion patterns">
+<a href="../img/ingestion_patterns.png" target="_blank">
+    <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
 </a>
-<br>
-<br>
 
 #### Pattern specific notes:
 
@@ -419,14 +434,13 @@ Rejected patterns:
 ### Data sharing and delivery patterns
 ---
 
-<a href="img/sharing_delivery_visualisation.png" target="_blank">
-    <img src="img/sharing_delivery_visualisation.png" width="700" alt="Sharing and delivery visualisation">
+<a href="../img/sharing_delivery_visualisation.png" target="_blank">
+    <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
 </a>
-<br>
-<br>
+
 
 #### Row Level Security
-see [Row Level Security](#row-level-security-1)
+see [Row Level Security](#row-level-security)
 
 #### Pull / direct access
 ---
@@ -574,6 +588,7 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 > - Databricks dashboards
 > - Apps
 
+<br>
 ## AI/ML
 ---
 > This section is a work in progress
@@ -582,7 +597,9 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 > - Databricks
 > - Azure ML
 
+<br>
 ## Data governance
+---
 
 
 ### Data lifecycle and asset management

@@ -3,4 +3,10 @@ nav:
   - Home: README.md
   - About: about.md
   - Licence: licence.md
-theme: readthedocs
+
+theme: 
+  name: mkdocs
+  logo: assets/intuitas.png
+
+extra_css:
+  - assets/custom.css

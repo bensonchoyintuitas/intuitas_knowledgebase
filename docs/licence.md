@@ -1,8 +1,4 @@
-<a href="img/intuitas.png" target="_blank">
-    <img src="img/intuitas.png" width="200" alt="Intuitas Logo">
-</a> 
-<br>
-<br>
+<img src="../img/intuitas.png" width="200"/>
 
 ## Copyright
 

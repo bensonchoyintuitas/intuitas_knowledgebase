@@ -13,10 +13,6 @@
    - [Workspace and Cluster Names](#workspace-and-cluster-names)
    - [Catalog](#catalog)
    - [Schema and Object Conventions](#schema-and-object-conventions)
-      - [Metadata](#metadata)
-      - [Bronze (Raw)](#bronze-raw)
-      - [Silver](#silver)
-      - [Gold](#gold)
    - [Delta Sharing](#delta-sharing)
 - [Azure Data Factory](#azure-data-factory)
 - [Streaming](#streaming)
@@ -141,11 +137,15 @@ No standard naming conventions for files and folders.
 
 ## Databricks
 
+
+### Workspace and cluster names
+
 - Workspace name: ws-{organisation_name}_{domain_name}
 - Cluster name: {personal_name/shared_name} Cluster
 - Workflow name: {dev/test} {workflow_name}
 
 ### Catalog 
+
 - Catalog name: {domain_name}_{environment}
 
    *e.g. intuitas_domain3_dev*
