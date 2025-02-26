@@ -1,0 +1,11 @@
+site_name: Intuitas Knowledgebase
+nav:
+  - Home: README.md
+  - About: about.md
+
+theme: 
+  name: mkdocs
+  logo: assets/intuitas.png
+
+extra_css:
+  - assets/custom.css
