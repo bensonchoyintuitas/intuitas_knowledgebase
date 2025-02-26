@@ -41,9 +41,6 @@
                             <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="../licence/" class="nav-link">Licence</a>
-                            </li>
                         </ul>
 
                     <ul class="nav navbar-nav ms-md-auto">
@@ -84,19 +81,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#cloud-resources" class="nav-link">Cloud Resources</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#vnet" class="nav-link">VNET</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#databricks" class="nav-link">Databricks</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#delta-sharing" class="nav-link">Delta Sharing</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -116,19 +101,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#databricks-asset-bundles" class="nav-link">Databricks Asset Bundles</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#security" class="nav-link">Security</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#policies" class="nav-link">Policies</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#frameworks" class="nav-link">Frameworks</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -141,44 +114,80 @@
 
 <h1 id="naming-conventions">Naming Conventions</h1>
 <p><a href="../">Return to home</a></p>
+<p><br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
+<hr />
 <ul>
-<li><a href="#mesh">Mesh</a></li>
+<li><a href="#mesh">Mesh</a><ul>
 <li><a href="#domain-names">Domain Names</a></li>
-<li><a href="#platform">Platform</a></li>
-<li><a href="#cloud-resources">Cloud Resources</a></li>
-<li><a href="#storage">Storage</a><ul>
-<li><a href="#lakehouse-storage">Lakehouse Storage</a></li>
-<li><a href="#generic-blob-storage">Generic Blob Storage</a></li>
 </ul>
 </li>
-<li><a href="#databricks">Databricks</a></li>
+<li><a href="#platform">Platform</a><ul>
+<li><a href="#environment">Environment</a></li>
+<li><a href="#vnet">VNET</a></li>
+<li><a href="#resource-groups">Resource Groups</a></li>
+<li><a href="#databricks-workspace">Databricks workspace</a></li>
+<li><a href="#key-vault">Key vault</a></li>
+<li><a href="#secrets">Secrets</a></li>
+<li><a href="#entra-group-names">Entra Group Names</a></li>
+<li><a href="#azure-data-factory-adf">Azure Data Factory (ADF)</a></li>
+<li><a href="#sql-server">SQL Server</a></li>
+<li><a href="#sql-database">SQL Database</a></li>
+<li><a href="#storage">Storage</a><ul>
+<li><a href="#lakehouse-storage">Lakehouse Storage</a></li>
+<li><a href="#lakehouse-storage-containers">Lakehouse Storage Containers</a></li>
+<li><a href="#lakehouse-storage-folders">Lakehouse Storage Folders</a></li>
+<li><a href="#generic-blob-storage">Generic Blob Storage</a></li>
+<li><a href="#generic-blob-files-and-folders">Generic Blob Files and Folders</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#databricks">Databricks</a><ul>
 <li><a href="#workspace-and-cluster-names">Workspace and Cluster Names</a></li>
 <li><a href="#catalog">Catalog</a></li>
 <li><a href="#schema-and-object-conventions">Schema and Object Conventions</a></li>
 <li><a href="#delta-sharing">Delta Sharing</a></li>
+</ul>
+</li>
 <li><a href="#azure-data-factory">Azure Data Factory</a></li>
 <li><a href="#streaming">Streaming</a></li>
-<li><a href="#dbt">dbt</a></li>
+<li><a href="#dbt">dbt</a><ul>
 <li><a href="#documentation-and-model-metadata">Documentation and Model Metadata</a></li>
 <li><a href="#sources">Sources</a></li>
 <li><a href="#model-folders">Model Folders</a></li>
 <li><a href="#model-names">Model Names</a></li>
-<li><a href="#cicd">CI/CD</a></li>
-<li><a href="#security">Security</a></li>
+<li><a href="#dbt_projectyml">dbt_project.yml</a></li>
+</ul>
+</li>
+<li><a href="#cicd">CI/CD</a><ul>
+<li><a href="#repository-naming">Repository Naming</a></li>
+<li><a href="#branch-naming">Branch Naming</a></li>
+<li><a href="#branch-lifecycle">Branch Lifecycle</a></li>
+<li><a href="#databricks-asset-bundles">Databricks Asset Bundles</a></li>
+</ul>
+</li>
+<li><a href="#security">Security</a><ul>
+<li><a href="#entra-group-names">Entra Group Names</a></li>
 <li><a href="#policies">Policies</a></li>
 <li><a href="#frameworks">Frameworks</a></li>
 </ul>
+</li>
+</ul>
+<p><br></p>
 <h2 id="mesh">Mesh</h2>
+<hr />
 <h3 id="domain-names">Domain Names</h3>
 <p>All lower case: {optional:organisation_}{functional area/domain}_{subdomain}</p>
 <p><em>e.g. intuitas_domain3</em></p>
+<p><br></p>
 <h2 id="platform">Platform</h2>
+<hr />
+<h3 id="environment">Environment</h3>
 <ul>
-<li>Environment: dev/test/prod (pat - production acceptance testing is optional as prepred)</li>
+<li>Environment: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
 </ul>
-<h2 id="cloud-resources"><strong>Cloud Resources</strong></h2>
-<h2 id="vnet">VNET</h2>
+<h3 id="vnet">VNET</h3>
 <ul>
 <li>Name: vn-{organisation_name}-{domain_name}</li>
 </ul>
@@ -198,7 +207,7 @@
 <li>Name: kv-{organisation_name}-{domain_name}</li>
 </ul>
 <p><em>e.g. kv-intuitas-domain3</em></p>
-<h4 id="secrets">Secrets</h4>
+<h3 id="secrets">Secrets</h3>
 <ul>
 <li>Name: {secret_name}</li>
 </ul>
@@ -217,7 +226,7 @@
 <li>Name: sql-{organisation_name}-{domain_name}</li>
 </ul>
 <p><em>e.g. sql-intuitas-domain3</em></p>
-<h4 id="sql-database">SQL Database</h4>
+<h3 id="sql-database">SQL Database</h3>
 <ul>
 <li>Name: sqldb-{purpose}-{organisation_name}-{domain_name}-{optional:environment}</li>
 </ul>
@@ -227,7 +236,7 @@
 <ul>
 <li>Lakehouse storage account name: dl{organisation_name}{domain_name}</li>
 </ul>
-<h5 id="lakehouse-storage-containers">Lakehouse storage containers</h5>
+<h4 id="lakehouse-storage-containers">Lakehouse storage containers</h4>
 <ul>
 <li>Name: {environment} (dev/test/preprod/prod)</li>
 </ul>
@@ -256,7 +265,10 @@
 </ul>
 <h4 id="generic-blob-files-and-folders">Generic Blob files and folders</h4>
 <p>No standard naming conventions for files and folders.</p>
+<p><br></p>
 <h2 id="databricks">Databricks</h2>
+<hr />
+<h3 id="workspace-and-cluster-names">Workspace and cluster names</h3>
 <ul>
 <li>Workspace name: ws-{organisation_name}_{domain_name}</li>
 <li>Cluster name: {personal_name/shared_name} Cluster</li>
@@ -293,7 +305,7 @@
 <p>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</p>
 </li>
 <li>
-<p>Ensure dbt’s dbt_project.yml and environment variables align with storage locations.</p>
+<p>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</p>
 </li>
 </ul>
 <h4 id="metadata-schemas-and-objects">Metadata Schemas and Objects</h4>
@@ -414,12 +426,14 @@
 <li>Object naming convention: <code>ref__[entity (singular)]</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.ref.ref__account_code</em></p>
-<h2 id="delta-sharing">Delta Sharing</h2>
+<h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
 <li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience}</li>
 </ul>
 <p><em>e.g. intuitas_domain3__finance__reporting__account_payments__payments</em></p>
+<p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
+<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>
@@ -432,14 +446,18 @@
 <li>Pipeline names: pl_{description: e.g copy_{source_name}<em>to</em>{destination_name}}</li>
 <li>Trigger names: tr_{pipeline_name}_{optional:start_time / frequency}</li>
 </ul>
+<p><br>  </p>
 <h2 id="streaming">Streaming</h2>
+<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>Cluster name: {domain_name}<strong>cluster</strong>{optional:environment}</li>
 <li>Topic names: {domain_name}<strong>{object/entity?}</strong>{optional:source_system}<strong><em>{optional:source</em>channel}</strong>{optional:environment}</li>
 <li>Consumer group names: {domain_name}<strong>{unique_group_name}</strong>{optional:environment}</li>
 </ul>
+<p><br>  </p>
 <h2 id="dbt">dbt</h2>
+<hr />
 <p>The following are in lower case:</p>
 <h3 id="documentation-and-model-metadata">Documentation and model metadata</h3>
 <p>Within each respective model folder (as needed)</p>
@@ -569,7 +587,9 @@ sources/gold/
         subdomain_name:
           +schema: gold__domain_name__subdomain_name
 </code></pre>
+<p><br></p>
 <h2 id="cicd">CI/CD</h2>
+<hr />
 <h3 id="repository-naming">Repository naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
@@ -615,7 +635,7 @@ sources/gold/
 <li>Release: Created from development, merged to main/master</li>
 <li>Hotfix: Created from main/master for urgent fixes</li>
 </ol>
-<h2 id="databricks-asset-bundles">Databricks Asset Bundles</h2>
+<h3 id="databricks-asset-bundles">Databricks Asset Bundles</h3>
 <p>Databricks asset bundles are encouraged for all Databricks projects.</p>
 <ul>
 <li>project/bundle name: </li>
@@ -693,15 +713,17 @@ targets:
     run_as:
       user_name: engineering-engineer@intuitas.com
 </code></pre>
+<p><br></p>
 <h2 id="security">Security</h2>
+<hr />
 <h3 id="entra-group-names_1">Entra Group Names</h3>
 <p>TBC</p>
-<h2 id="policies">Policies</h2>
+<h3 id="policies">Policies</h3>
 <ul>
 <li><strong>Data Retention</strong></li>
 <li><strong>Key Retention</strong></li>
 </ul>
-<h2 id="frameworks">Frameworks</h2>
+<h3 id="frameworks">Frameworks</h3>
 <ul>
 <li><strong>Engineering</strong></li>
 <li><strong>Security</strong></li>
