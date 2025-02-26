@@ -1,33 +1,61 @@
 # Naming Conventions
 [Return to home](README.md)
 
+<br>
 ## Table of Contents
-- [Mesh](#mesh)
-   - [Domain Names](#domain-names)
-- [Platform](#platform)
-   - [Cloud Resources](#cloud-resources)
-   - [Storage](#storage)
-      - [Lakehouse Storage](#lakehouse-storage)
-      - [Generic Blob Storage](#generic-blob-storage)
-- [Databricks](#databricks)
-   - [Workspace and Cluster Names](#workspace-and-cluster-names)
-   - [Catalog](#catalog)
-   - [Schema and Object Conventions](#schema-and-object-conventions)
-   - [Delta Sharing](#delta-sharing)
-- [Azure Data Factory](#azure-data-factory)
-- [Streaming](#streaming)
-- [dbt](#dbt)
-   - [Documentation and Model Metadata](#documentation-and-model-metadata)
-   - [Sources](#sources)
-   - [Model Folders](#model-folders)
-   - [Model Names](#model-names)
-- [CI/CD](#cicd)
-- [Security](#security)
-- [Policies](#policies)
-- [Frameworks](#frameworks)
+---
 
+   - [Mesh](#mesh)
+      - [Domain Names](#domain-names)
+   - [Platform](#platform)
+      - [Environment](#environment)
+      - [VNET](#vnet)
+      - [Resource Groups](#resource-groups)
+      - [Databricks workspace](#databricks-workspace)
+      - [Key vault](#key-vault)
+      - [Secrets](#secrets)
+      - [Entra Group Names](#entra-group-names)
+      - [Azure Data Factory (ADF)](#azure-data-factory-adf)
+      - [SQL Server](#sql-server)
+      - [SQL Database](#sql-database)
+      - [Storage](#storage)
+         - [Lakehouse Storage](#lakehouse-storage)
+         - [Lakehouse Storage Containers](#lakehouse-storage-containers)
+         - [Lakehouse Storage Folders](#lakehouse-storage-folders)
+         - [Generic Blob Storage](#generic-blob-storage)
+         - [Generic Blob Files and Folders](#generic-blob-files-and-folders)
+   - [Databricks](#databricks)
+      - [Workspace and Cluster Names](#workspace-and-cluster-names)
+      - [Catalog](#catalog)
+      - [Externally Mounted Catalog Names](#externally-mounted-catalog-names)
+      - [Schema and Object Conventions](#schema-and-object-conventions)
+         - [Schema Level External Storage Locations](#schema-level-external-storage-locations)
+         - [Metadata Schemas and Objects](#metadata-schemas-and-objects)
+         - [Bronze Schemas and Objects](#bronze-schemas-and-objects)
+         - [Silver Schemas and Objects](#silver-schemas-and-objects)
+         - [Gold Schemas and Objects](#gold-schemas-and-objects)
+      - [Delta Sharing](#delta-sharing)
+   - [Azure Data Factory](#azure-data-factory)
+   - [Streaming](#streaming)
+   - [dbt](#dbt)
+      - [Documentation and Model Metadata](#documentation-and-model-metadata)
+      - [Sources](#sources)
+      - [Model Folders](#model-folders)
+      - [Model Names](#model-names)
+      - [dbt_project.yml](#dbt_projectyml)
+   - [CI/CD](#cicd)
+      - [Repository Naming](#repository-naming)
+      - [Branch Naming](#branch-naming)
+      - [Branch Lifecycle](#branch-lifecycle)
+      - [Databricks Asset Bundles](#databricks-asset-bundles)
+   - [Security](#security)
+      - [Entra Group Names](#entra-group-names)
+      - [Policies](#policies)
+      - [Frameworks](#frameworks)
 
+<br>
 ## Mesh
+---
 
 ### Domain Names
 
@@ -35,12 +63,16 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
    *e.g. intuitas_domain3*
 
+<br>
 ## Platform
-- Environment: dev/test/prod (pat - production acceptance testing is optional as prepred)
+---
 
-## **Cloud Resources**
+### Environment
 
-## VNET
+- Environment: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)
+
+
+### VNET
 
 - Name: vn-{organisation_name}-{domain_name}
 
@@ -64,7 +96,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
    *e.g. kv-intuitas-domain3*
 
-#### Secrets
+### Secrets
 
 - Name: {secret_name}
 
@@ -88,7 +120,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
    *e.g. sql-intuitas-domain3*
 
-#### SQL Database
+### SQL Database
 
 - Name: sqldb-{purpose}-{organisation_name}-{domain_name}-{optional:environment}
 
@@ -101,7 +133,7 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
 
 - Lakehouse storage account name: dl{organisation_name}{domain_name}
 
-##### Lakehouse storage containers
+#### Lakehouse storage containers
 - Name: {environment} (dev/test/preprod/prod)
 
 ##### Lakehouse storage folders
@@ -115,8 +147,6 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
    - silver/edw_rv
    - silver/edw_bv
    - gold/mart
-
-
 
 #### Generic Blob storage
 
@@ -134,9 +164,9 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 No standard naming conventions for files and folders.
 
 
-
+<br>
 ## Databricks
-
+---
 
 ### Workspace and cluster names
 
@@ -175,7 +205,7 @@ Recommendations:
 
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 
-- Ensure dbt’s dbt_project.yml and environment variables align with storage locations.
+- Ensure dbt's dbt_project.yml and environment variables align with storage locations.
 
 
 #### Metadata Schemas and Objects
@@ -302,7 +332,7 @@ All schemas are may be optionally prefixed with `gold__`
 
    *e.g. intuitas_domain3_dev.ref.ref__account_code*
 
-## Delta Sharing
+### Delta Sharing
 
    - Share names: {domain_name}__{optional:subdomain_name}__{optional:purpose}__{schema_name or description}__{object_name or description}__{share_purpose and or target_audience}
 
@@ -311,8 +341,9 @@ All schemas are may be optionally prefixed with `gold__`
 
 
 
-
+<br>
 ## Azure Data Factory
+---
 
    The following are in lower case:
 
@@ -324,9 +355,9 @@ All schemas are may be optionally prefixed with `gold__`
    - Trigger names: tr_{pipeline_name}_{optional:start_time / frequency}
 
 
-
-
+<br>  
 ## Streaming
+---
 
 The following are in lower case:
 
@@ -336,8 +367,9 @@ The following are in lower case:
 
 
 
-
+<br>  
 ## dbt
+---
 
 The following are in lower case:
 
@@ -470,8 +502,9 @@ example
           +schema: gold__domain_name__subdomain_name
 ```
 
-
+<br>
 ## CI/CD
+---
 
 ### Repository naming 
 
@@ -521,8 +554,7 @@ example
 5. Hotfix: Created from main/master for urgent fixes
 
 
-
-## Databricks Asset Bundles
+### Databricks Asset Bundles
 
 Databricks asset bundles are encouraged for all Databricks projects.
 
@@ -595,16 +627,18 @@ targets:
     run_as:
       user_name: engineering-engineer@intuitas.com
 ```
-
+<br>
 ## Security
+---
+
 ### Entra Group Names
 TBC
 
-## Policies
+### Policies
 - **Data Retention**
 - **Key Retention**
 
-## Frameworks
+### Frameworks
 - **Engineering**
 - **Security**
 

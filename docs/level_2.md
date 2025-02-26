@@ -2,11 +2,11 @@
 [Return to home](README.md)
 
 ## Table of Contents
+
 - [Business architecture](level_2.md#business-architecture)
     - [Business processes](level_2.md#business-processes)
     - [Business glossary](level_2.md#business-glossary)
     - [Business metrics](level_2.md#business-metrics)
-
 - [Infrastructure](level_2.md#infrastructure)
     - [Environments, Workspaces and Storage](level_2.md#environments-workspaces-and-storage)
     - [Secrets](level_2.md#secrets)
@@ -15,20 +15,16 @@
     - [Observability](level_2.md#observability)
     - [Networking](level_2.md#networking)
     - [Orchestration](level_2.md#orchestration)
-
 - [Data and information models](level_2.md#data-and-information-models)
     - [Domain glossary](level_2.md#domain-glossary)
     - [Domain data and warehouse models](level_2.md#domain-data-and-warehouse-models)
-
 - [Data Architecture](level_2.md#data-architecture)
     - [Data layers and stages](level_2.md#data-layers-and-stages)
     - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-to-storage-mapping)
-
 - [Data Engineering](level_2.md#data-engineering)
     - [Ingestion](level_2.md#ingestion)
     - [Transformation](level_2.md#transformation)
     - [Data Sharing and Delivery Patterns](level_2.md#data-sharing-and-delivery-patterns)
-
 - [Data governance](level_2.md#data-governance)
     - [Data lifecycle and asset management](level_2.md#data-lifecycle-and-asset-management)
     - [Data access management](level_2.md#data-access-management)
@@ -41,8 +37,8 @@ Domain-level solutions are instantiations of the enterprise-level reference arch
 
 Example reference architecture:
 
-<a href="img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
-    <img src="img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
+<a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+    <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
 <br>
