@@ -1,11 +1,8 @@
 <img src="../img/intuitas.png" width="200"/>
 
-
-# About Intuitas
-
 Intuitas provides expertise in **data architecture, governance, and real-time analytics**, helping organisations build scalable and well-structured data systems. Our focus is on designing practical solutions that support efficient data management and decision-making.
 
-### Areas of Expertise
+## Areas of Expertise
 - **Enterprise Data Architecture & Governance**  
 - **Cloud & Hybrid Data Solutions**  
 - **Real-Time Data & Streaming Analytics**  

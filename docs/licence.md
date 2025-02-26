@@ -6,4 +6,4 @@ This knowledge base and its contents are © Intuitas PTY LTD, 2025. All rights r
 
 ## Licence
 
-Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given to the original author(s). Referenced third-party content is subject to the copyright terms of their respective owners.
+Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given to the original author. Referenced third-party content is subject to the copyright terms of their respective owners.
