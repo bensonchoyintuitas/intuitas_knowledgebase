@@ -154,7 +154,6 @@ Example:
 
 ## Enterprise Information and Data Architecture
 
-
 Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
 - Existing enterprise information, conceptual and logical models
 - Legacy warehouse models
@@ -172,7 +171,7 @@ Other secondary considerations:
 
 ## Enterprise Metadata Architecture
 
-
+Recommended content:
 - Description of applicable metadata standards
 - Enterprise Metadata Architecture and Metamodel
 - Description of metadata governance, stewards and processes
@@ -192,8 +191,7 @@ Other secondary considerations:
 
 ## Enterprise Security
 
-
->Work in progress:
+Recommended content:
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
 - Description of responsibilities and accountabilities.
@@ -204,7 +202,7 @@ Other secondary considerations:
 
 ## Enterprise Data Governance
 
->Work in progress:
+Recommended content:
 - Description of governance frameworks, policies and standards including but not limited to:
     - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
     - Privacy controls required, standards and services available
@@ -217,8 +215,11 @@ Other secondary considerations:
 ### Audit
 ---
 
-> This section is a work in progress
+Recommended content:
+- Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.
+
 ##### Example questions and associated queries
+> This section is a work in progress
 ```
 As an Enterprise Metastore Admin:
 
@@ -232,9 +233,10 @@ As an Enterprise Metastore Admin:
 
 ## Enterprise Billing
 
+Recommended content:
+- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
 
 >Work in progress:
-- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
 - Description of core concepts in Databricks:
     - Policies and cluster types
     - Tagging flow

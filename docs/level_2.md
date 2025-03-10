@@ -15,10 +15,10 @@
     - [Observability](level_2.md#observability)
     - [Networking](level_2.md#networking)
     - [Orchestration](level_2.md#orchestration)
-- [Data and information models](level_2.md#data-and-information-models)
+- [Data Architecture](level_2.md#data-architecture)
+    - [Data and information models](level_2.md#data-and-information-models)
     - [Domain glossary](level_2.md#domain-glossary)
     - [Domain data and warehouse models](level_2.md#domain-data-and-warehouse-models)
-- [Data Architecture](level_2.md#data-architecture)
     - [Data layers and stages](level_2.md#data-layers-and-stages)
     - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-to-storage-mapping)
 - [Data Engineering](level_2.md#data-engineering)
@@ -120,6 +120,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 > This section is a work in progress
 - Management
 - Areas of use
+- Handling practices
 
 ### Storage
 ---
@@ -150,15 +151,23 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 ### CICD and Repository
 ---
 > This section is a work in progress
+- Description of git workflows for CICD in terms of:
+    - Infrastructure
+    - Data engineering
+    - Analytics engineering
+    - Data science / AIML
+    - BI, Reports and other products
 
 #### Tools
 - Github
 - Azure Devops
+- Databricks Asset Bundles
 
 #### Repositories
 
 - Infrastructure
 - dbt projects (separate for each domain)
+    - potential for enterprise level stitching of lineage
 - Data engineering code (separate for each domain) using Databricks Asset Bundles
 
 ### Observability
@@ -195,14 +204,24 @@ Service endpoints and policies are enabled.
     - System access reports
 
 <br>
-## Data and information models
----
+
+
+
+
+<br>
+
+## Data Architecture
+
+Data Architecture refers to how data is physically structured, stored, and accessed within an organization. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. 
+
+### Data and information models
 
 Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. 
 
 See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
 ### Domain glossary
+
 - Expand on the enterprise glossary and add domain specific terms and definitions.
     - In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.
     - In cases where definitions are conflicting, governance should be applied to resolve the conflict.
@@ -210,11 +229,6 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 ### Domain data and warehouse models
 - Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.
 - Conformed dimensions may serve as a bridge between domains for common entities.
-
-
-<br>
-## Data Architecture
----
 
 ### Data layers and stages 
 ---
@@ -352,8 +366,8 @@ Example:
 </a>
 
 <br>
+
 ## Data Engineering
----
 
 ### Ingestion
 ---
@@ -387,7 +401,7 @@ Example batch ingestion options:
     <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
 </a>
 
-#### Pattern specific notes:
+#### Ingestion patterns and notes:
 
 > built and working
 - PAttern 1: streaming: kafka -> landing -> databricks autoloader -> ods
@@ -442,8 +456,7 @@ see [Row Level Security](#row-level-security)
 #### Pull / direct access
 ---
 
-##### Databricks Delta sharing practices
-> - dynamic views to be tested
+#### **Databricks Delta sharing practices**
 
 - Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
 -Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.
@@ -463,14 +476,12 @@ see [Row Level Security](#row-level-security)
     ORDER BY event_time DESC
     LIMIT 100;
     ```
-
 - Limitations:
     - No Row Level Security and Masking support (dynamic views required)
 
-
 - Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html
 
-##### ADLSGen2 access to data
+#### **ADLSGen2 access to data**
 
 - ADLSGen2 access, while technically possible, is not recommended as it bypasses the unity catalog and associated governance and observability.
 - Given Delta Sharing, then direct ADLS file sharing is usually unnecessary. However, there are still a few edge cases where ADLS file sharing might be preferable, even when Delta Sharing is available:
@@ -478,7 +489,7 @@ see [Row Level Security](#row-level-security)
     - Large non delta-file transfer
     - Consumers that dont support delta-sharing
 
-##### Duckdb access to data (via Unity Catalog)
+##### **Duckdb access to data (via Unity Catalog)**
 
 - Duckdb is a popular open source SQL engine that can be used to access data in the lakehouse. Duckdb can be run on a local machine or in process in a databricks cluster.
 - Costs: Duckdb data access will incur costs of the underlying compute, storage access, data transfer etc as per delta sharing.
@@ -496,33 +507,40 @@ see [Row Level Security](#row-level-security)
     - Delta Kernel  not yet supported
 
 
-#### SQL Access
+#### **SQL Access**
 ---
 - SQL Access is provided by the Databricks SQL (serverless) endpoint.
 
-#### API Access
+#### **API Access**
 ---
-> This section is a work in progress / requires build and write up
+> This section is a work in progress
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.
 
-https://docs.databricks.com/api/workspace/statementexecution
+References:
 
-https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
+ - https://docs.databricks.com/api/workspace/statementexecution
+ - https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 
-#### Snowflake Access
+#### **Snowflake Access**
 ---
-> This section is a work in progress / requires build and write up
+> This section is a work in progress
+
 - Snowflake access is provided by Databricks Delta Sharing.
 - Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 [see external tables](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta)
+
+References:
 - [tutorial](https://harke-harkema.medium.com/reading-delta-tables-in-snowflake-1396d21bf970)
 
 
 
-#### Microsoft Fabric Access
+#### **Microsoft Fabric Access**
 ---
-> This section is a work in progress / requires build and write up
+> This section is a work in progress and required validation
 
-- Option 1. Share via Delta Sharing
+The following describes options for providing access to Microsoft Fabric / PowerBI 
+
+*Option 1. Share via Delta Sharing*
+
     - Pros: 
         - No duplication
         - Centralised control over access policies
@@ -531,7 +549,8 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
         - Less control over access policies than Delta Sharing
         - No Row Level Security and Masking support (dynamic views required)
 
-- Option 2. Directlake via ADLSGen2
+*Option 2. Directlake via ADLSGen2*
+
     - Pros: 
         - No duplication
         - Potentially better PowerBI performance (untested)
@@ -542,9 +561,8 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
         - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
         - No Row Level Security and Masking support 
 
-> build and write up
+*Option 3. Fabric mirrored unity catalog*
 
-- Option 2. Fabric mirrored unity catalog
     - Pros: 
         - No duplication
         - Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)
@@ -553,7 +571,8 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
         - lots of limitations
 
 
-- Option 3. PowerBI Access Via SQL Endpoint
+*Option 4. PowerBI Access Via SQL Endpoint*
+
     - Pros: 
         - No duplication
         - Potentially better PowerBI performance (untested)
@@ -561,7 +580,8 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
     - Cons: 
         - Compute costs on Databricks as well as Fabric
 
-- Option 3. Replicate into Fabric
+Option 5*. Replicate into Fabric*
+
     - Pros:
         - Possibly reduced networking costs (depending on workload and networking topology)
     - Cons: 
@@ -573,24 +593,31 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 
 #### Push
 ---
+
 > This section is a work in progress
-> - adf
-> - databricks
-> - lakeflow
+
+For consideration:
+- adf
+- databricks
+- lakeflow
 
 ### Visualisation
 ---
 > This section is a work in progress
+
+For consideration:
 - Powerbi
 - Databricks dashboards
 - Apps
+- Open source visual options 
 
 <br>
 
 ## AI/ML
 
-
 > This section is a work in progress
+
+For consideration:
 - MLOps
 - Training
 - Databricks
@@ -602,10 +629,11 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 
 This section describes how Enterprise-level governance will be implemented through solutions at the domain level.
 
-
 ### Data lifecycle and asset management
 ---
 > This section is a work in progress
+
+For consideration:
 - data contracts and policy
 - data asset tagging
 
@@ -613,6 +641,8 @@ This section describes how Enterprise-level governance will be implemented throu
 ### Data access management
 ---
 > This section is a work in progress
+
+For consideration:
 - data access request management
 - data contracts
 - access audit
@@ -622,19 +652,27 @@ This section describes how Enterprise-level governance will be implemented throu
 ### Data quality
 ---
 > This section is a work in progress
+
+For consideration:
 - data quality checking and reporting
+- data standards and quality business rule management
 
 
 ### Data understandability
 ---
 > This section is a work in progress
+
+For consideration:
 - data lineage
-- 
+- data object metadata
+
 
 
 ### Privacy Preservation 
 ---
 > This section is a work in progress
+
+For consideration:
 - row level security
 - data masking
 - column level security
@@ -650,6 +688,8 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 #### Row Level Security
 ---
 > This section is a work in progress
+
+For consideration:
 - dynamic views
 - precomputed views
 
@@ -658,6 +698,7 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 
 > This section is a work in progress
 
+For consideration:
 - audit log queries
 
 ##### Example questions and associated queries
@@ -677,6 +718,8 @@ As a Domain (workspace) Admin:
 ## Billing
 
 >Work in progress:
+
+Recommended content:
 - Describe how Enterprise Billing is implemented in terms of:
     - Tagging standards
         - Workspace
