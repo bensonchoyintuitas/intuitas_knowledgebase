@@ -81,10 +81,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#data-and-information-models" class="nav-link">Data and information models</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#data-architecture" class="nav-link">Data Architecture</a>
               <ul class="nav flex-column">
               </ul>
@@ -132,12 +128,10 @@
 <li><a href="./#orchestration">Orchestration</a></li>
 </ul>
 </li>
-<li><a href="./#data-and-information-models">Data and information models</a><ul>
+<li><a href="./#data-architecture">Data Architecture</a><ul>
+<li><a href="./#data-and-information-models">Data and information models</a></li>
 <li><a href="./#domain-glossary">Domain glossary</a></li>
 <li><a href="./#domain-data-and-warehouse-models">Domain data and warehouse models</a></li>
-</ul>
-</li>
-<li><a href="./#data-architecture">Data Architecture</a><ul>
 <li><a href="./#data-layers-and-stages">Data layers and stages</a></li>
 <li><a href="./#lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</a></li>
 </ul>
@@ -229,7 +223,8 @@ While work can be achieved within a single workspace and lakehouse storage accou
 <blockquote>
 <p>This section is a work in progress
 - Management
-- Areas of use</p>
+- Areas of use
+- Handling practices</p>
 </blockquote>
 <h3 id="storage">Storage</h3>
 <hr />
@@ -256,17 +251,27 @@ This can then be modified according to costs, requirements, policies, projected 
 <h3 id="cicd-and-repository">CICD and Repository</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is a work in progress
+- Description of git workflows for CICD in terms of:
+    - Infrastructure
+    - Data engineering
+    - Analytics engineering
+    - Data science / AIML
+    - BI, Reports and other products</p>
 </blockquote>
 <h4 id="tools">Tools</h4>
 <ul>
 <li>Github</li>
 <li>Azure Devops</li>
+<li>Databricks Asset Bundles</li>
 </ul>
 <h4 id="repositories">Repositories</h4>
 <ul>
 <li>Infrastructure</li>
-<li>dbt projects (separate for each domain)</li>
+<li>dbt projects (separate for each domain)<ul>
+<li>potential for enterprise level stitching of lineage</li>
+</ul>
+</li>
 <li>Data engineering code (separate for each domain) using Databricks Asset Bundles</li>
 </ul>
 <h3 id="observability">Observability</h3>
@@ -300,8 +305,10 @@ This can then be modified according to costs, requirements, policies, projected 
 </li>
 </ul>
 <p><br></p>
-<h2 id="data-and-information-models">Data and information models</h2>
-<hr />
+<p><br></p>
+<h2 id="data-architecture">Data Architecture</h2>
+<p>Data Architecture refers to how data is physically structured, stored, and accessed within an organization. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. </p>
+<h3 id="data-and-information-models">Data and information models</h3>
 <p>Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. </p>
 <p>See <a href="https://martinfowler.com/bliki/BoundedContext.html">Bounded context</a></p>
 <h3 id="domain-glossary">Domain glossary</h3>
@@ -317,9 +324,6 @@ This can then be modified according to costs, requirements, policies, projected 
 <li>Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.</li>
 <li>Conformed dimensions may serve as a bridge between domains for common entities.</li>
 </ul>
-<p><br></p>
-<h2 id="data-architecture">Data Architecture</h2>
-<hr />
 <h3 id="data-layers-and-stages">Data layers and stages</h3>
 <hr />
 <p>Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:</p>
@@ -459,7 +463,6 @@ Example:
 </a></p>
 <p><br></p>
 <h2 id="data-engineering">Data Engineering</h2>
-<hr />
 <h3 id="ingestion">Ingestion</h3>
 <hr />
 <blockquote>
@@ -490,7 +493,7 @@ Example batch ingestion options:
 <a href="../img/ingestion_patterns.png" target="_blank">
     <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
 </a></p>
-<h4 id="pattern-specific-notes">Pattern specific notes:</h4>
+<h4 id="ingestion-patterns-and-notes">Ingestion patterns and notes:</h4>
 <blockquote>
 <p>built and working
 - PAttern 1: streaming: kafka -&gt; landing -&gt; databricks autoloader -&gt; ods
@@ -539,12 +542,7 @@ Example batch ingestion options:
 <p>see <a href="#row-level-security">Row Level Security</a></p>
 <h4 id="pull-direct-access">Pull / direct access</h4>
 <hr />
-<h5 id="databricks-delta-sharing-practices">Databricks Delta sharing practices</h5>
-<blockquote>
-<ul>
-<li>dynamic views to be tested</li>
-</ul>
-</blockquote>
+<h4 id="databricks-delta-sharing-practices"><strong>Databricks Delta sharing practices</strong></h4>
 <ul>
 <li>Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
 -Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.</li>
@@ -557,16 +555,14 @@ Example batch ingestion options:
 <li>Set an expiry</li>
 </ul>
 </li>
-<li>
-<p>Use audit logging to track access and usage
+<li>Use audit logging to track access and usage
     <code>sql
     SELECT *
     FROM system.access.audit
     WHERE 
     action_name LIKE 'deltaSharing%'
     ORDER BY event_time DESC
-    LIMIT 100;</code></p>
-</li>
+    LIMIT 100;</code></li>
 <li>
 <p>Limitations:</p>
 <ul>
@@ -577,7 +573,7 @@ Example batch ingestion options:
 <p>Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html</p>
 </li>
 </ul>
-<h5 id="adlsgen2-access-to-data">ADLSGen2 access to data</h5>
+<h4 id="adlsgen2-access-to-data"><strong>ADLSGen2 access to data</strong></h4>
 <ul>
 <li>ADLSGen2 access, while technically possible, is not recommended as it bypasses the unity catalog and associated governance and observability.</li>
 <li>Given Delta Sharing, then direct ADLS file sharing is usually unnecessary. However, there are still a few edge cases where ADLS file sharing might be preferable, even when Delta Sharing is available:<ul>
@@ -587,7 +583,7 @@ Example batch ingestion options:
 </ul>
 </li>
 </ul>
-<h5 id="duckdb-access-to-data-via-unity-catalog">Duckdb access to data (via Unity Catalog)</h5>
+<h5 id="duckdb-access-to-data-via-unity-catalog"><strong>Duckdb access to data (via Unity Catalog)</strong></h5>
 <ul>
 <li>Duckdb is a popular open source SQL engine that can be used to access data in the lakehouse. Duckdb can be run on a local machine or in process in a databricks cluster.</li>
 <li>Costs: Duckdb data access will incur costs of the underlying compute, storage access, data transfer etc as per delta sharing.</li>
@@ -612,205 +608,180 @@ Example batch ingestion options:
 </ul>
 </li>
 </ul>
-<h4 id="sql-access">SQL Access</h4>
+<h4 id="sql-access"><strong>SQL Access</strong></h4>
 <hr />
 <ul>
 <li>SQL Access is provided by the Databricks SQL (serverless) endpoint.</li>
 </ul>
-<h4 id="api-access">API Access</h4>
+<h4 id="api-access"><strong>API Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress / requires build and write up
+<p>This section is a work in progress
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.</p>
 </blockquote>
-<p>https://docs.databricks.com/api/workspace/statementexecution</p>
-<p>https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html</p>
-<h4 id="snowflake-access">Snowflake Access</h4>
+<p>References:</p>
+<ul>
+<li>https://docs.databricks.com/api/workspace/statementexecution</li>
+<li>https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html</li>
+</ul>
+<h4 id="snowflake-access"><strong>Snowflake Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress / requires build and write up
-- Snowflake access is provided by Databricks Delta Sharing.
-- Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 <a href="https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta">see external tables</a>
+<p>This section is a work in progress</p>
+</blockquote>
+<ul>
+<li>Snowflake access is provided by Databricks Delta Sharing.</li>
+<li>Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 <a href="https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta">see external tables</a></li>
+</ul>
+<p>References:
 - <a href="https://harke-harkema.medium.com/reading-delta-tables-in-snowflake-1396d21bf970">tutorial</a></p>
-</blockquote>
-<h4 id="microsoft-fabric-access">Microsoft Fabric Access</h4>
+<h4 id="microsoft-fabric-access"><strong>Microsoft Fabric Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress / requires build and write up</p>
+<p>This section is a work in progress and required validation</p>
 </blockquote>
-<ul>
-<li>
-<p>Option 1. Share via Delta Sharing</p>
-<ul>
-<li>Pros: <ul>
-<li>No duplication</li>
-<li>Centralised control over access policies</li>
-<li>Compute costs on consumer </li>
-</ul>
-</li>
-<li>Cons: <ul>
-<li>Less control over access policies than Delta Sharing</li>
-<li>No Row Level Security and Masking support (dynamic views required)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Option 2. Directlake via ADLSGen2</p>
-<ul>
-<li>Pros: <ul>
-<li>No duplication</li>
-<li>Potentially better PowerBI performance (untested)</li>
-<li>Compute costs on consumer </li>
-<li>No views</li>
-</ul>
-</li>
-<li>Cons: <ul>
-<li>Less control over access policies than Delta Sharing (outside of Unity Catalog)</li>
-<li>Requires granular ADLSGen2 access controls and service principals, and associated management overhead</li>
-<li>No Row Level Security and Masking support </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>build and write up</p>
-</blockquote>
-<ul>
-<li>
-<p>Option 2. Fabric mirrored unity catalog</p>
-<ul>
-<li>Pros: <ul>
-<li>No duplication</li>
-<li>Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)</li>
-</ul>
-</li>
-<li>Cons: <ul>
-<li>not GA</li>
-<li>lots of limitations</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Option 3. PowerBI Access Via SQL Endpoint</p>
-<ul>
-<li>Pros: <ul>
-<li>No duplication</li>
-<li>Potentially better PowerBI performance (untested)</li>
-<li>Row Level Security and Masking support </li>
-</ul>
-</li>
-<li>Cons: <ul>
-<li>Compute costs on Databricks as well as Fabric</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Option 3. Replicate into Fabric</p>
-<ul>
-<li>Pros:<ul>
-<li>Possibly reduced networking costs (depending on workload and networking topology)</li>
-</ul>
-</li>
-<li>Cons: <ul>
-<li>Duplicated data</li>
-<li>Engineering costs and overheads</li>
-<li>Latency</li>
-<li>Less governance control</li>
-<li>No Row Level Security and Masking support </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>The following describes options for providing access to Microsoft Fabric / PowerBI </p>
+<p><em>Option 1. Share via Delta Sharing</em></p>
+<pre><code>- Pros: 
+    - No duplication
+    - Centralised control over access policies
+    - Compute costs on consumer 
+- Cons: 
+    - Less control over access policies than Delta Sharing
+    - No Row Level Security and Masking support (dynamic views required)
+</code></pre>
+<p><em>Option 2. Directlake via ADLSGen2</em></p>
+<pre><code>- Pros: 
+    - No duplication
+    - Potentially better PowerBI performance (untested)
+    - Compute costs on consumer 
+    - No views
+- Cons: 
+    - Less control over access policies than Delta Sharing (outside of Unity Catalog)
+    - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
+    - No Row Level Security and Masking support
+</code></pre>
+<p><em>Option 3. Fabric mirrored unity catalog</em></p>
+<pre><code>- Pros: 
+    - No duplication
+    - Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)
+- Cons: 
+    - not GA
+    - lots of limitations
+</code></pre>
+<p><em>Option 4. PowerBI Access Via SQL Endpoint</em></p>
+<pre><code>- Pros: 
+    - No duplication
+    - Potentially better PowerBI performance (untested)
+    - Row Level Security and Masking support 
+- Cons: 
+    - Compute costs on Databricks as well as Fabric
+</code></pre>
+<p>Option 5<em>. Replicate into Fabric</em></p>
+<pre><code>- Pros:
+    - Possibly reduced networking costs (depending on workload and networking topology)
+- Cons: 
+    - Duplicated data
+    - Engineering costs and overheads
+    - Latency
+    - Less governance control
+    - No Row Level Security and Masking support
+</code></pre>
 <h4 id="push">Push</h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - adf
 - databricks
 - lakeflow</p>
-</blockquote>
 <h3 id="visualisation">Visualisation</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - Powerbi
 - Databricks dashboards
-- Apps</p>
-</blockquote>
+- Apps
+- Open source visual options </p>
 <p><br></p>
 <h2 id="aiml">AI/ML</h2>
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - MLOps
 - Training
 - Databricks
 - Azure ML</p>
-</blockquote>
 <p><br></p>
 <h2 id="data-governance">Data governance</h2>
 <p>This section describes how Enterprise-level governance will be implemented through solutions at the domain level.</p>
 <h3 id="data-lifecycle-and-asset-management">Data lifecycle and asset management</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - data contracts and policy
 - data asset tagging</p>
-</blockquote>
 <h3 id="data-access-management">Data access management</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - data access request management
 - data contracts
 - access audit
 - activity audit</p>
-</blockquote>
 <h3 id="data-quality">Data quality</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
-- data quality checking and reporting</p>
+<p>This section is a work in progress</p>
 </blockquote>
+<p>For consideration:
+- data quality checking and reporting
+- data standards and quality business rule management</p>
 <h3 id="data-understandability">Data understandability</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
-- data lineage
-- </p>
+<p>This section is a work in progress</p>
 </blockquote>
+<p>For consideration:
+- data lineage
+- data object metadata</p>
 <h3 id="privacy-preservation">Privacy Preservation</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - row level security
 - data masking
 - column level security
 - data anonymisation
 - data de-identification</p>
-</blockquote>
 <p>https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations</p>
 <p>"If you want to filter data when you share it using Delta Sharing, you must use dynamic views."</p>
 <p>Use dynamic views if you need to apply transformation logic, such as filters and masks, to read-only tables and if it is acceptable for users to refer to the dynamic views using different names.</p>
 <h4 id="row-level-security_1">Row Level Security</h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is a work in progress</p>
+</blockquote>
+<p>For consideration:
 - dynamic views
 - precomputed views</p>
-</blockquote>
 <h4 id="audit">Audit</h4>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<ul>
-<li>audit log queries</li>
-</ul>
+<p>For consideration:
+- audit log queries</p>
 <h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
 <pre><code>As a Domain (workspace) Admin:
 
@@ -822,7 +793,9 @@ Example batch ingestion options:
 <p><br></p>
 <h2 id="billing">Billing</h2>
 <blockquote>
-<p>Work in progress:
+<p>Work in progress:</p>
+</blockquote>
+<p>Recommended content:
 - Describe how Enterprise Billing is implemented in terms of:
     - Tagging standards
         - Workspace
@@ -831,7 +804,6 @@ Example batch ingestion options:
     - Cluster policies and assignment standards
 - Describe how the above are forced in a CICD manner:
     - DABs</p>
-</blockquote>
 <h3 id="example-questions-and-associated-queries_1">Example questions and associated queries</h3>
 <pre><code>As a Domain (workspace) Admin:
 

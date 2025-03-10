@@ -128,8 +128,10 @@ Maintaining a local bronze layer for non-enterprise-distributed data enables dom
 Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.
 
 <br>
+
 ## Enterprise Data Platform Reference Architecture
----
+
+
 
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
@@ -138,8 +140,9 @@ Example:
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
 <br>
+
 ## Enterprise (Logical) Data Warehouse Reference Architecture
----
+
 
 **Logical Data Warehouse topology**
 
@@ -155,6 +158,7 @@ Example:
 ## Enterprise Information and Data Architecture
 
 Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
+
 - Existing enterprise information, conceptual and logical models
 - Legacy warehouse models
 - Domain information models and glossaries
@@ -163,6 +167,7 @@ Solutions such as data warehouses and marts should reflect the business semantic
 - Data standards
 
 Other secondary considerations:
+
 - Source system data models
 - Industry models
 - Integration models
@@ -172,6 +177,7 @@ Other secondary considerations:
 ## Enterprise Metadata Architecture
 
 Recommended content:
+
 - Description of applicable metadata standards
 - Enterprise Metadata Architecture and Metamodel
 - Description of metadata governance, stewards and processes
@@ -192,6 +198,7 @@ Recommended content:
 ## Enterprise Security
 
 Recommended content:
+
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
 - Description of responsibilities and accountabilities.
@@ -203,6 +210,7 @@ Recommended content:
 ## Enterprise Data Governance
 
 Recommended content:
+
 - Description of governance frameworks, policies and standards including but not limited to:
     - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
     - Privacy controls required, standards and services available

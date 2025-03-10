@@ -142,7 +142,10 @@
 </ul>
 </li>
 <li><a href="#enterprise-security">Enterprise Security</a></li>
-<li><a href="#enterprise-data-governance">Enterprise Data Governance</a></li>
+<li><a href="#enterprise-data-governance">Enterprise Data Governance</a><ul>
+<li><a href="#audit">Audit</a></li>
+</ul>
+</li>
 <li><a href="#enterprise-billing">Enterprise Billing</a></li>
 </ul>
 <p><br></p>
@@ -212,13 +215,11 @@ Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-
 <p>Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
 <p><br></p>
 <h2 id="enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</h2>
-<hr />
 <p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
 <p>Example:</p>
 <p><img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture"></p>
 <p><br></p>
 <h2 id="enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</h2>
-<hr />
 <p><strong>Logical Data Warehouse topology</strong></p>
 <ul>
 <li>Reflects the domain topology.</li>
@@ -228,19 +229,24 @@ Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-
 <p><img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture"></p>
 <p><br></p>
 <h2 id="enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</h2>
-<p>Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
-- Existing enterprise information, conceptual and logical models
-- Legacy warehouse models
-- Domain information models and glossaries
-- Domain business objects and process models
-- Common entities and synonyms (which may form the basis of conformed dimensions)
-- Data standards</p>
-<p>Other secondary considerations:
-- Source system data models
-- Industry models
-- Integration models</p>
+<p>Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:</p>
+<ul>
+<li>Existing enterprise information, conceptual and logical models</li>
+<li>Legacy warehouse models</li>
+<li>Domain information models and glossaries</li>
+<li>Domain business objects and process models</li>
+<li>Common entities and synonyms (which may form the basis of conformed dimensions)</li>
+<li>Data standards</li>
+</ul>
+<p>Other secondary considerations:</p>
+<ul>
+<li>Source system data models</li>
+<li>Industry models</li>
+<li>Integration models</li>
+</ul>
 <p><br></p>
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
+<p>Recommended content:</p>
 <ul>
 <li>Description of applicable metadata standards</li>
 <li>Enterprise Metadata Architecture and Metamodel</li>
@@ -263,33 +269,37 @@ Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-
 </ul>
 <p><br></p>
 <h2 id="enterprise-security">Enterprise Security</h2>
-<blockquote>
-<p>Work in progress:
-- Description of security policies and standards for both the organisation and industry
-- Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
-- Description of responsibilities and accountabilities.
-- Risk and issues register
-- Description of security management and monitoring tools incl. system audit logs</p>
-</blockquote>
+<p>Recommended content:</p>
+<ul>
+<li>Description of security policies and standards for both the organisation and industry</li>
+<li>Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.</li>
+<li>Description of responsibilities and accountabilities.</li>
+<li>Risk and issues register</li>
+<li>Description of security management and monitoring tools incl. system audit logs</li>
+</ul>
 <p><br></p>
 <h2 id="enterprise-data-governance">Enterprise Data Governance</h2>
-<blockquote>
-<p>Work in progress:
-- Description of governance frameworks, policies and standards including but not limited to:
-    - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
-    - Privacy controls required, standards and services available
-    - Quality management expectations, standards and services available
-    - Audit requirements (e.g. data sharing, access)
-- Description of governance bodies and decision rights
-- Description of enterprise-level solutions and services for data governance
-- References to Enterprise Metadata management</p>
-</blockquote>
+<p>Recommended content:</p>
+<ul>
+<li>Description of governance frameworks, policies and standards including but not limited to:<ul>
+<li>Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata</li>
+<li>Privacy controls required, standards and services available</li>
+<li>Quality management expectations, standards and services available</li>
+<li>Audit requirements (e.g. data sharing, access)</li>
+</ul>
+</li>
+<li>Description of governance bodies and decision rights</li>
+<li>Description of enterprise-level solutions and services for data governance</li>
+<li>References to Enterprise Metadata management</li>
+</ul>
 <h3 id="audit">Audit</h3>
 <hr />
+<p>Recommended content:
+- Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.</p>
+<h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
 <pre><code>As an Enterprise Metastore Admin:
 
 1. Where are there misconfigured catalogs / schemas / objects?
@@ -299,9 +309,10 @@ Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-
 </code></pre>
 <p><br></p>
 <h2 id="enterprise-billing">Enterprise Billing</h2>
+<p>Recommended content:
+- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.</p>
 <blockquote>
 <p>Work in progress:
-- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
 - Description of core concepts in Databricks:
     - Policies and cluster types
     - Tagging flow
