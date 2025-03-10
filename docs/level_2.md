@@ -31,7 +31,8 @@
     - [Data quality](level_2.md#data-quality)
     - [Data understandability](level_2.md#data-understandability)
     - [Privacy Preservation](level_2.md#privacy-preservation)
-
+    - [Audit](level_2.md#audit)
+- [Billing](level_2.md#billing)
 
 Domain-level solutions are instantiations of the enterprise-level reference architecture. (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
 
@@ -580,60 +581,65 @@ https://docs.databricks.com/en/dev-tools/sql-execution-tutorial.html
 ### Visualisation
 ---
 > This section is a work in progress
-> - Powerbi
-> - Databricks dashboards
-> - Apps
+- Powerbi
+- Databricks dashboards
+- Apps
 
 <br>
+
 ## AI/ML
----
+
+
 > This section is a work in progress
-> - MLOps
-> - Training
-> - Databricks
-> - Azure ML
+- MLOps
+- Training
+- Databricks
+- Azure ML
 
 <br>
+
 ## Data governance
----
+
+This section describes how Enterprise-level governance will be implemented through solutions at the domain level.
 
 
 ### Data lifecycle and asset management
+---
 > This section is a work in progress
-> - data contracts and policy
-> - data asset tagging
+- data contracts and policy
+- data asset tagging
 
 
 ### Data access management
 ---
 > This section is a work in progress
-> - data access request management
-> - data contracts
-> - access audit
-> - activity audit
+- data access request management
+- data contracts
+- access audit
+- activity audit
 
 
 ### Data quality
 ---
 > This section is a work in progress
-> - data quality checking and reporting
+- data quality checking and reporting
 
 
 ### Data understandability
 ---
 > This section is a work in progress
-> - data lineage
-> - 
+- data lineage
+- 
 
 
 ### Privacy Preservation 
 ---
 > This section is a work in progress
-> - row level security
-> - data masking
-> - column level security
-> - data anonymisation
-> - data de-identification
+- row level security
+- data masking
+- column level security
+- data anonymisation
+- data de-identification
 
 https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations
 
@@ -644,5 +650,58 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 #### Row Level Security
 ---
 > This section is a work in progress
-> - dynamic views
-> - precomputed views
+- dynamic views
+- precomputed views
+
+#### Audit
+---
+
+> This section is a work in progress
+
+- audit log queries
+
+##### Example questions and associated queries
+```
+As a Domain (workspace) Admin:
+
+1. Where are there misconfigured catalogs / schemas / objects?
+2. Who is sharing what to who and is that permitted (as per access approvals?)
+3. Who is accessing data and are they permitted (as per access approvals?)
+
+```
+
+
+
+<br>
+
+## Billing
+
+>Work in progress:
+- Describe how Enterprise Billing is implemented in terms of:
+    - Tagging standards
+        - Workspace
+        - Cluster
+        - Job, Notebook, Query
+    - Cluster policies and assignment standards
+- Describe how the above are forced in a CICD manner:
+    - DABs
+    
+### Example questions and associated queries
+```
+As a Domain (workspace) Admin:
+
+1. What is my domain spending as a whole?
+    - In databricks DBUs
+    - Inclusive of cloud
+2. What are my subteams spending on within the workspace I administer?
+    - In databricks DBUs
+    - Inclusive of cloud
+3. What are the most expensive activities?
+    - By user
+    - By job
+4. Where are we wasting money as an enterprise?
+    - Reinventing the wheel
+    - Over utilising
+    - Redundant tasks
+    - Inefficient queries
+```

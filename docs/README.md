@@ -19,13 +19,15 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 <br>
 
 # Table of Contents
-<br>
+
+
 ## Level 0 - Enterprise-level context
 - [Org + Domain Definition](level_0.md#org-domain-definition)
 - [Strategies and Objectives](level_0.md#strategies-and-objectives)
 - [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
 - [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
 - [Governance Structures](level_0.md#governance-structures)
+- [Billing Structures](level_0.md#billing-structures)
 
 ## Level 1 - Enterprise-level architecture
 - [Key concepts](level_1.md#key-concepts)
@@ -35,6 +37,9 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 - [Enterprise Information and Data Architecture](level_1.md#enterprise-information-and-data-architecture)
 - [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)
 - [Enterprise Security](level_1.md#enterprise-security)
+- [Enterprise Data Governance](level_1.md#enterprise-data-governance)
+    - [Audit](level_1.md#audit)
+- [Enterprise Billing](level_1.md#enterprise-billing)
 
 ## Level 2 - Domain-level (solution) architecture
 - [Business architecture](level_2.md#business-architecture)
@@ -65,6 +70,7 @@ Permission is granted for free use, reproduction, and adaptation of this materia
     - [Data quality](level_2.md#data-quality)
     - [Data understandability](level_2.md#data-understandability)
     - [Privacy Preservation](level_2.md#privacy-preservation)
+    - [Audit](level_2.md#audit)
 
 
 ## Naming standards and conventions

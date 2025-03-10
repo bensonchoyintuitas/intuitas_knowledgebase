@@ -23,10 +23,14 @@ This section describes enterprise-wide and cross-domain data and data platform a
 - [Enterprise Metadata Architecture](#enterprise-metadata-architecture)
     - [Databricks Unity Catalog Metastore](#databricks-unity-catalog-metastore)
 - [Enterprise Security](#enterprise-security)
+- [Enterprise Data Governance](#enterprise-data-governance)
+    - [Audit](#audit)
+- [Enterprise Billing](#enterprise-billing)
 
 <br>
+
 ## Key concepts
----
+
 The following key concepts are used throughout this knowledgebase.
 
 #### Domain 
@@ -71,8 +75,9 @@ A data fabric is a unified platform that integrates data from various sources an
 A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.
 
 <br>
+
 ## Reference topologies
----
+
 
 - Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
 - The arrangement of domains:
@@ -87,7 +92,9 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 
 
 <br>
+
 ### Hybrid federated mesh topology
+---
 
 **Hybrid of Data Fabric and Data Mesh:**
 - Combines centralised governance with domain-specific autonomy.
@@ -144,8 +151,9 @@ Example:
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
 <br>
+
 ## Enterprise Information and Data Architecture
----
+
 
 Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
 - Existing enterprise information, conceptual and logical models
@@ -161,8 +169,9 @@ Other secondary considerations:
 - Integration models
 
 <br>
+
 ## Enterprise Metadata Architecture
----
+
 
 - Description of applicable metadata standards
 - Enterprise Metadata Architecture and Metamodel
@@ -180,10 +189,82 @@ Other secondary considerations:
 - The enterprise domain topology has a direct bearing on UC catalog layout and design.
 
 <br>
+
 ## Enterprise Security
----
+
+
+>Work in progress:
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
 - Description of responsibilities and accountabilities.
 - Risk and issues register
 - Description of security management and monitoring tools incl. system audit logs
+
+<br>
+
+## Enterprise Data Governance
+
+>Work in progress:
+- Description of governance frameworks, policies and standards including but not limited to:
+    - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
+    - Privacy controls required, standards and services available
+    - Quality management expectations, standards and services available
+    - Audit requirements (e.g. data sharing, access)
+- Description of governance bodies and decision rights
+- Description of enterprise-level solutions and services for data governance
+- References to Enterprise Metadata management
+
+### Audit
+---
+
+> This section is a work in progress
+##### Example questions and associated queries
+```
+As an Enterprise Metastore Admin:
+
+1. Where are there misconfigured catalogs / schemas / objects?
+2. Who is sharing what to who and is that permitted (as per access approvals?)
+3. Who is accessing data and are they permitted (as per access approvals?)
+
+```
+
+<br>
+
+## Enterprise Billing
+
+
+>Work in progress:
+- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
+- Description of core concepts in Databricks:
+    - Policies and cluster types
+    - Tagging flow
+    - Billing practices by workload types and  (adhoc, jobs, notebook)
+    - Default permissions and recommended delegation
+- Mapping of requirements to functionality present in the platform such as :
+    - Resources
+        - Budget policies
+        - Clusters and associated policies / assignments
+        - Native billing log sources (from cloud platform as well as Databricks system tables)
+        - Tags and other metadata (names, descriptions)
+        - Predefined reports (e.g. Databricks usage dashboard)
+    - Requirements:
+        - Administrator hierarchies / delegations and accountabilities to manage the above
+            - Log / view visibility
+            - Reports
+            - CICD approach to managing this
+        - Customisation or new solutions to fill any gaps between available resources and requirements
+
+### Example questions and associated queries
+```
+As an Enterprise Admin:
+
+1. What is my organisation spending as a whole?
+    - In databricks DBUs
+    - Inclusive of cloud
+2. What are my subteams/Domains spending on within the workspaces I have delegated?
+    - In databricks DBUs
+    - Inclusive of cloud
+3. Where are we wasting money as an enterprise?
+    - Reinventing the wheel
+    - Over utilising
+```

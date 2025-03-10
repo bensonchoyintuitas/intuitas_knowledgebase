@@ -11,6 +11,7 @@ This section describes enterprise-wide concepts which set the necessary business
 - [Key Systems and Data Assets](#key-systems-and-data-assets)
 - [Team Capabilities and Roles](#team-capabilities-and-roles)
 - [Governance Structures](#governance-structures)
+- [Billing Structures](#billing-structures)
 
 <br>
 <br>
@@ -54,4 +55,8 @@ This section describes enterprise-wide concepts which set the necessary business
 ## Governance Structures
 
 - Description of the organisation's governance frameworks, policies, standards, processes and bodies that are relevant to the scope of concern.
+
+## Billing Structures
+
+- Description of the organisation's structures in terms of billing, and how cost centres may relate to billing reports, delegations and associated observability requirements.
 
