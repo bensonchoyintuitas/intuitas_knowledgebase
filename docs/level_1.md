@@ -54,11 +54,7 @@ Using domains as logical governance boundaries helps ensure data ownership and a
 
 #### Data Mesh
 
-A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations. It can be described through 4 principles which organisations will embody with varying degrees of maturity and success:
-- **Data as a Product**: Data is treated as a valuable asset that can be bought, sold, and managed like any other product.
-- **Self-Serve Data Consumers**: Data consumers have the autonomy to access and use data without relying on IT support.
-- **Data as a Service**: Data is delivered as a service, allowing for flexible and scalable access to data.
-- **Domain-Driven Governance**: Data is governed by domain experts, ensuring alignment with business objectives and data quality.
+A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations and organisations will embody its principles with varying degrees of maturity and success. 
 
 see [Data Mesh: Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 
@@ -78,7 +74,6 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 
 ## Reference topologies
 
-
 - Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
 - The arrangement of domains:
     - reflects its operating model 
@@ -88,6 +83,7 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
+
 Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
 
 
@@ -131,8 +127,6 @@ Allowing domains to access gold data from other domains and, where appropriate, 
 
 ## Enterprise Data Platform Reference Architecture
 
-
-
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
 Example:
@@ -142,7 +136,6 @@ Example:
 <br>
 
 ## Enterprise (Logical) Data Warehouse Reference Architecture
-
 
 **Logical Data Warehouse topology**
 
@@ -276,5 +269,5 @@ As an Enterprise Admin:
     - Inclusive of cloud
 3. Where are we wasting money as an enterprise?
     - Reinventing the wheel
-    - Over utilising
+    - Over utilisation
 ```
