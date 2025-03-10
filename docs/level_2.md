@@ -719,7 +719,7 @@ As a Domain (workspace) Admin:
 
 >Work in progress:
 
-Recommended content:
+Recommended:
 - Describe how Enterprise Billing is implemented in terms of:
     - Tagging standards
         - Workspace

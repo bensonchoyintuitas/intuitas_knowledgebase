@@ -176,7 +176,7 @@ Other secondary considerations:
 
 ## Enterprise Metadata Architecture
 
-Recommended content:
+Recommended:
 
 - Description of applicable metadata standards
 - Enterprise Metadata Architecture and Metamodel
@@ -197,7 +197,7 @@ Recommended content:
 
 ## Enterprise Security
 
-Recommended content:
+Recommended:
 
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
@@ -209,7 +209,7 @@ Recommended content:
 
 ## Enterprise Data Governance
 
-Recommended content:
+Recommended:
 
 - Description of governance frameworks, policies and standards including but not limited to:
     - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
@@ -223,7 +223,7 @@ Recommended content:
 ### Audit
 ---
 
-Recommended content:
+Recommended:
 - Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.
 
 ##### Example questions and associated queries
@@ -241,7 +241,7 @@ As an Enterprise Metastore Admin:
 
 ## Enterprise Billing
 
-Recommended content:
+Recommended:
 - Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
 
 >Work in progress:

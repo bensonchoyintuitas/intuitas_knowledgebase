@@ -18,13 +18,15 @@ This section describes enterprise-wide concepts which set the necessary business
 
 ## Org + Domain Definition
 
-Recommended content:
+Recommended:
+
 - Description of the organisational boundary and any external organisations that are within the scope of concern.
 - Description of domains and subdomains within the organisation.
 
 ## Strategies and Objectives
 
-Recommended content:
+Recommended:
+
 - Description of the organisation's strategies and objectives at the whole of enterprise level:
     - Business strategies, objectives, plans and initiatives
     - Technology strategies, objectives, plans and initiatives
@@ -32,13 +34,15 @@ Recommended content:
 
 ## Key Systems and Data Assets
 
-Recommended content:
+Recommended:
+
 - Description of the organisation's key systems within the scope of concern. (CMDB)
 - Information Asset Register (IAR)
 
 ## Team Capabilities and Roles
 
-Recommended content:
+Recommended:
+
 - Description of in-scope key teams/parties associated with:
     - Strategy and portfolio / prioritisation of data initiatives
     - Data creation within the business domains
@@ -58,11 +62,13 @@ Recommended content:
 
 ## Governance Structures
 
-Recommended content:
+Recommended:
+
 - Description of the organisation's governance frameworks, policies, standards, processes and bodies that are relevant to the scope of concern.
 
 ## Billing Structures
 
-Recommended content:
+Recommended:
+
 - Description of the organisation's structures in terms of billing, and how cost centres may relate to billing reports, delegations and associated observability requirements.
 
