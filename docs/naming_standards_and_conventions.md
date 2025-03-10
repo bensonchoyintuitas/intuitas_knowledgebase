@@ -170,7 +170,7 @@ No standard naming conventions for files and folders.
 
 ### Catalog 
 
-- Catalog name: {domain_name}_{environment}
+- Catalog name: {domain_name}_{environment} (prod is optional)
 
    *e.g. intuitas_domain3_dev*
 
