@@ -101,6 +101,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#billing" class="nav-link">Billing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -150,8 +154,10 @@
 <li><a href="./#data-quality">Data quality</a></li>
 <li><a href="./#data-understandability">Data understandability</a></li>
 <li><a href="./#privacy-preservation">Privacy Preservation</a></li>
+<li><a href="./#audit">Audit</a></li>
 </ul>
 </li>
+<li><a href="./#billing">Billing</a></li>
 </ul>
 <p>Domain-level solutions are instantiations of the enterprise-level reference architecture. (See <a href="../level_1/#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a>)</p>
 <p>Example reference architecture:</p>
@@ -738,7 +744,6 @@ Example batch ingestion options:
 </blockquote>
 <p><br></p>
 <h2 id="aiml">AI/ML</h2>
-<hr />
 <blockquote>
 <p>This section is a work in progress
 - MLOps
@@ -748,8 +753,9 @@ Example batch ingestion options:
 </blockquote>
 <p><br></p>
 <h2 id="data-governance">Data governance</h2>
-<hr />
+<p>This section describes how Enterprise-level governance will be implemented through solutions at the domain level.</p>
 <h3 id="data-lifecycle-and-asset-management">Data lifecycle and asset management</h3>
+<hr />
 <blockquote>
 <p>This section is a work in progress
 - data contracts and policy
@@ -796,7 +802,44 @@ Example batch ingestion options:
 <p>This section is a work in progress
 - dynamic views
 - precomputed views</p>
-</blockquote></div>
+</blockquote>
+<h4 id="audit">Audit</h4>
+<hr />
+<blockquote>
+<p>This section is a work in progress</p>
+</blockquote>
+<ul>
+<li>audit log queries</li>
+</ul>
+<p><br></p>
+<h2 id="billing">Billing</h2>
+<blockquote>
+<p>Work in progress:
+- Describe how Enterprise Billing is implemented in terms of:
+    - Tagging standards
+        - Workspace
+        - Cluster
+        - Job, Notebook, Query
+    - Cluster policies and assignment standards
+- Describe how the above are forced in a CICD manner:
+    - DABs</p>
+</blockquote>
+<h3 id="example-questions-and-associated-queries">Example questions and associated queries</h3>
+<pre><code>As a Domain (workspace) Admin:
+
+1. What is my domain spending as a whole?
+    - In databricks DBUs
+    - Inclusive of cloud
+2. What are my subteams spending on within the workspace I administer?
+    - In databricks DBUs
+    - Inclusive of cloud
+3. What are the most expensive activities?
+    - By user
+    - By job
+4. Where are we wasting money as an enterprise?
+    - Reinventing the wheel
+    - Over utilising
+</code></pre></div>
             </div>
         </div>
 
