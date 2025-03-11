@@ -117,6 +117,7 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="level-1-enterprise-level-architecture">Level 1 - Enterprise-level architecture</h1>
+<p><a href="../">Return to home</a></p>
 <p>This section describes enterprise-wide and cross-domain data and data platform architecture concepts.</p>
 <p><br>
 <br></p>
@@ -290,8 +291,10 @@
 </ul>
 <h3 id="audit">Audit</h3>
 <hr />
-<p>Recommended:
-- Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.</p>
+<p>Recommended:</p>
+<ul>
+<li>Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.</li>
+</ul>
 <h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
 <blockquote>
 <p>This section is a work in progress</p>
@@ -305,30 +308,44 @@
 </code></pre>
 <p><br></p>
 <h2 id="enterprise-billing">Enterprise Billing</h2>
-<p>Recommended:
-- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.</p>
+<p>Recommended:</p>
+<ul>
+<li>Description of cost structures including roles, groups/cost centres and associated observability and management functions required.</li>
+</ul>
 <blockquote>
-<p>Work in progress:
-- Description of core concepts in Databricks:
-    - Policies and cluster types
-    - Tagging flow
-    - Billing practices by workload types and  (adhoc, jobs, notebook)
-    - Default permissions and recommended delegation
-- Mapping of requirements to functionality present in the platform such as :
-    - Resources
-        - Budget policies
-        - Clusters and associated policies / assignments
-        - Native billing log sources (from cloud platform as well as Databricks system tables)
-        - Tags and other metadata (names, descriptions)
-        - Predefined reports (e.g. Databricks usage dashboard)
-    - Requirements:
-        - Administrator hierarchies / delegations and accountabilities to manage the above
-            - Log / view visibility
-            - Reports
-            - CICD approach to managing this
-        - Customisation or new solutions to fill any gaps between available resources and requirements</p>
+<p>Work in progress:</p>
 </blockquote>
-<h3 id="example-questions-and-associated-queries_1">Example questions and associated queries</h3>
+<ul>
+<li>Description of core concepts in Databricks:<ul>
+<li>Policies and cluster types</li>
+<li>Tagging flow</li>
+<li>Billing practices by workload types and  (adhoc, jobs, notebook)</li>
+<li>Default permissions and recommended delegation</li>
+</ul>
+</li>
+<li>Mapping of requirements to functionality present in the platform such as :<ul>
+<li>Resources<ul>
+<li>Budget policies</li>
+<li>Clusters and associated policies / assignments</li>
+<li>Native billing log sources (from cloud platform as well as Databricks system tables)</li>
+<li>Tags and other metadata (names, descriptions)</li>
+<li>Predefined reports (e.g. Databricks usage dashboard)</li>
+</ul>
+</li>
+<li>Requirements:<ul>
+<li>Administrator hierarchies / delegations and accountabilities to manage the above<ul>
+<li>Log / view visibility</li>
+<li>Reports</li>
+<li>CICD approach to managing this</li>
+</ul>
+</li>
+<li>Customisation or new solutions to fill any gaps between available resources and requirements</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="example-questions-and-associated-queries_1">Example questions and associated queries</h5>
 <pre><code>As an Enterprise Admin:
 
 1. What is my organisation spending as a whole?
