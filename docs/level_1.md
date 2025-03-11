@@ -1,4 +1,5 @@
 # Level 1 - Enterprise-level architecture
+[Return to home](README.md)
 
 This section describes enterprise-wide and cross-domain data and data platform architecture concepts.
 
@@ -217,6 +218,7 @@ Recommended:
 ---
 
 Recommended:
+
 - Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.
 
 ##### Example questions and associated queries
@@ -235,9 +237,11 @@ As an Enterprise Metastore Admin:
 ## Enterprise Billing
 
 Recommended:
+
 - Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
 
 >Work in progress:
+
 - Description of core concepts in Databricks:
     - Policies and cluster types
     - Tagging flow
@@ -257,7 +261,7 @@ Recommended:
             - CICD approach to managing this
         - Customisation or new solutions to fill any gaps between available resources and requirements
 
-### Example questions and associated queries
+##### Example questions and associated queries
 ```
 As an Enterprise Admin:
 
