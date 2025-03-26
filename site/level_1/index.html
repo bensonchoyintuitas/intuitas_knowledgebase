@@ -341,7 +341,7 @@
 </li>
 </ul>
 </li>
-<li>Tags from higher level resources flow through to lower level resources as per https://docs.databricks.com/aws/en/admin/account-settings/usage-detail-tags</li>
+<li>Tags from higher level resources flow through to lower level resources as per <a href="https://docs.databricks.com/aws/en/admin/account-settings/usage-detail-tags">Databricks Usage Detail Tags</a></li>
 </ul>
 <h4 id="cluster-policies">Cluster policies</h4>
 <ul>
@@ -352,12 +352,12 @@
 <ul>
 <li>System tables provide granular visibility of all activity within Databricks.</li>
 <li>System tables only provide DBU based billing insights, access to Azure Costs may require alternate reporting to be developed by the Azure administrator.</li>
-<li>By default, only Databricks Account administrators have access to system tables such as billing.  This is a highly privileged role and is not fit for sharing broadly. https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables/</li>
+<li>By default, only Databricks Account administrators have access to system tables such as billing. This is a highly privileged role and is not fit for sharing broadly. <a href="https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables">Learn more</a></li>
 <li>Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (repo available on request)</li>
 </ul>
 <h4 id="usage-reports">Usage reports</h4>
 <ul>
-<li>Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables). https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage</li>
+<li>Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables. <a href="https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage">Learn more</a></li>
 </ul>
 <h3 id="domain-workspace-administrator-role">Domain / Workspace Administrator Role</h3>
 <ul>
@@ -391,7 +391,7 @@
 </ul>
 </li>
 </ul>
-<pre><code>As an Enterprise Admin:
+<pre><code class="language-md">**As an Enterprise Admin**
 1. What workloads are not being tagged/tracked?
 2. What is my organisation spending as a whole?
     - In databricks DBUs
@@ -403,9 +403,7 @@
     - Reinventing the wheel
     - Over utilisation
 </code></pre>
-<pre><code>As a Domain (workspace) Admin:
-
-
+<pre><code class="language-md">**As a Domain (workspace) Admin**
 1. What workloads are not being tagged/tracked?
 2. What is my domain spending as a whole?
     - In databricks DBUs
@@ -424,11 +422,11 @@
 </code></pre>
 <h3 id="recommended-practices">Recommended practices</h3>
 <ul>
-<li>"Top 10 Queries to use with System Tables": https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331</li>
-<li>"Unlocking Cost Optimization Insights with Databricks System Tables" https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf</li>
+<li><a href="https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331">Top 10 Queries to use with System Tables</a></li>
+<li><a href="https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf">Unlocking Cost Optimization Insights with Databricks System Tables</a></li>
 </ul>
 <pre><code class="language-md">
-**Selections from: &quot;Unlocking Cost Optimization Insights with Databricks System Tables&quot;** - Deenar Toraskar
+**Recommendations from: &quot;Unlocking Cost Optimization Insights with Databricks System Tables&quot; - Deenar Toraskar**
 
 #### 1. Cluster Efficiency: CPU &amp; Memory Utilization
 - Measures whether clusters are right-sized for workloads.
