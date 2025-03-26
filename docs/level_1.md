@@ -296,7 +296,8 @@ Recommendations here align with the following Domain topology:
 
 - All workloads (Jobs, serverless, shared compute) need to be attributable to at a minimum:
     - Domain
-- In addition all workloads may need more granular tracking in line with cost-centre granularity hence may include one of more of the following depending on your organisation's terminology:
+    - Environment: dev, test, uat, prod
+- In addition all workloads may need more granular tagging in line with cost-centre granularity hence may include one of more of the following depending on your organisation's terminology:
     - Sub-domain 
     - Team
     - Business unit
@@ -304,8 +305,6 @@ Recommendations here align with the following Domain topology:
     - Project
 - In addition all scheduled Jobs would benefit from further job tags:
     - Job name/id
-    - Environment: dev, test, uat, prod
-
 
 
 ```md
