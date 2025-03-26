@@ -264,7 +264,7 @@ Recommendations here align with the following Domain topology:
             - Jobs and associated job metadata (*Note job-specific tags only appear when using Job Clusters)
         - Query level
             - Query comments (Query tagging is not yet a feature)
-- Tags from higher level resources flow through to lower level resources as per https://docs.databricks.com/aws/en/admin/account-settings/usage-detail-tags
+- Tags from higher level resources flow through to lower level resources as per [Databricks Usage Detail Tags](https://docs.databricks.com/aws/en/admin/account-settings/usage-detail-tags)
 
 #### Cluster policies
 
@@ -275,12 +275,12 @@ Recommendations here align with the following Domain topology:
 
 - System tables provide granular visibility of all activity within Databricks.
 - System tables only provide DBU based billing insights, access to Azure Costs may require alternate reporting to be developed by the Azure administrator.
-- By default, only Databricks Account administrators have access to system tables such as billing.  This is a highly privileged role and is not fit for sharing broadly. https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables/
+- By default, only Databricks Account administrators have access to system tables such as billing. This is a highly privileged role and is not fit for sharing broadly. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables)
 - Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (repo available on request)
 
 #### Usage reports
 
-- Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables). https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage
+- Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage)
 
 ### Domain / Workspace Administrator Role
 
@@ -308,8 +308,8 @@ Recommendations here align with the following Domain topology:
 
 
 
-```
-As an Enterprise Admin:
+```md
+**As an Enterprise Admin**
 1. What workloads are not being tagged/tracked?
 2. What is my organisation spending as a whole?
     - In databricks DBUs
@@ -322,10 +322,8 @@ As an Enterprise Admin:
     - Over utilisation
 ```
 
-```
-As a Domain (workspace) Admin:
-
-
+```md
+**As a Domain (workspace) Admin**
 1. What workloads are not being tagged/tracked?
 2. What is my domain spending as a whole?
     - In databricks DBUs
@@ -345,12 +343,12 @@ As a Domain (workspace) Admin:
 
 ### Recommended practices
 
-- "Top 10 Queries to use with System Tables": https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331
-- "Unlocking Cost Optimization Insights with Databricks System Tables" https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf
+- [Top 10 Queries to use with System Tables](https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331)
+- [Unlocking Cost Optimization Insights with Databricks System Tables](https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf)
 
 ```md
 
-**Selections from: "Unlocking Cost Optimization Insights with Databricks System Tables"** - Deenar Toraskar
+**Recommendations from: "Unlocking Cost Optimization Insights with Databricks System Tables" - Deenar Toraskar**
 
 #### 1. Cluster Efficiency: CPU & Memory Utilization
 - Measures whether clusters are right-sized for workloads.
