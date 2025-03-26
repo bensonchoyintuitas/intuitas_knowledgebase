@@ -276,11 +276,17 @@ Recommendations here align with the following Domain topology:
 - System tables provide granular visibility of all activity within Databricks.
 - System tables only provide DBU based billing insights, access to Azure Costs may require alternate reporting to be developed by the Azure administrator.
 - By default, only Databricks Account administrators have access to system tables such as billing. This is a highly privileged role and is not fit for sharing broadly. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables)
-- Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (repo available on request)
+- Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (See Dynamic Billing Solution below. Solution available on request)
+
+
+<img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
+
+<br>
 
 #### Usage reports
 
 - Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage)
+- Once workspace administrators have been delegated access to system tables, they can import a refactored version of the Databricks Usage Dashboard which are repointed tothe RLS views. (See Dynamic Billing Solution above. Solution available on request)
 
 ### Domain / Workspace Administrator Role
 
