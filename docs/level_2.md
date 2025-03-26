@@ -717,34 +717,5 @@ As a Domain (workspace) Admin:
 
 ## Billing
 
->Work in progress:
+For more context and concepts, refer to the [Enterprise Billing](level_1.md#enterprise-billing) section in Level 1.
 
-Recommended:
-- Describe how Enterprise Billing is implemented in terms of:
-    - Tagging standards
-        - Workspace
-        - Cluster
-        - Job, Notebook, Query
-    - Cluster policies and assignment standards
-- Describe how the above are forced in a CICD manner:
-    - DABs
-    
-### Example questions and associated queries
-```
-As a Domain (workspace) Admin:
-
-1. What is my domain spending as a whole?
-    - In databricks DBUs
-    - Inclusive of cloud
-2. What are my subteams spending on within the workspace I administer?
-    - In databricks DBUs
-    - Inclusive of cloud
-3. What are the most expensive activities?
-    - By user
-    - By job
-4. Where are we wasting money as an enterprise?
-    - Reinventing the wheel
-    - Over utilising
-    - Redundant tasks
-    - Inefficient queries
-```

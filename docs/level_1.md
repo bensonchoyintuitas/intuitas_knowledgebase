@@ -235,43 +235,182 @@ As an Enterprise Metastore Admin:
 <br>
 
 ## Enterprise Billing
+>  Out of the box Databricks usage dashboard to be tested at workspace level
 
-Recommended:
+Large organisations typically need to track and allocate costs to organisational units, cost centres, projects, teams and individuals.
 
-- Description of cost structures including roles, groups/cost centres and associated observability and management functions required.
+Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform (i.e. Databricks) must to align.
 
->Work in progress:
+Recommendations here align with the following Domain topology:
 
-- Description of core concepts in Databricks:
-    - Policies and cluster types
-    - Tagging flow
-    - Billing practices by workload types and  (adhoc, jobs, notebook)
-    - Default permissions and recommended delegation
-- Mapping of requirements to functionality present in the platform such as :
-    - Resources
-        - Budget policies
-        - Clusters and associated policies / assignments
-        - Native billing log sources (from cloud platform as well as Databricks system tables)
-        - Tags and other metadata (names, descriptions)
-        - Predefined reports (e.g. Databricks usage dashboard)
-    - Requirements:
-        - Administrator hierarchies / delegations and accountabilities to manage the above
-            - Log / view visibility
-            - Reports
-            - CICD approach to managing this
-        - Customisation or new solutions to fill any gaps between available resources and requirements
+<img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
-##### Example questions and associated queries
+<br>
+
+
+### Databricks features for usage tracking
+
+#### Metadata and tags
+
+- In Databricks, metadata can be used to track activity:
+    - Workspace level
+        - Workpace owners identity
+        - Workspace tags
+        - Cluster level
+            - Authorised cluster users identities
+            - Cluster tags
+            - Budget Policies (Enforced tagging for serverless clusters)
+        - Job level  
+            - Jobs and associated job metadata (*Note job-specific tags only appear when using Job Clusters)
+        - Query level
+            - Query comments (Query tagging is not yet a feature)
+- Tags from higher level resources flow through to lower level resources as per https://docs.databricks.com/aws/en/admin/account-settings/usage-detail-tags
+
+#### Cluster policies
+
+- Cluster policies can be used to enforce tagging at the cluster level. 
+- Cluster policies can be set in the UI or via Databricks Asset Bundles in resource yaml definitions.
+
+#### System tables
+
+- System tables provide granular visibility of all activity within Databricks.
+- System tables only provide DBU based billing insights, access to Azure Costs may require alternate reporting to be developed by the Azure administrator.
+- By default, only Databricks Account administrators have access to system tables such as billing.  This is a highly privileged role and is not fit for sharing broadly. https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables/
+- Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (repo available on request)
+
+#### Usage reports
+
+- Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables). https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage
+
+### Domain / Workspace Administrator Role
+
+- Workspaces are a container for clusters, and hence are a natural fit for representing a Domain scope.
+- Domain administrators (i.e Workspace Admins) shall be delegated functionality necessary to monitor and manage costs withing their domain (Workspace):
+    - Ability to audit and shutdown workloads
+    - Ability to create budget policies and enforce them on serverless clusters
+    - Ability to create cluster tagging policies and enforce them on clusters
+    - Ability to delegate/assign appropriate clusters and associated policies to domain users 
+    - Ability to call on  Databrick Account Admin to establish and update Budget Alerts
+
+### Tagging convention
+
+- All workloads (Jobs, serverless, shared compute) need to be attributable to at a minimum:
+    - Domain
+- In addition all workloads may need more granular tracking in line with cost-centre granularity hence may include one of more of the following depending on your organisation's terminology:
+    - Sub-domain 
+    - Team
+    - Business unit
+    - Cost centre
+    - Project
+- In addition all scheduled Jobs would benefit from further job tags:
+    - Job name/id
+    - Environment: dev, test, uat, prod
+
+
+
 ```
 As an Enterprise Admin:
-
-1. What is my organisation spending as a whole?
+1. What workloads are not being tagged/tracked?
+2. What is my organisation spending as a whole?
     - In databricks DBUs
     - Inclusive of cloud
-2. What are my subteams/Domains spending on within the workspaces I have delegated?
+3. What are my subteams/Domains spending on within the workspaces I have delegated?
     - In databricks DBUs
     - Inclusive of cloud
-3. Where are we wasting money as an enterprise?
+4. Where are we wasting money as an enterprise?
     - Reinventing the wheel
     - Over utilisation
 ```
+
+```
+As a Domain (workspace) Admin:
+
+
+1. What workloads are not being tagged/tracked?
+2. What is my domain spending as a whole?
+    - In databricks DBUs
+    - Inclusive of cloud
+3. What are my subteams spending on within the workspace I administer?
+    - In databricks DBUs
+    - Inclusive of cloud
+4. What are the most expensive activities?
+    - By user
+    - By job
+5. Where are we wasting money as an enterprise?
+    - Reinventing the wheel
+    - Over utilising
+    - Redundant tasks
+    - Inefficient queries
+```
+
+### Recommended practices
+
+- "Top 10 Queries to use with System Tables": https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331
+- "Unlocking Cost Optimization Insights with Databricks System Tables" https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf
+
+```md
+
+**Selections from: "Unlocking Cost Optimization Insights with Databricks System Tables"** - Deenar Toraskar
+
+#### 1. Cluster Efficiency: CPU & Memory Utilization
+- Measures whether clusters are right-sized for workloads.
+- Low utilization indicates wasted resources.
+
+**Optimization Strategies:**
+- Select appropriate instance types.
+- Enable auto-scaling to dynamically allocate resources.
+- Configure auto-termination and timeouts to reduce idle time.
+
+#### 2. Cost Breakdown: All-Purpose vs. Job Clusters
+- All-Purpose Clusters cost twice as much DBUs as Job Clusters.
+
+**Best Practice:**  
+Use All-Purpose Clusters primarily for development, exploratory data analysis, or collaboration.
+
+**Optimization:**  
+Move non-interactive workloads to Job Clusters for lower costs.
+
+#### 3. Databricks Runtime (DBR) Version Compliance
+- Newer DBR versions improve performance, security, and reliability.
+- This metric measures the number of versions behind the latest DBR (weighted by spend).
+
+**Recommendation:**  
+Regularly update to the latest DBR versions to ensure optimal performance and cost efficiency.
+
+#### 4. Job & Query Success Rate
+- Tracks the percentage of costs in successful jobs/queries.
+- Failed jobs result in wasted resources and potential re-runs.
+
+**Action:**  
+Investigate high failure rates to identify and address workflow inefficiencies.
+
+#### 5. Use of On-Demand vs. Spot Clusters
+- Spot instances offer significant savings but can be preempted by cloud providers.
+- Databricks' auto-fallback mechanism (`SPOT_WITH_FALLBACK_AZURE`) ensures jobs finish using on-demand resources if spot capacity is preempted.
+
+**Best Practice:**  
+Use spot instances for test/dev workloads and workloads with flexible SLAs.
+
+#### 6. Startup Time vs. Processing Time
+- Measures the time spent in startup overhead versus actual processing.
+- Small workloads may be inefficient on Spark clusters.
+
+**Optimization Options:**
+- Use serverless compute or instance pools.
+- Consolidate small jobs into larger workloads.
+- Move non-distributed workloads to alternative compute solutions (e.g., AKS).
+
+#### 7. SQL Warehouse Utilization & Costs
+- Evaluates whether SQL Warehouses are right-sized for workloads.
+- Identifies underutilized instances, highlighting cost-saving opportunities.
+
+**Best Practice:**  
+Tune warehouse size, auto-scaling, and timeout settings.
+
+#### 8. Instance Type Efficiency Score
+- Using latest-generation cloud instance types offers better price-performance compared to older generations.
+```
+
+
+
+
