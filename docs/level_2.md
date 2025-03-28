@@ -372,21 +372,6 @@ Example:
 ### Ingestion
 ---
 
-> This section is a work in progress
-> Improved diagrams and assessments of:
-
-> - lakeflow
-> - streaming: kafka -> landing -> databricks autoloader -> ods
-> - streaming: kafka -> iceberg
-> assessed in terms of:
-> - cost
-> - performance
-> - resilience
-> - maintainability
-> - governance
-> CDC patterns
-> sql-server (ct tables, datatyping via views, custom init vs change sources and handling)
-
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.
 
 It should be:
@@ -403,34 +388,30 @@ Example batch ingestion options:
 
 #### Ingestion patterns and notes:
 
-> built and working
-- PAttern 1: streaming: kafka -> landing -> databricks autoloader -> ods
+- Pattern 1: streaming: kafka -> landing -> databricks autoloader -> ods
     - see repo [Bronze Landing to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
 
-> built and working
 - Pattern 2: batch: source -> adf -> landing -> databricks autoloader merge to ods
     - see repo [Bronze landing SQL Server to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
     - adf requires azure sql and on-premise integration runtime
 
-> built and working
-- Pattern 3: batch: source -> databricks lakehouse federation -> databricks workflows -> ods, pds
     - see repo [External Database to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
     - requires network access to source
 
-> i.e. poor mans datalake. todo
 - Pattern 4: batch/streaming: source -> custom python -> deltalake -> external table
 
-> Sharepoint ingestion
 - Pattern 5: sharepoint -> fivetran -> databricks sql warehouse (ods)
-- see repo [fivetran](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom)
+    - see repo [fivetran](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom)
 
 Rejected patterns:
+
 - batch: adf -> deltalake -> ods (does not support unity catalog, requires target tables to be pre-initialised)
 - batch: adf -> databricks sql endpoint -> ods (no linked service for databricks)
 - batch: adf + databricks notebook -> landing, ods, pds (more undesireable coupling of adf and databricks an associated risks)
 
 ### Transformation
 ---
+
 > This section is a work in progress
 #### Batch and Micro-batch SQL transformation
 - dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
@@ -546,8 +527,7 @@ The following describes options for providing access to Microsoft Fabric / Power
         - Centralised control over access policies
         - Compute costs on consumer 
     - Cons: 
-        - Less control over access policies than Delta Sharing
-        - No Row Level Security and Masking support (dynamic views required)
+        - Row Level Security and Masking support via dynamic views only
 
 *Option 2. Directlake via ADLSGen2*
 
@@ -560,36 +540,46 @@ The following describes options for providing access to Microsoft Fabric / Power
         - Less control over access policies than Delta Sharing (outside of Unity Catalog)
         - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
         - No Row Level Security and Masking support 
+        - May require OneLake
 
 *Option 3. Fabric mirrored unity catalog*
 
     - Pros: 
         - No duplication
-        - Convenient access to all Databricks Unity Catalog objects (wihtin credential scope)
+        - Convenient access to all Databricks Unity Catalog objects (within credential permissions)
     - Cons: 
-        - not GA
-        - lots of limitations
+        - not GA or tested
+        - service-principal level identity required to enforce permissions
 
 
-*Option 4. PowerBI Access Via SQL Endpoint*
+*Option 4. PowerBI Import Via SQL Endpoint*
+
+    - Pros: 
+        - Potentially the best PowerBI performance and feature completeness
+        - Predictable costs on Databricks
+    - Cons: 
+        - Some, but manageable Compute costs on Databricks
+
+*Option 5. PowerBI DirectQuery Via SQL Endpoint*
 
     - Pros: 
         - No duplication
-        - Potentially better PowerBI performance (untested)
-        - Row Level Security and Masking support 
+        - Unity Catalog Enforced Row Level Security and Masking 
     - Cons: 
-        - Compute costs on Databricks as well as Fabric
+        - High Compute costs on Databricks on every report interaction
+        - Likely deprecated in favour of DirectLake
 
-Option 5*. Replicate into Fabric*
+*Option 6. Replicate into Fabric*
 
     - Pros:
         - Possibly reduced networking costs (depending on workload and networking topology)
     - Cons: 
         - Duplicated data
         - Engineering costs and overheads
-        - Latency
-        - Less governance control
+        - Latency in data updates (SQL Endpoint lag)
+        - Less governance control compared to Unity Catalog
         - No Row Level Security and Masking support 
+        - Requires use of Onelake and associated CU consumption
 
 #### Push
 ---
