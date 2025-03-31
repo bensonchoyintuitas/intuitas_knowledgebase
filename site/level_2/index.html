@@ -570,38 +570,39 @@ Example batch ingestion options:
 <p>Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html</p>
 </li>
 </ul>
-<h4 id="adlsgen2-access-to-data"><strong>ADLSGen2 access to data</strong></h4>
+<h4 id="adlsgen2-access-to-data"><strong>ADLSGen2 Access to Data</strong></h4>
 <ul>
-<li>ADLSGen2 access, while technically possible, is not recommended as it bypasses the unity catalog and associated governance and observability.</li>
-<li>Given Delta Sharing, then direct ADLS file sharing is usually unnecessary. However, there are still a few edge cases where ADLS file sharing might be preferable, even when Delta Sharing is available:<ul>
+<li>Provide direct ADLSGen2 access via Managed Identity, SAS or Account Key</li>
+<li>Note: While technically possible, ADLSGen2 access is not generally recommended for end user consumption as it bypasses the Unity Catalog and associated governance and observabilit controls.</li>
+<li>Example Scenarios: Direct ADLS file sharing might be preferable in certain cases, even when Delta Sharing is available:<ul>
 <li>Unstructured data</li>
-<li>Large non delta-file transfer</li>
-<li>Consumers that dont support delta-sharing</li>
+<li>Large non-delta file transfer</li>
+<li>Consumers that don't support Delta Sharing</li>
 </ul>
 </li>
 </ul>
-<h5 id="duckdb-access-to-data-via-unity-catalog"><strong>Duckdb access to data (via Unity Catalog)</strong></h5>
+<h5 id="duckdb-access-to-data-via-unity-catalog"><strong>DuckDB Access to Data (via Unity Catalog)</strong></h5>
 <ul>
-<li>Duckdb is a popular open source SQL engine that can be used to access data in the lakehouse. Duckdb can be run on a local machine or in process in a databricks cluster.</li>
-<li>Costs: Duckdb data access will incur costs of the underlying compute, storage access, data transfer etc as per delta sharing.</li>
+<li>Example: DuckDB is a popular open-source SQL engine that can be used to access data in the lakehouse. It can be run on a local machine or in-process in a Databricks cluster.</li>
+<li>Costs: DuckDB data access will incur costs of the underlying compute, storage access, data transfer, etc., similar to Delta Sharing.</li>
 <li>
-<p>Opportunities / uses:</p>
+<p>Example Opportunities/Uses:</p>
 <ul>
 <li>Last mile analysis</li>
-<li>SQL interface to delta, iceberg, parquet, csv, etc.</li>
+<li>SQL interface to Delta, Iceberg, Parquet, CSV, etc.</li>
 <li>dbt compatibility</li>
 <li>Local execution and storage of queries and data</li>
-<li>Use as feed visualisation tools e.g. Apache Superset</li>
+<li>Use as feed visualization tools, e.g., Apache Superset</li>
 </ul>
 </li>
 <li>
-<p>see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom">Duckdb</a></p>
+<p>See repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom">DuckDB</a></p>
 </li>
 <li>
 <p>Limitations:</p>
 <ul>
 <li>Unity Catalog not yet supported</li>
-<li>Delta Kernel  not yet supported</li>
+<li>Delta Kernel not yet supported</li>
 </ul>
 </li>
 </ul>
@@ -634,53 +635,95 @@ Example batch ingestion options:
 - <a href="https://harke-harkema.medium.com/reading-delta-tables-in-snowflake-1396d21bf970">tutorial</a></p>
 <h4 id="microsoft-fabric-access"><strong>Microsoft Fabric Access</strong></h4>
 <hr />
-<blockquote>
-<p>This section is a work in progress and required validation</p>
-</blockquote>
 <p>The following describes options for providing access to Microsoft Fabric / PowerBI </p>
 <p><em>Option 1. Share via Delta Sharing</em></p>
-<pre><code>- Pros: 
-    - No duplication
-    - Centralised control over access policies
-    - Compute costs on consumer 
-- Cons: 
-    - Row Level Security and Masking support via dynamic views only
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Create a delta share</li>
+<li>Use the delta share to get data from within PowerBI</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Centralised control over access policies</li>
+<li>Compute costs on consumer </li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Row Level Security and Masking support via dynamic views only</li>
+<li>See <a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">limitations</a>. e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 2. Directlake via ADLSGen2</em></p>
-<pre><code>- Pros: 
-    - No duplication
-    - Potentially better PowerBI performance (untested)
-    - Compute costs on consumer 
-    - No views
-- Cons: 
-    - Less control over access policies than Delta Sharing (outside of Unity Catalog)
-    - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
-    - No Row Level Security and Masking support 
-    - May require OneLake
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Create a new connection to ADLSGen2 using a provided credential / token / Service principal</li>
+<li>Create a lakehouse shortcut in Fabric</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Potentially better PowerBI performance (untested)</li>
+<li>Compute costs on consumer </li>
+<li>No views</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Less control over access policies than Delta Sharing (outside of Unity Catalog)</li>
+<li>Requires granular ADLSGen2 access controls and service principals, and associated management overhead</li>
+<li>No Row Level Security and Masking support </li>
+<li>May require OneLake</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 3. Fabric mirrored unity catalog</em></p>
-<pre><code>- Pros: 
-    - No duplication
-    - Convenient access to all Databricks Unity Catalog objects (within credential permissions)
-- Cons: 
-    - not GA or tested
-    - service-principal level identity required to enforce permissions
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Within a Fabric Workspace, create a new item <code>Mirrored Azure Databricks Catalog</code></li>
+<li>Enter the Databricks workspace config to create a new connection</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Convenient access to all Databricks Unity Catalog objects (within credential permissions)</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>not GA or tested</li>
+<li>service-principal level identity required to enforce permissions</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 4. PowerBI Import Via SQL Endpoint</em></p>
-<pre><code>- Pros: 
-    - Potentially the best PowerBI performance and feature completeness
-    - Predictable costs on Databricks
-- Cons: 
-    - Some, but manageable Compute costs on Databricks
-</code></pre>
+<p>Steps:</p>
+<p><a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">Databricks documentation</a></p>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>Potentially the best PowerBI performance and feature completeness</li>
+<li>Predictable costs on Databricks</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Some, but manageable Compute costs on Databricks</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 5. PowerBI DirectQuery Via SQL Endpoint</em></p>
-<pre><code>- Pros: 
+<p>Steps:</p>
+<p><a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">Databricks documentation</a></p>
+<p>Evaluation:
+- Pros: 
     - No duplication
     - Unity Catalog Enforced Row Level Security and Masking 
 - Cons: 
     - High Compute costs on Databricks on every report interaction
     - Likely deprecated in favour of DirectLake
-</code></pre>
+    - Less feature rich that import mode</p>
 <p><em>Option 6. Replicate into Fabric</em></p>
 <pre><code>- Pros:
     - Possibly reduced networking costs (depending on workload and networking topology)
