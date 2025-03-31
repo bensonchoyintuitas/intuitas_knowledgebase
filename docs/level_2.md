@@ -460,7 +460,7 @@ see [Row Level Security](#row-level-security)
 - Limitations:
     - No Row Level Security and Masking support (dynamic views required)
 
-- Reference:https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html
+- Reference: [Security Best Practices for Delta Sharing](https://www.databricks.com/blog/2022/08/01/security-best-practices-for-delta-sharing.html)
 
 #### **ADLSGen2 Access to Data**
 
@@ -520,7 +520,7 @@ References:
 The following describes options for providing access to Microsoft Fabric / PowerBI 
 
 *Option 1. Share via Delta Sharing*
-
+```
 Steps:
 
 1. Create a delta share
@@ -535,9 +535,9 @@ Evaluation:
 - Cons: 
     - Row Level Security and Masking support via dynamic views only
     - See [limitations](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi). e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.
-
+```
 *Option 2. Directlake via ADLSGen2*
-
+```
 Steps:
 
 1. Create a new connection to ADLSGen2 using a provided credential / token / Service principal
@@ -555,9 +555,9 @@ Evaluation:
     - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
     - No Row Level Security and Masking support 
     - May require OneLake
-
+```
 *Option 3. Fabric mirrored unity catalog*
-
+```
 Steps:
 
 1. Within a Fabric Workspace, create a new item `Mirrored Azure Databricks Catalog`
@@ -571,10 +571,10 @@ Evaluation:
 - Cons: 
     - not GA or tested
     - service-principal level identity required to enforce permissions
-
+```
 
 *Option 4. PowerBI Import Via SQL Endpoint*
-
+```
 Steps:
 
 [Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
@@ -586,9 +586,9 @@ Evaluation:
     - Predictable costs on Databricks
 - Cons: 
     - Some, but manageable Compute costs on Databricks
-
+```
 *Option 5. PowerBI DirectQuery Via SQL Endpoint*
-
+```
 Steps:
 
 [Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
@@ -613,7 +613,7 @@ Evaluation:
         - Less governance control compared to Unity Catalog
         - No Row Level Security and Masking support 
         - Requires use of Onelake and associated CU consumption
-
+```
 #### Push
 ---
 
