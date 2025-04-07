@@ -118,71 +118,69 @@
 <h2 id="table-of-contents">Table of Contents</h2>
 <hr />
 <ul>
-<li>{Mesh}(#mesh)<ul>
-<li>{Domain Names}(#domain-names)</li>
+<li><a href="#mesh">Mesh</a><ul>
+<li><a href="#domain-names">Domain Names</a></li>
 </ul>
 </li>
-<li>{Platform}(#platform)<ul>
-<li>{Environment}(#environment)</li>
-<li>{VNET}(#vnet)</li>
-<li>{Resource Groups}(#resource-groups)</li>
-<li>{Databricks workspace}(#databricks-workspace)</li>
-<li>{Key vault}(#key-vault)</li>
-<li>{Secrets}(#secrets)</li>
-<li>{Entra Group Names}(#entra-group-names)</li>
-<li>{Azure Data Factory (ADF)}(#azure-data-factory-adf)</li>
-<li>{SQL Server}(#sql-server)</li>
-<li>{SQL Database}(#sql-database)</li>
-<li>{Storage}(#storage)<ul>
-<li>{Lakehouse Storage}(#lakehouse-storage)</li>
-<li>{Lakehouse Storage Containers}(#lakehouse-storage-containers)</li>
-<li>{Lakehouse Storage Folders}(#lakehouse-storage-folders)</li>
-<li>{Generic Blob Storage}(#generic-blob-storage)</li>
-<li>{Generic Blob Files and Folders}(#generic-blob-files-and-folders)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>{Databricks}(#databricks)<ul>
-<li>{Workspace and Cluster Names}(#workspace-and-cluster-names)</li>
-<li>{Catalog}(#catalog)</li>
-<li>{Schema and Object Conventions}(#schema-and-object-conventions)</li>
-<li>{Delta Sharing}(#delta-sharing)</li>
-</ul>
-</li>
-<li>{Azure Data Factory}(#azure-data-factory)</li>
-<li>{Streaming}(#streaming)</li>
-<li>{dbt}(#dbt)<ul>
-<li>{Documentation and Model Metadata}(#documentation-and-model-metadata)</li>
-<li>{Sources}(#sources)</li>
-<li>{Model Folders}(#model-folders)</li>
-<li>{Model and Folder Names}(#model-and-folder-names)</li>
-<li>{dbt_project.yml}(#dbt_projectyml)</li>
-</ul>
-</li>
-<li>{CI/CD}(#cicd)<ul>
-<li>{Repository Naming}(#repository-naming)</li>
-<li>{Branch Naming}(#branch-naming)</li>
-<li>{Branch Lifecycle}(#branch-lifecycle)</li>
-<li>{Databricks Asset Bundles}(#databricks-asset-bundles)</li>
-</ul>
-</li>
-<li>{Security}(#security)<ul>
-<li>{Entra Group Names}(#entra-group-names)</li>
-<li>{Policies}(#policies)</li>
-<li>{Frameworks}(#frameworks)</li>
+<li><a href="#platform">Platform</a><ul>
+<li><a href="#environment">Environment</a></li>
+<li><a href="#vnet">VNET</a></li>
+<li><a href="#resource-groups">Resource Groups</a></li>
+<li><a href="#databricks-workspace">Databricks workspace</a></li>
+<li><a href="#key-vault">Key vault</a></li>
+<li><a href="#secrets">Secrets</a></li>
+<li><a href="#entra-group-names">Entra Group Names</a></li>
+<li><a href="#azure-data-factory-adf">Azure Data Factory (ADF)</a></li>
+<li><a href="#sql-server">SQL Server</a></li>
+<li><a href="#sql-database">SQL Database</a></li>
+<li><a href="#storage">Storage</a><ul>
+<li><a href="#lakehouse-storage">Lakehouse Storage</a></li>
+<li><a href="#lakehouse-storage-containers">Lakehouse Storage Containers</a></li>
+<li><a href="#lakehouse-storage-folders">Lakehouse Storage Folders</a></li>
+<li><a href="#generic-blob-storage">Generic Blob Storage</a></li>
+<li><a href="#generic-blob-files-and-folders">Generic Blob Files and Folders</a></li>
 </ul>
 </li>
 </ul>
-<p><br></p>
+</li>
+<li><a href="#databricks">Databricks</a><ul>
+<li><a href="#workspace-and-cluster-names">Workspace and Cluster Names</a></li>
+<li><a href="#catalog">Catalog</a></li>
+<li><a href="#schema-and-object-conventions">Schema and Object Conventions</a></li>
+<li><a href="#delta-sharing">Delta Sharing</a></li>
+</ul>
+</li>
+<li><a href="#azure-data-factory">Azure Data Factory</a></li>
+<li><a href="#streaming">Streaming</a></li>
+<li><a href="#dbt">dbt</a><ul>
+<li><a href="#documentation-and-model-metadata">Documentation and Model Metadata</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#model-folders">Model Folders</a></li>
+<li><a href="#model-and-folder-names">Model and Folder Names</a></li>
+<li><a href="#dbt_projectyml">dbt_project.yml</a></li>
+</ul>
+</li>
+<li><a href="#cicd">CI/CD</a><ul>
+<li><a href="#repository-naming">Repository Naming</a></li>
+<li><a href="#branch-naming">Branch Naming</a></li>
+<li><a href="#branch-lifecycle">Branch Lifecycle</a></li>
+<li><a href="#databricks-asset-bundles">Databricks Asset Bundles</a></li>
+</ul>
+</li>
+<li><a href="#security">Security</a><ul>
+<li><a href="#entra-group-names">Entra Group Names</a></li>
+<li><a href="#policies">Policies</a></li>
+<li><a href="#frameworks">Frameworks</a>
+<br></li>
+</ul>
+</li>
+</ul>
 <h2 id="mesh">Mesh</h2>
-<hr />
 <h3 id="domain-names">Domain Names</h3>
 <p>All lower case: {optional:organisation_}{functional area/domain}_{subdomain}</p>
 <p><em>e.g. intuitas_domain3</em></p>
 <p><br></p>
 <h2 id="platform">Platform</h2>
-<hr />
 <h3 id="environment">Environment</h3>
 <ul>
 <li>Environment: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
@@ -266,7 +264,6 @@
 <p>No standard naming conventions for files and folders.</p>
 <p><br></p>
 <h2 id="databricks">Databricks</h2>
-<hr />
 <h3 id="workspace-and-cluster-names">Workspace and cluster names</h3>
 <ul>
 <li>Workspace name: ws-{organisation_name}_{domain_name}</li>
@@ -500,7 +497,6 @@
 <p><em>e.g. intuitas_domain3__finance__reporting__account_payments__payments</em></p>
 <p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
-<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>
@@ -515,7 +511,6 @@
 </ul>
 <p><br>  </p>
 <h2 id="streaming">Streaming</h2>
-<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>Cluster name: {domain_name}<strong>cluster</strong>{optional:environment}</li>
@@ -524,7 +519,6 @@
 </ul>
 <p><br>  </p>
 <h2 id="dbt">dbt</h2>
-<hr />
 <p>The following are in lower case:</p>
 <h3 id="documentation-and-model-metadata">Documentation and model metadata</h3>
 <p>Within each respective model folder (as needed)</p>
@@ -544,31 +538,25 @@
 <p><em>e.g. bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
 <h3 id="model-and-folder-names">Model and Folder Names</h3>
 <p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
+<h4 id="bronze">Bronze</h4>
 <ul>
-<li>Bronze</li>
 <li>Folder: <code>models/bronze/{optional: domain name}/</code></li>
-<li>
-<p>Bronze objects are likely to be referenced in sources/bronze or as seeds</p>
-</li>
-<li>
-<p>Silver</p>
-</li>
-<li>
-<p>Staging Source-specific: </p>
+<li>Bronze objects are likely to be referenced in sources/bronze or as seeds</li>
+</ul>
+<h4 id="silver">Silver</h4>
 <ul>
+<li>Staging Source-specific: </li>
 <li>Folder: <code>models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/</code></li>
 <li>Folder: <code>models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/stg (for multi-step staging objects)</code></li>
 <li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
 </ul>
 <p><code>``md
-  Example:</code>silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql<code>or</code>silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`</p>
+   Example:</code>silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql<code>or</code>silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`</p>
 <p>materialises to:
-  <em>intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em>
-  ```</p>
-</li>
-<li>
-<p>Staging Non-source-specific (entity centric): </p>
+   <em>intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em>
+   ```</p>
 <ul>
+<li>Staging Non-source-specific (entity centric): </li>
 <li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}/stg</code></li>
 <li>
 <p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
@@ -579,77 +567,69 @@
 </li>
 </ul>
 <p><code>``md
-  Example:</code>silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql<code>or</code>silver\mart\accounts\stg\stg__accounts__01_deduped.sql`</p>
+   Example:</code>silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql<code>or</code>silver\mart\accounts\stg\stg__accounts__01_deduped.sql`</p>
 <p>materialises to:
-  <em>e.g. intuitas_domain3_dev.stg.accounts__01_deduped</em>
-  ```</p>
-</li>
-<li>
-<p>Mart Source-specific: </p>
+   <em>e.g. intuitas_domain3_dev.stg.accounts__01_deduped</em>
+   ```</p>
 <ul>
+<li>Mart Source-specific: </li>
 <li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}</code></p>
 </li>
 <li>
 <p>Mart Non-source specific: </p>
-<ul>
+</li>
 <li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}</code></p>
 </li>
 <li>
 <p>Reference Data: </p>
-<ul>
+</li>
 <li>Folder: <code>models/silver/{optional: domain name}/ref/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></p>
 </li>
 <li>
 <p>Raw Vault: </p>
-<ul>
+</li>
 <li>Folder: <code>models/silver/{optional: domain name}/edw/rv</code></li>
-<li>Models: <code>edw_rv__{vault object named as per data vault standards}</code></li>
-</ul>
+<li>
+<p>Models: <code>edw_rv__{vault object named as per data vault standards}</code></p>
 </li>
 <li>
 <p>Schema naming convention: </p>
-<ul>
+</li>
 <li>Folder: <code>models/silver/{optional: domain name}/edw/bv</code></li>
 <li>Models: <code>edw_bv__{vault object named as per data vault standards}</code></li>
 </ul>
-</li>
-<li>
-<p>Gold</p>
-</li>
-<li>
-<p>Staging: </p>
+<h4 id="gold">Gold</h4>
 <ul>
+<li>Staging: </li>
 <li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}/stg</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></p>
 </li>
 <li>
 <p>Dimensions: </p>
-<ul>
+</li>
 <li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
 </li>
 <li>
 <p>Facts: </p>
-<ul>
+</li>
 <li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></li>
-</ul>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
 </li>
 <li>
 <p>Denormalized (One Big Table): </p>
-<ul>
+</li>
 <li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
 <li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}</code></li>
-</ul>
-</li>
 </ul>
 <h4 id="example">Example:</h4>
 <pre><code class="language-md">{{domain/enterprise} _project_name}
@@ -736,7 +716,6 @@
 </code></pre>
 <p><br></p>
 <h2 id="cicd">CI/CD</h2>
-<hr />
 <h3 id="repository-naming">Repository naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
@@ -862,7 +841,6 @@ targets:
 </code></pre>
 <p><br></p>
 <h2 id="security">Security</h2>
-<hr />
 <h3 id="entra-group-names_1">Entra Group Names</h3>
 <p>TBC</p>
 <h3 id="policies">Policies</h3>
