@@ -2,54 +2,55 @@
 {Return to home}(README.md)
 
 <br>
+
 ## Table of Contents
 ---
 
-   - {Mesh}(#mesh)
-      - {Domain Names}(#domain-names)
-   - {Platform}(#platform)
-      - {Environment}(#environment)
-      - {VNET}(#vnet)
-      - {Resource Groups}(#resource-groups)
-      - {Databricks workspace}(#databricks-workspace)
-      - {Key vault}(#key-vault)
-      - {Secrets}(#secrets)
-      - {Entra Group Names}(#entra-group-names)
-      - {Azure Data Factory (ADF)}(#azure-data-factory-adf)
-      - {SQL Server}(#sql-server)
-      - {SQL Database}(#sql-database)
-      - {Storage}(#storage)
-         - {Lakehouse Storage}(#lakehouse-storage)
-         - {Lakehouse Storage Containers}(#lakehouse-storage-containers)
-         - {Lakehouse Storage Folders}(#lakehouse-storage-folders)
-         - {Generic Blob Storage}(#generic-blob-storage)
-         - {Generic Blob Files and Folders}(#generic-blob-files-and-folders)
-   - {Databricks}(#databricks)
-      - {Workspace and Cluster Names}(#workspace-and-cluster-names)
-      - {Catalog}(#catalog)
-      - {Schema and Object Conventions}(#schema-and-object-conventions)
-      - {Delta Sharing}(#delta-sharing)
-   - {Azure Data Factory}(#azure-data-factory)
-   - {Streaming}(#streaming)
-   - {dbt}(#dbt)
-      - {Documentation and Model Metadata}(#documentation-and-model-metadata)
-      - {Sources}(#sources)
-      - {Model Folders}(#model-folders)
-      - {Model Names}(#model-names)
-      - {dbt_project.yml}(#dbt_projectyml)
-   - {CI/CD}(#cicd)
-      - {Repository Naming}(#repository-naming)
-      - {Branch Naming}(#branch-naming)
-      - {Branch Lifecycle}(#branch-lifecycle)
-      - {Databricks Asset Bundles}(#databricks-asset-bundles)
-   - {Security}(#security)
-      - {Entra Group Names}(#entra-group-names)
-      - {Policies}(#policies)
-      - {Frameworks}(#frameworks)
 
+   - [Mesh](#mesh)
+      - [Domain Names](#domain-names)
+   - [Platform](#platform)
+      - [Environment](#environment)
+      - [VNET](#vnet)
+      - [Resource Groups](#resource-groups)
+      - [Databricks workspace](#databricks-workspace)
+      - [Key vault](#key-vault)
+      - [Secrets](#secrets)
+      - [Entra Group Names](#entra-group-names)
+      - [Azure Data Factory (ADF)](#azure-data-factory-adf)
+      - [SQL Server](#sql-server)
+      - [SQL Database](#sql-database)
+      - [Storage](#storage)
+         - [Lakehouse Storage](#lakehouse-storage)
+         - [Lakehouse Storage Containers](#lakehouse-storage-containers)
+         - [Lakehouse Storage Folders](#lakehouse-storage-folders)
+         - [Generic Blob Storage](#generic-blob-storage)
+         - [Generic Blob Files and Folders](#generic-blob-files-and-folders)
+   - [Databricks](#databricks)
+      - [Workspace and Cluster Names](#workspace-and-cluster-names)
+      - [Catalog](#catalog)
+      - [Schema and Object Conventions](#schema-and-object-conventions)
+      - [Delta Sharing](#delta-sharing)
+   - [Azure Data Factory](#azure-data-factory)
+   - [Streaming](#streaming)
+   - [dbt](#dbt)
+      - [Documentation and Model Metadata](#documentation-and-model-metadata)
+      - [Sources](#sources)
+      - [Model Folders](#model-folders)
+      - [Model and Folder Names](#model-and-folder-names)
+      - [dbt_project.yml](#dbt_projectyml)
+   - [CI/CD](#cicd)
+      - [Repository Naming](#repository-naming)
+      - [Branch Naming](#branch-naming)
+      - [Branch Lifecycle](#branch-lifecycle)
+      - [Databricks Asset Bundles](#databricks-asset-bundles)
+   - [Security](#security)
+      - [Entra Group Names](#entra-group-names)
+      - [Policies](#policies)
+      - [Frameworks](#frameworks)
 <br>
+
 ## Mesh
----
 
 ### Domain Names
 
@@ -58,8 +59,8 @@ All lower case: {optional:organisation_}{functional area/domain}_{subdomain}
    *e.g. intuitas_domain3*
 
 <br>
+
 ## Platform
----
 
 ### Environment
 
@@ -158,8 +159,8 @@ No standard naming conventions for files and folders.
 
 
 <br>
+
 ## Databricks
----
 
 ### Workspace and cluster names
 
@@ -359,8 +360,8 @@ The Gold layer focuses on requirement-aligned products (datasets, aggregations, 
 
 
 <br>
+
 ## Azure Data Factory
----
 
    The following are in lower case:
 
@@ -373,8 +374,8 @@ The Gold layer focuses on requirement-aligned products (datasets, aggregations, 
 
 
 <br>  
+
 ## Streaming
----
 
 The following are in lower case:
 
@@ -385,8 +386,8 @@ The following are in lower case:
 
 
 <br>  
+
 ## dbt
----
 
 The following are in lower case:
 
@@ -408,100 +409,88 @@ Within each respective model folder (as needed)
 
    *e.g. bronze__ods__ambo_sim__kafka__local__sources.yml*
 
-### Model folders
-
-```yml
-
-models/silver/{source_system}__{source_channel}
-models/silver/{source_system}__{source_channel}/stg
-models/silver/{edw}__{domain_name}
-models/gold/{domain_name}/{intermediate/marts}
-
-sources/bronze/
-sources/silver/
-sources/gold/
-```
-### Model Names
+### Model and Folder Names
 
 dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.
 
-- Bronze
-   - Folder: `models/bronze/{optional: domain name}/`
-   * Bronze objects are likely to be referenced in sources/bronze or as seeds
+#### Bronze
 
-- Silver
+- Folder: `models/bronze/{optional: domain name}/`
+* Bronze objects are likely to be referenced in sources/bronze or as seeds
 
-   - Staging Source-specific: 
-      - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/`
-      - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/stg (for multi-step staging objects)`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}`
+#### Silver
 
-      ```md
-      Example:
-      `silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
-      or
-      `silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
-      
-      materialises to:
-      *intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
-      ```
+- Staging Source-specific: 
+   - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/`
+   - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/stg (for multi-step staging objects)`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}`
 
- 
-   - Staging Non-source-specific (entity centric): 
-      - Folder: `models/silver/{optional: domain name}/mart/{entity}/stg`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description} `
-
-         - *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
-         - *e.g. intuitas_domain3_dev.stg.accounts__02_business_validated* 
-
+   ```md
+   Example:
+   `silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
+   or
+   `silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
    
-      ```md
-      Example:
-      `silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql`
-      or
-      `silver\mart\accounts\stg\stg__accounts__01_deduped.sql`
-      
-      materialises to:
-      *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
-      ```
+   materialises to:
+   *intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
+   ```
 
-   - Mart Source-specific: 
-      - Folder: `models/silver/{optional: domain name}/mart/{entity}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}`
 
-   - Mart Non-source specific: 
-      - Folder: `models/silver/{optional: domain name}/mart/{entity}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}`
-  
-   - Reference Data: 
-      - Folder: `models/silver/{optional: domain name}/ref/{entity}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}`
+- Staging Non-source-specific (entity centric): 
+   - Folder: `models/silver/{optional: domain name}/mart/{entity}/stg`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description} `
 
-   - Raw Vault: 
-      - Folder: `models/silver/{optional: domain name}/edw/rv`
-      - Models: `edw_rv__{vault object named as per data vault standards}`
+      - *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
+      - *e.g. intuitas_domain3_dev.stg.accounts__02_business_validated* 
 
-   - Schema naming convention: 
-      - Folder: `models/silver/{optional: domain name}/edw/bv`
-      - Models: `edw_bv__{vault object named as per data vault standards}`
 
-- Gold
-
-   -  Staging: 
-      - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}/stg`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
-
-   -  Dimensions: 
-      - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
+   ```md
+   Example:
+   `silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql`
+   or
+   `silver\mart\accounts\stg\stg__accounts__01_deduped.sql`
    
-   -  Facts: 
-      - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
-   
-   -  Denormalized (One Big Table): 
-      - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
-      - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}`
+   materialises to:
+   *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
+   ```
+
+- Mart Source-specific: 
+   - Folder: `models/silver/{optional: domain name}/mart/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}`
+
+- Mart Non-source specific: 
+   - Folder: `models/silver/{optional: domain name}/mart/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}`
+
+- Reference Data: 
+   - Folder: `models/silver/{optional: domain name}/ref/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}`
+
+- Raw Vault: 
+   - Folder: `models/silver/{optional: domain name}/edw/rv`
+   - Models: `edw_rv__{vault object named as per data vault standards}`
+
+- Schema naming convention: 
+   - Folder: `models/silver/{optional: domain name}/edw/bv`
+   - Models: `edw_bv__{vault object named as per data vault standards}`
+
+#### Gold
+
+-  Staging: 
+   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}/stg`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
+
+-  Dimensions: 
+   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
+
+-  Facts: 
+   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
+
+-  Denormalized (One Big Table): 
+   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}`
 
 
 
@@ -595,8 +584,8 @@ example
 ```
 
 <br>
+
 ## CI/CD
----
 
 ### Repository naming 
 
@@ -720,8 +709,8 @@ targets:
       user_name: engineering-engineer@intuitas.com
 ```
 <br>
+
 ## Security
----
 
 ### Entra Group Names
 TBC

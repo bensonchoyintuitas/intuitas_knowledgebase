@@ -113,7 +113,7 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="naming-conventions">Naming Conventions</h1>
-<p><a href="../">Return to home</a></p>
+<p>{Return to home}(README.md)</p>
 <p><br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <hr />
@@ -156,7 +156,7 @@
 <li><a href="#documentation-and-model-metadata">Documentation and Model Metadata</a></li>
 <li><a href="#sources">Sources</a></li>
 <li><a href="#model-folders">Model Folders</a></li>
-<li><a href="#model-names">Model Names</a></li>
+<li><a href="#model-and-folder-names">Model and Folder Names</a></li>
 <li><a href="#dbt_projectyml">dbt_project.yml</a></li>
 </ul>
 </li>
@@ -170,19 +170,17 @@
 <li><a href="#security">Security</a><ul>
 <li><a href="#entra-group-names">Entra Group Names</a></li>
 <li><a href="#policies">Policies</a></li>
-<li><a href="#frameworks">Frameworks</a></li>
+<li><a href="#frameworks">Frameworks</a>
+<br></li>
 </ul>
 </li>
 </ul>
-<p><br></p>
 <h2 id="mesh">Mesh</h2>
-<hr />
 <h3 id="domain-names">Domain Names</h3>
 <p>All lower case: {optional:organisation_}{functional area/domain}_{subdomain}</p>
 <p><em>e.g. intuitas_domain3</em></p>
 <p><br></p>
 <h2 id="platform">Platform</h2>
-<hr />
 <h3 id="environment">Environment</h3>
 <ul>
 <li>Environment: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
@@ -244,14 +242,13 @@
 <ul>
 <li>Level 1 Name: {layer} (bronze/silver/gold) // if using medallion approach</li>
 <li>Level 2 Name: {stage_name}</li>
-<li>bronze/landing
-   --- tbc --- might be managed by databricks within the catalog storage root</li>
-<li>silver/base</li>
-<li>silver/staging</li>
-<li>silver/enriched</li>
-<li>silver/edw_rv</li>
-<li>silver/edw_bv</li>
-<li>gold/mart</li>
+<li>bronze/landing</li>
+<li>bronze/ods</li>
+<li>bronze/pds</li>
+<li>bronze/schema (for autoloader metadata)</li>
+<li>bronze/checkpoints (for autoloader metadata)</li>
+<li>silver/automatically determined by unity catalog</li>
+<li>gold/automatically determined by unity catalog</li>
 </ul>
 <h4 id="generic-blob-storage">Generic Blob storage</h4>
 <p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
@@ -267,7 +264,6 @@
 <p>No standard naming conventions for files and folders.</p>
 <p><br></p>
 <h2 id="databricks">Databricks</h2>
-<hr />
 <h3 id="workspace-and-cluster-names">Workspace and cluster names</h3>
 <ul>
 <li>Workspace name: ws-{organisation_name}_{domain_name}</li>
@@ -276,7 +272,7 @@
 </ul>
 <h3 id="catalog">Catalog</h3>
 <ul>
-<li>Catalog name: {domain_name}_{environment} (prod is optional)</li>
+<li>Catalog name: {domain_name}{environment} (prod is implied optional)</li>
 </ul>
 <p><em>e.g. intuitas_domain3_dev</em></p>
 <ul>
@@ -312,11 +308,11 @@
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
 <ol>
 <li><strong>Engineering - ingestion framework</strong>:</li>
-<li>Schema naming convention:  <code>meta__[optional: function]</code></li>
-<li>Naming convention: <code>[function/descriptor]</code></li>
+<li>Schema naming convention:  <code>meta__{optional: function}</code></li>
+<li>Naming convention: <code>{function/descriptor}</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.meta__ingestion.ingestion_control</em></p>
-<h4 id="bronze-raw-schemas-and-objects">Bronze (Raw) Schemas and Objects</h4>
+<h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems.</p>
 <p>All schemas are may be optionally prefixed with <code>bronze__</code></p>
 <ol>
@@ -328,29 +324,62 @@
 <p><strong>Operational Data Store (ODS)</strong>:</p>
 </li>
 <li>Schema naming convention: <code>ods</code></li>
-<li>Object naming convention: <code>ods__[source_system]__[source_channel]__[object]</code></li>
+<li>Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.ods.ods__finance_system__adf__accounts</em></p>
 <ol>
 <li><strong>Persistent Data Store (PDS)</strong>:</li>
 <li>Schema naming convention: <code>pds</code></li>
-<li>Object naming convention: <code>pds__[source_system]__[source_channel]__[object]</code></li>
+<li>Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.pds.pds__finance_system__adf__accounts</em></p>
-<h4 id="silver-source-centric-filtered-cleaned-augmented">Silver (Source-Centric - Filtered, Cleaned, Augmented)</h4>
-<p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets.</p>
-<p>All schemas are may be optionally prefixed with <code>silver__</code></p>
-<ol>
-<li><strong>Base Views</strong>:</li>
-<li>Schema naming convention: <code>base__[source_system]__[source_channel]</code></li>
-<li>Object naming convention: <code>base__[source_system]__[source_channel]__[object]</code></li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.base__finance_system__adf.base__finance_system__adf__accounts</em></p>
-<ol>
-<li><strong>Staging Objects (Optional)</strong>:</li>
-<li>Schema naming convention: <code>stg__[source_system]__[source_channel]</code></li>
-<li>Object naming convention: <code>stg__[source_system]__[source_channel]__[object]__[n]__[transformation]</code></li>
-<li>Examples of transformations:<ul>
+<h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
+<p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
+<p>These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.</p>
+<ul>
+<li>All schemas are may be optionally prefixed with <code>silver__</code></li>
+<li>All <code>entity</code> names which align to facts should be named in plural.</li>
+<li>
+<p>All <code>entity</code> names which align to dims should be named in singular.</p>
+</li>
+<li>
+<p><strong>(Silver) Staging Objects (Optional)</strong>:
+   These models exist to stage silver marts only.</p>
+</li>
+<li>
+<p>Source-specific:</p>
+<ul>
+<li>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></li>
+<li>
+<p>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></p>
+<ul>
+<li><em>e.g. intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
+<li>
+<p><em>e.g. intuitas_domain3_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></p>
+</li>
+<li>
+<p><em>e.g. intuitas_domain3_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf</em></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Non-source specific</p>
+<ul>
+<li>Schema naming convention: <code>stg</code></li>
+<li>
+<p>Object naming convention to align with target mart: <code>stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}</code></p>
+<ul>
+<li><em>e.g. intuitas_domain3_dev.stg.accounts__01_deduped</em></li>
+<li><em>e.g. intuitas_domain3_dev.stg.accounts__02_business_validated</em> </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Examples of transformations:</p>
+<ul>
 <li><code>01_renamed_and_typed</code></li>
 <li><code>02_deduped</code></li>
 <li><code>03_cleaned</code></li>
@@ -360,40 +389,94 @@
 <li><code>07_desensitised</code></li>
 </ul>
 </li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.stg__finance_system__adf.stg__finance_system__adf__accounts__01_renamed_and_typed</em></p>
+</ul>
+<p><em>e.g. intuitas_domain3_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
 <ol>
-<li><strong>Enriched Data</strong>:</li>
-<li>Schema naming convention: <code>enr__[source_system]__[source_channel]</code></li>
-<li>Object naming convention: <code>enr__[source_system]__[source_channel]__[new_object]</code></li>
+<li><strong>(Silver) Marts</strong>:
+   Final products after staging</li>
+<li>
+<p>Source-specific:</p>
+<ul>
+<li>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></li>
+<li>
+<p>Object naming convention: <code>(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}</code></p>
+<ul>
+<li><em>e.g. intuitas_domain3_dev.mart__new_finance_system__adf.payment__new_finance_system__adf</em></li>
+<li><em>e.g. intuitas_domain3_dev.mart__new_finance_system__adf.account__new_finance_system__adf</em></li>
+<li><em>e.g. intuitas_domain3_dev.mart__old_finance_system__adf.account__old_finance_system__adf</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Non-source specific</p>
+<ul>
+<li>Schema naming convention: <code>mart</code></li>
+<li>
+<p>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></p>
+<ul>
+<li><em>e.g. intuitas_domain3_dev.mart.account</em> (unified)</li>
+<li><em>e.g. intuitas_domain3_dev.mart.account_join_with_payments</em> (joined across two systems)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Reference Data</strong>:
+   Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
+</li>
+<li>
+<p>Schema naming convention: <code>ref</code></p>
+</li>
+<li>Object naming convention: <code>{reference data set name} (optional:__{source_system}__{source_channel})</code></li>
 </ol>
-<p><em>e.g. intuitas_domain3_dev.enr__finance_system__adf.enr__finance_system__adf__accounts_join_with_payments</em></p>
+<p><em>e.g. intuitas_domain3_dev.ref.account_code</em></p>
 <ol>
-<li><strong>Reference Data</strong>:</li>
-<li>Schema naming convention: <code>ref__[source_system]__[source_channel]</code></li>
-<li>Object naming convention: <code>ref__[source_system]__[source_channel]__[entity]</code></li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.ref__finance_system__adf.ref__finance_system__adf__account_codes</em></p>
-<ol>
-<li><strong>Raw Vault</strong>:</li>
-<li>Schema naming convention: <code>edw_rv</code></li>
-<li>Object naming convention: <code>edw_rv__[vault object]</code></li>
+<li>
+<p><strong>Raw Vault</strong>:
+   Optional warehousing construct.</p>
+</li>
+<li>
+<p>Schema naming convention: <code>edw_rv</code></p>
+</li>
+<li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.edw_rv.hs_payments__finance_system__adf</em></p>
-<h4 id="gold-business-centric-optionally-source-decomposed">Gold (Business-Centric - Optionally Source-Decomposed)</h4>
-<p>The Gold layer focuses on business-ready datasets, aggregations, and reporting structures.</p>
-<p>All schemas are may be optionally prefixed with <code>gold__</code></p>
 <ol>
 <li><strong>Business Vault</strong>:</li>
 <li>Schema naming convention: <code>edw_bv</code></li>
-<li>Object naming convention: <code>edw_bv__[vault object]</code></li>
+<li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ol>
 <p><em>e.g. intuitas_domain3_dev.edw_bv.hs_late_payments__finance_system__adf</em></p>
+<h4 id="gold-data-according-to-requirements">Gold (Data according to requirements)</h4>
+<p>The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed. </p>
+<ul>
+<li>All schemas are may be optionally prefixed with <code>gold__</code></li>
+<li>All <code>entity</code> names which align to facts should be named in plural.</li>
+<li>
+<p>All <code>entity</code> names which align to dims should be named in singular.</p>
+</li>
+<li>
+<p><strong>(Gold) Staging Models</strong>:
+   These models exist to stage gold marts only.</p>
+</li>
+<li>
+<p>Schema naming convention: <code>stg</code></p>
+</li>
+<li>Object naming convention to align to target mart: <code>(optional: dim/fact__){entity / product description}__{n}__{transformation}</code></li>
+</ul>
+<p><em>e.g. intuitas_domain3_dev.stg.fact__late_payments__01__pivoted_by_order</em></p>
 <ol>
-<li><strong>Intermediate Models</strong>:</li>
-<li>Schema naming convention: <code>int</code></li>
-<li>Object naming convention: <code>int__[entity]__[optional_transformation]</code></li>
-<li>Purpose: Business-specific transformations such as:<ul>
+<li><strong>(Gold) Marts</strong>:</li>
+<li>Schema naming convention: <code>mart</code></li>
+<li>Dimension naming convention: <code>dim__{entity / product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>Fact naming convention: <code>fact__{entity / product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>
+<p>Denormalized (One Big Table) Object naming convention: <code>{entity / product description} (optional: __{source_system}__{source_channel})</code></p>
+</li>
+<li>
+<p>Required transformation: Business-specific transformations such as:</p>
+<ul>
 <li><code>pivoting</code></li>
 <li><code>aggregation</code></li>
 <li><code>joining</code></li>
@@ -403,29 +486,10 @@
 </ul>
 </li>
 </ol>
-<p><em>e.g. intuitas_domain3_dev.int.int__payments_pivoted_to_orders</em></p>
-<ol>
-<li><strong>Dimensions and Facts</strong>:</li>
-<li>Schema naming convention: <code>mart</code></li>
-<li>Dimension naming convention: <code>dim__[entity (singular)]__[optional_source_system]__[optional_source_channel]</code></li>
-<li>Fact naming convention: <code>fact__[entity (plural)]__[optional_source_system]__[optional_source_channel]</code></li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.mart.dim__account</em></p>
-<p><em>e.g. intuitas_domain3_dev.mart.fact__payments</em></p>
-<ol>
-<li><strong>Denormalized Views (One Big Table)</strong>:</li>
-<li>Schema naming convention: <code>mart</code></li>
-<li>Object naming convention: <code>mart__[product]__[optional_source_system]__[optional_source_channel]__[transformation]</code></li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.mart.mart__account_payments__old_finance_system__adf</em></p>
-<p><em>e.g. intuitas_domain3_dev.mart.mart__account_payments__new_finance_system__adf</em></p>
-<p><em>e.g. intuitas_domain3_dev.mart.mart__account_payments</em> (union of old and new)</p>
-<ol>
-<li><strong>Reference Data</strong>:</li>
-<li>Schema naming convention: <code>ref</code></li>
-<li>Object naming convention: <code>ref__[entity (singular)]</code></li>
-</ol>
-<p><em>e.g. intuitas_domain3_dev.ref.ref__account_code</em></p>
+<p><em>e.g. intuitas_domain3_dev.mart.fact__late_payments</em></p>
+<p><em>e.g. intuitas_domain3_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></p>
+<p><em>e.g. intuitas_domain3_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></p>
+<p><em>e.g. intuitas_domain3_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
 <li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience}</li>
@@ -433,7 +497,6 @@
 <p><em>e.g. intuitas_domain3__finance__reporting__account_payments__payments</em></p>
 <p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
-<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>
@@ -448,7 +511,6 @@
 </ul>
 <p><br>  </p>
 <h2 id="streaming">Streaming</h2>
-<hr />
 <p>The following are in lower case:</p>
 <ul>
 <li>Cluster name: {domain_name}<strong>cluster</strong>{optional:environment}</li>
@@ -457,7 +519,6 @@
 </ul>
 <p><br>  </p>
 <h2 id="dbt">dbt</h2>
-<hr />
 <p>The following are in lower case:</p>
 <h3 id="documentation-and-model-metadata">Documentation and model metadata</h3>
 <p>Within each respective model folder (as needed)</p>
@@ -471,43 +532,107 @@
 <p><em>e.g. models/silver/ambo_sim__kafka__local/_ambo_sim__kafka__local__models.yml</em></p>
 <h3 id="sources">Sources</h3>
 <ul>
-<li>Folder: models/sources/[bronze/silver/gold]</li>
+<li>Folder: models/sources/{bronze/silver/gold}</li>
 <li>yml: {schema}__sources.yml (one for each source schema) </li>
 </ul>
 <p><em>e.g. bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
-<h3 id="model-folders">Model folders</h3>
-<pre><code class="language-yml">models/bronze/
-models/silver/{source system}/{base/staging/enriched/edw}
-models/silver/{edw}__{domain_name}
-models/gold/{domain_name}/{intermediate/marts}
-
-sources/bronze/
-sources/silver/
-sources/gold/
-</code></pre>
-<h3 id="model-names">Model Names</h3>
+<h3 id="model-and-folder-names">Model and Folder Names</h3>
+<p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
+<h4 id="bronze">Bronze</h4>
 <ul>
+<li>Folder: <code>models/bronze/{optional: domain name}/</code></li>
+<li>Bronze objects are likely to be referenced in sources/bronze or as seeds</li>
+</ul>
+<h4 id="silver">Silver</h4>
+<ul>
+<li>Staging Source-specific: </li>
+<li>Folder: <code>models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/</code></li>
+<li>Folder: <code>models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/stg (for multi-step staging objects)</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
+</ul>
+<p><code>``md
+   Example:</code>silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql<code>or</code>silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`</p>
+<p>materialises to:
+   <em>intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em>
+   ```</p>
+<ul>
+<li>Staging Non-source-specific (entity centric): </li>
+<li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}/stg</code></li>
 <li>
-<p>Bronze objects are likely to be referenced in sources/bronze</p>
-</li>
-<li>
-<p>Silver base object naming: base__{source name}<strong>{source channel}</strong>{source object name}</p>
-</li>
-<li>
-<p>Silver stage object naming: stg__{source name}<strong>{source channel}</strong>{source object name}__{ordinal}_{transformation description}</p>
-</li>
-<li>
-<p>Silver enriched object naming: enr__  optional:<strong>{source name}  optional:</strong>{source channel} __{description} // alternatively - just use stg or edw</p>
-</li>
-<li>
-<p>Silver edw object naming: edw<strong><em>{domain</em>name}</strong>{description}</p>
-</li>
-<li>
-<p>Gold object name: mart__{domain name} optional: <strong>{subdomain name(s)}</strong>{description}</p>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
+<ul>
+<li><em>e.g. intuitas_domain3_dev.stg.accounts__01_deduped</em></li>
+<li><em>e.g. intuitas_domain3_dev.stg.accounts__02_business_validated</em> </li>
+</ul>
 </li>
 </ul>
+<p><code>``md
+   Example:</code>silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql<code>or</code>silver\mart\accounts\stg\stg__accounts__01_deduped.sql`</p>
+<p>materialises to:
+   <em>e.g. intuitas_domain3_dev.stg.accounts__01_deduped</em>
+   ```</p>
+<ul>
+<li>Mart Source-specific: </li>
+<li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}</code></p>
+</li>
+<li>
+<p>Mart Non-source specific: </p>
+</li>
+<li>Folder: <code>models/silver/{optional: domain name}/mart/{entity}</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}</code></p>
+</li>
+<li>
+<p>Reference Data: </p>
+</li>
+<li>Folder: <code>models/silver/{optional: domain name}/ref/{entity}</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></p>
+</li>
+<li>
+<p>Raw Vault: </p>
+</li>
+<li>Folder: <code>models/silver/{optional: domain name}/edw/rv</code></li>
+<li>
+<p>Models: <code>edw_rv__{vault object named as per data vault standards}</code></p>
+</li>
+<li>
+<p>Schema naming convention: </p>
+</li>
+<li>Folder: <code>models/silver/{optional: domain name}/edw/bv</code></li>
+<li>Models: <code>edw_bv__{vault object named as per data vault standards}</code></li>
+</ul>
+<h4 id="gold">Gold</h4>
+<ul>
+<li>Staging: </li>
+<li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}/stg</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></p>
+</li>
+<li>
+<p>Dimensions: </p>
+</li>
+<li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
+</li>
+<li>
+<p>Facts: </p>
+</li>
+<li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
+<li>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
+</li>
+<li>
+<p>Denormalized (One Big Table): </p>
+</li>
+<li>Folder: <code>models/gold/{optional: domain name}/mart/{entity / product description}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}</code></li>
+</ul>
 <h4 id="example">Example:</h4>
-<pre><code>[[domain/enterprise] _project_name]
+<pre><code class="language-md">{{domain/enterprise} _project_name}
 ├── README.md
 ├── analyses
 ├── seeds
@@ -517,45 +642,47 @@ sources/gold/
 │   └── custom_macro.sql
 │   ├── utilities
 │       └── all_dates.sql
-├── models/bronze [domain/enterprise] 
+├── models/bronze
+│   /{optional: domain and subdomains}
 │   ├── _bronze.md
-│   ├── [domain/enterprise] sources
-├── models/silver
+│   ├── {domain/enterprise} sources
+├── models/silver/{optional: domain and subdomains}
+│   /{optional: domain and subdomains}
 │   ├── _silver.md
-│   ├── edw__[domain_name] 
-│        └──dim_date
-│        └── reference_data
-│            ├── _reference_data__models.yml
-│            ├── _reference_data__sources.yml
-│            └── ref_[entity].sql
-│   ├── source_system_1
-│   │       ├── _source_system_1__docs.md
-│   │       ├── _source_system_1__models.yml
-│   │       ├── base
-│   │       │   ├── base_source_system_1__object.sql
-│   │       │   └── base_source_system_1__deleted_object.sql
-│   │       ├── stg_source_system_1__object
-│   │       ├── stg_source_system_1__(new object)
-│   │       ├── stg_source_system_1__object_desensitised
-│   │       ├── stg
-│   │       │   ├── stg_source_system_1__object_01step.sql
-│   │       │   └── stg_source_system_1__object_02step_.sqll
-│   │       └── enrichment (optional)
-│   │           ├── enr_source_system_1__object.sql
-│   │           ├── enr_source_system_1__object_01step.sql
-│   │           └── enr_source_system_1__object_02step.sql
+│   ├── mart  (entity centric objects)
+│   |    └── account
+│   |    |   └── mart__dim_account.sql
+│   |    |       └── stg
+│   |    |           └── stg__dim_account__01_dedupe.sql
+│   |    |           └── stg__dim_account__02_filter.sql
+│   |    └── date
+│   |        └── mart__dim_date.sql
+│   └── ref
+│       ├── _reference_data__models.yml
+│       ├── _reference_data__sources.yml
+│       └── ref_{entity}.sql
+│   ├── stg (source centric staging objects)
+│   |   └── source_system_1 
+│   |       ├── _source_system_1__docs.md
+│   |       ├── _source_system_1__models.yml
+│   |       ├── stg__object__source_system_1.sql
+│   |       ├── stg__(new object)__source_system_1.sql
+│   |       ├── stg__object_desensitised__source_system_1.sql
+│   |       └── stg
+│   |           ├── stg__object__01_step__source_system_1.sql
+│   |           └── stg__object__02_step__source_system_1.sql
 │   ├── sources
-│   │       ├── _source_system_1__sources.yml
+│           └── _source_system_1__sources.yml
 ├── models/gold
+│   /{optional: domain and subdomains}
 │   ├── _gold.md
-│   ├── domain_name e.g. finance 
-│       └── intermediate (building blocks for marts)
-│       |   ├── _int_finance__models.yml
-│       |   └── int_payments_pivoted_to_orders.sql
-│       ├── marts
+│   └── domain_name e.g. finance 
+│       └── mart
 │           ├── _finance__models.yml
 │           ├── orders.sql
 │           └── payments.sql
+│               └── stg
+│                   └── stg_payments_pivoted_to_orders.sql
 ├── packages.yml
 ├── snapshots
 └── tests
@@ -589,7 +716,6 @@ sources/gold/
 </code></pre>
 <p><br></p>
 <h2 id="cicd">CI/CD</h2>
-<hr />
 <h3 id="repository-naming">Repository naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
@@ -715,7 +841,6 @@ targets:
 </code></pre>
 <p><br></p>
 <h2 id="security">Security</h2>
-<hr />
 <h3 id="entra-group-names_1">Entra Group Names</h3>
 <p>TBC</p>
 <h3 id="policies">Policies</h3>
