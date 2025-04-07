@@ -156,7 +156,7 @@
 <li>{Documentation and Model Metadata}(#documentation-and-model-metadata)</li>
 <li>{Sources}(#sources)</li>
 <li>{Model Folders}(#model-folders)</li>
-<li>{Model Names}(#model-names)</li>
+<li>{Model and Folder Names}(#model-and-folder-names)</li>
 <li>{dbt_project.yml}(#dbt_projectyml)</li>
 </ul>
 </li>
@@ -542,18 +542,7 @@
 <li>yml: {schema}__sources.yml (one for each source schema) </li>
 </ul>
 <p><em>e.g. bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
-<h3 id="model-folders">Model folders</h3>
-<pre><code class="language-yml">
-models/silver/{source_system}__{source_channel}
-models/silver/{source_system}__{source_channel}/stg
-models/silver/{edw}__{domain_name}
-models/gold/{domain_name}/{intermediate/marts}
-
-sources/bronze/
-sources/silver/
-sources/gold/
-</code></pre>
-<h3 id="model-names">Model Names</h3>
+<h3 id="model-and-folder-names">Model and Folder Names</h3>
 <p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
 <ul>
 <li>Bronze</li>
