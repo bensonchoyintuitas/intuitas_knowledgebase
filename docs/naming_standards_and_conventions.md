@@ -36,7 +36,6 @@
    - [dbt](#dbt)
       - [Documentation and Model Metadata](#documentation-and-model-metadata)
       - [Sources](#sources)
-      - [Model Folders](#model-folders)
       - [Model and Folder Names](#model-and-folder-names)
       - [dbt_project.yml](#dbt_projectyml)
    - [CI/CD](#cicd)
@@ -221,13 +220,13 @@ All schemas are may be optionally prefixed with `bronze__`
    - N/A (see file naming)
 
 2. **Operational Data Store (ODS)**:
-   - Schema naming convention: `ods`
+   - Schema naming convention: `ods{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention: `ods__{source_system}__{source_channel}__{object}`
 
    *e.g. intuitas_domain3_dev.ods.ods__finance_system__adf__accounts*
 
 3. **Persistent Data Store (PDS)**:
-   - Schema naming convention: `pds`
+   - Schema naming convention: `pds{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention: `pds__{source_system}__{source_channel}__{object}`
 
    *e.g. intuitas_domain3_dev.pds.pds__finance_system__adf__accounts*
@@ -238,13 +237,16 @@ The Silver layer focuses on transforming raw data into cleaned, enriched, and va
 
 These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.
 
-- All schemas are may be optionally prefixed with `silver__`
+- All schemas are may be optionally prefixed with `silver`
 - All `entity` names which align to facts should be named in plural.
 - All `entity` names which align to dims should be named in singular.
 
-1. **(Silver) Staging Objects (Optional)**:
+1. **(Silver) Staging Objects**:
+
    These models exist to stage silver marts only.
+
    - Source-specific:
+
       - Schema naming convention: `stg__{source_system}__{source_channel}`
       - Object naming convention: `{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}`
 
@@ -254,13 +256,15 @@ These marts are objects that are aligned to business entities and broad requirem
          - *e.g. intuitas_domain3_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf*
  
    - Non-source specific
-      - Schema naming convention: `stg`
+
+      - Schema naming convention: `stg{optional: __domain name}{optional: __subdomain name(s)}`
       - Object naming convention to align with target mart: `stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}`
 
          - *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
          - *e.g. intuitas_domain3_dev.stg.accounts__02_business_validated* 
 
    - Examples of transformations:
+
       - `01_renamed_and_typed`
       - `02_deduped`
       - `03_cleaned`
@@ -272,8 +276,11 @@ These marts are objects that are aligned to business entities and broad requirem
    *e.g. intuitas_domain3_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed*
 
 3. **(Silver) Marts**:
+
    Final products after staging
+
    - Source-specific:
+
       - Schema naming convention: `mart__{source_system}__{source_channel}`
       - Object naming convention: `(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}`
 
@@ -282,21 +289,26 @@ These marts are objects that are aligned to business entities and broad requirem
          - *e.g. intuitas_domain3_dev.mart__old_finance_system__adf.account__old_finance_system__adf*
 
    - Non-source specific
-      - Schema naming convention: `mart`
+
+      - Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
       - Object naming convention: `(optional:dim/fact)__{unified entity / _object_description}`
 
          - *e.g. intuitas_domain3_dev.mart.account* (unified)
+         - *e.g. intuitas_domain3_dev.mart__corporate__finance.account* (unified)
+         - *e.g. intuitas_domain3_dev.mart__finance.account* (unified)
          - *e.g. intuitas_domain3_dev.mart.account_join_with_payments* (joined across two systems)
 
 4. **Reference Data**:
+
    Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.
 
-   - Schema naming convention: `ref`
+   - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel})`
 
    *e.g. intuitas_domain3_dev.ref.account_code*
 
 5. **Raw Vault**:
+
    Optional warehousing construct.
 
    - Schema naming convention: `edw_rv`
@@ -305,30 +317,36 @@ These marts are objects that are aligned to business entities and broad requirem
    *e.g. intuitas_domain3_dev.edw_rv.hs_payments__finance_system__adf*
 
 6. **Business Vault**:
+
    - Schema naming convention: `edw_bv`
    - Object naming convention: `{vault object named as per data vault standards}`
 
    *e.g. intuitas_domain3_dev.edw_bv.hs_late_payments__finance_system__adf*
 
 #### Gold (Data according to requirements)
+
 The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed. 
 
-- All schemas are may be optionally prefixed with `gold__`
+- All schemas are may be optionally prefixed with `gold`
 - All `entity` names which align to facts should be named in plural.
 - All `entity` names which align to dims should be named in singular.
 
 
 2. **(Gold) Staging Models**:
+
    These models exist to stage gold marts only.
 
-   - Schema naming convention: `stg`
+   - Schema naming convention: `stg__{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention to align to target mart: `(optional: dim/fact__){entity / product description}__{n}__{transformation}`
 
    *e.g. intuitas_domain3_dev.stg.fact__late_payments__01__pivoted_by_order*
+   *e.g. intuitas_domain3_dev.stg__corporate.fact__late_payments__01__pivoted_by_order*
+   *e.g. intuitas_domain3_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order*
 
 
 3. **(Gold) Marts**:
-   - Schema naming convention: `mart`
+
+   - Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
    - Dimension naming convention: `dim__{entity / product description} (optional: __{source_system}__{source_channel})`
    - Fact naming convention: `fact__{entity / product description} (optional: __{source_system}__{source_channel})`
    - Denormalized (One Big Table) Object naming convention: `{entity / product description} (optional: __{source_system}__{source_channel})`
@@ -414,82 +432,99 @@ Within each respective model folder (as needed)
 dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.
 
 #### Bronze
+*Bronze objects are likely to be referenced in sources/bronze or as seeds*
 
-- Folder: `models/bronze/{optional: domain name}/`
-* Bronze objects are likely to be referenced in sources/bronze or as seeds
+- Folder: `models/bronze/{optional: domain name}{optional: __subdomain name(s)}/`
+- Folder: `sources/bronze/{optional: domain name}{optional: __subdomain name(s)}/`
+- Folder: `seeds/{optional: domain name}{optional: __subdomain name(s)}/`
 
 #### Silver
 
 - Staging Source-specific: 
-   - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/`
-   - Folder: `models/silver/{optional: domain name}/stg/{source_system}__{source_channel}/stg (for multi-step staging objects)`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}`
 
-   ```md
+```md
    Example:
-   `silver\stg\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
+
+   `silver\new_finance_system__adf\stg\intuitas_domain3__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
    or
-   `silver\stg\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
+
+   `silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
    
    materialises to:
    *intuitas_domain3_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
-   ```
+```
 
 
 - Staging Non-source-specific (entity centric): 
-   - Folder: `models/silver/{optional: domain name}/mart/{entity}/stg`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description} `
 
       - *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
       - *e.g. intuitas_domain3_dev.stg.accounts__02_business_validated* 
 
 
-   ```md
+```md
    Example:
+
    `silver\mart\accounts\stg\intuitas_domain3__silver__stg__accounts__01_deduped.sql`
    or
+
    `silver\mart\accounts\stg\stg__accounts__01_deduped.sql`
    
    materialises to:
+
    *e.g. intuitas_domain3_dev.stg.accounts__01_deduped*
-   ```
+```
 
 - Mart Source-specific: 
-   - Folder: `models/silver/{optional: domain name}/mart/{entity}`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}`
 
 - Mart Non-source specific: 
-   - Folder: `models/silver/{optional: domain name}/mart/{entity}`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}`
 
 - Reference Data: 
-   - Folder: `models/silver/{optional: domain name}/ref/{entity}`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}`
 
 - Raw Vault: 
-   - Folder: `models/silver/{optional: domain name}/edw/rv`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv`
    - Models: `edw_rv__{vault object named as per data vault standards}`
 
 - Schema naming convention: 
-   - Folder: `models/silver/{optional: domain name}/edw/bv`
+
+   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/bv`
    - Models: `edw_bv__{vault object named as per data vault standards}`
 
 #### Gold
 
 -  Staging: 
-   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}/stg`
+
+   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
 
 -  Dimensions: 
-   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+
+   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
 
 -  Facts: 
-   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+
+   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact{__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}`
 
 -  Denormalized (One Big Table): 
-   - Folder: `models/gold/{optional: domain name}/mart/{entity / product description}`
+
+   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}`
 
 
@@ -510,8 +545,7 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 │       └── all_dates.sql
 ├── models/bronze
 │   /{optional: domain and subdomains}
-│   ├── _bronze.md
-│   ├── {domain/enterprise} sources
+│   └── _bronze.md
 ├── models/silver/{optional: domain and subdomains}
 │   /{optional: domain and subdomains}
 │   ├── _silver.md
@@ -538,7 +572,9 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 │   |           ├── stg__object__01_step__source_system_1.sql
 │   |           └── stg__object__02_step__source_system_1.sql
 │   ├── sources
-│           └── _source_system_1__sources.yml
+│        └── {optional: domain}
+│        └── {optional: bronze/silver/gold}
+│             └── _source_system_1__sources.yml 
 ├── models/gold
 │   /{optional: domain and subdomains}
 │   ├── _gold.md
