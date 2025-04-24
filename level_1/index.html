@@ -139,8 +139,8 @@
 <li><a href="#enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</a></li>
 <li><a href="#enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</a></li>
 <li><a href="#enterprise-metadata-architecture">Enterprise Metadata Architecture</a><ul>
-<li><a href="#lakehouse-metadata-–-dbt-docs">Lakehouse Metadata – dbt Docs</a></li>
-<li><a href="#lakehouse-metadata-–-databricks-unity-catalog-metastore">Lakehouse Metadata – Databricks Unity Catalog Metastore</a></li>
+<li><a href="#dbt-docs">Lakehouse Metadata - dbt Docs</a></li>
+<li><a href="#databricks-unity-catalog-metastore">Lakehouse Metadata - Databricks Unity Catalog Metastore</a></li>
 </ul>
 </li>
 <li><a href="#enterprise-security">Enterprise Security</a></li>
@@ -267,7 +267,7 @@
 <blockquote>
 <p>Include a diagram showing how metadata repositories (e.g., dbt docs, Unity Catalog, source control) interact and synchronize.</p>
 </blockquote>
-<h4 id="lakehouse-metadata-dbt-docs">Lakehouse Metadata – dbt Docs</h4>
+<h4 id="dbt-docs">dbt Docs</h4>
 <ul>
 <li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
 <li>It captures object, column, and lineage metadata, and provides a rich interface for discovery and documentation.  </li>
@@ -275,7 +275,7 @@
 <li>For more information, refer to <a href="../naming_standards_and_conventions/#dbt">naming standards and conventions</a>.</li>
 </ul>
 <hr />
-<h4 id="lakehouse-metadata-databricks-unity-catalog-metastore">Lakehouse Metadata – Databricks Unity Catalog Metastore</h4>
+<h4 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h4>
 <ul>
 <li><strong>Unity Catalog</strong> supports centralized governance of data and metadata across Databricks workspaces.</li>
 <li>Each region can have <strong>only one Unity Catalog metastore</strong>.</li>
