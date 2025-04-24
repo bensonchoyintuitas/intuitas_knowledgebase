@@ -23,7 +23,8 @@ This section describes enterprise-wide and cross-domain data and data platform a
 - [Enterprise (Logical) Data Warehouse Reference Architecture](#enterprise-logical-data-warehouse-reference-architecture)
 - [Enterprise Information and Data Architecture](#enterprise-information-and-data-architecture)
 - [Enterprise Metadata Architecture](#enterprise-metadata-architecture)
-    - [Databricks Unity Catalog Metastore](#databricks-unity-catalog-metastore)
+    - [Lakehouse Metadata - dbt Docs](#dbt-docs)
+    - [Lakehouse Metadata - Databricks Unity Catalog Metastore](#databricks-unity-catalog-metastore)
 - [Enterprise Security](#enterprise-security)
 - [Enterprise Data Governance](#enterprise-data-governance)
     - [Audit](#audit)
@@ -195,9 +196,10 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 
 ### Data and Information Governance and Architecture
 
-> Include a diagram showing how metadata repositories (e.g., dbt docs, Unity Catalog, source control) interact and synchronize.
+<img src="../img/metadata_1.png" alt="Metadata Overview Diagram">
 
-#### Lakehouse Metadata – dbt Docs
+
+#### dbt Docs
 
 - **dbt Docs** is the authoritative source for metadata related to SQL analytics engineering.  
 - It captures object, column, and lineage metadata, and provides a rich interface for discovery and documentation.  
@@ -206,7 +208,7 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 
 ---
 
-#### Lakehouse Metadata – Databricks Unity Catalog Metastore
+#### Databricks Unity Catalog Metastore
 
 - **Unity Catalog** supports centralized governance of data and metadata across Databricks workspaces.
 - Each region can have **only one Unity Catalog metastore**.

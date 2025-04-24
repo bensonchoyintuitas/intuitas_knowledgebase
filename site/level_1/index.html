@@ -139,7 +139,8 @@
 <li><a href="#enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</a></li>
 <li><a href="#enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</a></li>
 <li><a href="#enterprise-metadata-architecture">Enterprise Metadata Architecture</a><ul>
-<li><a href="#databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</a></li>
+<li><a href="#dbt-docs">Lakehouse Metadata - dbt Docs</a></li>
+<li><a href="#databricks-unity-catalog-metastore">Lakehouse Metadata - Databricks Unity Catalog Metastore</a></li>
 </ul>
 </li>
 <li><a href="#enterprise-security">Enterprise Security</a></li>
@@ -243,26 +244,48 @@
 </ul>
 <p><br></p>
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
-<p>Recommended:</p>
+<p>Enterprise metadata plays a critical role across various domains, supporting the description, governance, and operational use of data and technology assets. It is essential for:</p>
 <ul>
-<li>Description of applicable metadata standards</li>
-<li>Enterprise Metadata Architecture and Metamodel</li>
-<li>Description of metadata governance, stewards and processes</li>
+<li>Data and Information Governance and Architecture  </li>
+<li>Data Engineering and Analytics  </li>
+<li>Technical and Platform Administration  </li>
 </ul>
-<h3 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h3>
+<h3 id="recommendations">Recommendations</h3>
+<p>To support enterprise-wide consistency and governance, it is recommended to define and maintain:</p>
 <ul>
-<li>Only one metastore exists per region
-<a href="https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/create-metastore#add-storage">Documentation</a></li>
-<li>Metastore-level storage accounts are used to store the metastore and its associated data. </li>
-<li>Recommendation:<ul>
-<li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Databricks recommends</a> that you assign managed storage at the catalog level for logical data isolation, with metastore-level and schema-level as options.</li>
-<li><a href="https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351">Catalog layouts</a><ul>
-<li>Metastore admin is optional - all cases, the metastore admin role should be assigned to a group instead of an individual. </li>
+<li>Applicable metadata standards  </li>
+<li>An enterprise metadata architecture and metamodel  </li>
+<li>Metadata governance framework, including roles (e.g., stewards) and operational processes  </li>
 </ul>
-</li>
+<hr />
+<h3 id="enterprise-metadata-architecture-and-metamodel">Enterprise Metadata Architecture and Metamodel</h3>
+<blockquote>
+<p>Include a diagram showing the different types of metadata at a high level and key relationships between them</p>
+</blockquote>
+<hr />
+<h3 id="data-and-information-governance-and-architecture">Data and Information Governance and Architecture</h3>
+<p><img src="../img/metadata_1.png" alt="Metadata Overview Diagram"></p>
+<h4 id="dbt-docs">dbt Docs</h4>
+<ul>
+<li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
+<li>It captures object, column, and lineage metadata, and provides a rich interface for discovery and documentation.  </li>
+<li>dbt schema metadata is integrated with Databricks Unity Catalog.  </li>
+<li>For more information, refer to <a href="../naming_standards_and_conventions/#dbt">naming standards and conventions</a>.</li>
 </ul>
-</li>
-<li>The enterprise domain topology has a direct bearing on UC catalog layout and design.</li>
+<hr />
+<h4 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h4>
+<ul>
+<li><strong>Unity Catalog</strong> supports centralized governance of data and metadata across Databricks workspaces.</li>
+<li>Each region can have <strong>only one Unity Catalog metastore</strong>.</li>
+<li>The metastore uses designated <strong>storage accounts</strong> to hold metadata and related data.</li>
+</ul>
+<p><strong>Recommendations and Notes:</strong></p>
+<ul>
+<li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Assign managed storage</a> at the <strong>catalog level</strong> to enforce logical data isolation.  </li>
+<li>Metastore-level and schema-level storage options also exist.  </li>
+<li>Review <a href="https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351">catalog layout strategies</a> to align with domain-oriented design.</li>
+<li>The <strong>metastore admin role</strong> is optional but, if used, should always be assigned to a <strong>group</strong>, not an individual.</li>
+<li>The enterprise’s <strong>domain topology</strong> directly influences the Unity Catalog design and layout.</li>
 </ul>
 <p><br></p>
 <h2 id="enterprise-security">Enterprise Security</h2>
