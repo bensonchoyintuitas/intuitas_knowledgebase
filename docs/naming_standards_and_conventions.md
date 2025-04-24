@@ -415,11 +415,11 @@ Within each respective model folder (as needed)
 
 * md: _{path to model folder using _ separators}__docs.md 
 
-   *e.g. models/silver/ambo_sim__kafka__local/_ambo_sim__kafka__local__docs.md*
+   *e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md*
 
 * model yml: _{path to model folder using _ separators}__models.yml 
 
-   *e.g. models/silver/ambo_sim__kafka__local/_ambo_sim__kafka__local__models.yml*
+   *e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml*
 
 ### Sources
 * Folder: models/sources/{bronze/silver/gold}
@@ -594,6 +594,13 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 
 example
 ```yml
+
+models:
+  health_lakehouse__engineering__dbt:
+    +persist_docs: #enables injection of metadata into unity catalog
+        relation: true
+        columns: true
+
     bronze:
       +schema: bronze
 

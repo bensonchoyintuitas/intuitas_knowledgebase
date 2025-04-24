@@ -1,6 +1,12 @@
 # Level 2 - Domain-Level (Solution) Architecture and Patterns
 [Return to home](README.md)
 
+This section describes Domain-level instantiations of the enterprise-level reference architecture. i.e. solutions (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
+
+<br>
+<br>
+
+
 ## Table of Contents
 
 - [Business architecture](level_2.md#business-architecture)
@@ -34,7 +40,7 @@
     - [Audit](level_2.md#audit)
 - [Billing](level_2.md#billing)
 
-Domain-level solutions are instantiations of the enterprise-level reference architecture. (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
+
 
 Example reference architecture:
 
@@ -43,8 +49,9 @@ Example reference architecture:
 </a>
 
 <br>
+
 ## Business architecture
----
+
 
 ### Business processes
 ---

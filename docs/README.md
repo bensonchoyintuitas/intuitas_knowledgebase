@@ -1,10 +1,10 @@
 <img src="img/intuitas.png" width="200"/>
 
-# Intuitas knowledgebase
+# Intuitas Enterprise Data Intelligence Platform Blueprint
 
 <br>
 
-This knowledgebase contains a collection of resources that describe Intuitas' approach to designing and delivering Data and AI solutions. 
+This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data and AI solutions. It is representative of large multi-domain enterprise deployments, however concepts should be adapted to each organisation as appropriate.
 
 
 ## Copyright
