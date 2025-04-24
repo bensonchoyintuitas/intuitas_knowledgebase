@@ -538,11 +538,11 @@
 <ul>
 <li>md: _{path to model folder using _ separators}__docs.md </li>
 </ul>
-<p><em>e.g. models/silver/ambo_sim__kafka__local/_ambo_sim__kafka__local__docs.md</em></p>
+<p><em>e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md</em></p>
 <ul>
 <li>model yml: _{path to model folder using _ separators}__models.yml </li>
 </ul>
-<p><em>e.g. models/silver/ambo_sim__kafka__local/_ambo_sim__kafka__local__models.yml</em></p>
+<p><em>e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></p>
 <h3 id="sources">Sources</h3>
 <ul>
 <li>Folder: models/sources/{bronze/silver/gold}</li>
@@ -746,7 +746,14 @@
 </code></pre>
 <h3 id="dbt_projectyml">dbt_project.yml</h3>
 <p>example</p>
-<pre><code class="language-yml">    bronze:
+<pre><code class="language-yml">
+models:
+  health_lakehouse__engineering__dbt:
+    +persist_docs: #enables injection of metadata into unity catalog
+        relation: true
+        columns: true
+
+    bronze:
       +schema: bronze
 
     silver:
