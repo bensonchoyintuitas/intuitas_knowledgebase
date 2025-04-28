@@ -277,26 +277,41 @@ This can then be modified according to costs, requirements, policies, projected 
 </ul>
 <h3 id="observability">Observability</h3>
 <hr />
-<h4 id="tools_1">Tools</h4>
+<p>Various tools can be used to provide insight into different aspects of the architecture:</p>
 <ul>
 <li>dbt observability - Elementary</li>
 <li>Databricks observability - Databricks monitoring dashboards</li>
 <li>ADF - Native adf monitoring</li>
 </ul>
+<h4 id="dbt-observability-elementary">dbt observability - Elementary</h4>
+<p>Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: https://docs.elementary-data.com/introduction</p>
+<p><a href="../img/observability.png" target="_blank">
+    <img src="../img/observability.png"  alt="Observability Diagram">
+</a></p>
+<p><a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard">Example observability dashboard for Intuitas Engineering Domain</a></p>
+<p>Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:</p>
+<ul>
+<li>Data freshness: Ensures your data is up to date.</li>
+<li>Volume anomalies: Detects unexpected changes in row counts.</li>
+<li>Schema changes: Monitors additions, deletions, or modifications of columns.</li>
+<li>Test results: Checks if your dbt tests are passing or failing.</li>
+<li>Custom metrics: Allows you to define your own checks.</li>
+</ul>
+<p>It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.</p>
 <h3 id="networking">Networking</h3>
 <hr />
 <p>By default - all resources reside within the same VNet with private endpoints.</p>
 <p>Service endpoints and policies are enabled.</p>
 <h3 id="orchestration">Orchestration</h3>
 <hr />
-<h4 id="tools_2">Tools</h4>
+<h4 id="tools_1">Tools</h4>
 <ul>
 <li>Azure Data Factory (if needed)</li>
 <li>Databricks Workflows (for both databricks and dbt)</li>
 </ul>
 <h3 id="security">Security</h3>
 <hr />
-<h4 id="tools_3">Tools</h4>
+<h4 id="tools_2">Tools</h4>
 <ul>
 <li>Azure Entra</li>
 <li>Azure Key Vault</li>

@@ -180,18 +180,20 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 ### Observability
 ---
 
-#### Tools
+Various tools can be used to provide insight into different aspects of the architecture:
 
 - dbt observability - Elementary
 - Databricks observability - Databricks monitoring dashboards
 - ADF - Native adf monitoring
 
-#### Elementary
+#### dbt observability - Elementary
 Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: https://docs.elementary-data.com/introduction
 
 <a href="../img/observability.png" target="_blank">
     <img src="../img/observability.png"  alt="Observability Diagram">
 </a>
+
+[Example observability dashboard for Intuitas Engineering Domain](https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard)
 
 Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
 
