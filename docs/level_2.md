@@ -186,6 +186,24 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 - Databricks observability - Databricks monitoring dashboards
 - ADF - Native adf monitoring
 
+#### Elementary
+Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: https://docs.elementary-data.com/introduction
+
+<a href="../img/observability.png" target="_blank">
+    <img src="../img/observability.png"  alt="Observability Diagram">
+</a>
+
+Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
+
+- Data freshness: Ensures your data is up to date.
+- Volume anomalies: Detects unexpected changes in row counts.
+- Schema changes: Monitors additions, deletions, or modifications of columns.
+- Test results: Checks if your dbt tests are passing or failing.
+- Custom metrics: Allows you to define your own checks.
+
+It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.
+
+
 ### Networking
 ---
 By default - all resources reside within the same VNet with private endpoints.
