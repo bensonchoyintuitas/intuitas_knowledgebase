@@ -187,13 +187,14 @@ Various tools can be used to provide insight into different aspects of the archi
 - ADF - Native adf monitoring
 
 #### dbt observability - Elementary
-Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: https://docs.elementary-data.com/introduction
+Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a>
 
 <a href="../img/observability.png" target="_blank">
     <img src="../img/observability.png"  alt="Observability Diagram">
 </a>
+<br>
 
-[Example observability dashboard for Intuitas Engineering Domain](https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard)
+<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
 
 Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
 
