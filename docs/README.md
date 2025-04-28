@@ -1,6 +1,6 @@
 <img src="img/intuitas.png" width="200"/>
 
-# Intuitas Enterprise Data Intelligence Platform Blueprint
+# Enterprise Data Intelligence Blueprint
 
 <br>
 
