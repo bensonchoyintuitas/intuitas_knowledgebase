@@ -283,6 +283,20 @@ This can then be modified according to costs, requirements, policies, projected 
 <li>Databricks observability - Databricks monitoring dashboards</li>
 <li>ADF - Native adf monitoring</li>
 </ul>
+<h4 id="elementary">Elementary</h4>
+<p>Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: https://docs.elementary-data.com/introduction</p>
+<p><a href="../img/observability.png" target="_blank">
+    <img src="../img/observability.png"  alt="Observability Diagram">
+</a></p>
+<p>Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:</p>
+<ul>
+<li>Data freshness: Ensures your data is up to date.</li>
+<li>Volume anomalies: Detects unexpected changes in row counts.</li>
+<li>Schema changes: Monitors additions, deletions, or modifications of columns.</li>
+<li>Test results: Checks if your dbt tests are passing or failing.</li>
+<li>Custom metrics: Allows you to define your own checks.</li>
+</ul>
+<p>It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.</p>
 <h3 id="networking">Networking</h3>
 <hr />
 <p>By default - all resources reside within the same VNet with private endpoints.</p>
