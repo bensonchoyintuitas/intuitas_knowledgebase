@@ -3,8 +3,6 @@
 
 This section describes enterprise-wide and cross-domain data and data platform architecture concepts.
 
-
-<br>
 <br>
 
 ## Table of Contents
@@ -36,7 +34,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
 
 The following key concepts are used throughout this knowledgebase.
 
-#### Domain 
+#### **Domain**
 
 Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.
 
@@ -46,30 +44,30 @@ Domains relate to functional and organisational boundaries, and represent closel
 
 see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
 
-#### Subdomain
+#### **Subdomain**
 
 A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.
 
-#### Domain-Centric Design
+#### **Domain-Centric Design**
 
 Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
 
-#### Data Mesh
+#### **Data Mesh**
 
 A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations and organisations will embody its principles with varying degrees of maturity and success. 
 
 see [Data Mesh: Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 
-#### Domain Topology
+#### **Domain Topology**
 
 A Domain Topology is a representation of how domains are structured, positioned in the enterprise, and how they interact with each other. see [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90?gi=631b1b9f4dbb)
 
-#### Data Fabric
+#### **Data Fabric**
 
 A data fabric is a unified platform that integrates data from various sources and provides a single source of truth. It enables data sharing and collaboration across domains and supports data mesh principles.
 
-#### Data Mesh vs Fabric
+#### **Data Mesh vs Fabric**
 
 A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.
 
@@ -79,11 +77,13 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 
 ## Reference topologies
 
-- Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
-- The arrangement of domains:
-    - reflects its operating model 
-    - defines expectations on how data+products are shared, built, managed and governed
-    - impacts accessibility, costs, support and overall experience.
+Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
+
+The arrangement of domains:
+
+- reflects its operating model 
+- defines expectations on how data+products are shared, built, managed and governed
+- impacts accessibility, costs, support and overall experience.
 
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
@@ -187,7 +187,7 @@ Enterprise metadata plays a critical role across various domains, supporting the
 - Data Engineering and Analytics  
 - Technical and Platform Administration  
 
-### Recommendations
+**Recommendations**
 
 To support enterprise-wide consistency and governance, it is recommended to define and maintain:
 
@@ -198,12 +198,14 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 ---
 
 ### Enterprise Metadata Architecture and Metamodel
-
+---
 > Metamodel to be provided 
 
----
+
 
 ### Data Architecture and Governance Metadata
+---
+
 Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.
 
 #### dbt Docs
@@ -222,8 +224,6 @@ Metadata is essential for effective data governance, providing necessary context
 - **Unity Catalog** supports centralized governance of data and metadata across Databricks workspaces.
 - Each region can have **only one Unity Catalog metastore**.
 - The metastore uses designated **storage accounts** to hold metadata and related data.
-
-**Recommendations and Notes:**
 
 
 **Recommendations and Notes:**
@@ -263,10 +263,18 @@ Recommended:
 
 ### Audit
 ---
+Some organisations are bound to regulatory and policy requirements which mandate auditability.
+
+Examples of auditable areas include: 
+
+- data sharing and access; 
+- platform access; 
+- change history to data.
 
 Recommended:
 
 - Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.
+
 
 ##### Example questions and associated queries
 > This section is a work in progress
@@ -282,6 +290,8 @@ As an Enterprise Metastore Admin:
 <br>
 
 ## Enterprise Billing
+---
+
 >  Out of the box Databricks usage dashboard to be tested at workspace level
 
 Large organisations typically need to track and allocate costs to organisational units, cost centres, projects, teams and individuals.
@@ -296,6 +306,7 @@ Recommendations here align with the following Domain topology:
 
 
 ### Databricks features for usage tracking
+---
 
 #### Metadata and tags
 
@@ -393,74 +404,10 @@ Recommendations here align with the following Domain topology:
     - Inefficient queries
 ```
 
-### Recommended practices
+### References to recommended practices
 
 - [Top 10 Queries to use with System Tables](https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331)
 - [Unlocking Cost Optimization Insights with Databricks System Tables](https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf)
-
-```md
-
-**Recommendations from: "Unlocking Cost Optimization Insights with Databricks System Tables" - Deenar Toraskar**
-
-#### 1. Cluster Efficiency: CPU & Memory Utilization
-- Measures whether clusters are right-sized for workloads.
-- Low utilization indicates wasted resources.
-
-**Optimization Strategies:**
-- Select appropriate instance types.
-- Enable auto-scaling to dynamically allocate resources.
-- Configure auto-termination and timeouts to reduce idle time.
-
-#### 2. Cost Breakdown: All-Purpose vs. Job Clusters
-- All-Purpose Clusters cost twice as much DBUs as Job Clusters.
-
-**Best Practice:**  
-Use All-Purpose Clusters primarily for development, exploratory data analysis, or collaboration.
-
-**Optimization:**  
-Move non-interactive workloads to Job Clusters for lower costs.
-
-#### 3. Databricks Runtime (DBR) Version Compliance
-- Newer DBR versions improve performance, security, and reliability.
-- This metric measures the number of versions behind the latest DBR (weighted by spend).
-
-**Recommendation:**  
-Regularly update to the latest DBR versions to ensure optimal performance and cost efficiency.
-
-#### 4. Job & Query Success Rate
-- Tracks the percentage of costs in successful jobs/queries.
-- Failed jobs result in wasted resources and potential re-runs.
-
-**Action:**  
-Investigate high failure rates to identify and address workflow inefficiencies.
-
-#### 5. Use of On-Demand vs. Spot Clusters
-- Spot instances offer significant savings but can be preempted by cloud providers.
-- Databricks' auto-fallback mechanism (`SPOT_WITH_FALLBACK_AZURE`) ensures jobs finish using on-demand resources if spot capacity is preempted.
-
-**Best Practice:**  
-Use spot instances for test/dev workloads and workloads with flexible SLAs.
-
-#### 6. Startup Time vs. Processing Time
-- Measures the time spent in startup overhead versus actual processing.
-- Small workloads may be inefficient on Spark clusters.
-
-**Optimization Options:**
-- Use serverless compute or instance pools.
-- Consolidate small jobs into larger workloads.
-- Move non-distributed workloads to alternative compute solutions (e.g., AKS).
-
-#### 7. SQL Warehouse Utilization & Costs
-- Evaluates whether SQL Warehouses are right-sized for workloads.
-- Identifies underutilized instances, highlighting cost-saving opportunities.
-
-**Best Practice:**  
-Tune warehouse size, auto-scaling, and timeout settings.
-
-#### 8. Instance Type Efficiency Score
-- Using latest-generation cloud instance types offers better price-performance compared to older generations.
-```
-
 
 
 

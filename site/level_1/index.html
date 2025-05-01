@@ -119,8 +119,7 @@
 <h1 id="level-1-enterprise-level-architecture">Level 1 - Enterprise-level architecture</h1>
 <p><a href="../">Return to home</a></p>
 <p>This section describes enterprise-wide and cross-domain data and data platform architecture concepts.</p>
-<p><br>
-<br></p>
+<p><br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#key-concepts">Key concepts</a><ul>
@@ -153,7 +152,7 @@
 <p><br></p>
 <h2 id="key-concepts">Key concepts</h2>
 <p>The following key concepts are used throughout this knowledgebase.</p>
-<h4 id="domain">Domain</h4>
+<h4 id="domain"><strong>Domain</strong></h4>
 <p>Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.</p>
 <ul>
 <li>Each domain encapsulates functional responsibilities, services, processes, information, expertise, and governance.</li>
@@ -161,29 +160,27 @@
 <li>Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles.</li>
 </ul>
 <p>see <a href="https://martinfowler.com/bliki/DomainDrivenDesign.html">Domain driven design</a></p>
-<h4 id="subdomain">Subdomain</h4>
+<h4 id="subdomain"><strong>Subdomain</strong></h4>
 <p>A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.</p>
-<h4 id="domain-centric-design">Domain-Centric Design</h4>
+<h4 id="domain-centric-design"><strong>Domain-Centric Design</strong></h4>
 <p>Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.</p>
-<h4 id="data-mesh">Data Mesh</h4>
+<h4 id="data-mesh"><strong>Data Mesh</strong></h4>
 <p>A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations and organisations will embody its principles with varying degrees of maturity and success. </p>
 <p>see <a href="https://martinfowler.com/articles/data-mesh-principles.html">Data Mesh: Principles</a></p>
-<h4 id="domain-topology">Domain Topology</h4>
+<h4 id="domain-topology"><strong>Domain Topology</strong></h4>
 <p>A Domain Topology is a representation of how domains are structured, positioned in the enterprise, and how they interact with each other. see <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90?gi=631b1b9f4dbb">Data Mesh: Topologies and domain granularity</a></p>
-<h4 id="data-fabric">Data Fabric</h4>
+<h4 id="data-fabric"><strong>Data Fabric</strong></h4>
 <p>A data fabric is a unified platform that integrates data from various sources and provides a single source of truth. It enables data sharing and collaboration across domains and supports data mesh principles.</p>
-<h4 id="data-mesh-vs-fabric">Data Mesh vs Fabric</h4>
+<h4 id="data-mesh-vs-fabric"><strong>Data Mesh vs Fabric</strong></h4>
 <p>A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.</p>
 <p><br></p>
 <h2 id="reference-topologies">Reference topologies</h2>
+<p>Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.</p>
+<p>The arrangement of domains:</p>
 <ul>
-<li>Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.</li>
-<li>The arrangement of domains:<ul>
 <li>reflects its operating model </li>
 <li>defines expectations on how data+products are shared, built, managed and governed</li>
 <li>impacts accessibility, costs, support and overall experience.</li>
-</ul>
-</li>
 </ul>
 <p><a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
@@ -258,7 +255,7 @@
 <li>Data Engineering and Analytics  </li>
 <li>Technical and Platform Administration  </li>
 </ul>
-<h3 id="recommendations">Recommendations</h3>
+<p><strong>Recommendations</strong></p>
 <p>To support enterprise-wide consistency and governance, it is recommended to define and maintain:</p>
 <ul>
 <li>Applicable metadata standards  </li>
@@ -267,11 +264,12 @@
 </ul>
 <hr />
 <h3 id="enterprise-metadata-architecture-and-metamodel">Enterprise Metadata Architecture and Metamodel</h3>
+<hr />
 <blockquote>
 <p>Metamodel to be provided </p>
 </blockquote>
-<hr />
 <h3 id="data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</h3>
+<hr />
 <p>Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.</p>
 <h4 id="dbt-docs">dbt Docs</h4>
 <ul>
@@ -288,7 +286,6 @@
 <li>Each region can have <strong>only one Unity Catalog metastore</strong>.</li>
 <li>The metastore uses designated <strong>storage accounts</strong> to hold metadata and related data.</li>
 </ul>
-<p><strong>Recommendations and Notes:</strong></p>
 <p><strong>Recommendations and Notes:</strong></p>
 <ul>
 <li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Assign managed storage</a> at the <strong>catalog level</strong> to enforce logical data isolation.  </li>
@@ -324,6 +321,13 @@
 </ul>
 <h3 id="audit">Audit</h3>
 <hr />
+<p>Some organisations are bound to regulatory and policy requirements which mandate auditability.</p>
+<p>Examples of auditable areas include: </p>
+<ul>
+<li>data sharing and access; </li>
+<li>platform access; </li>
+<li>change history to data.</li>
+</ul>
 <p>Recommended:</p>
 <ul>
 <li>Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.</li>
@@ -341,6 +345,7 @@
 </code></pre>
 <p><br></p>
 <h2 id="enterprise-billing">Enterprise Billing</h2>
+<hr />
 <blockquote>
 <p>Out of the box Databricks usage dashboard to be tested at workspace level</p>
 </blockquote>
@@ -350,6 +355,7 @@
 <p><img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes"></p>
 <p><br></p>
 <h3 id="databricks-features-for-usage-tracking">Databricks features for usage tracking</h3>
+<hr />
 <h4 id="metadata-and-tags">Metadata and tags</h4>
 <ul>
 <li>In Databricks, metadata can be used to track activity:<ul>
@@ -456,72 +462,11 @@
     - Redundant tasks
     - Inefficient queries
 </code></pre>
-<h3 id="recommended-practices">Recommended practices</h3>
+<h3 id="references-to-recommended-practices">References to recommended practices</h3>
 <ul>
 <li><a href="https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331">Top 10 Queries to use with System Tables</a></li>
 <li><a href="https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf">Unlocking Cost Optimization Insights with Databricks System Tables</a></li>
-</ul>
-<pre><code class="language-md">
-**Recommendations from: &quot;Unlocking Cost Optimization Insights with Databricks System Tables&quot; - Deenar Toraskar**
-
-#### 1. Cluster Efficiency: CPU &amp; Memory Utilization
-- Measures whether clusters are right-sized for workloads.
-- Low utilization indicates wasted resources.
-
-**Optimization Strategies:**
-- Select appropriate instance types.
-- Enable auto-scaling to dynamically allocate resources.
-- Configure auto-termination and timeouts to reduce idle time.
-
-#### 2. Cost Breakdown: All-Purpose vs. Job Clusters
-- All-Purpose Clusters cost twice as much DBUs as Job Clusters.
-
-**Best Practice:**  
-Use All-Purpose Clusters primarily for development, exploratory data analysis, or collaboration.
-
-**Optimization:**  
-Move non-interactive workloads to Job Clusters for lower costs.
-
-#### 3. Databricks Runtime (DBR) Version Compliance
-- Newer DBR versions improve performance, security, and reliability.
-- This metric measures the number of versions behind the latest DBR (weighted by spend).
-
-**Recommendation:**  
-Regularly update to the latest DBR versions to ensure optimal performance and cost efficiency.
-
-#### 4. Job &amp; Query Success Rate
-- Tracks the percentage of costs in successful jobs/queries.
-- Failed jobs result in wasted resources and potential re-runs.
-
-**Action:**  
-Investigate high failure rates to identify and address workflow inefficiencies.
-
-#### 5. Use of On-Demand vs. Spot Clusters
-- Spot instances offer significant savings but can be preempted by cloud providers.
-- Databricks' auto-fallback mechanism (`SPOT_WITH_FALLBACK_AZURE`) ensures jobs finish using on-demand resources if spot capacity is preempted.
-
-**Best Practice:**  
-Use spot instances for test/dev workloads and workloads with flexible SLAs.
-
-#### 6. Startup Time vs. Processing Time
-- Measures the time spent in startup overhead versus actual processing.
-- Small workloads may be inefficient on Spark clusters.
-
-**Optimization Options:**
-- Use serverless compute or instance pools.
-- Consolidate small jobs into larger workloads.
-- Move non-distributed workloads to alternative compute solutions (e.g., AKS).
-
-#### 7. SQL Warehouse Utilization &amp; Costs
-- Evaluates whether SQL Warehouses are right-sized for workloads.
-- Identifies underutilized instances, highlighting cost-saving opportunities.
-
-**Best Practice:**  
-Tune warehouse size, auto-scaling, and timeout settings.
-
-#### 8. Instance Type Efficiency Score
-- Using latest-generation cloud instance types offers better price-performance compared to older generations.
-</code></pre></div>
+</ul></div>
             </div>
         </div>
 
