@@ -97,7 +97,7 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 ### Hybrid federated mesh topology
 ---
 
-This blueprint illustrates a Hybrid Federated Mesh Topology, typical of large enterprises. It combines multiple distinct distributed functional domains with a consolidated raw data engineering capability. 
+This blueprint depicts a Hybrid Federated Mesh Topology, common in large enterprises. It integrates various distributed functional domains with a unified raw data engineering capability. While tailored for this topology, the guidance is broadly applicable to other configurations.
 
 Key characteristics of this topology include:
 
