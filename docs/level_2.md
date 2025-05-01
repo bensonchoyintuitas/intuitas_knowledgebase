@@ -395,7 +395,7 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 
 Example:
 <a href="../img/catalog_to_storage_mapping.png">
-    <img src="../img/catalog_to_storage_mapping.png" alt="Catalog to storage mapping">
+    <img src="../img/catalog_to_storage_mapping.png" alt="Catalog to storage mapping" width="50%">
 </a>
 
 <br>
