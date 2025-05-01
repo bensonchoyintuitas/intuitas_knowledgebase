@@ -458,6 +458,16 @@ Rejected patterns:
 ### Data sharing and delivery patterns
 ---
 
+Data can be shared and delivered to consumers through various channels, each differing in:
+
+- Cost
+- Functionality
+- Scalability
+- Security
+- Maintainability
+
+The following subsections offer more details about the channels depicted below.
+
 <a href="../img/sharing_delivery_visualisation.png" target="_blank">
     <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
 </a>
@@ -465,6 +475,7 @@ Rejected patterns:
 
 #### Row Level Security
 see [Row Level Security](#row-level-security)
+
 
 #### Pull / direct access
 ---
@@ -552,7 +563,7 @@ References:
 The following describes options for providing access to Microsoft Fabric / PowerBI 
 
 *Option 1. Share via Delta Sharing*
-```
+
 Steps:
 
 1. Create a delta share
@@ -567,9 +578,9 @@ Evaluation:
 - Cons: 
     - Row Level Security and Masking support via dynamic views only
     - See [limitations](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi). e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.
-```
+
 *Option 2. Directlake via ADLSGen2*
-```
+
 Steps:
 
 1. Create a new connection to ADLSGen2 using a provided credential / token / Service principal
@@ -587,9 +598,9 @@ Evaluation:
     - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
     - No Row Level Security and Masking support 
     - May require OneLake
-```
+
 *Option 3. Fabric mirrored unity catalog*
-```
+
 Steps:
 
 1. Within a Fabric Workspace, create a new item `Mirrored Azure Databricks Catalog`
@@ -603,10 +614,10 @@ Evaluation:
 - Cons: 
     - not GA or tested
     - service-principal level identity required to enforce permissions
-```
+
 
 *Option 4. PowerBI Import Via SQL Endpoint*
-```
+
 Steps:
 
 [Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
@@ -618,17 +629,19 @@ Evaluation:
     - Predictable costs on Databricks
 - Cons: 
     - Some, but manageable Compute costs on Databricks
-```
+
 *Option 5. PowerBI DirectQuery Via SQL Endpoint*
-```
+
 Steps:
 
 [Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
 
 Evaluation:
+
 - Pros: 
     - No duplication
     - Unity Catalog Enforced Row Level Security and Masking 
+
 - Cons: 
     - High Compute costs on Databricks on every report interaction
     - Likely deprecated in favour of DirectLake
@@ -636,22 +649,24 @@ Evaluation:
 
 *Option 6. Replicate into Fabric*
 
-    - Pros:
-        - Possibly reduced networking costs (depending on workload and networking topology)
-    - Cons: 
-        - Duplicated data
-        - Engineering costs and overheads
-        - Latency in data updates (SQL Endpoint lag)
-        - Less governance control compared to Unity Catalog
-        - No Row Level Security and Masking support 
-        - Requires use of Onelake and associated CU consumption
-```
+- Pros:
+    - Possibly reduced networking costs (depending on workload and networking topology)
+
+- Cons: 
+    - Duplicated data
+    - Engineering costs and overheads
+    - Latency in data updates (SQL Endpoint lag)
+    - Less governance control compared to Unity Catalog
+    - No Row Level Security and Masking support 
+    - Requires use of Onelake and associated CU consumption
+
 #### Push
 ---
 
 > This section is a work in progress
 
 For consideration:
+
 - adf
 - databricks
 - lakeflow
@@ -661,6 +676,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - Powerbi
 - Databricks dashboards
 - Apps
@@ -673,6 +689,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - MLOps
 - Training
 - Databricks
@@ -689,6 +706,7 @@ This section describes how Enterprise-level governance will be implemented throu
 > This section is a work in progress
 
 For consideration:
+
 - data contracts and policy
 - data asset tagging
 
@@ -698,6 +716,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - data access request management
 - data contracts
 - access audit
@@ -709,6 +728,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - data quality checking and reporting
 - data standards and quality business rule management
 
@@ -718,6 +738,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - data lineage
 - data object metadata
 
@@ -728,6 +749,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - row level security
 - data masking
 - column level security
@@ -745,6 +767,7 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 > This section is a work in progress
 
 For consideration:
+
 - dynamic views
 - precomputed views
 
@@ -754,6 +777,7 @@ For consideration:
 > This section is a work in progress
 
 For consideration:
+
 - audit log queries
 
 ##### Example questions and associated queries
