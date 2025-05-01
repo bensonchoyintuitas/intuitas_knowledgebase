@@ -203,7 +203,7 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 
 ---
 
-### Data and Information Governance and Architecture
+### Data Architecture and Governance Metadata
 Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.
 
 #### dbt Docs
