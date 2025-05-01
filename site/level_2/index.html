@@ -474,13 +474,14 @@ This can then be modified according to costs, requirements, policies, projected 
 <li>Single table / view objects that combine data from multiple objects (e.g. facts and dimensions) </li>
 </ul>
 <h3 id="lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</h3>
-<p>Unity catalog objects (catalogs, schemas, objects) are mapped to:
-- Storage accounts
-- Environments (containers: dev, test, prod)
-- Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)
-- Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)</p>
+<p>Unity catalog objects (catalogs, schemas, objects) are mapped to:</p>
+<ul>
+<li>Storage accounts</li>
+<li>Environments (containers: dev, test, prod)</li>
+<li>Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)</li>
+<li>Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)</li>
+</ul>
 <p><br>
-<br>
 Example:
 <a href="../img/catalog_to_storage_mapping.png" target="_blank">
     <img src="../img/catalog_to_storage_mapping.png"  alt="Catalog to storage mapping">

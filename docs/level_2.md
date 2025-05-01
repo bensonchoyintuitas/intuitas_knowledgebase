@@ -385,16 +385,17 @@ The Gold layer focuses on business-ready datasets, aggregations, and reporting s
 ### Lakehouse Catalog to Storage Mapping
 
 Unity catalog objects (catalogs, schemas, objects) are mapped to:
+
 - Storage accounts
 - Environments (containers: dev, test, prod)
 - Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)
 - Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)
 
 <br>
-<br>
+
 Example:
-<a href="../img/catalog_to_storage_mapping.png" target="_blank">
-    <img src="../img/catalog_to_storage_mapping.png"  alt="Catalog to storage mapping">
+<a href="../img/catalog_to_storage_mapping.png">
+    <img src="../img/catalog_to_storage_mapping.png" alt="Catalog to storage mapping">
 </a>
 
 <br>
