@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Naming Conventions - Intuitas Knowledgebase</title>
+        <title>Naming Conventions - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Intuitas Knowledgebase</a>
+                <a class="navbar-brand" href="..">Intuitas Data Intelligence Blueprint</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -342,7 +342,8 @@
 <p>All <code>entity</code> names which align to dims should be named in singular.</p>
 </li>
 <li>
-<p><strong>(Silver) Staging Objects</strong>:</p>
+<p><strong>(Silver) Staging Objects</strong>:
+   Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 </li>
 </ul>
 <p>These models exist to stage silver marts only.</p>
@@ -464,7 +465,8 @@
 <p>All <code>entity</code> names which align to dims should be named in singular.</p>
 </li>
 <li>
-<p><strong>(Gold) Staging Models</strong>:</p>
+<p><strong>(Gold) Staging Models</strong>:
+   Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 </li>
 </ul>
 <p>These models exist to stage gold marts only.</p>

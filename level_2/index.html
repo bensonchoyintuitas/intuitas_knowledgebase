@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Level 2 - Domain-Level (Solution) Architecture and Patterns - Intuitas Knowledgebase</title>
+        <title>Level 2 - Domain-Level (Solution) Architecture and Patterns - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Intuitas Knowledgebase</a>
+                <a class="navbar-brand" href="..">Intuitas Data Intelligence Blueprint</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -346,7 +346,14 @@ This can then be modified according to costs, requirements, policies, projected 
 <p>Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:</p>
 <ul>
 <li>Top level layers follow the <a href="https://www.databricks.com/glossary/medallion-architecture">Medallion architecture</a>.</li>
-<li>Within each layer, data is transformed through a series of stages.</li>
+<li>
+<p>Within each layer, data is transformed through a series of stages.</p>
+<ul>
+<li>Bronze: Data according to source. </li>
+<li>Silver: Data according to business.</li>
+<li>Gold: Data according to requirements. </li>
+</ul>
+</li>
 </ul>
 <p><a href="../img/data_layers_and_stages.png" target="_blank">
     <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
