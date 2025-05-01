@@ -205,7 +205,7 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 
 ### Data and Information Governance and Architecture
 
-<img src="../img/metadata_1.png" alt="Metadata Overview Diagram">
+<img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%">
 
 
 #### dbt Docs
