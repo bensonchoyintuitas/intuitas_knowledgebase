@@ -556,6 +556,15 @@ Example batch ingestion options:
 </blockquote>
 <h3 id="data-sharing-and-delivery-patterns">Data sharing and delivery patterns</h3>
 <hr />
+<p>Data can be shared and delivered to consumers through various channels, each differing in:</p>
+<ul>
+<li>Cost</li>
+<li>Functionality</li>
+<li>Scalability</li>
+<li>Security</li>
+<li>Maintainability</li>
+</ul>
+<p>The following subsections offer more details about the channels depicted below.</p>
 <p><a href="../img/sharing_delivery_visualisation.png" target="_blank">
     <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
 </a></p>
@@ -661,123 +670,158 @@ Example batch ingestion options:
 <hr />
 <p>The following describes options for providing access to Microsoft Fabric / PowerBI </p>
 <p><em>Option 1. Share via Delta Sharing</em></p>
-<pre><code>Steps:
-
-1. Create a delta share
-2. Use the delta share to get data from within PowerBI
-
-Evaluation:
-
-- Pros: 
-    - No duplication
-    - Centralised control over access policies
-    - Compute costs on consumer 
-- Cons: 
-    - Row Level Security and Masking support via dynamic views only
-    - See [limitations](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi). e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Create a delta share</li>
+<li>Use the delta share to get data from within PowerBI</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Centralised control over access policies</li>
+<li>Compute costs on consumer </li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Row Level Security and Masking support via dynamic views only</li>
+<li>See <a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">limitations</a>. e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 2. Directlake via ADLSGen2</em></p>
-<pre><code>Steps:
-
-1. Create a new connection to ADLSGen2 using a provided credential / token / Service principal
-2. Create a lakehouse shortcut in Fabric
-
-Evaluation:
-
-- Pros: 
-    - No duplication
-    - Potentially better PowerBI performance (untested)
-    - Compute costs on consumer 
-    - No views
-- Cons: 
-    - Less control over access policies than Delta Sharing (outside of Unity Catalog)
-    - Requires granular ADLSGen2 access controls and service principals, and associated management overhead
-    - No Row Level Security and Masking support 
-    - May require OneLake
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Create a new connection to ADLSGen2 using a provided credential / token / Service principal</li>
+<li>Create a lakehouse shortcut in Fabric</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Potentially better PowerBI performance (untested)</li>
+<li>Compute costs on consumer </li>
+<li>No views</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Less control over access policies than Delta Sharing (outside of Unity Catalog)</li>
+<li>Requires granular ADLSGen2 access controls and service principals, and associated management overhead</li>
+<li>No Row Level Security and Masking support </li>
+<li>May require OneLake</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 3. Fabric mirrored unity catalog</em></p>
-<pre><code>Steps:
-
-1. Within a Fabric Workspace, create a new item `Mirrored Azure Databricks Catalog`
-2. Enter the Databricks workspace config to create a new connection
-
-Evaluation:
-
-- Pros: 
-    - No duplication
-    - Convenient access to all Databricks Unity Catalog objects (within credential permissions)
-- Cons: 
-    - not GA or tested
-    - service-principal level identity required to enforce permissions
-</code></pre>
+<p>Steps:</p>
+<ol>
+<li>Within a Fabric Workspace, create a new item <code>Mirrored Azure Databricks Catalog</code></li>
+<li>Enter the Databricks workspace config to create a new connection</li>
+</ol>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>No duplication</li>
+<li>Convenient access to all Databricks Unity Catalog objects (within credential permissions)</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>not GA or tested</li>
+<li>service-principal level identity required to enforce permissions</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 4. PowerBI Import Via SQL Endpoint</em></p>
-<pre><code>Steps:
-
-[Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
-
-Evaluation:
-
-- Pros: 
-    - Potentially the best PowerBI performance and feature completeness
-    - Predictable costs on Databricks
-- Cons: 
-    - Some, but manageable Compute costs on Databricks
-</code></pre>
+<p>Steps:</p>
+<p><a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">Databricks documentation</a></p>
+<p>Evaluation:</p>
+<ul>
+<li>Pros: <ul>
+<li>Potentially the best PowerBI performance and feature completeness</li>
+<li>Predictable costs on Databricks</li>
+</ul>
+</li>
+<li>Cons: <ul>
+<li>Some, but manageable Compute costs on Databricks</li>
+</ul>
+</li>
+</ul>
 <p><em>Option 5. PowerBI DirectQuery Via SQL Endpoint</em></p>
-<pre><code>Steps:
-
-[Databricks documentation](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi)
-
-Evaluation:
-- Pros: 
-    - No duplication
-    - Unity Catalog Enforced Row Level Security and Masking 
-- Cons: 
-    - High Compute costs on Databricks on every report interaction
-    - Likely deprecated in favour of DirectLake
-    - Less feature rich that import mode
-
-*Option 6. Replicate into Fabric*
-
-    - Pros:
-        - Possibly reduced networking costs (depending on workload and networking topology)
-    - Cons: 
-        - Duplicated data
-        - Engineering costs and overheads
-        - Latency in data updates (SQL Endpoint lag)
-        - Less governance control compared to Unity Catalog
-        - No Row Level Security and Masking support 
-        - Requires use of Onelake and associated CU consumption
-</code></pre>
+<p>Steps:</p>
+<p><a href="https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi">Databricks documentation</a></p>
+<p>Evaluation:</p>
+<ul>
+<li>
+<p>Pros: </p>
+<ul>
+<li>No duplication</li>
+<li>Unity Catalog Enforced Row Level Security and Masking </li>
+</ul>
+</li>
+<li>
+<p>Cons: </p>
+<ul>
+<li>High Compute costs on Databricks on every report interaction</li>
+<li>Likely deprecated in favour of DirectLake</li>
+<li>Less feature rich that import mode</li>
+</ul>
+</li>
+</ul>
+<p><em>Option 6. Replicate into Fabric</em></p>
+<ul>
+<li>
+<p>Pros:</p>
+<ul>
+<li>Possibly reduced networking costs (depending on workload and networking topology)</li>
+</ul>
+</li>
+<li>
+<p>Cons: </p>
+<ul>
+<li>Duplicated data</li>
+<li>Engineering costs and overheads</li>
+<li>Latency in data updates (SQL Endpoint lag)</li>
+<li>Less governance control compared to Unity Catalog</li>
+<li>No Row Level Security and Masking support </li>
+<li>Requires use of Onelake and associated CU consumption</li>
+</ul>
+</li>
+</ul>
 <h4 id="push">Push</h4>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- adf
-- databricks
-- lakeflow</p>
+<p>For consideration:</p>
+<ul>
+<li>adf</li>
+<li>databricks</li>
+<li>lakeflow</li>
+</ul>
 <h3 id="visualisation">Visualisation</h3>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- Powerbi
-- Databricks dashboards
-- Apps
-- Open source visual options </p>
+<p>For consideration:</p>
+<ul>
+<li>Powerbi</li>
+<li>Databricks dashboards</li>
+<li>Apps</li>
+<li>Open source visual options </li>
+</ul>
 <p><br></p>
 <h2 id="aiml">AI/ML</h2>
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- MLOps
-- Training
-- Databricks
-- Azure ML</p>
+<p>For consideration:</p>
+<ul>
+<li>MLOps</li>
+<li>Training</li>
+<li>Databricks</li>
+<li>Azure ML</li>
+</ul>
 <p><br></p>
 <h2 id="data-governance">Data governance</h2>
 <p>This section describes how Enterprise-level governance will be implemented through solutions at the domain level.</p>
@@ -786,46 +830,56 @@ Evaluation:
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- data contracts and policy
-- data asset tagging</p>
+<p>For consideration:</p>
+<ul>
+<li>data contracts and policy</li>
+<li>data asset tagging</li>
+</ul>
 <h3 id="data-access-management">Data access management</h3>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- data access request management
-- data contracts
-- access audit
-- activity audit</p>
+<p>For consideration:</p>
+<ul>
+<li>data access request management</li>
+<li>data contracts</li>
+<li>access audit</li>
+<li>activity audit</li>
+</ul>
 <h3 id="data-quality">Data quality</h3>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- data quality checking and reporting
-- data standards and quality business rule management</p>
+<p>For consideration:</p>
+<ul>
+<li>data quality checking and reporting</li>
+<li>data standards and quality business rule management</li>
+</ul>
 <h3 id="data-understandability">Data understandability</h3>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- data lineage
-- data object metadata</p>
+<p>For consideration:</p>
+<ul>
+<li>data lineage</li>
+<li>data object metadata</li>
+</ul>
 <h3 id="privacy-preservation">Privacy Preservation</h3>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- row level security
-- data masking
-- column level security
-- data anonymisation
-- data de-identification</p>
+<p>For consideration:</p>
+<ul>
+<li>row level security</li>
+<li>data masking</li>
+<li>column level security</li>
+<li>data anonymisation</li>
+<li>data de-identification</li>
+</ul>
 <p>https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations</p>
 <p>"If you want to filter data when you share it using Delta Sharing, you must use dynamic views."</p>
 <p>Use dynamic views if you need to apply transformation logic, such as filters and masks, to read-only tables and if it is acceptable for users to refer to the dynamic views using different names.</p>
@@ -834,16 +888,20 @@ Evaluation:
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- dynamic views
-- precomputed views</p>
+<p>For consideration:</p>
+<ul>
+<li>dynamic views</li>
+<li>precomputed views</li>
+</ul>
 <h4 id="audit">Audit</h4>
 <hr />
 <blockquote>
 <p>This section is a work in progress</p>
 </blockquote>
-<p>For consideration:
-- audit log queries</p>
+<p>For consideration:</p>
+<ul>
+<li>audit log queries</li>
+</ul>
 <h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
 <pre><code>As a Domain (workspace) Admin:
 
