@@ -266,6 +266,10 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 * Top level layers follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
 * Within each layer, data is transformed through a series of stages.
 
+    - Bronze: Data according to source. 
+    - Silver: Data according to business.
+    - Gold: Data according to requirements. 
+
 <a href="../img/data_layers_and_stages.png" target="_blank">
     <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
 </a>

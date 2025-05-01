@@ -73,6 +73,8 @@ A data fabric is a unified platform that integrates data from various sources an
 
 A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.
 
+
+
 <br>
 
 ## Reference topologies
@@ -95,16 +97,23 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 ### Hybrid federated mesh topology
 ---
 
+This blueprint illustrates a Hybrid Federated Mesh Topology, typical of large enterprises. It combines multiple distinct distributed functional domains with a consolidated raw data engineering capability. 
+
+Key characteristics of this topology include:
+
 **Hybrid of Data Fabric and Data Mesh:**
+
 - Combines centralised governance with domain-specific autonomy.
 - Offers a unified platform for seamless data integration, alongside domain-driven flexibility.
 
 **Fabric-Like Features:**
+
 - Scalable, unified platform: Connects diverse data sources across the organisation.
 - Shared infrastructure and standards: Ensures consistency, interoperability, and trusted data.
 - Streamlined access: Simplifies workflows and reduces friction for data usage and insights delivery.
 
 **Mesh-Like Features:**
+
 - Domain-driven autonomy: Empowers teams to create tailored solutions for their specific data and AI needs.
 - Collaboration-focused: Teams act as both data producers and consumers, fostering reuse and efficiency.
 - Federated governance: Ensures standards while allowing teams to manage their data locally.

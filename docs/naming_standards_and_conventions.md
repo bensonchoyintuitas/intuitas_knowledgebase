@@ -242,7 +242,8 @@ These marts are objects that are aligned to business entities and broad requirem
 - All `entity` names which align to dims should be named in singular.
 
 1. **(Silver) Staging Objects**:
-
+   Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+   
    These models exist to stage silver marts only.
 
    - Source-specific:
@@ -333,6 +334,7 @@ The Gold layer focuses on requirement-aligned products (datasets, aggregations, 
 
 
 2. **(Gold) Staging Models**:
+   Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
    These models exist to stage gold marts only.
 
