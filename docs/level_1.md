@@ -199,14 +199,12 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 
 ### Enterprise Metadata Architecture and Metamodel
 
-> Include a diagram showing the different types of metadata at a high level and key relationships between them
+> Metamodel to be provided 
 
 ---
 
 ### Data and Information Governance and Architecture
-
-<img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%">
-
+Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.
 
 #### dbt Docs
 
@@ -215,6 +213,8 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 - dbt schema metadata is integrated with Databricks Unity Catalog.  
 - For more information, refer to [naming standards and conventions](naming_standards_and_conventions.md#dbt).
 
+<img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%">
+
 ---
 
 #### Databricks Unity Catalog Metastore
@@ -222,6 +222,9 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 - **Unity Catalog** supports centralized governance of data and metadata across Databricks workspaces.
 - Each region can have **only one Unity Catalog metastore**.
 - The metastore uses designated **storage accounts** to hold metadata and related data.
+
+**Recommendations and Notes:**
+
 
 **Recommendations and Notes:**
 
