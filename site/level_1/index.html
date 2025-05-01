@@ -151,6 +151,7 @@
 </ul>
 <p><br></p>
 <h2 id="key-concepts">Key concepts</h2>
+<hr />
 <p>The following key concepts are used throughout this knowledgebase.</p>
 <h4 id="domain"><strong>Domain</strong></h4>
 <p>Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.</p>
@@ -175,6 +176,7 @@
 <p>A data mesh and fabric are not mutually exclusive. In fact, they can be complementary approaches. A data mesh can be built on top of a data fabric.</p>
 <p><br></p>
 <h2 id="reference-topologies">Reference topologies</h2>
+<hr />
 <p>Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.</p>
 <p>The arrangement of domains:</p>
 <ul>
@@ -218,11 +220,13 @@
 <p>Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
 <p><br></p>
 <h2 id="enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</h2>
+<hr />
 <p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
 <p>Example:</p>
 <p><img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture"></p>
 <p><br></p>
 <h2 id="enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</h2>
+<hr />
 <p><strong>Logical Data Warehouse topology</strong></p>
 <ul>
 <li>Reflects the domain topology.</li>
@@ -232,6 +236,7 @@
 <p><img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture"></p>
 <p><br></p>
 <h2 id="enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</h2>
+<hr />
 <p>Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:</p>
 <ul>
 <li>Existing enterprise information, conceptual and logical models</li>
@@ -249,6 +254,7 @@
 </ul>
 <p><br></p>
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
+<hr />
 <p>Enterprise metadata plays a critical role across various domains, supporting the description, governance, and operational use of data and technology assets. It is essential for:</p>
 <ul>
 <li>Data and Information Governance and Architecture  </li>
@@ -262,7 +268,6 @@
 <li>An enterprise metadata architecture and metamodel  </li>
 <li>Metadata governance framework, including roles (e.g., stewards) and operational processes  </li>
 </ul>
-<hr />
 <h3 id="enterprise-metadata-architecture-and-metamodel">Enterprise Metadata Architecture and Metamodel</h3>
 <hr />
 <blockquote>
@@ -279,7 +284,6 @@
 <li>For more information, refer to <a href="../naming_standards_and_conventions/#dbt">naming standards and conventions</a>.</li>
 </ul>
 <p><img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%"></p>
-<hr />
 <h4 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h4>
 <ul>
 <li><strong>Unity Catalog</strong> supports centralized governance of data and metadata across Databricks workspaces.</li>
@@ -296,6 +300,7 @@
 </ul>
 <p><br></p>
 <h2 id="enterprise-security">Enterprise Security</h2>
+<hr />
 <p>Recommended:</p>
 <ul>
 <li>Description of security policies and standards for both the organisation and industry</li>
@@ -306,6 +311,7 @@
 </ul>
 <p><br></p>
 <h2 id="enterprise-data-governance">Enterprise Data Governance</h2>
+<hr />
 <p>Recommended:</p>
 <ul>
 <li>Description of governance frameworks, policies and standards including but not limited to:<ul>
@@ -333,10 +339,7 @@
 <li>Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.</li>
 </ul>
 <h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
-<blockquote>
-<p>This section is a work in progress</p>
-</blockquote>
-<pre><code>As an Enterprise Metastore Admin:
+<pre><code class="language-md">As an Enterprise Metastore Admin:
 
 1. Where are there misconfigured catalogs / schemas / objects?
 2. Who is sharing what to who and is that permitted (as per access approvals?)

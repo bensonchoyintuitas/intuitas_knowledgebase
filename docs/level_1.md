@@ -31,6 +31,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
 <br>
 
 ## Key concepts
+---
 
 The following key concepts are used throughout this knowledgebase.
 
@@ -76,6 +77,7 @@ A data mesh and fabric are not mutually exclusive. In fact, they can be compleme
 <br>
 
 ## Reference topologies
+---
 
 Organisations need to consider the current and target topology that best reflects their strategy, capabilities, structure and operating/service model.
 
@@ -138,6 +140,7 @@ Allowing domains to access gold data from other domains and, where appropriate, 
 <br>
 
 ## Enterprise Data Platform Reference Architecture
+---
 
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
@@ -148,6 +151,7 @@ Example:
 <br>
 
 ## Enterprise (Logical) Data Warehouse Reference Architecture
+---
 
 **Logical Data Warehouse topology**
 
@@ -161,6 +165,7 @@ Example:
 <br>
 
 ## Enterprise Information and Data Architecture
+---
 
 Solutions such as data warehouses and marts should reflect the business semantics relating to the scope of requirements, and will also need to consider:
 
@@ -180,6 +185,7 @@ Other secondary considerations:
 <br>
 
 ## Enterprise Metadata Architecture
+---
 
 Enterprise metadata plays a critical role across various domains, supporting the description, governance, and operational use of data and technology assets. It is essential for:
 
@@ -195,13 +201,10 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 - An enterprise metadata architecture and metamodel  
 - Metadata governance framework, including roles (e.g., stewards) and operational processes  
 
----
-
 ### Enterprise Metadata Architecture and Metamodel
 ---
+
 > Metamodel to be provided 
-
-
 
 ### Data Architecture and Governance Metadata
 ---
@@ -216,8 +219,6 @@ Metadata is essential for effective data governance, providing necessary context
 - For more information, refer to [naming standards and conventions](naming_standards_and_conventions.md#dbt).
 
 <img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%">
-
----
 
 #### Databricks Unity Catalog Metastore
 
@@ -237,6 +238,7 @@ Metadata is essential for effective data governance, providing necessary context
 <br>
 
 ## Enterprise Security
+---
 
 Recommended:
 
@@ -249,6 +251,7 @@ Recommended:
 <br>
 
 ## Enterprise Data Governance
+---
 
 Recommended:
 
@@ -277,8 +280,8 @@ Recommended:
 
 
 ##### Example questions and associated queries
-> This section is a work in progress
-```
+
+```md
 As an Enterprise Metastore Admin:
 
 1. Where are there misconfigured catalogs / schemas / objects?
@@ -369,7 +372,6 @@ Recommendations here align with the following Domain topology:
     - Project
 - In addition all scheduled Jobs would benefit from further job tags:
     - Job name/id
-
 
 ```md
 **As an Enterprise Admin**
