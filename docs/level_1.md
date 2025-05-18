@@ -201,16 +201,16 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 - An enterprise metadata architecture and metamodel  
 - Metadata governance framework, including roles (e.g., stewards) and operational processes  
 
-### Enterprise Metadata Architecture Principles
+### Intuitas Metadata Architecture Principles
 ---
 
-The following principles describe Intuitas' design philosophy to ensure Sustainable and effective metadata capability
+The following principles describe Intuitas' design philosophy to ensure sustainable and effective metadata capability
 
 - **Accessible**: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.
 - **Dynamic**: Automate collection and updates to keep metadata fresh and reduce manual work.
 - **Contextual**: Serve metadata where it’s needed, in the right format.
 - **Integrated**: Metadata exists in an ecosystem across tools to support diverse workflows.
-- **Consistency**: Use common standards, terms, and structures.
+- **Consistency**: Use common standards, terms, and structures; Ensure all metadata is current and in-sync.
 - **Secure**: Protect metadata as it may contain sensitive details.
 - **Accountability**: Clearly define roles for ownership and stewardship.
 - **Agnostic**: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.
