@@ -208,7 +208,7 @@ The following principles describe Intuitas' design philosophy to ensure sustaina
 
 - **Accessible**: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.
 - **Dynamic**: Automate collection and updates to keep metadata fresh and reduce manual work.
-- **Contextual**: Serve metadata where it’s needed, in the right format.
+- **Contextual**: Bridge the gaps between business, technical, governance and architecture perspectives and serve the right metadata, in the right place, in the right format for the audience. 
 - **Integrated**: Metadata exists in an ecosystem across tools to support diverse workflows.
 - **Consistency**: Use common standards, terms, and structures; Ensure all metadata is current and in-sync.
 - **Secure**: Protect metadata as it may contain sensitive details.
