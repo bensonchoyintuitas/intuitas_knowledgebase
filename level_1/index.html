@@ -295,6 +295,13 @@
 <h3 id="data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</h3>
 <hr />
 <p>Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.</p>
+<h4 id="datahub">Datahub</h4>
+<p><strong>DataHub</strong> serves as a unifying layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
+<p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, providing a comprehensive view of data flows and relationships throughout the ecosystem.</p>
+<p><a href="../img/datahub-lineage.png" target="_blank">
+    <img src="../img/datahub-lineage.png"  alt="Datahub Lineage">
+</a></p>
+<p><br></p>
 <h4 id="dbt-docs">dbt Docs</h4>
 <ul>
 <li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
@@ -315,7 +322,7 @@
 <li>Metastore-level and schema-level storage options also exist.  </li>
 <li>Review <a href="https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351">catalog layout strategies</a> to align with domain-oriented design.</li>
 <li>The <strong>metastore admin role</strong> is optional but, if used, should always be assigned to a <strong>group</strong>, not an individual.</li>
-<li>The enterprise’s <strong>domain topology</strong> directly influences the Unity Catalog design and layout.</li>
+<li>The enterprise's <strong>domain topology</strong> directly influences the Unity Catalog design and layout.</li>
 </ul>
 <p><br></p>
 <h2 id="enterprise-security">Enterprise Security</h2>
