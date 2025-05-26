@@ -237,6 +237,18 @@ The diagram below shows how key metadata flows across the ecosystem. It highligh
 
 Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.
 
+#### Datahub
+
+**DataHub** serves as a unifying layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.
+
+The diagram below illustrates how DataHub consolidates lineage across diverse platforms, providing a comprehensive view of data flows and relationships throughout the ecosystem.
+
+<a href="../img/datahub-lineage.png" target="_blank">
+    <img src="../img/datahub-lineage.png"  alt="Datahub Lineage">
+</a>
+
+<br>
+
 #### dbt Docs
 
 - **dbt Docs** is the authoritative source for metadata related to SQL analytics engineering.  
@@ -259,7 +271,7 @@ Metadata is essential for effective data governance, providing necessary context
   - Metastore-level and schema-level storage options also exist.  
 - Review [catalog layout strategies](https://medium.com/databricks-unity-catalog-sme/a-practical-guide-to-catalog-layout-data-sharing-and-distribution-with-databricks-unity-catalog-763e4c7b7351) to align with domain-oriented design.
 - The **metastore admin role** is optional but, if used, should always be assigned to a **group**, not an individual.
-- The enterprise’s **domain topology** directly influences the Unity Catalog design and layout.
+- The enterprise's **domain topology** directly influences the Unity Catalog design and layout.
 
 <br>
 
