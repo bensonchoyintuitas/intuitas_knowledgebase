@@ -242,13 +242,40 @@ Metadata is essential for effective data governance, providing necessary context
 **DataHub** serves as a unifying layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.
 
 The diagram below illustrates how DataHub consolidates lineage across diverse platforms, providing a comprehensive view of data flows and relationships throughout the ecosystem.
-
 <a href="../img/datahub-lineage.png" target="_blank">
-    <img src="../img/datahub-lineage.png"  alt="Datahub Lineage">
+    <img src="../img/datahub-lineage.png"  alt="Datahub Lineage" >
 </a>
 
 <br>
+<br>
+**Enterprise-wide summary of assets:**
+<br>
+<a href="../img/metadata_dashboard.png" target="_blank">
+    <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="25%">
+</a>
+<br>
+<br>
+**Browse by business domain and filters:**
+<br>
+<a href="../img/metadata_clinical_catalog.png" target="_blank">
+    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="25%">
+</a>
+<br>
+<br>
+**Metadata search by term:**
+<br>
+<a href="../img/metadata_search.png" target="_blank">
+    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="25%">
+</a>
+<br>
+<br>
+**Explore PowerBI measures:**
+<br>
+<a href="../img/powerbi_mart_measures.png" target="_blank">
+    <img src="../img/powerbi_mart_measures.png"  alt="Explore PowerBI measures" width="25%">
+</a>
 
+<br>
 #### dbt Docs
 
 - **dbt Docs** is the authoritative source for metadata related to SQL analytics engineering.  
