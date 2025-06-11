@@ -198,7 +198,7 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 - An enterprise metadata architecture and metamodel  
 - Metadata governance framework, including roles (e.g., stewards) and operational processes  
 
-### Intuitas Metadata Architecture Principles
+### Metadata Architecture Principles
 ---
 
 The following principles reflect our design philosophy to ensure sustainable and effective metadata capability
