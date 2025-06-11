@@ -308,35 +308,35 @@
     <img src="../img/datahub-lineage.png"  alt="Datahub Lineage" >
 </a></p>
 <p><br>
-<br>
-<strong>Enterprise-wide summary of assets:</strong>
+<br></p>
+<p><strong>Enterprise-wide summary of assets:</strong>
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="25%">
 </a>
 <br>
-<br>
-<strong>Browse by business domain and filters:</strong>
+<br></p>
+<p><strong>Browse by business domain and filters:</strong>
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="50%">
 </a>
 <br>
-<br>
-<strong>Metadata search by term:</strong>
+<br></p>
+<p><strong>Metadata search by term:</strong>
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="50%">
 </a>
 <br>
-<br>
-<strong>User-driven mapping of glossary terms to measures:</strong>
+<br></p>
+<p><strong>User-driven mapping of glossary terms to measures:</strong>
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="50%">
 </a>
-<br>
-<strong>User-driven tagging of PII:</strong>
+<br></p>
+<p><strong>User-driven tagging of PII:</strong>
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="50%">
@@ -349,13 +349,25 @@
 <li>dbt schema metadata is integrated with Databricks Unity Catalog.  </li>
 <li>For more information, refer to <a href="../naming_standards_and_conventions/#dbt">naming standards and conventions</a>.</li>
 </ul>
-<p><img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%"></p>
 <h4 id="databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</h4>
 <ul>
 <li><strong>Unity Catalog</strong> supports centralized governance of data and metadata across Databricks workspaces.</li>
 <li>Each region can have <strong>only one Unity Catalog metastore</strong>.</li>
 <li>The metastore uses designated <strong>storage accounts</strong> to hold metadata and related data.</li>
+<li>Unity catalog is able to <ul>
+<li>store table, column and lineage metadata</li>
+<li>inherit schema metadata from dbt</li>
+<li>detect definitions using AI where they are missing</li>
 </ul>
+</li>
+</ul>
+<p><br></p>
+<p><strong>Databricks AI-driven semantic detection</strong>
+<br>
+<a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
+    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="50%">
+</a>
+<br></p>
 <p><strong>Recommendations and Notes:</strong></p>
 <ul>
 <li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Assign managed storage</a> at the <strong>catalog level</strong> to enforce logical data isolation.  </li>
