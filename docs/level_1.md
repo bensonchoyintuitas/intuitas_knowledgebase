@@ -281,7 +281,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **Enterprise-wide summary of assets:**
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
-    <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
+    <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="60%">
 </a>
 <br>
 <br>
@@ -289,7 +289,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **Browse by business domain and filters:**
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
-    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
+    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="60%">
 </a>
 <br>
 <br>
@@ -297,7 +297,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **Metadata search by term:**
 <br>
 <a href="../img/metadata_search.png" target="_blank">
-    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
+    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="60%">
 </a>
 <br>
 <br>
@@ -305,14 +305,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **User-driven mapping of glossary terms to measures:**
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
-    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
+    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="60%">
 </a>
 <br>
 
 **User-driven tagging of PII:**
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
-    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
+    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="60%">
 </a>
 <br>
 
@@ -339,7 +339,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **Databricks AI-driven semantic detection**
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
-    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="50%">
+    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="60%">
 </a>
 <br>
 
