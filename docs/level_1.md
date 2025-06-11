@@ -187,11 +187,17 @@ Other secondary considerations:
 ## Enterprise Metadata Architecture
 ---
 
-Enterprise metadata plays a critical role across various domains, supporting the description, governance, and operational use of data and technology assets. It is essential for:
+Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. It is essential for enabling:
 
-- Data and Information Governance and Architecture  
-- Data Engineering and Analytics  
+- Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls
+- Data Engineering and Analytics devlopment
+- Business interpretation and understanding of information and analytics
+- Data quality and integrity
 - Technical and Platform Administration  
+- Integration, data sharing and interoperability
+
+
+
 
 **Recommendations**
 
@@ -215,10 +221,18 @@ The following principles describe Intuitas' design philosophy to ensure sustaina
 - **Accountability**: Clearly define roles for ownership and stewardship.
 - **Agnostic**: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.
 
-### Enterprise Metadata Architecture and Metamodel
+### Enterprise Metadata Logical Architecture and Metamodel
 ---
+In the context of a Modern Data Intelligence Capability semantic lineage, data lineage
 
-> Further information on components and use cases for consumption are under development
+The diagram below shows illustrates the concepts of semantic and data lineage/
+
+<img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
+
+<br>
+
+### Enterprise Metadata Logical Architecture and Metamodel
+---
 
 The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.
 
@@ -258,24 +272,30 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 **Browse by business domain and filters:**
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
-    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="25%">
+    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="50%">
 </a>
 <br>
 <br>
 **Metadata search by term:**
 <br>
 <a href="../img/metadata_search.png" target="_blank">
-    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="25%">
+    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="50%">
 </a>
 <br>
 <br>
-**Explore PowerBI measures:**
+**User-driven mapping of glossary terms to measures:**
 <br>
-<a href="../img/powerbi_mart_measures.png" target="_blank">
-    <img src="../img/powerbi_mart_measures.png"  alt="Explore PowerBI measures" width="25%">
+<a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
+    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="50%">
 </a>
+<br>
+**User-driven tagging of PII:**
+<br>
+<a href="../img/metadata_manual_pii_tagging.png" target="_blank">
+    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="50%">
+</a>
+<br>
 
-<br>
 #### dbt Docs
 
 - **dbt Docs** is the authoritative source for metadata related to SQL analytics engineering.  
