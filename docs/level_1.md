@@ -251,9 +251,9 @@ The diagram below shows metadata objects and elements created and managed across
 Metadata consolidation and synchronisation are critical for achieving a consistent, unified view of data assets, enabling reliable lineage, governance, and context across the data ecosystem. This approach:
 
 
-- Eliminates Silos: Aggregates metadata from diverse tools (e.g. dbt, Unity Catalog, PowerBI, MLflow) into a central catalogue like DataHub, ensuring all stakeholders access the same contextual information.
-- Improves Trust and Traceability: Enables end-to-end lineage and visibility, helping users understand where data comes from, how it is transformed, and how it is used across platforms.
-- Enables Automation and Governance: Supports data quality, access control, and policy enforcement through unified metadata APIs and standardized governance models.
+- **Eliminates Silos:** Aggregates metadata from diverse tools (e.g. dbt, Unity Catalog, PowerBI, MLflow) into a central catalogue like DataHub, ensuring all stakeholders access the same contextual information.
+- **Improves Trust and Traceability:** Enables end-to-end lineage and visibility, helping users understand where data comes from, how it is transformed, and how it is used across platforms.
+- **Enables Automation and Governance:** Supports data quality, access control, and policy enforcement through unified metadata APIs and standardized governance models.
 
 The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.
 
