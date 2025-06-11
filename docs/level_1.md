@@ -187,7 +187,7 @@ Other secondary considerations:
 ## Enterprise Metadata Architecture
 ---
 
-Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. 
+Metadata is an umbrella term encompassing various types of data that play critical roles across multiple domains, supporting the description, governance, and operational use of data and technology assets. It can be actively curated or generated as a byproduct of processes and systems.
 
 
 **Recommendations**
@@ -201,7 +201,7 @@ To support enterprise-wide consistency and governance, it is recommended to defi
 ### Intuitas Metadata Architecture Principles
 ---
 
-The following principles describe Intuitas' design philosophy to ensure sustainable and effective metadata capability
+The following principles reflect our design philosophy to ensure sustainable and effective metadata capability
 
 - **Accessible**: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.
 - **Dynamic**: Automate collection and updates to keep metadata fresh and reduce manual work.
@@ -215,7 +215,7 @@ The following principles describe Intuitas' design philosophy to ensure sustaina
 
 ### Semantic and Data lineage
 ---
-In the context of a Modern Data Intelligence Capability, semantic lineage and data lineage are critical concepts:
+Semantic lineage and Data lineage are critical concepts in a Modern Data Intelligence Capability:
 
 - **Semantic Lineage** refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.
 
@@ -230,14 +230,14 @@ Together, these concepts provide a comprehensive view of both the business and t
 ### Metadata Objects and Elements
 ---
 
-There are various types, formats and purposes of metadata which are essential for enabling:
+Metadata exists in various types, formats, and purposes, each essential for enabling:
 
-- Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls
-- Data Engineering and Analytics devlopment
-- Business interpretation and understanding of information and analytics
-- Data quality and integrity
-- Technical and Platform Administration  
-- Integration, data sharing and interoperability
+- Data and Information Governance & Architecture – including semantic and data lineage, as well as privacy, access, and security - controls
+- Data Engineering and Analytics Development
+- Business Interpretation and Understanding – supporting the context and meaning of information and analytics
+- Data Quality and Integrity
+- Technical and Platform Administration
+- Integration, Data Sharing, and Interoperability
 
 The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.
 
@@ -245,7 +245,17 @@ The diagram below shows metadata objects and elements created and managed across
 
 <br>
 
-The diagram below shows how key metadata flows across the ecosystem. It highlights where synchronisation matters most—and how a unified metastore complements existing in-context metadata serving.
+### Metadata Consolidation and Synchronisation
+---
+
+Metadata consolidation and synchronisation are critical for achieving a consistent, unified view of data assets, enabling reliable lineage, governance, and context across the data ecosystem. This approach:
+
+
+- Eliminates Silos: Aggregates metadata from diverse tools (e.g. dbt, Unity Catalog, PowerBI, MLflow) into a central catalogue like DataHub, ensuring all stakeholders access the same contextual information.
+- Improves Trust and Traceability: Enables end-to-end lineage and visibility, helping users understand where data comes from, how it is transformed, and how it is used across platforms.
+- Enables Automation and Governance: Supports data quality, access control, and policy enforcement through unified metadata APIs and standardized governance models.
+
+The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.
 
 <img src="../img/metadata_flow.png"  alt="Metadata flow">
 
