@@ -255,7 +255,7 @@
 <p><br></p>
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
 <hr />
-<p>Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. </p>
+<p>Metadata is an umbrella term encompassing various types of data that play critical roles across multiple domains, supporting the description, governance, and operational use of data and technology assets. It can be actively curated or generated as a byproduct of processes and systems.</p>
 <p><strong>Recommendations</strong></p>
 <p>To support enterprise-wide consistency and governance, it is recommended to define and maintain:</p>
 <ul>
@@ -265,7 +265,7 @@
 </ul>
 <h3 id="intuitas-metadata-architecture-principles">Intuitas Metadata Architecture Principles</h3>
 <hr />
-<p>The following principles describe Intuitas' design philosophy to ensure sustainable and effective metadata capability</p>
+<p>The following principles reflect our design philosophy to ensure sustainable and effective metadata capability</p>
 <ul>
 <li><strong>Accessible</strong>: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.</li>
 <li><strong>Dynamic</strong>: Automate collection and updates to keep metadata fresh and reduce manual work.</li>
@@ -278,7 +278,7 @@
 </ul>
 <h3 id="semantic-and-data-lineage">Semantic and Data lineage</h3>
 <hr />
-<p>In the context of a Modern Data Intelligence Capability, semantic lineage and data lineage are critical concepts:</p>
+<p>Semantic lineage and Data lineage are critical concepts in a Modern Data Intelligence Capability:</p>
 <ul>
 <li>
 <p><strong>Semantic Lineage</strong> refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.</p>
@@ -292,19 +292,27 @@
 <p><br></p>
 <h3 id="metadata-objects-and-elements">Metadata Objects and Elements</h3>
 <hr />
-<p>There are various types, formats and purposes of metadata which are essential for enabling:</p>
+<p>Metadata exists in various types, formats, and purposes, each essential for enabling:</p>
 <ul>
-<li>Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls</li>
-<li>Data Engineering and Analytics devlopment</li>
-<li>Business interpretation and understanding of information and analytics</li>
-<li>Data quality and integrity</li>
-<li>Technical and Platform Administration  </li>
-<li>Integration, data sharing and interoperability</li>
+<li>Data and Information Governance &amp; Architecture – including semantic and data lineage, as well as privacy, access, and security - controls</li>
+<li>Data Engineering and Analytics Development</li>
+<li>Business Interpretation and Understanding – supporting the context and meaning of information and analytics</li>
+<li>Data Quality and Integrity</li>
+<li>Technical and Platform Administration</li>
+<li>Integration, Data Sharing, and Interoperability</li>
 </ul>
 <p>The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.</p>
 <p><img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture"></p>
 <p><br></p>
-<p>The diagram below shows how key metadata flows across the ecosystem. It highlights where synchronisation matters most—and how a unified metastore complements existing in-context metadata serving.</p>
+<h3 id="metadata-consolidation-and-synchronisation">Metadata Consolidation and Synchronisation</h3>
+<hr />
+<p>Metadata consolidation and synchronisation are critical for achieving a consistent, unified view of data assets, enabling reliable lineage, governance, and context across the data ecosystem. This approach:</p>
+<ul>
+<li>Eliminates Silos: Aggregates metadata from diverse tools (e.g. dbt, Unity Catalog, PowerBI, MLflow) into a central catalogue like DataHub, ensuring all stakeholders access the same contextual information.</li>
+<li>Improves Trust and Traceability: Enables end-to-end lineage and visibility, helping users understand where data comes from, how it is transformed, and how it is used across platforms.</li>
+<li>Enables Automation and Governance: Supports data quality, access control, and policy enforcement through unified metadata APIs and standardized governance models.</li>
+</ul>
+<p>The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.</p>
 <p><img src="../img/metadata_flow.png"  alt="Metadata flow"></p>
 <p><br></p>
 <h3 id="data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</h3>
