@@ -262,6 +262,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 
 <br>
 <br>
+
 **Enterprise-wide summary of assets:**
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
@@ -269,6 +270,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 </a>
 <br>
 <br>
+
 **Browse by business domain and filters:**
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
@@ -276,6 +278,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 </a>
 <br>
 <br>
+
 **Metadata search by term:**
 <br>
 <a href="../img/metadata_search.png" target="_blank">
@@ -283,12 +286,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 </a>
 <br>
 <br>
+
 **User-driven mapping of glossary terms to measures:**
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="50%">
 </a>
 <br>
+
 **User-driven tagging of PII:**
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
@@ -303,13 +308,25 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 - dbt schema metadata is integrated with Databricks Unity Catalog.  
 - For more information, refer to [naming standards and conventions](naming_standards_and_conventions.md#dbt).
 
-<img src="../img/metadata_1.png" alt="Metadata Overview Diagram" width="30%">
 
 #### Databricks Unity Catalog Metastore
 
 - **Unity Catalog** supports centralized governance of data and metadata across Databricks workspaces.
 - Each region can have **only one Unity Catalog metastore**.
 - The metastore uses designated **storage accounts** to hold metadata and related data.
+- Unity catalog is able to 
+    - store table, column and lineage metadata
+    - inherit schema metadata from dbt
+    - detect definitions using AI where they are missing
+    
+<br>
+
+**Databricks AI-driven semantic detection**
+<br>
+<a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
+    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="50%">
+</a>
+<br>
 
 
 **Recommendations and Notes:**

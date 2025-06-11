@@ -255,11 +255,14 @@
 <p><br></p>
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
 <hr />
-<p>Enterprise metadata plays a critical role across various domains, supporting the description, governance, and operational use of data and technology assets. It is essential for:</p>
+<p>Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. It is essential for enabling:</p>
 <ul>
-<li>Data and Information Governance and Architecture  </li>
-<li>Data Engineering and Analytics  </li>
+<li>Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls</li>
+<li>Data Engineering and Analytics devlopment</li>
+<li>Business interpretation and understanding of information and analytics</li>
+<li>Data quality and integrity</li>
 <li>Technical and Platform Administration  </li>
+<li>Integration, data sharing and interoperability</li>
 </ul>
 <p><strong>Recommendations</strong></p>
 <p>To support enterprise-wide consistency and governance, it is recommended to define and maintain:</p>
@@ -281,11 +284,14 @@
 <li><strong>Accountability</strong>: Clearly define roles for ownership and stewardship.</li>
 <li><strong>Agnostic</strong>: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.</li>
 </ul>
-<h3 id="enterprise-metadata-architecture-and-metamodel">Enterprise Metadata Architecture and Metamodel</h3>
+<h3 id="enterprise-metadata-logical-architecture-and-metamodel">Enterprise Metadata Logical Architecture and Metamodel</h3>
 <hr />
-<blockquote>
-<p>Further information on components and use cases for consumption are under development</p>
-</blockquote>
+<p>In the context of a Modern Data Intelligence Capability semantic lineage, data lineage</p>
+<p>The diagram below shows illustrates the concepts of semantic and data lineage/</p>
+<p><img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage"></p>
+<p><br></p>
+<h3 id="enterprise-metadata-logical-architecture-and-metamodel_1">Enterprise Metadata Logical Architecture and Metamodel</h3>
+<hr />
 <p>The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.</p>
 <p><img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture"></p>
 <p><br></p>
@@ -313,23 +319,29 @@
 <strong>Browse by business domain and filters:</strong>
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
-    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="25%">
+    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="50%">
 </a>
 <br>
 <br>
 <strong>Metadata search by term:</strong>
 <br>
 <a href="../img/metadata_search.png" target="_blank">
-    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="25%">
+    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="50%">
 </a>
 <br>
 <br>
-<strong>Explore PowerBI measures:</strong>
+<strong>User-driven mapping of glossary terms to measures:</strong>
 <br>
-<a href="../img/powerbi_mart_measures.png" target="_blank">
-    <img src="../img/powerbi_mart_measures.png"  alt="Explore PowerBI measures" width="25%">
-</a></p>
-<p><br></p>
+<a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
+    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="50%">
+</a>
+<br>
+<strong>User-driven tagging of PII:</strong>
+<br>
+<a href="../img/metadata_manual_pii_tagging.png" target="_blank">
+    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="50%">
+</a>
+<br></p>
 <h4 id="dbt-docs">dbt Docs</h4>
 <ul>
 <li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
