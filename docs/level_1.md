@@ -187,16 +187,7 @@ Other secondary considerations:
 ## Enterprise Metadata Architecture
 ---
 
-Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. It is essential for enabling:
-
-- Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls
-- Data Engineering and Analytics devlopment
-- Business interpretation and understanding of information and analytics
-- Data quality and integrity
-- Technical and Platform Administration  
-- Integration, data sharing and interoperability
-
-
+Metadata is an umbrella term for many types of data which play a critical roles across various domains, supporting the description, governance, and operational use of data and technology assets. Metadata can be both actively curated, as well as a byproduct. 
 
 
 **Recommendations**
@@ -221,18 +212,32 @@ The following principles describe Intuitas' design philosophy to ensure sustaina
 - **Accountability**: Clearly define roles for ownership and stewardship.
 - **Agnostic**: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.
 
-### Enterprise Metadata Logical Architecture and Metamodel
----
-In the context of a Modern Data Intelligence Capability semantic lineage, data lineage
 
-The diagram below shows illustrates the concepts of semantic and data lineage/
+### Semantic and Data lineage
+---
+In the context of a Modern Data Intelligence Capability, semantic lineage and data lineage are critical concepts:
+
+- **Semantic Lineage** refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.
+
+- **Data Lineage** captures the technical flow of data from its source to its destination, including all transformations and processing steps. It provides visibility into how data moves through the organization's systems and helps ensure data quality, compliance, and governance.
+
+Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.
 
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
 
 <br>
 
-### Enterprise Metadata Logical Architecture and Metamodel
+### Metadata Objects and Elements
 ---
+
+There are various types, formats and purposes of metadata which are essential for enabling:
+
+- Data and Information Governance and Architecture  - specifically semantic lineage, data lineage and privacy/access/security controls
+- Data Engineering and Analytics devlopment
+- Business interpretation and understanding of information and analytics
+- Data quality and integrity
+- Technical and Platform Administration  
+- Integration, data sharing and interoperability
 
 The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.
 
@@ -318,7 +323,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
     - store table, column and lineage metadata
     - inherit schema metadata from dbt
     - detect definitions using AI where they are missing
-    
+
 <br>
 
 **Databricks AI-driven semantic detection**
