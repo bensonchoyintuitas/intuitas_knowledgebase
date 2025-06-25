@@ -122,50 +122,50 @@
 <p><br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="#key-concepts">Key concepts</a><ul>
-<li><a href="#domain">Domain</a></li>
-<li><a href="#subdomain">Subdomain</a></li>
-<li><a href="#domain-centric-design">Domain-Centric Design</a> </li>
-<li><a href="#data-mesh">Data Mesh</a></li>
-<li><a href="#domain-topology">Domain Topology</a></li>
-<li><a href="#data-fabric">Data Fabric</a></li>
-<li><a href="#data-mesh-vs-fabric">Data Mesh vs Fabric</a></li>
+<li><a href="./#key-concepts">Key concepts</a><ul>
+<li><a href="./#domain">Domain</a></li>
+<li><a href="level_1.mdlevel_1.md#subdomain">Subdomain</a></li>
+<li><a href="./#domain-centric-design">Domain-Centric Design</a> </li>
+<li><a href="./#data-mesh">Data Mesh</a></li>
+<li><a href="./#domain-topology">Domain Topology</a></li>
+<li><a href="./#data-fabric">Data Fabric</a></li>
+<li><a href="./#data-mesh-vs-fabric">Data Mesh vs Fabric</a></li>
 </ul>
 </li>
-<li><a href="#reference-topologies">Reference topologies</a></li>
-<li><a href="#hybrid-federated-mesh-topology">Hybrid federated mesh topology</a></li>
-<li><a href="#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a></li>
-<li><a href="#enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</a></li>
-<li><a href="#enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</a></li>
-<li><a href="#enterprise-metadata-architecture">Enterprise Metadata Architecture</a><ul>
-<li><a href="#metadata-architecture-principles">Metadata Architecture Principles</a></li>
-<li><a href="#semantic-and-data-lineage">Semantic and Data lineage</a></li>
-<li><a href="#metadata-objects-and-elements">Metadata Objects and Elements</a></li>
-<li><a href="#metadata-consolidation-and-synchronisation">Metadata Consolidation and Synchronisation</a></li>
-<li><a href="#data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</a><ul>
-<li><a href="#datahub">Datahub</a></li>
-<li><a href="#dbt-docs">dbt Docs</a></li>
-<li><a href="#databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</a></li>
+<li><a href="./#reference-topologies">Reference topologies</a></li>
+<li><a href="./#hybrid-federated-mesh-topology">Hybrid federated mesh topology</a></li>
+<li><a href="./#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a></li>
+<li><a href="./#enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</a></li>
+<li><a href="./#enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</a></li>
+<li><a href="./#enterprise-metadata-architecture">Enterprise Metadata Architecture</a><ul>
+<li><a href="./#metadata-architecture-principles">Metadata Architecture Principles</a></li>
+<li><a href="./#semantic-and-data-lineage">Semantic and Data lineage</a></li>
+<li><a href="./#metadata-objects-and-elements">Metadata Objects and Elements</a></li>
+<li><a href="./#metadata-consolidation-and-synchronisation">Metadata Consolidation and Synchronisation</a></li>
+<li><a href="./#data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</a><ul>
+<li><a href="./#datahub">Datahub</a></li>
+<li><a href="./#dbt-docs">dbt Docs</a></li>
+<li><a href="./#databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#enterprise-security">Enterprise Security</a></li>
-<li><a href="#enterprise-data-governance">Enterprise Data Governance</a><ul>
-<li><a href="#audit">Audit</a></li>
+<li><a href="./#enterprise-security">Enterprise Security</a></li>
+<li><a href="./#enterprise-data-governance">Enterprise Data Governance</a><ul>
+<li><a href="./#audit">Audit</a></li>
 </ul>
 </li>
-<li><a href="#enterprise-billing">Enterprise Billing</a><ul>
-<li><a href="#databricks-features-for-usage-tracking">Databricks features for usage tracking</a><ul>
-<li><a href="#metadata-and-tags">Metadata and tags</a></li>
-<li><a href="#cluster-policies">Cluster policies</a></li>
-<li><a href="#system-tables">System tables</a></li>
-<li><a href="#usage-reports">Usage reports</a></li>
+<li><a href="./#enterprise-billing">Enterprise Billing</a><ul>
+<li><a href="./#databricks-features-for-usage-tracking">Databricks features for usage tracking</a><ul>
+<li><a href="./#metadata-and-tags">Metadata and tags</a></li>
+<li><a href="./#cluster-policies">Cluster policies</a></li>
+<li><a href="./#system-tables">System tables</a></li>
+<li><a href="./#usage-reports">Usage reports</a></li>
 </ul>
 </li>
-<li><a href="#domain--workspace-administrator-role">Domain / Workspace Administrator Role</a></li>
-<li><a href="#tagging-convention">Tagging convention</a></li>
-<li><a href="#references-to-recommended-practices">References to recommended practices</a></li>
+<li><a href="./#domain--workspace-administrator-role">Domain / Workspace Administrator Role</a></li>
+<li><a href="./#tagging-convention">Tagging convention</a></li>
+<li><a href="./#references-to-recommended-practices">References to recommended practices</a></li>
 </ul>
 </li>
 </ul>
@@ -235,9 +235,9 @@
 <p><strong>Centralising engineering</strong></p>
 <p>Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organization.</p>
 <p><strong>Distributed Local engineering</strong></p>
-<p>Maintaining a local bronze layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.</p>
+<p>Maintaining a local bronze/raw layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.</p>
 <p><strong>Cross-Domain Access</strong></p>
-<p>Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
+<p>Allowing domains to access 'gold' data from other domains and, where appropriate, 'silver' or 'bronze', facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
 <p><br></p>
 <h2 id="enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</h2>
 <hr />
@@ -340,9 +340,9 @@
 <p>Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.</p>
 <h4 id="datahub">Datahub</h4>
 <p><strong>DataHub</strong> serves as a unifying layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
-<p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, providing a comprehensive view of data flows and relationships throughout the ecosystem.
-<a href="../img/datahub-lineage.png" target="_blank">
-    <img src="../img/datahub-lineage.png"  alt="Datahub Lineage" >
+<p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
+<a href="../img/dbt-chained-lineage.png" target="_blank">
+    <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
 </a></p>
 <p><br>
 <br></p>
