@@ -1,5 +1,5 @@
 # Naming Conventions
-{Return to home}(README.md)
+[Return to home](README.md)
 
 <br>
 
