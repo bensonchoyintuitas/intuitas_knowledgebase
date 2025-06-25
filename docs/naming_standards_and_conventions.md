@@ -447,7 +447,7 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 
 #### Silver
 
-- Staging Source-specific: 
+**Staging Source-specific:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}`
@@ -461,7 +461,7 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 ```
 
 
-- Staging Non-source-specific (entity centric): 
+**Staging Non-source-specific (entity centric):**
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description} `
@@ -478,34 +478,34 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
       - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
 ```
 
-- Mart Source-specific: 
+**Mart Source-specific:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}`
 
-- Mart Non-source specific: 
+**Mart Non-source specific:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}`
 
-- Reference Data: 
+**Reference Data:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}`
 
-- Raw Vault: 
+**Raw Vault:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv`
    - Models: `edw_rv__{vault object named as per data vault standards}`
 
-- Schema naming convention: 
+- Schema naming convention:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/bv`
    - Models: `edw_bv__{vault object named as per data vault standards}`
 
 #### Gold
 
--  Staging: 
+-  Staging:**
 
    - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
