@@ -239,22 +239,27 @@ Service endpoints and policies are enabled.
 <br>
 
 ## Data Architecture
+---
 
 Data Architecture refers to how data is physically structured, stored, and accessed within an organization. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. 
 
 ### Data and information models
+---
 
 Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. 
 
 See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
 ### Domain glossary
+---
 
 - Expand on the enterprise glossary and add domain specific terms and definitions.
     - In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.
     - In cases where definitions are conflicting, governance should be applied to resolve the conflict.
 
 ### Domain data and warehouse models
+---
+
 - Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.
 - Conformed dimensions may serve as a bridge between domains for common entities.
 
@@ -378,7 +383,6 @@ Transformations used to shape source data into business-ready datasets, aligned 
 
 - While dbt best practices use the term *'Intermediates'* as reuseable building blocks for marts, this is considered a form of staging and are hence optional under this blueprint. https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate
 
-
 **Business Information Marts (Requirement Specific)**
 The term 'business' here is use to distinguish marts in this layer from marts in the Silver layer. These marts are designed for a defined requirement. *e.g. sales fact aggregated by region.*
 
@@ -388,8 +392,12 @@ A solution served to the consumption layer is likely to contain a mix of Silver 
 - silver.dim_customer
 - gold.fact_sales_aggregated_by_region
 
+<br>
+<br>
 
 ### Lakehouse Catalog to Storage Mapping
+---
+
 
 Unity catalog objects (catalogs, schemas, objects) are mapped to:
 
