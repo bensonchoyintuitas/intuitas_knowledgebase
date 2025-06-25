@@ -338,16 +338,12 @@
 <li>All <code>entity</code> names which align to dims should be named in singular.</li>
 </ul>
 <p><br></p>
-<p><strong>(Silver) Staging Objects</strong>:</p>
-<p>Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
+<p><strong>(Silver) Staging Objects</strong>:
+Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 <p>These models exist to stage silver marts only.</p>
 <ul>
-<li>
-<p>Source-specific:</p>
-</li>
-<li>
-<p>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></p>
-</li>
+<li>Source-specific:</li>
+<li>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></li>
 <li>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
 <li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></li>
@@ -376,8 +372,8 @@
 <li><em>e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></li>
 </ul>
 <p><br></p>
-<p><strong>(Silver) Base Information Marts</strong>:</p>
-<p>Final products after staging:</p>
+<p><strong>(Silver) Base Information Marts</strong>:
+Final products after staging:</p>
 <ul>
 <li>Source-specific:</li>
 <li>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></li>
@@ -398,24 +394,24 @@
 <li><em>e.g: intuitas_corporate_dev.mart.account_join_with_payments</em> (joined across two systems)</li>
 </ul>
 <p><br></p>
-<p><strong>Reference Data</strong>:</p>
-<p>Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
+<p><strong>Reference Data</strong>:
+Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
 <ul>
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference data set name} (optional:__{source_system}__{source_channel})</code></li>
 <li><em>e.g: intuitas_corporate_dev.ref.account_code</em></li>
 </ul>
 <p><br></p>
-<p><strong>Raw Vault</strong>:</p>
-<p>Optional warehousing construct.</p>
+<p><strong>Raw Vault</strong>:
+Optional warehousing construct.</p>
 <ul>
 <li>Schema naming convention: <code>edw_rv</code></li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 <li><em>e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></li>
 </ul>
 <p><br></p>
-<p><strong>Business Vault</strong>:</p>
-<p>Optional warehousing construct.</p>
+<p><strong>Business Vault</strong>:
+Optional warehousing construct.</p>
 <ul>
 <li>Schema naming convention: <code>edw_bv</code></li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
