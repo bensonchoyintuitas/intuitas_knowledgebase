@@ -172,7 +172,6 @@ This section provides naming standards and conventions for Databricks.
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
 Catalog name:
-
    - Minimum granularity `{domain_name}{_environment (dev/test/pat/prod)}` (prod is implied optional)   *e.g: intuitas_corporate_dev*
    - Optional granularity `{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_bronze_dev*
    - Optional granularity `{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_finance_bronze_dev*
@@ -189,7 +188,6 @@ Catalog name:
 ### Catalog Metadata tags:
 
 The following metadata should be added when creating a catalog:
-
 - Key: domain (owner): `{domain_name}`
 - Key: environment: `{environment}`
 - Key: managing_domain: `{domain_name}` e.g: if delegating to engineering domain
@@ -203,7 +201,6 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 #### Schema level external storage locations
 
 Recommendations:
-
 - For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 - Ensure dbt's dbt_project.yml and environment variables align with storage locations.
@@ -222,6 +219,7 @@ Contains metadata that supports engineering and governance. This will vary depen
 
 <br>
 #### Bronze (Raw data according to systems)
+
 The Bronze layer stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
 
 All schemas are may be optionally prefixed with `bronze__`
@@ -255,31 +253,24 @@ These marts are objects that are aligned to business entities and broad requirem
 <br>
 
 **(Silver) Staging Objects**:
-
 Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
    
 These models exist to stage silver marts only.
 
 - Source-specific:
-
    - Schema naming convention: `stg__{source_system}__{source_channel}`
    - Object naming convention: `{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}`
-
-      - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
-      - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf*
-
-      - *e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf*
 
 - Non-source specific
-
    - Schema naming convention: `stg{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention to align with target mart: `stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}`
-
-      - *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
-      - *e.g: intuitas_corporate_dev.stg.accounts__02_business_validated* 
+   - *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
+   - *e.g: intuitas_corporate_dev.stg.accounts__02_business_validated* 
 
 - Examples of transformations:
-
    - `01_renamed_and_typed`
    - `02_deduped`
    - `03_cleaned`
@@ -292,54 +283,49 @@ These models exist to stage silver marts only.
 <br>
 
 **(Silver) Base Information Marts**:
-
 Final products after staging:
 
 - Source-specific:
-
    - Schema naming convention: `mart__{source_system}__{source_channel}`
    - Object naming convention: `(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}`
-      - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf*
-      - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf*
-      - *e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf*
+   - *e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf*
 
-- Non-source specific
-
+- Non-source specific:
    - Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention: `(optional:dim/fact)__{unified entity / _object_description}`
-      - *e.g: intuitas_corporate_dev.mart.account* (unified)
-      - *e.g: intuitas_corporate_dev.mart__corporate__finance.account* (unified)
-      - *e.g: intuitas_corporate_dev.mart__finance.account* (unified)
-      - *e.g: intuitas_corporate_dev.mart.account_join_with_payments* (joined across two systems)
+   - *e.g: intuitas_corporate_dev.mart.account* (unified)
+   - *e.g: intuitas_corporate_dev.mart__corporate__finance.account* (unified)
+   - *e.g: intuitas_corporate_dev.mart__finance.account* (unified)
+   - *e.g: intuitas_corporate_dev.mart.account_join_with_payments* (joined across two systems)
 
 <br>
 
 **Reference Data**:
-
 Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.
 
 - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
 - Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel})`
-
-*e.g: intuitas_corporate_dev.ref.account_code*
-
-<br>
-
-4. **Raw Vault**:
-
-   Optional warehousing construct.
-
-   - Schema naming convention: `edw_rv`
-   - Object naming convention: `{vault object named as per data vault standards}`
-   - *e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf*
+- *e.g: intuitas_corporate_dev.ref.account_code*
 
 <br>
 
-5. **Business Vault**:
+**Raw Vault**:
+Optional warehousing construct.
 
-   - Schema naming convention: `edw_bv`
-   - Object naming convention: `{vault object named as per data vault standards}`
-   - *e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf*
+- Schema naming convention: `edw_rv`
+- Object naming convention: `{vault object named as per data vault standards}`
+- *e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf*
+
+<br>
+
+**Business Vault**:
+Optional warehousing construct.
+
+- Schema naming convention: `edw_bv`
+- Object naming convention: `{vault object named as per data vault standards}`
+- *e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf*
 
 <br>
 
@@ -355,38 +341,37 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 <br>
 
-2. **(Gold) Staging Models**:
-   Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+**(Gold) Staging Models**:
 
-   These models exist to stage gold marts only.
+Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
-   - Schema naming convention: `stg__{optional: __domain name}{optional: __subdomain name(s)}`
-   - Object naming convention to align to target mart: `(optional: dim/fact__){entity / product description}__{n}__{transformation}`
+These models exist to stage gold marts only.
 
-   *e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order*
-   *e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order*
-   *e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order*
+- Schema naming convention: `stg__{optional: __domain name}{optional: __subdomain name(s)}`
+- Object naming convention to align to target mart: `(optional: dim/fact__){entity / product description}__{n}__{transformation}`
+- *e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order*
+- *e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order*
+- *e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order*
 
 <br>
 
-3. **(Gold) Information Marts**:
+**(Gold) Information Marts**:
 
-   - Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
-   - Dimension naming convention: `dim__{entity / product description} (optional: __{source_system}__{source_channel})`
-   - Fact naming convention: `fact__{entity / product description} (optional: __{source_system}__{source_channel})`
-   - Denormalized (One Big Table) Object naming convention: `{entity / product description} (optional: __{source_system}__{source_channel})`
+- Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
+- Dimension naming convention: `dim__{entity / product description} (optional: __{source_system}__{source_channel})`
+- Fact naming convention: `fact__{entity / product description} (optional: __{source_system}__{source_channel})`
+- Denormalized (One Big Table) Object naming convention: `{entity / product description} (optional: __{source_system}__{source_channel})`
 
-   - Required transformation: Business-specific transformations such as:
-     - `pivoting`
-     - `aggregation`
-     - `joining`
-     - `conformance`
-     - `desensitization`
-
-   *e.g: intuitas_corporate_dev.mart.fact__late_payments*
-   *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf*
-   *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf*
-   *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments* (union of old and new)
+- Required transformation: Business-specific transformations such as:
+   - `pivoting`
+   - `aggregation`
+   - `joining`
+   - `conformance`
+   - `desensitization`
+- *e.g: intuitas_corporate_dev.mart.fact__late_payments*
+- *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf*
+- *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf*
+- *e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments* (union of old and new)
 
 ### Delta Sharing
 
