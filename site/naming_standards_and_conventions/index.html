@@ -243,8 +243,12 @@
 <ul>
 <li>Level 1 Name: <code>{layer} (bronze/silver/gold)</code> // if using medallion approach</li>
 <li>Level 2 Name: <code>{stage_name}</code></li>
-<li><em>e.g:</em></li>
-<li><em>bronze/landing</em></li>
+<li>
+<p><em>e.g:</em></p>
+</li>
+<li>
+<p><em>bronze/landing</em></p>
+</li>
 <li><em>bronze/ods</em></li>
 <li><em>bronze/pds</em></li>
 <li><em>bronze/schema</em> (for autoloader metadata)</li>
@@ -258,8 +262,12 @@
 <li>Resource: ADLSGen2</li>
 <li>Generic storage account name: <code>sa{organisation_name}{domain_name}{functional_description}</code></li>
 <li>Tier: Standard/Premium (depends on workload)</li>
-<li>Redundancy: </li>
-<li>Minimum ZRS or GRS for prod</li>
+<li>
+<p>Redundancy: </p>
+</li>
+<li>
+<p>Minimum ZRS or GRS for prod</p>
+</li>
 <li>Minimum LRS for poc, dev, test and preprod</li>
 </ul>
 <h4 id="generic-blob-files-and-folders">Generic Blob files and folders</h4>
@@ -278,10 +286,12 @@
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
 <hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
-<p>Catalog name:
-   - Minimum granularity <code>{domain_name}{_environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: intuitas_corporate_dev</em>
-   - Optional granularity <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_dev</em>
-   - Optional granularity <code>{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_finance_bronze_dev</em></p>
+<p>Catalog name:</p>
+<ul>
+<li>Minimum granularity: <code>{domain_name}{_environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: intuitas_corporate_dev</em></li>
+<li>Optional granularity: <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_dev</em></li>
+<li>Optional granularity: <code>{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_finance_bronze_dev</em></li>
+</ul>
 <p><em>Note that projects are temporary constructs, and hence are not recommended for naming</em></p>
 <ul>
 <li>Catalog storage root: <code>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</code></li>
@@ -292,42 +302,48 @@
 <li><em>e.g: intuitas_corporate_ext__sqlonpremsource</em></li>
 </ul>
 <h3 id="catalog-metadata-tags">Catalog Metadata tags:</h3>
-<p>The following metadata should be added when creating a catalog:
-- Key: domain (owner): <code>{domain_name}</code>
-- Key: environment: <code>{environment}</code>
-- Key: managing_domain: <code>{domain_name}</code> e.g: if delegating to engineering domain</p>
+<p>The following metadata should be added when creating a catalog:</p>
+<ul>
+<li>Key: domain (owner): <code>{domain_name}</code></li>
+<li>Key: environment: <code>{environment}</code></li>
+<li>Key: managing_domain: <code>{domain_name}</code> e.g: if delegating to engineering domain</li>
+</ul>
 <h3 id="schema-and-object-conventions">Schema and object conventions</h3>
 <hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
-<p><br></p>
 <h4 id="schema-level-external-storage-locations">Schema level external storage locations</h4>
-<p>Recommendations:
-- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. <em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em>
-- For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
-- Ensure dbt's dbt_project.yml and environment variables align with storage locations.</p>
-<p><br></p>
+<p>Recommendations:</p>
+<ul>
+<li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. <em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></li>
+<li>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</li>
+<li>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</li>
+</ul>
 <h4 id="metadata-schemas-and-objects">Metadata Schemas and Objects</h4>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
-<p><strong>Engineering - ingestion framework</strong>:
-- Schema naming convention:  <code>meta__{optional: function}</code>
-- Naming convention: <code>{function/descriptor}</code>
-- <em>e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
-<p><br></p>
+<p><strong>Engineering - ingestion framework</strong>:</p>
+<ul>
+<li>Schema naming convention:  <code>meta__{optional: function}</code></li>
+<li>Naming convention: <code>{function/descriptor}</code></li>
+<li><em>e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control</em></li>
+</ul>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
 <p>All schemas are may be optionally prefixed with <code>bronze__</code></p>
 <p><strong>Persistent Landing</strong>:
 - N/A (see file naming)</p>
-<p><strong>Operational Data Store (ODS)</strong>:
-- Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code>
-- Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code>
-- <em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
-<p><strong>Persistent Data Store (PDS)</strong>:
-- Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code>
-- Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code>
-- <em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
-<p><br></p>
+<p><strong>Operational Data Store (ODS)</strong>:</p>
+<ul>
+<li>Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></li>
+<li><em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></li>
+</ul>
+<p><strong>Persistent Data Store (PDS)</strong>:</p>
+<ul>
+<li>Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></li>
+<li><em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></li>
+</ul>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
@@ -342,8 +358,12 @@
 Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 <p>These models exist to stage silver marts only.</p>
 <ul>
-<li>Source-specific:</li>
-<li>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></li>
+<li>
+<p>Source-specific:</p>
+</li>
+<li>
+<p>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></p>
+</li>
 <li>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
 <li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></li>
@@ -351,9 +371,11 @@ Staging models serve as intermediary models that transform source data into the 
 <p><em>e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf</em></p>
 </li>
 <li>
-<p>Non-source specific</p>
+<p>Non-source specific:</p>
 </li>
-<li>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>
+<p>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></p>
+</li>
 <li>Object naming convention to align with target mart: <code>stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
 <li>
@@ -362,7 +384,9 @@ Staging models serve as intermediary models that transform source data into the 
 <li>
 <p>Examples of transformations:</p>
 </li>
-<li><code>01_renamed_and_typed</code></li>
+<li>
+<p><code>01_renamed_and_typed</code></p>
+</li>
 <li><code>02_deduped</code></li>
 <li><code>03_cleaned</code></li>
 <li><code>04_filtered/split</code></li>
@@ -375,8 +399,12 @@ Staging models serve as intermediary models that transform source data into the 
 <p><strong>(Silver) Base Information Marts</strong>:
 Final products after staging:</p>
 <ul>
-<li>Source-specific:</li>
-<li>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></li>
+<li>
+<p>Source-specific:</p>
+</li>
+<li>
+<p>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></p>
+</li>
 <li>Object naming convention: <code>(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}</code></li>
 <li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf</em></li>
 <li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf</em></li>
@@ -386,7 +414,9 @@ Final products after staging:</p>
 <li>
 <p>Non-source specific:</p>
 </li>
-<li>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>
+<p>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></p>
+</li>
 <li>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></li>
 <li><em>e.g: intuitas_corporate_dev.mart.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
@@ -429,7 +459,7 @@ Optional warehousing construct.</p>
 <p><br></p>
 <p><strong>(Gold) Staging Models</strong>:</p>
 <p>Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
-<p>These models exist to stage gold marts only.</p>
+<p>These models exist to stage gold marts.</p>
 <ul>
 <li>Schema naming convention: <code>stg__{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention to align to target mart: <code>(optional: dim/fact__){entity / product description}__{n}__{transformation}</code></li>
@@ -449,15 +479,20 @@ Optional warehousing construct.</p>
 <li>
 <p>Required transformation: Business-specific transformations such as:</p>
 </li>
-<li><code>pivoting</code></li>
+<li>
+<p><code>pivoting</code></p>
+</li>
 <li><code>aggregation</code></li>
 <li><code>joining</code></li>
 <li><code>conformance</code></li>
 <li><code>desensitization</code></li>
-<li><em>e.g: intuitas_corporate_dev.mart.fact__late_payments</em></li>
-<li><em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></li>
-<li><em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></li>
-<li><em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</li>
+</ul>
+<p><em>e.g:</em></p>
+<ul>
+<li><em>intuitas_corporate_dev.mart.fact__late_payments</em></li>
+<li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></li>
+<li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></li>
+<li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</li>
 </ul>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
@@ -489,16 +524,16 @@ Optional warehousing construct.</p>
 <p><em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md</em></p>
 </li>
 <li>
-<p>model yml: _{path to model folder using _ separators}__models.yml 
--<em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></p>
+<p>model yml: _{path to model folder using _ separators}__models.yml </p>
 </li>
+<li><em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></li>
 </ul>
 <h3 id="sources">Sources</h3>
 <ul>
 <li>Folder: models/sources/{bronze/silver/gold}</li>
 <li>yml: {schema}__sources.yml (one for each source schema) </li>
+<li><em>e.g: bronze__ods__ambo_sim__kafka__local__sources.yml</em></li>
 </ul>
-<p><em>e.g: bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
 <h3 id="model-and-folder-names">Model and Folder Names</h3>
 <p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
 <h4 id="bronze">Bronze</h4>
@@ -519,9 +554,10 @@ Optional warehousing construct.</p>
 <li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
 </ul>
 <pre><code class="language-md">   *e.g:*
-   - *silver\new_finance_system__adf\stg\intuitas_corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-   - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-   - materialises to: *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
+
+      - *silver\new_finance_system__adf\stg\intuitas_corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
+      - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
+      - materialises to: *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
 </code></pre>
 <ul>
 <li>
@@ -539,9 +575,10 @@ Optional warehousing construct.</p>
 </li>
 </ul>
 <pre><code class="language-md">   *e.g:*
-   - *silver\mart\accounts\stg\intuitas_corporate__silver__stg__accounts__01_deduped.sql*
-   - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
-   - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
+
+      - *silver\mart\accounts\stg\intuitas_corporate__silver__stg__accounts__01_deduped.sql*
+      - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
+      - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
 </code></pre>
 <ul>
 <li>
