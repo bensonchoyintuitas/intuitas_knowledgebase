@@ -28,7 +28,7 @@
          - [Generic Blob Files and Folders](naming_standards_and_conventions.md#generic-blob-files-and-folders)
    - [Databricks](naming_standards_and_conventions.md#databricks)
       - [Workspace and Cluster Names](naming_standards_and_conventions.md#workspace-and-cluster-names)
-      - [Catalog](naming_standards_and_conventions.md#catalog)
+      - [Catalog](naming_standards_and_conventions.md#catalog-naming-and-conventions)
       - [Schema and Object Conventions](naming_standards_and_conventions.md#schema-and-object-conventions)
       - [Delta Sharing](naming_standards_and_conventions.md#delta-sharing)
    - [Azure Data Factory](naming_standards_and_conventions.md#azure-data-factory)

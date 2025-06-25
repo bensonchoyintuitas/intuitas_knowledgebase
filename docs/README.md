@@ -20,6 +20,8 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 
 # Table of Contents
 
+## Naming standards and conventions
+- [Naming standards and conventions](naming_standards_and_conventions.md)
 
 ## Level 0 - Enterprise-level context
 - [Org + Domain Definition](level_0.md#org-domain-definition)
@@ -73,5 +75,3 @@ Permission is granted for free use, reproduction, and adaptation of this materia
     - [Audit](level_2.md#audit)
 
 
-## Naming standards and conventions
-- [Naming standards and conventions](naming_standards_and_conventions.md)

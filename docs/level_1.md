@@ -9,7 +9,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
 
 - [Key concepts](level_1.md#key-concepts)
     - [Domain](level_1.md#domain)
-    - [Subdomain](level_1.mdlevel_1.md#subdomain)
+    - [Subdomain](level_1.md#subdomain)
     - [Domain-Centric Design](level_1.md#domain-centric-design) 
     - [Data Mesh](level_1.md#data-mesh)
     - [Domain Topology](level_1.md#domain-topology)

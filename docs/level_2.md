@@ -276,7 +276,7 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 
 <br>
 
-These map to naming standards and conventions for [Catalogs](naming_standards_and_conventions.md#catalog), [Schemas](naming_standards_and_conventions.md#schema-and-object-conventions) and [dbt](naming_standards_and_conventions.md#dbt).
+These map to naming standards and conventions for [Catalog](naming_standards_and_conventions.md#catalog-naming-and-conventions), [Schemas](naming_standards_and_conventions.md#schema-and-object-conventions) and [dbt](naming_standards_and_conventions.md#dbt).
 
 #### **Metadata layer**
 
