@@ -204,9 +204,7 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 Recommendations:
 
-- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root.
-- *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
-
+- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 - Ensure dbt's dbt_project.yml and environment variables align with storage locations.
 
@@ -220,8 +218,7 @@ Contains metadata that supports engineering and governance. This will vary depen
 **Engineering - ingestion framework**:
 - Schema naming convention:  `meta__{optional: function}`
 - Naming convention: `{function/descriptor}`
-
-*e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control*
+- *e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control*
 
 <br>
 #### Bronze (Raw data according to systems)
@@ -235,14 +232,12 @@ All schemas are may be optionally prefixed with `bronze__`
 **Operational Data Store (ODS)**:
 - Schema naming convention: `ods{optional: __domain name}{optional: __subdomain name(s)}`
 - Object naming convention: `ods__{source_system}__{source_channel}__{object}`
-
-*e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts*
+- *e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts*
 
 **Persistent Data Store (PDS)**:
 - Schema naming convention: `pds{optional: __domain name}{optional: __subdomain name(s)}`
 - Object naming convention: `pds__{source_system}__{source_channel}__{object}`
-
-*e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts*
+- *e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts*
 
 <br>
 #### Silver (Data according to business entities)
@@ -292,8 +287,7 @@ These models exist to stage silver marts only.
    - `05_column_selected`
    - `06_business_validated`
    - `07_desensitised`
-
-*e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed*
+   - *e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed*
 
 <br>
 
@@ -305,7 +299,6 @@ Final products after staging:
 
    - Schema naming convention: `mart__{source_system}__{source_channel}`
    - Object naming convention: `(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}`
-
       - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf*
       - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf*
       - *e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf*
@@ -314,7 +307,6 @@ Final products after staging:
 
    - Schema naming convention: `mart{optional: __domain name}{optional: __subdomain name(s)}`
    - Object naming convention: `(optional:dim/fact)__{unified entity / _object_description}`
-
       - *e.g: intuitas_corporate_dev.mart.account* (unified)
       - *e.g: intuitas_corporate_dev.mart__corporate__finance.account* (unified)
       - *e.g: intuitas_corporate_dev.mart__finance.account* (unified)
@@ -339,8 +331,7 @@ Reference data objects that are aligned to business entities and broad requireme
 
    - Schema naming convention: `edw_rv`
    - Object naming convention: `{vault object named as per data vault standards}`
-
-   *e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf*
+   - *e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf*
 
 <br>
 
@@ -348,8 +339,7 @@ Reference data objects that are aligned to business entities and broad requireme
 
    - Schema naming convention: `edw_bv`
    - Object naming convention: `{vault object named as per data vault standards}`
-
-   *e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf*
+   - *e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf*
 
 <br>
 
@@ -400,18 +390,14 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 ### Delta Sharing
 
-- Share names: {domain_name}__{optional:subdomain_name}__{optional:purpose}__{schema_name or description}__{object_name or description}__{share_purpose and or target_audience}
-
-*e.g: intuitas_corporate__finance__reporting__account_payments__payments*
+- Share names: {domain_name}__{optional:subdomain_name}__{optional:purpose}__{schema_name or description}__{object_name or description}__{share_purpose and or target_audience} *e.g: intuitas_corporate__finance__reporting__account_payments__payments*
 
 
 <br>
 
 ## Azure Data Factory
 
-- Linked service names: ls_{database_name}(if not in database_name:{_organisation_name}_{domain_name})
-*e.g: ls_financedb_intuitas_corporate*
-
+- Linked service names: ls_{database_name}(if not in database_name:{_organisation_name}_{domain_name}) *e.g: ls_financedb_intuitas_corporate*
 - Dataset names: ds_{database_name}_{object_name}
 - Pipeline names: pl_{description: e.g copy_{source_name}_to_{destination_name}}
 - Trigger names: tr_{pipeline_name}_{optional:start_time / frequency}
@@ -421,9 +407,9 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 ## Streaming
 
-- Cluster name: {domain_name}__cluster__{optional:environment}
-- Topic names: {domain_name}__{object/entity?}__{optional:source_system}___{optional:source_channel}__{optional:environment}
-- Consumer group names: {domain_name}__{unique_group_name}__{optional:environment}
+- Cluster name: `{domain_name}__cluster__{optional:environment}`
+- Topic names: `{domain_name}__{object/entity?}__{optional:source_system}___{optional:source_channel}__{optional:environment}`
+- Consumer group names: `{domain_name}__{unique_group_name}__{optional:environment}`
 
 
 

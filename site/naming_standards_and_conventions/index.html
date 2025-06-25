@@ -307,13 +307,8 @@
 <h4 id="schema-level-external-storage-locations">Schema level external storage locations</h4>
 <p>Recommendations:</p>
 <ul>
-<li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root.</li>
-<li>
-<p><em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></p>
-</li>
-<li>
-<p>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</p>
-</li>
+<li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. <em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></li>
+<li>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</li>
 <li>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</li>
 </ul>
 <p><br></p>
@@ -322,8 +317,8 @@
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
 <p><strong>Engineering - ingestion framework</strong>:
 - Schema naming convention:  <code>meta__{optional: function}</code>
-- Naming convention: <code>{function/descriptor}</code></p>
-<p><em>e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
+- Naming convention: <code>{function/descriptor}</code>
+- <em>e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
 <p><br></p>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
@@ -332,12 +327,12 @@
 - N/A (see file naming)</p>
 <p><strong>Operational Data Store (ODS)</strong>:
 - Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code>
-- Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></p>
-<p><em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
+- Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code>
+- <em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
 <p><strong>Persistent Data Store (PDS)</strong>:
 - Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code>
-- Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></p>
-<p><em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
+- Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code>
+- <em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
 <p><br></p>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
@@ -396,8 +391,8 @@
 <li><code>05_column_selected</code></li>
 <li><code>06_business_validated</code></li>
 <li><code>07_desensitised</code></li>
+<li><em>e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></li>
 </ul>
-<p><em>e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
 <p><br></p>
 <p><strong>(Silver) Base Information Marts</strong>:</p>
 <p>Final products after staging:</p>
@@ -422,9 +417,7 @@
 <li>
 <p>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></p>
 </li>
-<li>
-<p>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></p>
-<ul>
+<li>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code><ul>
 <li><em>e.g: intuitas_corporate_dev.mart.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__finance.account</em> (unified)</li>
@@ -448,8 +441,8 @@
 <ul>
 <li>Schema naming convention: <code>edw_rv</code></li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
+<li><em>e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></li>
 </ul>
-<p><em>e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></p>
 <p><br></p>
 <ol>
 <li>
@@ -459,8 +452,8 @@
 <p>Schema naming convention: <code>edw_bv</code></p>
 </li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
+<li><em>e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf</em></li>
 </ol>
-<p><em>e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf</em></p>
 <p><br></p>
 <h4 id="gold-data-according-to-requirements">Gold (Data according to requirements)</h4>
 <p>The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed.</p>
@@ -513,28 +506,22 @@
    <em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
-<li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience}</li>
+<li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience} <em>e.g: intuitas_corporate__finance__reporting__account_payments__payments</em></li>
 </ul>
-<p><em>e.g: intuitas_corporate__finance__reporting__account_payments__payments</em></p>
 <p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
 <ul>
-<li>
-<p>Linked service names: ls_{database_name}(if not in database_name:{<em>organisation_name}</em>{domain_name})
-<em>e.g: ls_financedb_intuitas_corporate</em></p>
-</li>
-<li>
-<p>Dataset names: ds_{database_name}_{object_name}</p>
-</li>
+<li>Linked service names: ls_{database_name}(if not in database_name:{<em>organisation_name}</em>{domain_name}) <em>e.g: ls_financedb_intuitas_corporate</em></li>
+<li>Dataset names: ds_{database_name}_{object_name}</li>
 <li>Pipeline names: pl_{description: e.g copy_{source_name}<em>to</em>{destination_name}}</li>
 <li>Trigger names: tr_{pipeline_name}_{optional:start_time / frequency}</li>
 </ul>
 <p><br>  </p>
 <h2 id="streaming">Streaming</h2>
 <ul>
-<li>Cluster name: {domain_name}<strong>cluster</strong>{optional:environment}</li>
-<li>Topic names: {domain_name}<strong>{object/entity?}</strong>{optional:source_system}<strong><em>{optional:source</em>channel}</strong>{optional:environment}</li>
-<li>Consumer group names: {domain_name}<strong>{unique_group_name}</strong>{optional:environment}</li>
+<li>Cluster name: <code>{domain_name}__cluster__{optional:environment}</code></li>
+<li>Topic names: <code>{domain_name}__{object/entity?}__{optional:source_system}___{optional:source_channel}__{optional:environment}</code></li>
+<li>Consumer group names: <code>{domain_name}__{unique_group_name}__{optional:environment}</code></li>
 </ul>
 <p><br>  </p>
 <h2 id="dbt">dbt</h2>
