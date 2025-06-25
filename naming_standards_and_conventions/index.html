@@ -544,13 +544,9 @@ Optional warehousing construct.</p>
 <li>Folder: <code>seeds/{optional: domain name}{optional: __subdomain name(s)}/</code></li>
 </ul>
 <h4 id="silver">Silver</h4>
+<p><strong>Staging Source-specific:</strong> </p>
 <ul>
-<li>
-<p>Staging Source-specific: </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/</code></p>
-</li>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/</code></li>
 <li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
 </ul>
 <pre><code class="language-md">   *e.g:*
@@ -559,13 +555,9 @@ Optional warehousing construct.</p>
       - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
       - materialises to: *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
 </code></pre>
+<p><strong>Staging Non-source-specific (entity centric):</strong></p>
 <ul>
-<li>
-<p>Staging Non-source-specific (entity centric): </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg</code></p>
-</li>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg</code></li>
 <li>
 <p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
 <ul>
@@ -580,45 +572,29 @@ Optional warehousing construct.</p>
       - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
       - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
 </code></pre>
+<p><strong>Mart Source-specific:</strong> </p>
 <ul>
-<li>
-<p>Mart Source-specific: </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}</code></p>
-</li>
-<li>
-<p>Mart Non-source specific: </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}</code></p>
-</li>
-<li>
-<p>Reference Data: </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></p>
-</li>
-<li>
-<p>Raw Vault: </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv</code></p>
-</li>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__entity /_object_description}__{source_system}__{source_channel}</code></li>
+</ul>
+<p><strong>Mart Non-source specific:</strong> </p>
+<ul>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim/fact}{__unified entity /_object_description}</code></li>
+</ul>
+<p><strong>Reference Data:</strong> </p>
+<ul>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim/fact} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
+</ul>
+<p><strong>Raw Vault:</strong> </p>
+<ul>
+<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv</code></li>
 <li>
 <p>Models: <code>edw_rv__{vault object named as per data vault standards}</code></p>
 </li>
 <li>
-<p>Schema naming convention: </p>
+<p>Schema naming convention:** </p>
 </li>
 <li>
 <p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/bv</code></p>
@@ -628,7 +604,7 @@ Optional warehousing construct.</p>
 <h4 id="gold">Gold</h4>
 <ul>
 <li>
-<p>Staging: </p>
+<p>Staging:**</p>
 </li>
 <li>
 <p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg</code></p>
