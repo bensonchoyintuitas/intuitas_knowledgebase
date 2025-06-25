@@ -324,11 +324,14 @@ This can then be modified according to costs, requirements, policies, projected 
 <p><br></p>
 <p><br></p>
 <h2 id="data-architecture">Data Architecture</h2>
+<hr />
 <p>Data Architecture refers to how data is physically structured, stored, and accessed within an organization. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. </p>
 <h3 id="data-and-information-models">Data and information models</h3>
+<hr />
 <p>Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. </p>
 <p>See <a href="https://martinfowler.com/bliki/BoundedContext.html">Bounded context</a></p>
 <h3 id="domain-glossary">Domain glossary</h3>
+<hr />
 <ul>
 <li>Expand on the enterprise glossary and add domain specific terms and definitions.<ul>
 <li>In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.</li>
@@ -337,6 +340,7 @@ This can then be modified according to costs, requirements, policies, projected 
 </li>
 </ul>
 <h3 id="domain-data-and-warehouse-models">Domain data and warehouse models</h3>
+<hr />
 <ul>
 <li>Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.</li>
 <li>Conformed dimensions may serve as a bridge between domains for common entities.</li>
@@ -457,7 +461,10 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <p>A solution served to the consumption layer is likely to contain a mix of Silver and Gold mart objects. e.g:
 - silver.dim_customer
 - gold.fact_sales_aggregated_by_region</p>
+<p><br>
+<br></p>
 <h3 id="lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</h3>
+<hr />
 <p>Unity catalog objects (catalogs, schemas, objects) are mapped to:</p>
 <ul>
 <li>Storage accounts</li>
