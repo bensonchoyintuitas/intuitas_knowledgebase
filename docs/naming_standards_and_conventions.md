@@ -1,6 +1,8 @@
 # Naming Conventions
 [Return to home](README.md)
 
+All naming is in lower case.
+
 <br>
 
 ## Table of Contents
@@ -162,8 +164,6 @@ No standard naming conventions for files and folders.
 ## Databricks
 ---
 This section provides naming standards and conventions for Databricks.
-
-All lower case naming is in lower case.
 
 ### Workspace and cluster names
 ---
