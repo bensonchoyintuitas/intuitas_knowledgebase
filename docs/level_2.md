@@ -263,27 +263,31 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
 Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:
 
-* Top level layers follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
 * Within each layer, data is transformed through a series of stages.
+* Top level layers follow the [Medallion architecture](https://www.databricks.com/glossary/medallion-architecture).
 
-    - Bronze: Data according to source. 
-    - Silver: Data according to business.
-    - Gold: Data according to requirements. 
+    - **Bronze: Data according to source.**
+    - **Silver: Data according to business.** ([see Data and information models](level_2.md#data-and-information-models))
+    - **Gold: Data according to requirements.**
 
 <a href="../img/data_layers_and_stages.png" target="_blank">
     <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
 </a>
 
-#### **Metadata**
+<br>
 
-Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets
+These map to naming standards and conventions for [Catalogs](naming_standards_and_conventions.md#catalog), [Schemas](naming_standards_and_conventions.md#schema-and-object-conventions) and [dbt](naming_standards_and_conventions.md#dbt).
+
+#### **Metadata layer**
+
+Contains engineering and governance of data managed within the platform. The format of this will vary depending on the choice of engineering and governance toolsets and associated metamodels within the solution as well as across the broader enterprise.  [see Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture) 
 
 
-#### **Bronze**
+#### **Bronze layer: Data according to source**
 
-The Bronze layer stores raw, immutable data as it is ingested from source systems.
+The Bronze layer stores raw, immutable data as it is ingested from source systems. The choice of persistence level will depend on requirements.
 
-*(Persistent) Landing*
+**(Persistent) Landing**
 
 - Initial storage area for raw data from source systems.
 - Stores raw events as JSON or CDC/tabular change records.
@@ -294,14 +298,14 @@ The Bronze layer stores raw, immutable data as it is ingested from source system
     - Append-only immitable data.
     - Schema changes tracked but not enforced
 
-*ODS (Operational Data Store)*
+**ODS (Operational Data Store)**
 
 - Current state of source system data with latest changes applied.
     - Maintains latest version of each record
     - Supports merge operations for change data capture (CDC)
     - Preserves source system relationships
 
-*PDS (Persistent Data Store)*
+**PDS (Persistent Data Store)**
 
 - Historical storage of all changes over time.
     - Append-only for all changes
@@ -310,17 +314,15 @@ The Bronze layer stores raw, immutable data as it is ingested from source system
     - As these may be available in landing - may be realised through views over landing
 
 
-#### **Silver**
-The Silver layer is source centric and focuses on transforming raw data into cleaned, enriched, and validated datasets.
+#### **Silver layer: Data according to business**
+The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets. These datasets are aligned with broadly accepted business standards and models, making them suitable for a range of downstream requirements.
 
-*Base Models*
-
-- Representation of source data with no changes. Used as a foundation for staging models as well as data quality checks.
+While some interpretations consider Silver to be primarily *source-centric*, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources.
 
 
-*Staging Models*
+**Silver Staging**
 
-- Source-system and object centric transformations that are core to all downstream consumption.
+Transformations used to shape source data into standardised, conformed, and fit-for-use Reference Data, Data Vault and Base Information Mart objects.
 
 - Examples of transformations:
     - `01_renamed_and_typed`
@@ -331,55 +333,60 @@ The Silver layer is source centric and focuses on transforming raw data into cle
     - `06_business_validated`
     - `07_desensitised`
 
-*Enrichment Models*
+**Data Quality**
 
-Still source-centric, however:
-- more complex business logic and transformations are applied e.g. common calculations and derivations. 
-- may combine multiple staging objects from the same source
+Data quality test results from checks applied to source data. Further transformation of these results may be applied to shape them into data quality reports.
 
-- By separating enrichment from core staging, we can schedule these processes independently. This allows for flexibility in updating or refreshing only the parts of the data pipeline that need it, reducing unnecessary computation and improving efficiency. It also allows for change and versioning of those business rules with minimal impact on core staging objects.
+**Reference Data**
 
-*Source Reference Data*
+Reference data, being a common asset and provided for broad consumption should be aligned to standards and downstream needs. Historical versioning requirements of reference data may need to be considered.
 
-- For convenience, reference data specific to the source can be segregated here and aligned to standards and downstream needs.
+**Raw Vault**
 
-*Raw Vault*
+- Optional Data vault 2.0 aligned raw data warehouse.
 
-- Data vault 2.0 aligned raw data warehouse.
+**Business Vault**
 
-#### **Gold**
+- Optional Business rule applied objects as per Data vault 2.0.
 
-The Gold layer focuses on business-ready datasets, aggregations, and reporting structures.
+**Base Information Marts**
 
-*Business Vault*
+The term *base* is used to distinguish these marts from the domain- or enterprise-specific marts found in the Gold layer. Base marts are designed for broad usability across multiple downstream use cases—for example, a conformed customer dimension.
 
-- Data vault 2.0 aligned business data warehouse where business rules and transformations are applied.
+In some scenarios, it may be beneficial to maintain *source-centric* base marts alongside a final *consolidation* (UNION) mart—all conforming to a common logical model. This approach supports decoupled pipelining across multiple sources, improving modularity and maintainability.
 
-*Intermediate Models*
+These marts may be implemented as **Kimball-style** dimensional models or **denormalized** flat tables, depending on performance and reporting requirements. However, dimensional modelling is generally encouraged for its clarity, reusability, and alignment with analytic workloads.
 
-- These act as building blocks for marts, transforming and aggregating data further. Then be thought of as mart staging  https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate
+#### **Gold layer: Data according to requirements**
 
-- Business-specific transformations such as:
-    - Pivoting
-    - Aggregation
-    - Joining
-    - Funnel creation
-    - Conformance
-    - Desensitization
+The Gold layer focuses on delivering business-ready datasets, including aggregations and reporting structures that directly reflect specific business requirements.
 
-*Enterprise Reference Data*
+In some instances, Gold assets may be reused across multiple use cases or domains—blurring the line with Silver. While this is not inherently problematic, it is important to consider supportability and scalability to ensure these assets remain trustworthy, maintainable, and accessible over time. 
 
-- Reference data, independent of source can be aggregated here for broad consumption.
+Consider shifting logic left into the Silver layer—such as common aggregations, reusable business rules, or conformed dimensions. This improves consistency, reduces duplication, and enables faster development of Gold-layer assets by building on stronger, more standardized foundations.
 
-*Marts - Facts and dimensions*
+**Gold Staging**
 
-- Kimball style marts that represent business entities and processes. They may 
-    * serve foundational or narrow requirements. 
-    * be scoped to specific systems or conformed across the enterprise
+Transformations used to shape source data into business-ready datasets, aligned to business requirements.
 
-*Marts - Denormalised*
+- Examples of Business-specific transformations include:
+    - `Pivoting`
+    - `Aggregation`
+    - `Joining`
+    - `Conformance`
+    - `Desensitization`
 
-- Single table / view objects that combine data from multiple objects (e.g. facts and dimensions) 
+- While dbt best practices use the term *'Intermediates'* as reuseable building blocks for marts, this is considered a form of staging and are hence optional under this blueprint. https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate
+
+
+**Business Information Marts (Requirement Specific)**
+The term 'business' here is use to distinguish marts in this layer from marts in the Silver layer. These marts are designed for a defined requirement. *e.g. sales fact aggregated by region.*
+
+These marts may be Kimball or denormalised flat tables depending on requirements; although Kimball dimensional models are encouraged.
+
+A solution served to the consumption layer is likely to contain a mix of Silver and Gold mart objects. e.g:
+- silver.dim_customer
+- gold.fact_sales_aggregated_by_region
 
 
 ### Lakehouse Catalog to Storage Mapping

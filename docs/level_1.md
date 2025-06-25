@@ -7,40 +7,40 @@ This section describes enterprise-wide and cross-domain data and data platform a
 
 ## Table of Contents
 
-- [Key concepts](#key-concepts)
-    - [Domain](#domain)
-    - [Subdomain](#subdomain)
-    - [Domain-Centric Design](#domain-centric-design) 
-    - [Data Mesh](#data-mesh)
-    - [Domain Topology](#domain-topology)
-    - [Data Fabric](#data-fabric)
-    - [Data Mesh vs Fabric](#data-mesh-vs-fabric)
-- [Reference topologies](#reference-topologies)
-- [Hybrid federated mesh topology](#hybrid-federated-mesh-topology)
-- [Enterprise Data Platform Reference Architecture](#enterprise-data-platform-reference-architecture)
-- [Enterprise (Logical) Data Warehouse Reference Architecture](#enterprise-logical-data-warehouse-reference-architecture)
-- [Enterprise Information and Data Architecture](#enterprise-information-and-data-architecture)
-- [Enterprise Metadata Architecture](#enterprise-metadata-architecture)
-    - [Metadata Architecture Principles](#metadata-architecture-principles)
-    - [Semantic and Data lineage](#semantic-and-data-lineage)
-    - [Metadata Objects and Elements](#metadata-objects-and-elements)
-    - [Metadata Consolidation and Synchronisation](#metadata-consolidation-and-synchronisation)
-    - [Data Architecture and Governance Metadata](#data-architecture-and-governance-metadata)
-        - [Datahub](#datahub)
-        - [dbt Docs](#dbt-docs)
-        - [Databricks Unity Catalog Metastore](#databricks-unity-catalog-metastore)
-- [Enterprise Security](#enterprise-security)
-- [Enterprise Data Governance](#enterprise-data-governance)
-    - [Audit](#audit)
-- [Enterprise Billing](#enterprise-billing)
-    - [Databricks features for usage tracking](#databricks-features-for-usage-tracking)
-        - [Metadata and tags](#metadata-and-tags)
-        - [Cluster policies](#cluster-policies)
-        - [System tables](#system-tables)
-        - [Usage reports](#usage-reports)
-    - [Domain / Workspace Administrator Role](#domain--workspace-administrator-role)
-    - [Tagging convention](#tagging-convention)
-    - [References to recommended practices](#references-to-recommended-practices)
+- [Key concepts](level_1.md#key-concepts)
+    - [Domain](level_1.md#domain)
+    - [Subdomain](level_1.mdlevel_1.md#subdomain)
+    - [Domain-Centric Design](level_1.md#domain-centric-design) 
+    - [Data Mesh](level_1.md#data-mesh)
+    - [Domain Topology](level_1.md#domain-topology)
+    - [Data Fabric](level_1.md#data-fabric)
+    - [Data Mesh vs Fabric](level_1.md#data-mesh-vs-fabric)
+- [Reference topologies](level_1.md#reference-topologies)
+- [Hybrid federated mesh topology](level_1.md#hybrid-federated-mesh-topology)
+- [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture)
+- [Enterprise (Logical) Data Warehouse Reference Architecture](level_1.md#enterprise-logical-data-warehouse-reference-architecture)
+- [Enterprise Information and Data Architecture](level_1.md#enterprise-information-and-data-architecture)
+- [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)
+    - [Metadata Architecture Principles](level_1.md#metadata-architecture-principles)
+    - [Semantic and Data lineage](level_1.md#semantic-and-data-lineage)
+    - [Metadata Objects and Elements](level_1.md#metadata-objects-and-elements)
+    - [Metadata Consolidation and Synchronisation](level_1.md#metadata-consolidation-and-synchronisation)
+    - [Data Architecture and Governance Metadata](level_1.md#data-architecture-and-governance-metadata)
+        - [Datahub](level_1.md#datahub)
+        - [dbt Docs](level_1.md#dbt-docs)
+        - [Databricks Unity Catalog Metastore](level_1.md#databricks-unity-catalog-metastore)
+- [Enterprise Security](level_1.md#enterprise-security)
+- [Enterprise Data Governance](level_1.md#enterprise-data-governance)
+    - [Audit](level_1.md#audit)
+- [Enterprise Billing](level_1.md#enterprise-billing)
+    - [Databricks features for usage tracking](level_1.md#databricks-features-for-usage-tracking)
+        - [Metadata and tags](level_1.md#metadata-and-tags)
+        - [Cluster policies](level_1.md#cluster-policies)
+        - [System tables](level_1.md#system-tables)
+        - [Usage reports](level_1.md#usage-reports)
+    - [Domain / Workspace Administrator Role](level_1.md#domain--workspace-administrator-role)
+    - [Tagging convention](level_1.md#tagging-convention)
+    - [References to recommended practices](level_1.md#references-to-recommended-practices)
 
 <br>
 
@@ -145,11 +145,11 @@ Centralizing engineering tasks related to source data processing allows for spec
 
 **Distributed Local engineering**
 
-Maintaining a local bronze layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.
+Maintaining a local bronze/raw layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.
 
 **Cross-Domain Access**
 
-Allowing domains to access gold data from other domains and, where appropriate, silver or bronze, facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.
+Allowing domains to access 'gold' data from other domains and, where appropriate, 'silver' or 'bronze', facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.
 
 <br>
 
