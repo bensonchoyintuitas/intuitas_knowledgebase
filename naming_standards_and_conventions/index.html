@@ -177,84 +177,86 @@
 </ul>
 <h2 id="mesh">Mesh</h2>
 <h3 id="domain-names">Domain Names</h3>
-<p>All lower case: {optional:organisation_}{functional area/domain}_{subdomain}</p>
-<p><em>e.g. intuitas_corporate</em></p>
+<p>All lower case: <code>{optional:organisation_}{functional area/domain}_{subdomain}</code></p>
+<p><em>e.g: intuitas_corporate</em></p>
 <p><br></p>
 <h2 id="platform">Platform</h2>
 <h3 id="environment">Environment</h3>
 <ul>
-<li>Environment: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
+<li>Environment name: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
 </ul>
 <h3 id="vnet">VNET</h3>
 <ul>
-<li>Name: vn-{organisation_name}-{domain_name}</li>
+<li>Name: <code>vn-{organisation_name}-{domain_name}</code>
+= <em>e.g: vn-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. vn-intuitas-corporate</em></p>
 <h3 id="resource-groups">Resource Groups</h3>
 <ul>
-<li>Name: rg-{organisation_name}-{domain_name}</li>
+<li>Name: <code>rg-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: rg-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. rg-intuitas-corporate</em></p>
 <h3 id="databricks-workspace">Databricks workspace</h3>
 <ul>
-<li>Name: ws-{organisation_name}-{domain_name}</li>
+<li>Name: <code>ws-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: ws-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. ws-intuitas-corporate</em></p>
 <h3 id="key-vault">Key vault</h3>
 <ul>
-<li>Name: kv-{organisation_name}-{domain_name}</li>
+<li>Name: <code>kv-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: kv-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. kv-intuitas-corporate</em></p>
 <h3 id="secrets">Secrets</h3>
 <ul>
-<li>Name: {secret_name}</li>
+<li>Name: <code>{secret_name}</code></li>
 </ul>
 <h3 id="entra-group-names">Entra Group Names</h3>
 <ul>
-<li>Name: eg-{organisation_name}-{domain_name}</li>
+<li>Name: <code>eg-{organisation_name}-{domain_name}</code>
+= <em>e.g: eg-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. eg-intuitas-corporate</em></p>
 <h3 id="azure-data-factory-adf">Azure Data Factory (ADF)</h3>
 <ul>
-<li>Name: adf-{organisation_name}-{domain_name}</li>
+<li>Name: <code>adf-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: adf-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. adf-intuitas-corporate</em></p>
 <h3 id="sql-server">SQL Server</h3>
 <ul>
-<li>Name: sql-{organisation_name}-{domain_name}</li>
+<li>Name: <code>sql-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: sql-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. sql-intuitas-corporate</em></p>
 <h3 id="sql-database">SQL Database</h3>
 <ul>
-<li>Name: sqldb-{purpose}-{organisation_name}-{domain_name}-{optional:environment}</li>
+<li>Name: <code>sqldb-{purpose}-{organisation_name}-{domain_name}-{optional:environment}</code></li>
+<li><em>e.g: sqldb-metadata-intuitas-corporate</em></li>
 </ul>
-<p><em>e.g. sqldb-metadata-intuitas-corporate</em></p>
 <h3 id="storage">Storage</h3>
+<p>The section describes naming standards and conventions for cloud storage resources.</p>
 <h4 id="lakehouse-storage">Lakehouse storage</h4>
 <ul>
-<li>Lakehouse storage account name: dl{organisation_name}{domain_name}</li>
+<li>Lakehouse storage account name: <code>dl{organisation_name}{domain_name}</code></li>
 </ul>
 <h4 id="lakehouse-storage-containers">Lakehouse storage containers</h4>
 <ul>
-<li>Name: {environment} (dev/test/preprod/prod)</li>
+<li>Name: <code>{environment} (dev/test/preprod/prod)</code></li>
 </ul>
 <h5 id="lakehouse-storage-folders">Lakehouse storage folders</h5>
 <ul>
-<li>Level 1 Name: {layer} (bronze/silver/gold) // if using medallion approach</li>
-<li>Level 2 Name: {stage_name}</li>
-<li>bronze/landing</li>
-<li>bronze/ods</li>
-<li>bronze/pds</li>
-<li>bronze/schema (for autoloader metadata)</li>
-<li>bronze/checkpoints (for autoloader metadata)</li>
-<li>silver/automatically determined by unity catalog</li>
-<li>gold/automatically determined by unity catalog</li>
+<li>Level 1 Name: <code>{layer} (bronze/silver/gold)</code> // if using medallion approach</li>
+<li>Level 2 Name: <code>{stage_name}</code></li>
+<li><em>e.g:</em></li>
+<li><em>bronze/landing</em></li>
+<li><em>bronze/ods</em></li>
+<li><em>bronze/pds</em></li>
+<li><em>bronze/schema</em> (for autoloader metadata)</li>
+<li><em>bronze/checkpoints</em> (for autoloader metadata)</li>
+<li><em>silver/automatically determined by unity catalog</em></li>
+<li><em>gold/automatically determined by unity catalog</em></li>
 </ul>
 <h4 id="generic-blob-storage">Generic Blob storage</h4>
 <p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
 <ul>
 <li>Resource: ADLSGen2</li>
-<li>Generic storage account name: sa{organisation_name}{domain_name}{functional_description}</li>
+<li>Generic storage account name: <code>sa{organisation_name}{domain_name}{functional_description}</code></li>
 <li>Tier: Standard/Premium (depends on workload)</li>
 <li>Redundancy: </li>
 <li>Minimum ZRS or GRS for prod</li>
@@ -269,34 +271,34 @@
 <h3 id="workspace-and-cluster-names">Workspace and cluster names</h3>
 <hr />
 <ul>
-<li>Workspace name: ws-{organisation_name}_{domain_name}</li>
-<li>Cluster name: {personal_name/shared_name} Cluster</li>
-<li>Workflow name: {dev/test} {workflow_name}</li>
+<li>Workspace name: <code>ws-{organisation_name}_{domain_name}</code></li>
+<li>Cluster name: <code>{personal_name/shared_name} Cluster</code></li>
+<li>Workflow name: <code>{dev/test} {workflow_name}</code></li>
 </ul>
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
 <hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <p>Catalog name:</p>
 <ul>
-<li>Minimum granularity {domain_name}{_environment (dev/test/pat/prod)} (prod is implied optional)   <em>e.g. intuitas_corporate_dev</em></li>
-<li>Optional granularity {domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}    <em>e.g. intuitas_corporate_bronze_dev</em></li>
-<li>Optional granularity {domain_name}{_descriptor (subdomain/subject/project<em>)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}    </em>e.g. intuitas_corporate_finance_bronze_dev*</li>
+<li>Minimum granularity <code>{domain_name}{_environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: intuitas_corporate_dev</em></li>
+<li>Optional granularity <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_dev</em></li>
+<li>Optional granularity <code>{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_finance_bronze_dev</em></li>
 </ul>
 <p><em>Note that projects are temporary constructs, and hence are not recommended for naming</em></p>
-<p>Catalog storage root: </p>
 <ul>
-<li>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</li>
+<li>Catalog storage root: <code>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</code></li>
 </ul>
 <h3 id="externally-mounted-lakehouse-federation-catalog-names">Externally mounted (lakehouse federation) Catalog Names</h3>
-<p>Catalog name:
-   - {domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g._environment}</p>
-<p><em>e.g. intuitas_corporate_ext__sqlonpremsource</em></p>
+<ul>
+<li>Catalog name: <code>{domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g:_environment}</code></li>
+<li><em>e.g: intuitas_corporate_ext__sqlonpremsource</em></li>
+</ul>
 <h3 id="catalog-metadata-tags">Catalog Metadata tags:</h3>
 <p>The following metadata should be added when creating a catalog:</p>
 <ul>
-<li>Key: domain (owner): {domain_name}</li>
-<li>Key: environment: {environment}</li>
-<li>Key: managing_domain: {domain_name} e.g. if delegating to engineering domain</li>
+<li>Key: domain (owner): <code>{domain_name}</code></li>
+<li>Key: environment: <code>{environment}</code></li>
+<li>Key: managing_domain: <code>{domain_name}</code> e.g: if delegating to engineering domain</li>
 </ul>
 <h3 id="schema-and-object-conventions">Schema and object conventions</h3>
 <hr />
@@ -306,10 +308,12 @@
 <p>Recommendations:</p>
 <ul>
 <li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root.</li>
-</ul>
-<p><em>e.g. abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></p>
-<ul>
-<li>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</li>
+<li>
+<p><em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></p>
+</li>
+<li>
+<p>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</p>
+</li>
 <li>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</li>
 </ul>
 <p><br></p>
@@ -319,7 +323,7 @@
 <p><strong>Engineering - ingestion framework</strong>:
 - Schema naming convention:  <code>meta__{optional: function}</code>
 - Naming convention: <code>{function/descriptor}</code></p>
-<p><em>e.g. intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
+<p><em>e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
 <p><br></p>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
@@ -329,11 +333,11 @@
 <p><strong>Operational Data Store (ODS)</strong>:
 - Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code>
 - Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></p>
-<p><em>e.g. intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
+<p><em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
 <p><strong>Persistent Data Store (PDS)</strong>:
 - Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code>
 - Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></p>
-<p><em>e.g. intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
+<p><em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
 <p><br></p>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
@@ -358,12 +362,12 @@
 <li>
 <p>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></p>
 <ul>
-<li><em>e.g. intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
 <li>
-<p><em>e.g. intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></p>
 </li>
 <li>
-<p><em>e.g. intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf</em></p>
 </li>
 </ul>
 </li>
@@ -376,8 +380,8 @@
 <li>
 <p>Object naming convention to align with target mart: <code>stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}</code></p>
 <ul>
-<li><em>e.g. intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
-<li><em>e.g. intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
+<li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
 </ul>
 </li>
 <li>
@@ -393,7 +397,7 @@
 <li><code>06_business_validated</code></li>
 <li><code>07_desensitised</code></li>
 </ul>
-<p><em>e.g. intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
+<p><em>e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
 <p><br></p>
 <p><strong>(Silver) Base Information Marts</strong>:</p>
 <p>Final products after staging:</p>
@@ -407,9 +411,9 @@
 <li>
 <p>Object naming convention: <code>(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}</code></p>
 <ul>
-<li><em>e.g. intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf</em></li>
-<li><em>e.g. intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf</em></li>
-<li><em>e.g. intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf</em></li>
+<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf</em></li>
+<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf</em></li>
+<li><em>e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf</em></li>
 </ul>
 </li>
 <li>
@@ -421,10 +425,10 @@
 <li>
 <p>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></p>
 <ul>
-<li><em>e.g. intuitas_corporate_dev.mart.account</em> (unified)</li>
-<li><em>e.g. intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
-<li><em>e.g. intuitas_corporate_dev.mart__finance.account</em> (unified)</li>
-<li><em>e.g. intuitas_corporate_dev.mart.account_join_with_payments</em> (joined across two systems)</li>
+<li><em>e.g: intuitas_corporate_dev.mart.account</em> (unified)</li>
+<li><em>e.g: intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
+<li><em>e.g: intuitas_corporate_dev.mart__finance.account</em> (unified)</li>
+<li><em>e.g: intuitas_corporate_dev.mart.account_join_with_payments</em> (joined across two systems)</li>
 </ul>
 </li>
 </ul>
@@ -435,7 +439,7 @@
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference data set name} (optional:__{source_system}__{source_channel})</code></li>
 </ul>
-<p><em>e.g. intuitas_corporate_dev.ref.account_code</em></p>
+<p><em>e.g: intuitas_corporate_dev.ref.account_code</em></p>
 <p><br></p>
 <ol>
 <li><strong>Raw Vault</strong>:</li>
@@ -445,7 +449,7 @@
 <li>Schema naming convention: <code>edw_rv</code></li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ul>
-<p><em>e.g. intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></p>
 <p><br></p>
 <ol>
 <li>
@@ -456,7 +460,7 @@
 </li>
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ol>
-<p><em>e.g. intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf</em></p>
 <p><br></p>
 <h4 id="gold-data-according-to-requirements">Gold (Data according to requirements)</h4>
 <p>The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed.</p>
@@ -476,9 +480,9 @@
 <li>Schema naming convention: <code>stg__{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention to align to target mart: <code>(optional: dim/fact__){entity / product description}__{n}__{transformation}</code></li>
 </ul>
-<p><em>e.g. intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</em>
-   <em>e.g. intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order</em>
-   <em>e.g. intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</em></p>
+<p><em>e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</em>
+   <em>e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order</em>
+   <em>e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</em></p>
 <p><br></p>
 <ol>
 <li>
@@ -503,21 +507,21 @@
 </ul>
 </li>
 </ol>
-<p><em>e.g. intuitas_corporate_dev.mart.fact__late_payments</em>
-   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em>
-   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em>
-   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
+<p><em>e.g: intuitas_corporate_dev.mart.fact__late_payments</em>
+   <em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em>
+   <em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em>
+   <em>e.g: intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
 <li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience}</li>
 </ul>
-<p><em>e.g. intuitas_corporate__finance__reporting__account_payments__payments</em></p>
+<p><em>e.g: intuitas_corporate__finance__reporting__account_payments__payments</em></p>
 <p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
 <ul>
 <li>
 <p>Linked service names: ls_{database_name}(if not in database_name:{<em>organisation_name}</em>{domain_name})
-<em>e.g. ls_financedb_intuitas_corporate</em></p>
+<em>e.g: ls_financedb_intuitas_corporate</em></p>
 </li>
 <li>
 <p>Dataset names: ds_{database_name}_{object_name}</p>
@@ -539,18 +543,20 @@
 <p>Within each respective model folder (as needed)</p>
 <ul>
 <li>md: _{path to model folder using _ separators}__docs.md </li>
+<li>
+<p><em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md</em></p>
+</li>
+<li>
+<p>model yml: _{path to model folder using _ separators}__models.yml 
+-<em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></p>
+</li>
 </ul>
-<p><em>e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md</em></p>
-<ul>
-<li>model yml: _{path to model folder using _ separators}__models.yml </li>
-</ul>
-<p><em>e.g. models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></p>
 <h3 id="sources">Sources</h3>
 <ul>
 <li>Folder: models/sources/{bronze/silver/gold}</li>
 <li>yml: {schema}__sources.yml (one for each source schema) </li>
 </ul>
-<p><em>e.g. bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
+<p><em>e.g: bronze__ods__ambo_sim__kafka__local__sources.yml</em></p>
 <h3 id="model-and-folder-names">Model and Folder Names</h3>
 <p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
 <h4 id="bronze">Bronze</h4>
@@ -570,15 +576,10 @@
 </li>
 <li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
 </ul>
-<pre><code class="language-md">   Example:
-
-   `silver\new_finance_system__adf\stg\intuitas_corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
-   or
-
-   `silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql`
-
-   materialises to:
-   *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
+<pre><code class="language-md">   *e.g:*
+   - *silver\new_finance_system__adf\stg\intuitas_corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
+   - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
+   - materialises to: *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
 </code></pre>
 <ul>
 <li>
@@ -590,21 +591,15 @@
 <li>
 <p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim/fact}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
 <ul>
-<li><em>e.g. intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
-<li><em>e.g. intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
+<li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-md">   Example:
-
-   `silver\mart\accounts\stg\intuitas_corporate__silver__stg__accounts__01_deduped.sql`
-   or
-
-   `silver\mart\accounts\stg\stg__accounts__01_deduped.sql`
-
-   materialises to:
-
-   *e.g. intuitas_corporate_dev.stg.accounts__01_deduped*
+<pre><code class="language-md">   *e.g:*
+   - *silver\mart\accounts\stg\intuitas_corporate__silver__stg__accounts__01_deduped.sql*
+   - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
+   - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
 </code></pre>
 <ul>
 <li>
@@ -735,7 +730,7 @@
 ├── models/gold
 │   /{optional: domain and subdomains}
 │   ├── _gold.md
-│   └── domain_name e.g. finance 
+│   └── domain_name e.g: finance 
 │       └── mart
 │           ├── _finance__models.yml
 │           ├── orders.sql
@@ -785,7 +780,7 @@
 <h3 id="repository-naming">Repository naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
-<li>Format: {org}-{domain}-{purpose}-{optional:descriptor}</li>
+<li>Format: <code>{org}-{domain}-{purpose}-{optional:descriptor}</code></li>
 </ul>
 <p>Examples:
    - intuitas-corporate-dbt
@@ -795,7 +790,7 @@
 <h3 id="branch-naming">Branch naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
-<li>Naming convention: {type}-{optional:ticket-id}-{description}</li>
+<li>Naming convention: <code>{type}-{optional:ticket-id}-{description}</code></li>
 </ul>
 <p>Types:
    - feature: New functionality
@@ -831,22 +826,22 @@
 <p>Databricks asset bundles are encouraged for all Databricks projects.</p>
 <ul>
 <li>project/bundle name: </li>
-<li>{domain_name}__databricks (for general databricks projects)</li>
+<li><code>{domain_name}__databricks</code> (for general databricks projects)</li>
 <li>
-<p>{domain_name}__dbt (for dbt databricks bundles)</p>
+<p><code>{domain_name}__dbt</code> (for dbt databricks bundles)</p>
 </li>
 <li>
 <p>Bundle tags:</p>
 </li>
-<li>Key: environment: {environment}</li>
-<li>Key: manager: {team_name} and or {email_address}</li>
-<li>Key: managing_domain: {domain_name} e.g. if delegating to engineering domain</li>
-<li>Key: owner: {owner_name}</li>
-<li>Key: owning_domain: {domain_name}</li>
-<li>Key: dab: {bundle_name}</li>
-<li>Key: project: {project_name}</li>
+<li>Key: <code>environment: {environment}</code></li>
+<li>Key: <code>manager: {team_name}</code> and or <code>{email_address}</code></li>
+<li>Key: <code>managing_domain:</code>{domain_name}` e.g: if delegating to engineering domain</li>
+<li>Key: <code>owner: {owner_name}</code></li>
+<li>Key: <code>owning_domain: {domain_name}</code></li>
+<li>Key: <code>dab: {bundle_name}</code></li>
+<li>Key: <code>project: {project_name}</code></li>
 </ul>
-<p>e.g.
+<p>e.g:
    <code>yml
    tags:
       environment: ${bundle.target}
@@ -858,7 +853,7 @@
       managing_domain: intuitas_engineering</code></p>
 <ul>
 <li>Resources:</li>
-<li>Folder level 1: {meaningful sub-project name}</li>
+<li>Folder level 1: <code>{meaningful sub-project name}</code></li>
 <li>
 <p>Folder level 2: </p>
 <ul>
@@ -869,7 +864,7 @@
 <li>
 <p>Databricks.yml</p>
 </li>
-<li>For both dev and prod: root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}</li>
+<li>For both dev and prod: <code>root_path: /Workspace/Users/engineering-engineer@intuitas.com/.bundle/${bundle.name}/${bundle.target}</code></li>
 </ul>
 <p>Example databricks.yml</p>
 <pre><code class="language-yml"># This is a Databricks asset bundle definition for health_lakehouse__engineering.
