@@ -316,33 +316,23 @@
 <h4 id="metadata-schemas-and-objects">Metadata Schemas and Objects</h4>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
-<ol>
-<li><strong>Engineering - ingestion framework</strong>:</li>
-<li>Schema naming convention:  <code>meta__{optional: function}</code></li>
-<li>Naming convention: <code>{function/descriptor}</code></li>
-</ol>
+<p><strong>Engineering - ingestion framework</strong>:
+- Schema naming convention:  <code>meta__{optional: function}</code>
+- Naming convention: <code>{function/descriptor}</code></p>
 <p><em>e.g. intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
 <p><br></p>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
 <p>All schemas are may be optionally prefixed with <code>bronze__</code></p>
-<ol>
-<li><strong>Persistent Landing</strong>:</li>
-<li>
-<p>N/A (see file naming)</p>
-</li>
-<li>
-<p><strong>Operational Data Store (ODS)</strong>:</p>
-</li>
-<li>Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></li>
-</ol>
+<p><strong>Persistent Landing</strong>:
+- N/A (see file naming)</p>
+<p><strong>Operational Data Store (ODS)</strong>:
+- Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code>
+- Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></p>
 <p><em>e.g. intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></p>
-<ol>
-<li><strong>Persistent Data Store (PDS)</strong>:</li>
-<li>Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></li>
-</ol>
+<p><strong>Persistent Data Store (PDS)</strong>:
+- Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code>
+- Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></p>
 <p><em>e.g. intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
 <p><br></p>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
@@ -355,16 +345,16 @@
 <li>All <code>entity</code> names which align to dims should be named in singular.</li>
 </ul>
 <p><br></p>
-<ol>
-<li><strong>(Silver) Staging Objects</strong>:
-   Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></li>
-</ol>
+<p><strong>(Silver) Staging Objects</strong>:</p>
+<p>Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 <p>These models exist to stage silver marts only.</p>
 <ul>
 <li>
 <p>Source-specific:</p>
-<ul>
-<li>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></li>
+</li>
+<li>
+<p>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></p>
+</li>
 <li>
 <p>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></p>
 <ul>
@@ -377,12 +367,12 @@
 </li>
 </ul>
 </li>
-</ul>
-</li>
 <li>
 <p>Non-source specific</p>
-<ul>
-<li>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+</li>
+<li>
+<p>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></p>
+</li>
 <li>
 <p>Object naming convention to align with target mart: <code>stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}</code></p>
 <ul>
@@ -390,12 +380,12 @@
 <li><em>e.g. intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
 </ul>
 </li>
-</ul>
-</li>
 <li>
 <p>Examples of transformations:</p>
-<ul>
-<li><code>01_renamed_and_typed</code></li>
+</li>
+<li>
+<p><code>01_renamed_and_typed</code></p>
+</li>
 <li><code>02_deduped</code></li>
 <li><code>03_cleaned</code></li>
 <li><code>04_filtered/split</code></li>
@@ -403,19 +393,17 @@
 <li><code>06_business_validated</code></li>
 <li><code>07_desensitised</code></li>
 </ul>
-</li>
-</ul>
 <p><em>e.g. intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
 <p><br></p>
-<ol>
-<li><strong>(Silver) Marts</strong>:</li>
-</ol>
-<p>Final products after staging</p>
+<p><strong>(Silver) Base Information Marts</strong>:</p>
+<p>Final products after staging:</p>
 <ul>
 <li>
 <p>Source-specific:</p>
-<ul>
-<li>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></li>
+</li>
+<li>
+<p>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></p>
+</li>
 <li>
 <p>Object naming convention: <code>(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}</code></p>
 <ul>
@@ -424,12 +412,12 @@
 <li><em>e.g. intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf</em></li>
 </ul>
 </li>
-</ul>
-</li>
 <li>
 <p>Non-source specific</p>
-<ul>
-<li>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+</li>
+<li>
+<p>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></p>
+</li>
 <li>
 <p>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></p>
 <ul>
@@ -440,12 +428,8 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <p><br></p>
-<ol>
-<li><strong>Reference Data</strong>:</li>
-</ol>
+<p><strong>Reference Data</strong>:</p>
 <p>Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
 <ul>
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
@@ -498,7 +482,7 @@
 <p><br></p>
 <ol>
 <li>
-<p><strong>(Gold) Marts</strong>:</p>
+<p><strong>(Gold) Information Marts</strong>:</p>
 </li>
 <li>
 <p>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></p>
@@ -514,7 +498,6 @@
 <li><code>pivoting</code></li>
 <li><code>aggregation</code></li>
 <li><code>joining</code></li>
-<li><code>funnel creation</code></li>
 <li><code>conformance</code></li>
 <li><code>desensitization</code></li>
 </ul>
@@ -531,11 +514,10 @@
 <p><em>e.g. intuitas_corporate__finance__reporting__account_payments__payments</em></p>
 <p><br></p>
 <h2 id="azure-data-factory">Azure Data Factory</h2>
-<p>The following are in lower case:</p>
 <ul>
 <li>
 <p>Linked service names: ls_{database_name}(if not in database_name:{<em>organisation_name}</em>{domain_name})
-   <em>e.g. ls_financedb_intuitas_corporate</em></p>
+<em>e.g. ls_financedb_intuitas_corporate</em></p>
 </li>
 <li>
 <p>Dataset names: ds_{database_name}_{object_name}</p>
@@ -545,7 +527,6 @@
 </ul>
 <p><br>  </p>
 <h2 id="streaming">Streaming</h2>
-<p>The following are in lower case:</p>
 <ul>
 <li>Cluster name: {domain_name}<strong>cluster</strong>{optional:environment}</li>
 <li>Topic names: {domain_name}<strong>{object/entity?}</strong>{optional:source_system}<strong><em>{optional:source</em>channel}</strong>{optional:environment}</li>
@@ -553,7 +534,7 @@
 </ul>
 <p><br>  </p>
 <h2 id="dbt">dbt</h2>
-<p>The following are in lower case:</p>
+<p>The following standards and conventions relate to dbt projects.</p>
 <h3 id="documentation-and-model-metadata">Documentation and model metadata</h3>
 <p>Within each respective model folder (as needed)</p>
 <ul>
@@ -768,8 +749,7 @@
 </code></pre>
 <h3 id="dbt_projectyml">dbt_project.yml</h3>
 <p>The yml structure below reflects a single catalog for domain+environment and schema separation for layers and stages:</p>
-<pre><code class="language-yml">
-models:
+<pre><code class="language-yml">models:
   health_lakehouse__engineering__dbt:
     +persist_docs: #enables injection of metadata into unity catalog
         relation: true
@@ -801,6 +781,7 @@ models:
 </code></pre>
 <p><br></p>
 <h2 id="cicd">CI/CD</h2>
+<p>The following standards and conventions relate to Continuous Improvement and Continuous Delivery constructs.</p>
 <h3 id="repository-naming">Repository naming</h3>
 <ul>
 <li>All lowercase with hyphens as separators</li>
