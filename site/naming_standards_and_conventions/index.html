@@ -263,39 +263,45 @@
 <p>No standard naming conventions for files and folders.</p>
 <p><br></p>
 <h2 id="databricks">Databricks</h2>
+<hr />
+<p>This section provides naming standards and conventions for Databricks.</p>
+<p>All lower case naming is in lower case.</p>
 <h3 id="workspace-and-cluster-names">Workspace and cluster names</h3>
+<hr />
 <ul>
 <li>Workspace name: ws-{organisation_name}_{domain_name}</li>
 <li>Cluster name: {personal_name/shared_name} Cluster</li>
 <li>Workflow name: {dev/test} {workflow_name}</li>
 </ul>
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
+<hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
-<p>All lower case:</p>
+<p>Catalog name:</p>
 <ul>
-<li>Catalog name: </li>
 <li>Minimum granularity {domain_name}{_environment (dev/test/pat/prod)} (prod is implied optional)   <em>e.g. intuitas_corporate_dev</em></li>
 <li>Optional granularity {domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}    <em>e.g. intuitas_corporate_bronze_dev</em></li>
 <li>Optional granularity {domain_name}{_descriptor (subdomain/subject/project<em>)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}    </em>e.g. intuitas_corporate_finance_bronze_dev*</li>
 </ul>
 <p><em>Note that projects are temporary constructs, and hence are not recommended for naming</em></p>
+<p>Catalog storage root: </p>
 <ul>
-<li>Catalog storage root: abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</li>
+<li>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</li>
 </ul>
 <h3 id="externally-mounted-lakehouse-federation-catalog-names">Externally mounted (lakehouse federation) Catalog Names</h3>
-<ul>
-<li>Catalog name:</li>
-<li>{domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g._environment}</li>
-</ul>
+<p>Catalog name:
+   - {domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g._environment}</p>
 <p><em>e.g. intuitas_corporate_ext__sqlonpremsource</em></p>
 <h3 id="catalog-metadata-tags">Catalog Metadata tags:</h3>
+<p>The following metadata should be added when creating a catalog:</p>
 <ul>
 <li>Key: domain (owner): {domain_name}</li>
 <li>Key: environment: {environment}</li>
 <li>Key: managing_domain: {domain_name} e.g. if delegating to engineering domain</li>
 </ul>
 <h3 id="schema-and-object-conventions">Schema and object conventions</h3>
+<hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<p><br></p>
 <h4 id="schema-level-external-storage-locations">Schema level external storage locations</h4>
 <p>Recommendations:</p>
 <ul>
@@ -306,6 +312,7 @@
 <li>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</li>
 <li>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</li>
 </ul>
+<p><br></p>
 <h4 id="metadata-schemas-and-objects">Metadata Schemas and Objects</h4>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
@@ -315,6 +322,7 @@
 <li>Naming convention: <code>{function/descriptor}</code></li>
 </ol>
 <p><em>e.g. intuitas_corporate_dev.meta__ingestion.ingestion_control</em></p>
+<p><br></p>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
 <p>All schemas are may be optionally prefixed with <code>bronze__</code></p>
@@ -336,6 +344,7 @@
 <li>Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></li>
 </ol>
 <p><em>e.g. intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></p>
+<p><br></p>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
@@ -343,14 +352,13 @@
 <ul>
 <li>All schemas are may be optionally prefixed with <code>silver</code></li>
 <li>All <code>entity</code> names which align to facts should be named in plural.</li>
-<li>
-<p>All <code>entity</code> names which align to dims should be named in singular.</p>
-</li>
-<li>
-<p><strong>(Silver) Staging Objects</strong>:
-   Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
-</li>
+<li>All <code>entity</code> names which align to dims should be named in singular.</li>
 </ul>
+<p><br></p>
+<ol>
+<li><strong>(Silver) Staging Objects</strong>:
+   Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></li>
+</ol>
 <p>These models exist to stage silver marts only.</p>
 <ul>
 <li>
@@ -398,6 +406,7 @@
 </li>
 </ul>
 <p><em>e.g. intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed</em></p>
+<p><br></p>
 <ol>
 <li><strong>(Silver) Marts</strong>:</li>
 </ol>
@@ -432,16 +441,18 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>Reference Data</strong>:</p>
-</li>
 </ul>
+<p><br></p>
+<ol>
+<li><strong>Reference Data</strong>:</li>
+</ol>
 <p>Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
 <ul>
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference data set name} (optional:__{source_system}__{source_channel})</code></li>
 </ul>
 <p><em>e.g. intuitas_corporate_dev.ref.account_code</em></p>
+<p><br></p>
 <ol>
 <li><strong>Raw Vault</strong>:</li>
 </ol>
@@ -451,6 +462,7 @@
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ul>
 <p><em>e.g. intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf</em></p>
+<p><br></p>
 <ol>
 <li>
 <p><strong>Business Vault</strong>:</p>
@@ -461,20 +473,20 @@
 <li>Object naming convention: <code>{vault object named as per data vault standards}</code></li>
 </ol>
 <p><em>e.g. intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf</em></p>
+<p><br></p>
 <h4 id="gold-data-according-to-requirements">Gold (Data according to requirements)</h4>
 <p>The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <ul>
 <li>All schemas are may be optionally prefixed with <code>gold</code></li>
 <li>All <code>entity</code> names which align to facts should be named in plural.</li>
-<li>
-<p>All <code>entity</code> names which align to dims should be named in singular.</p>
-</li>
-<li>
-<p><strong>(Gold) Staging Models</strong>:
-   Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
-</li>
+<li>All <code>entity</code> names which align to dims should be named in singular.</li>
 </ul>
+<p><br></p>
+<ol>
+<li><strong>(Gold) Staging Models</strong>:
+   Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></li>
+</ol>
 <p>These models exist to stage gold marts only.</p>
 <ul>
 <li>Schema naming convention: <code>stg__{optional: __domain name}{optional: __subdomain name(s)}</code></li>
@@ -483,6 +495,7 @@
 <p><em>e.g. intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</em>
    <em>e.g. intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order</em>
    <em>e.g. intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</em></p>
+<p><br></p>
 <ol>
 <li>
 <p><strong>(Gold) Marts</strong>:</p>
@@ -507,10 +520,10 @@
 </ul>
 </li>
 </ol>
-<p><em>e.g. intuitas_corporate_dev.mart.fact__late_payments</em></p>
-<p><em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></p>
-<p><em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></p>
-<p><em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
+<p><em>e.g. intuitas_corporate_dev.mart.fact__late_payments</em>
+   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em>
+   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em>
+   <em>e.g. intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</p>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
 <li>Share names: {domain_name}<strong>{optional:subdomain_name}</strong>{optional:purpose}<strong>{schema_name or description}</strong>{object_name or description}__{share_purpose and or target_audience}</li>
