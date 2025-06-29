@@ -451,7 +451,10 @@ Example batch ingestion options:
 
 - Pattern 4: batch/streaming: source -> custom python -> deltalake -> external table
 
-- Pattern 5: sharepoint -> fivetran -> databricks sql warehouse (ods)
+- Pattern 5: databricks lakeflow: source -> lakeflow connect -> ods
+    - requires network access to source
+
+- Pattern 6: sharepoint -> fivetran -> databricks sql warehouse (ods)
     - see repo [fivetran](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom)
 
 Rejected patterns:
