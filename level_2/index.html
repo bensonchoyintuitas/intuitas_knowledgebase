@@ -519,7 +519,13 @@ Example batch ingestion options:
 <p>Pattern 4: batch/streaming: source -&gt; custom python -&gt; deltalake -&gt; external table</p>
 </li>
 <li>
-<p>Pattern 5: sharepoint -&gt; fivetran -&gt; databricks sql warehouse (ods)</p>
+<p>Pattern 5: databricks lakeflow: source -&gt; lakeflow connect -&gt; ods</p>
+<ul>
+<li>requires network access to source</li>
+</ul>
+</li>
+<li>
+<p>Pattern 6: sharepoint -&gt; fivetran -&gt; databricks sql warehouse (ods)</p>
 <ul>
 <li>see repo <a href="https://github.com/bensonchoyintuitas/health_lakehouse__engineering__custom">fivetran</a></li>
 </ul>
