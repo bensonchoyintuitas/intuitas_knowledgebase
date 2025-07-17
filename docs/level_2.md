@@ -589,7 +589,7 @@ The following describes options for providing access to Microsoft Fabric / Power
 Steps:
 
 1. Create a delta share
-2. Use the delta share to get data from within PowerBI
+2. Use the delta share to import from within PowerBI
 
 Evaluation:
 
@@ -597,6 +597,7 @@ Evaluation:
     - No duplication
     - Centralised control over access policies
     - Compute costs on consumer 
+    - Avoided SQL Endpoint costs for reads
 - Cons: 
     - Row Level Security and Masking support via dynamic views only
     - See [limitations](https://learn.microsoft.com/en-au/azure/databricks/partners/bi/power-bi). e.g. The data that the Delta Sharing connector loads must fit into the memory of your machine. To ensure this, the connector limits the number of imported rows to the Row Limit that was set earlier.
@@ -636,6 +637,7 @@ Evaluation:
 - Cons: 
     - not GA or tested
     - service-principal level identity required to enforce permissions
+    - Requires public workspaces
 
 
 *Option 4. PowerBI Import Via SQL Endpoint*
