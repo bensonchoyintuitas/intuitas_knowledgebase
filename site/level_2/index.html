@@ -673,7 +673,7 @@ Example batch ingestion options:
 <p>Steps:</p>
 <ol>
 <li>Create a delta share</li>
-<li>Use the delta share to get data from within PowerBI</li>
+<li>Use the delta share to import from within PowerBI</li>
 </ol>
 <p>Evaluation:</p>
 <ul>
@@ -681,6 +681,7 @@ Example batch ingestion options:
 <li>No duplication</li>
 <li>Centralised control over access policies</li>
 <li>Compute costs on consumer </li>
+<li>Avoided SQL Endpoint costs for reads</li>
 </ul>
 </li>
 <li>Cons: <ul>
@@ -728,6 +729,7 @@ Example batch ingestion options:
 <li>Cons: <ul>
 <li>not GA or tested</li>
 <li>service-principal level identity required to enforce permissions</li>
+<li>Requires public workspaces</li>
 </ul>
 </li>
 </ul>
