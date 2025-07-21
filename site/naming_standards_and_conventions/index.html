@@ -286,12 +286,16 @@
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
 <hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
-<p>Catalog name:</p>
+<p>Catalog name: </p>
+<p>The choice of granularity depends on domain topology, stage/zone convention and desired level of segregation for access and sharing controls (i.e. catalog or schema level)</p>
 <ul>
-<li>Minimum granularity: <code>{domain_name}{_environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: intuitas_corporate_dev</em></li>
-<li>Optional granularity: <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_dev</em></li>
-<li>Optional granularity: <code>{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_finance_bronze_dev</em></li>
+<li>Minimum granularity (domain level): <code>{domain_name}{_environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: intuitas_corporate_dev</em></li>
+<li>Optional granularity (domain-data stage level): <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_dev</em></li>
+<li>Optional granularity (domain-data stage and zone level): <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/im)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_bronze_ods_dev</em></li>
+<li>Optional granularity (domain-data zone level): <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/im)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_ods_dev</em></li>
+<li>Optional granularity (subdomain-data stage level): <code>{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}</code>    <em>e.g: intuitas_corporate_finance_bronze_dev</em></li>
 </ul>
+<p>In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></p>
 <p><em>Note that projects are temporary constructs, and hence are not recommended for naming</em></p>
 <ul>
 <li>Catalog storage root: <code>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</code></li>
@@ -329,21 +333,31 @@
 </ul>
 <h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
 <p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
-<p>All schemas are may be optionally prefixed with <code>bronze__</code></p>
+<p>All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. <code>bronze__</code></p>
+<p>In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></p>
 <p><strong>Persistent Landing</strong>:
 - N/A (see file naming)</p>
 <p><strong>Operational Data Store (ODS)</strong>:</p>
-<ul>
-<li>Schema naming convention: <code>ods{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Object naming convention: <code>ods__{source_system}__{source_channel}__{object}</code></li>
-<li><em>e.g: intuitas_corporate_dev.ods.ods__finance_system__adf__accounts</em></li>
-</ul>
+<p>The objective of raw layer conventions is to provide clarity over which zone and stage it belongs, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).</p>
+<p>ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:</p>
+<p>Database replicated ODS (structured sources like SQL Server)::
+- Schema naming : <code>{optional: data_stage__: (bronze/silver/gold)}{__data_zone: (ods)}{__source_database}{if applicable:__source_schema}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow)}</code>
+- Table naming convention: <code>{named as per source}</code>
+- <em>e.g: intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__sqlsvr-intuitas-engineering__adf.encounter</em></p>
+<p>Prepped  semi/unstructured ODS data:
+- Schema naming : <code>{optional: data_stage__: (bronze/silver/gold)}{__data_zone: (ods)}{__source_descriptor}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow/kafka/dbrx pipeline)}</code>
+- Table naming convention: <code>{named as per source or other unique assigned name (e.g. topic/folder name)}</code>
+- <em>e.g: intuitas_engineering_dev.bronze__ods__ambosim__intuitas-confluent__databricks.encounter</em></p>
 <p><strong>Persistent Data Store (PDS)</strong>:</p>
-<ul>
-<li>Schema naming convention: <code>pds{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Object naming convention: <code>pds__{source_system}__{source_channel}__{object}</code></li>
-<li><em>e.g: intuitas_corporate_dev.pds.pds__finance_system__adf__accounts</em></li>
-</ul>
+<p>PDS conventions will mirror ODS conventions:</p>
+<p>Database replicated PDS (structured sources like SQL Server)::
+- Schema naming : <code>{optional: data_stage__: (bronze/silver/gold)}{data_zone: (pds)}{__source_database}{if applicable:__source_schema}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow)}</code>
+- Table naming convention: <code>{named as per source}</code>
+- <em>e.g: intuitas_engineering_dev.bronze__pds__fhirhouse__dbo__sqlsvr-intuitas-engineering__adf.encounter</em></p>
+<p>Prepped  semi/unstructured PDS data:
+- Schema naming : <code>{optional: data_stage__: (bronze/silver/gold)}{__data_zone: (pds)}{__source_descriptor}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow/kafka/dbrx pipeline)}</code>
+- Table naming convention: <code>{named as per source or other unique assigned name (e.g. topic/folder name)}</code>
+- <em>e.g: intuitas_engineering_dev.bronze__pds__ambosim__intuitas-confluent__databricks.encounter</em></p>
 <h4 id="silver-data-according-to-business-entities">Silver (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
@@ -359,16 +373,16 @@ Staging models serve as intermediary models that transform source data into the 
 <p>These models exist to stage silver marts only.</p>
 <ul>
 <li>
-<p>Source-specific:</p>
+<p>Source-specific (note at this stage, pre-normalisation - sourcing channels may still matter):</p>
 </li>
 <li>
-<p>Schema naming convention: <code>stg__{source_system}__{source_channel}</code></p>
+<p>Schema naming convention: <code>stg{__source_system_identifier}{optional:__source_channel}</code></p>
 </li>
-<li>Object naming convention: <code>{entity}__{object_description}__{n}__{transformation}__{source_system}__{source_channel}</code></li>
-<li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf</em></li>
-<li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned__new_finance_system__adf</em></li>
+<li>Object naming convention: <code>{entity}{__object_description}{__n}{__transformation}{optional:__source_system_identifier}{optional:__source_channel}</code></li>
+<li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned</em></li>
 <li>
-<p><em>e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed__old_finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed</em></p>
 </li>
 <li>
 <p>Non-source specific:</p>
@@ -376,7 +390,7 @@ Staging models serve as intermediary models that transform source data into the 
 <li>
 <p>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></p>
 </li>
-<li>Object naming convention to align with target mart: <code>stg__(optional:dim/fact)_{entity}__{object_description}__{n}__{transformation}</code></li>
+<li>Object naming convention to align with target mart: <code>stg__(optional:dim/fact){_entity}{__object_description}{__n}{__transformation}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
 <li>
 <p><em>e.g: intuitas_corporate_dev.stg.accounts__02_business_validated</em> </p>
@@ -400,16 +414,16 @@ Staging models serve as intermediary models that transform source data into the 
 Final products after staging:</p>
 <ul>
 <li>
-<p>Source-specific:</p>
+<p>Source-specific (note at this stage, post-normalisation - sourcing channels should not differ so may need merging or unioning):</p>
 </li>
 <li>
-<p>Schema naming convention: <code>mart__{source_system}__{source_channel}</code></p>
+<p>Schema naming convention: <code>mart{__source_system_identifier}{optional:__source_channel}</code></p>
 </li>
-<li>Object naming convention: <code>(optional:dim/fact)_{entity / _object_description}__{source_system}__{source_channel}</code></li>
-<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment__new_finance_system__adf</em></li>
-<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account__new_finance_system__adf</em></li>
+<li>Object naming convention: <code>(optional:dim/fact){__entity / __object_description}{optional:__source_system_identifier}{optional:__source_channel}</code></li>
+<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment</em></li>
+<li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account</em></li>
 <li>
-<p><em>e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account__old_finance_system__adf</em></p>
+<p><em>e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account</em></p>
 </li>
 <li>
 <p>Non-source specific:</p>
@@ -417,7 +431,7 @@ Final products after staging:</p>
 <li>
 <p>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></p>
 </li>
-<li>Object naming convention: <code>(optional:dim/fact)__{unified entity / _object_description}</code></li>
+<li>Object naming convention: <code>(optional:dim/fact){__unified entity / __object_description}</code></li>
 <li><em>e.g: intuitas_corporate_dev.mart.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__finance.account</em> (unified)</li>
@@ -461,8 +475,8 @@ Optional warehousing construct.</p>
 <p>Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 <p>These models exist to stage gold marts.</p>
 <ul>
-<li>Schema naming convention: <code>stg__{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Object naming convention to align to target mart: <code>(optional: dim/fact__){entity / product description}__{n}__{transformation}</code></li>
+<li>Schema naming convention: <code>stg{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>Object naming convention to align to target mart: <code>(optional: dim/fact){__entity / __product description}{__n}{__transformation}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</em></li>
 <li><em>e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order</em></li>
 <li><em>e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</em></li>
@@ -471,8 +485,8 @@ Optional warehousing construct.</p>
 <p><strong>(Gold) Information Marts</strong>:</p>
 <ul>
 <li>Schema naming convention: <code>mart{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Dimension naming convention: <code>dim__{entity / product description} (optional: __{source_system}__{source_channel})</code></li>
-<li>Fact naming convention: <code>fact__{entity / product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>Dimension naming convention: <code>dim{__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>Fact naming convention: <code>fact{__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
 <li>
 <p>Denormalized (One Big Table) Object naming convention: <code>{entity / product description} (optional: __{source_system}__{source_channel})</code></p>
 </li>
@@ -489,7 +503,7 @@ Optional warehousing construct.</p>
 </ul>
 <p><em>e.g:</em></p>
 <ul>
-<li><em>intuitas_corporate_dev.mart.fact__late_payments</em></li>
+<li><em>intuitas_corporate_dev.mart.fact_late_payments</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</li>
