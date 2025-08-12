@@ -168,8 +168,9 @@
 <li><a href="./#metadata-objects-and-elements">Metadata Objects and Elements</a></li>
 <li><a href="./#metadata-consolidation-and-synchronisation">Metadata Consolidation and Synchronisation</a></li>
 <li><a href="./#data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</a><ul>
-<li><a href="./#datahub">Datahub</a></li>
-<li><a href="./#dbt-docs">dbt Docs</a></li>
+<li><a href="./#semantic-modelling-mastering-and-lineage">Semantic modelling, mastering and lineage</a></li>
+<li><a href="./#unified-metadata-repository">Unified metadata repository</a></li>
+<li><a href="./#analytics-engineering-metadata">Analytics engineering metadata</a></li>
 <li><a href="./#databricks-unity-catalog-metastore">Databricks Unity Catalog Metastore</a></li>
 </ul>
 </li>
@@ -369,8 +370,13 @@
 <h3 id="data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</h3>
 <hr />
 <p>Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.</p>
-<h4 id="datahub">Datahub</h4>
-<p><strong>DataHub</strong> serves as a unifying layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
+<h4 id="semantic-modelling-mastering-and-lineage">Semantic modelling, mastering and lineage</h4>
+<p><strong>Snappy</strong> serves as a 'business-first' enterprise domain, model, standards and glossary authoring and mastering tool, and acts as the key driver of semantic lineage linking between true on-the-ground semantics, reference models and physical as-built metadata in Datahub. </p>
+<p>Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access the tool.
+<br>
+<br></p>
+<h4 id="unified-metadata-repository">Unified metadata repository</h4>
+<p><strong>DataHub</strong> serves as a consolidation layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
 <p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
@@ -410,7 +416,7 @@
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="60%">
 </a>
 <br></p>
-<h4 id="dbt-docs">dbt Docs</h4>
+<h4 id="analytics-engineering-metadata">Analytics engineering metadata</h4>
 <ul>
 <li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
 <li>It captures object, column, and lineage metadata, and provides a rich interface for discovery and documentation.  </li>
