@@ -8,7 +8,7 @@ This blueprint consists of a collection of resources that describe Intuitas' opi
 
 ## Contact
 
-For further access to any of the tools presented here, our live showcase environment or feedback please contact us via [office@intuitas.com](mailto:office@intuitas.com)
+For access to any of the tools presented here, our live showcase environment or further information, contact us via [office@intuitas.com](mailto:office@intuitas.com)
 
 ## Copyright
 
