@@ -524,13 +524,13 @@ Recommendations here align with the following Domain topology:
     - Project
 - In addition all scheduled Jobs would benefit from further job tags:
     - Job name/id
-
-
-#### Typical observability requirements by role include:
+<br>
 <br>
 
-```md
+##### Typical observability requirements by role
+
 **As an Enterprise Admin**
+```md
 1. What workloads are not being tagged/tracked?
 2. What is my organisation spending as a whole?
     - In databricks DBUs
@@ -542,9 +542,9 @@ Recommendations here align with the following Domain topology:
     - Reinventing the wheel
     - Over utilisation
 ```
-
-```md
+<br>
 **As a Domain (workspace) Admin**
+```md
 1. What workloads are not being tagged/tracked?
 2. What is my domain spending as a whole?
     - In databricks DBUs
