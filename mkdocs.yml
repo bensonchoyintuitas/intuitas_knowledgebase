@@ -2,6 +2,11 @@ site_name: Intuitas Data Intelligence Blueprint
 nav:
   - Home: README.md
   - About: about.md
+  - Data Model: data_model.md
+  - Level 0 - Platform Architecture: level_0.md
+  - Level 1 - Enterprise Architecture: level_1.md
+  - Level 2 - Detailed Implementation: level_2.md
+  - Naming Standards and Conventions: naming_standards_and_conventions.md
 
 theme: 
   name: mkdocs

@@ -38,7 +38,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
         - [Cluster policies](level_1.md#cluster-policies)
         - [System tables](level_1.md#system-tables)
         - [Usage reports](level_1.md#usage-reports)
-    - [Domain / Workspace Administrator Role](level_1.md#domain--workspace-administrator-role)
+    - [Domain / Workspace Administrator Role](level_1.md#domain-workspace-administrator-role)
     - [Tagging convention](level_1.md#tagging-convention)
     - [References to recommended practices](level_1.md#references-to-recommended-practices)
 
