@@ -4,16 +4,19 @@
 
 <br>
 
-This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data and AI solutions. It is representative of large multi-domain enterprise deployments, however concepts should be adapted to each organisation as appropriate.
+This blueprint consists of a collection of resources that describe Intuitas' opinionated approach to designing and delivering Data, AI and Governance solutions. It is representative of large multi-domain enterprise deployments, however concepts should be adapted to each organisation as appropriate.
 
 
 ## Copyright
 
-This knowledge base and its contents are © Intuitas PTY LTD, 2025. All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
+This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025. All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
 
 ## Licence
 
-Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given to the original author. Referenced third-party content is subject to the copyright terms of their respective owners.
+Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given. Referenced third-party content is subject to the copyright terms of their respective owners. 
+
+## Contact
+For further clarification, or feedback please contact us via [office@intuitas.com](mailto:office@intuitas.com)
 
 <br>
 <br>
