@@ -42,7 +42,7 @@ This section describes Domain-level instantiations of the enterprise-level refer
 
 
 
-Example reference architecture:
+*Example reference architecture:*
 
 <a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
     <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
@@ -67,12 +67,14 @@ Understanding them is necessary to understand:
 
 A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
 
-**Example glossary from Intuitas' Glossary builder tool:**
+*Example glossary from Intuitas' Glossary builder tool:*
 <br>
 <a href="../img/glossary.png" target="_blank">
     <img src="../img/glossary.png"  alt="Example glossary from Intuitas' Glossary builder tool" width="75%">
 </a>
 <br>
+
+Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 
 ### Business metrics
 ---

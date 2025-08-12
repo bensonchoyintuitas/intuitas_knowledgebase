@@ -167,7 +167,7 @@ Allowing domains to access 'gold' data from other domains and, where appropriate
 
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
-Example:
+*Example:*
 
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
@@ -181,7 +181,7 @@ Example:
 - Reflects the domain topology.
 - Provides unified access to data warehouse products from across domains via a common catalog.
 
-Example:
+*Example*
 
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
@@ -293,6 +293,11 @@ Metadata is essential for effective data governance, providing necessary context
 
 **Snappy** serves as a 'business-first' enterprise domain, model, standards and glossary authoring and mastering tool, and acts as the key driver of semantic lineage linking between true on-the-ground semantics, reference models and physical as-built metadata in Datahub. 
 
+<br>
+<a href="../img/snappy.png" target="_blank">
+    <img src="../img/domsnappyains.png"  alt="Intuitas' snappy tool" width="100%">
+</a>
+<br>
 Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
@@ -311,7 +316,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 *Enterprise-wide summary of assets:*
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
-    <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="60%">
+    <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
 </a>
 <br>
 <br>
@@ -319,7 +324,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 *Browse by business domain and filters:*
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
-    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="60%">
+    <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
 </a>
 <br>
 <br>
@@ -327,7 +332,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 *Metadata search by term:*
 <br>
 <a href="../img/metadata_search.png" target="_blank">
-    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="60%">
+    <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
 </a>
 <br>
 <br>
@@ -335,14 +340,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 *User-driven mapping of glossary terms to measures:*
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
-    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="60%">
+    <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
 <br>
 
 *User-driven tagging of PII:*
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
-    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="60%">
+    <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
 </a>
 <br>
 
@@ -369,7 +374,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 *Databricks AI-driven semantic detection*
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
-    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="60%">
+    <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="75%">
 </a>
 <br>
 
