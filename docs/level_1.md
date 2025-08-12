@@ -295,7 +295,7 @@ Metadata is essential for effective data governance, providing necessary context
 
 <br>
 <a href="../img/snappy.png" target="_blank">
-    <img src="../img/domsnappyains.png"  alt="Intuitas' snappy tool" width="100%">
+    <img src="../img/snappy.png"  alt="Intuitas' snappy tool" width="100%">
 </a>
 <br>
 Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.

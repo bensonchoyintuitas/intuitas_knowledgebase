@@ -24,7 +24,7 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 ## Naming standards and conventions
 - [Naming standards and conventions](naming_standards_and_conventions.md)
 <br>
-
+<br>
 ## Level 0 - Enterprise-level context
 - [Org + Domain Definition](level_0.md#org-domain-definition)
 - [Strategies and Objectives](level_0.md#strategies-and-objectives)
@@ -45,7 +45,6 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 - [Enterprise Data Governance](level_1.md#enterprise-data-governance)
     - [Audit](level_1.md#audit)
 - [Enterprise Billing](level_1.md#enterprise-billing)
-
 <br>
 
 ## Level 2 - Domain-level (solution) architecture
