@@ -16,7 +16,7 @@ This knowledge base and its contents are the original works of © Intuitas PTY L
 Permission is granted for free use, reproduction, and adaptation of this material, provided prior consent is obtained and appropriate attribution is given. Referenced third-party content is subject to the copyright terms of their respective owners. 
 
 ## Contact
-For further clarification, or feedback please contact us via [office@intuitas.com](mailto:office@intuitas.com)
+For further access to any of the tools presented here, our live demo environment or feedback please contact us via [office@intuitas.com](mailto:office@intuitas.com)
 
 <br>
 <br>
