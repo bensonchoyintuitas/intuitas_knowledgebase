@@ -19,9 +19,11 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 <br>
 
 # Table of Contents
+<br>
 
 ## Naming standards and conventions
 - [Naming standards and conventions](naming_standards_and_conventions.md)
+<br>
 
 ## Level 0 - Enterprise-level context
 - [Org + Domain Definition](level_0.md#org-domain-definition)
@@ -30,6 +32,7 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 - [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
 - [Governance Structures](level_0.md#governance-structures)
 - [Billing Structures](level_0.md#billing-structures)
+<br>
 
 ## Level 1 - Enterprise-level architecture
 - [Key concepts](level_1.md#key-concepts)
@@ -42,6 +45,8 @@ Permission is granted for free use, reproduction, and adaptation of this materia
 - [Enterprise Data Governance](level_1.md#enterprise-data-governance)
     - [Audit](level_1.md#audit)
 - [Enterprise Billing](level_1.md#enterprise-billing)
+
+<br>
 
 ## Level 2 - Domain-level (solution) architecture
 - [Business architecture](level_2.md#business-architecture)

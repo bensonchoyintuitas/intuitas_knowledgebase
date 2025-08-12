@@ -53,7 +53,7 @@ The following key concepts are used throughout this knowledgebase.
 
 Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
-**Example domains from Intuitas' Domain builder tool:**
+*Example domains from Intuitas' Domain builder tool:*
 <br>
 <a href="../img/domains.png" target="_blank">
     <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
@@ -61,7 +61,6 @@ Using domains as logical governance boundaries helps ensure data ownership and a
 <br>
 
 see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
-
 
 #### **Domain**
 
@@ -72,11 +71,9 @@ Domains relate to functional and organisational boundaries, and represent closel
 - Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles.
 
 
-
 #### **Subdomain**
 
 A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.
-
 
 
 #### **Data Mesh**
@@ -303,7 +300,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-**Enterprise-wide summary of assets:**
+*Enterprise-wide summary of assets:*
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="60%">
@@ -311,7 +308,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-**Browse by business domain and filters:**
+*Browse by business domain and filters:*
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="60%">
@@ -319,7 +316,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-**Metadata search by term:**
+*Metadata search by term:*
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="60%">
@@ -327,14 +324,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-**User-driven mapping of glossary terms to measures:**
+*User-driven mapping of glossary terms to measures:*
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="60%">
 </a>
 <br>
 
-**User-driven tagging of PII:**
+*User-driven tagging of PII:*
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="60%">
@@ -361,7 +358,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 
 <br>
 
-**Databricks AI-driven semantic detection**
+*Databricks AI-driven semantic detection*
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
     <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="60%">
