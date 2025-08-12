@@ -49,6 +49,20 @@ This section describes enterprise-wide and cross-domain data and data platform a
 
 The following key concepts are used throughout this knowledgebase.
 
+### **Domain-Centric Design**
+
+Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
+
+**Example domains from Intuitas' Domain builder tool:**
+<br>
+<a href="../img/domains.png" target="_blank">
+    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+</a>
+<br>
+
+see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+
+
 #### **Domain**
 
 Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.
@@ -57,15 +71,12 @@ Domains relate to functional and organisational boundaries, and represent closel
 - Domains serve their own objectives while also offering products and services of value to other domains and the broader enterprise.
 - Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles.
 
-see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+
 
 #### **Subdomain**
 
 A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.
 
-#### **Domain-Centric Design**
-
-Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
 
 #### **Data Mesh**
@@ -371,7 +382,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 ## Enterprise Security
 ---
 
-Recommended:
+**Recommended artefacts:**
 
 - Description of security policies and standards for both the organisation and industry
 - Description of processes, tools, controls, protocols to adhere to during design, deployment and operation.
@@ -384,7 +395,7 @@ Recommended:
 ## Enterprise Data Governance
 ---
 
-Recommended:
+**Recommended artefacts:**
 
 - Description of governance frameworks, policies and standards including but not limited to:
     - Custodianship, management/stewardship roles, RACI and mapping to permissions and metadata
@@ -405,7 +416,7 @@ Examples of auditable areas include:
 - platform access; 
 - change history to data.
 
-Recommended:
+**Recommended artefacts:**
 
 - Description of mandatory audit requirements to inform enterprise-level and domain-level audit solutions.
 
@@ -503,6 +514,10 @@ Recommendations here align with the following Domain topology:
     - Project
 - In addition all scheduled Jobs would benefit from further job tags:
     - Job name/id
+
+
+#### Typical observability requirements by role include:
+<br>
 
 ```md
 **As an Enterprise Admin**

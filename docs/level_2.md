@@ -67,6 +67,13 @@ Understanding them is necessary to understand:
 
 A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
 
+**Example glossary from Intuitas' Glossary builder tool:**
+<br>
+<a href="../img/glossary.png" target="_blank">
+    <img src="../img/glossary.png"  alt="Example glossary from Intuitas' Glossary builder tool" width="75%">
+</a>
+<br>
+
 ### Business metrics
 ---
 Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:

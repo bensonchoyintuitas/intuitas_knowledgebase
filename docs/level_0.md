@@ -7,8 +7,6 @@ This section outlines the foundational enterprise-wide concepts that inform and 
 
 Establishing a clear enterprise-level context ensures that investments in data, capabilities, and infrastructure are purposefully aligned with the organisation’s strategic vision, operating model, and capacity. This alignment is essential for delivering meaningful, sustainable outcomes that reflect the organisation’s unique context and long-term goals.
 
-
-<br>
 <br>
 
 ## Table of Contents
@@ -25,19 +23,25 @@ Establishing a clear enterprise-level context ensures that investments in data, 
 
 ## Org + Domain Definition
 
-Understanding the structure of the organisation and its domains is foundational to defining governance and metadata boundaries.
+Understanding the structure of the organisation and its domains is foundational to defining governance, environment and metadata boundaries. While organisations can look to industry patterns and reference architectures for guidance, they are also unique. See [Domain-Centric Design](level_1.md#domain-centric-design) to see further definition.
 
-**Recommended:**
+**Recommended artefacts:**
 
 - Description of the organisational boundary and any external organisations that are within the scope of concern.
-- Description of domains and subdomains within the organisation.
+- Description of domains and subdomains within the organisation that may have a material bearing on the data governance and data management operating model.
 
+**Example domains from Intuitas' Domain builder tool:**
+<br>
+<a href="../img/domains.png" target="_blank">
+    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+</a>
+<br>
 
 ## Strategies and Objectives
 
 This section outlines the strategic context in which data, technology, and governance initiatives operate.
 
-**Recommended:**
+**Recommended artefacts**
 
 - Description of the organisation's strategies and objectives at the whole-of-enterprise level:
   - Business strategies, objectives, plans, and initiatives
@@ -49,7 +53,7 @@ This section outlines the strategic context in which data, technology, and gover
 
 Identifying the systems and data assets in scope supports effective governance, architecture, and planning.
 
-**Recommended:**
+**Recommended artefacts**
 
 - Description of the organisation's key systems within the scope of concern (e.g., CMDB).
 - Information Asset Register (IAR)
@@ -59,7 +63,7 @@ Identifying the systems and data assets in scope supports effective governance, 
 
 Clarity on the responsibilities and capabilities of key teams is essential for executing data strategy and maintaining accountability.
 
-**Recommended:**
+**Recommended artefacts**
 
 - Description of in-scope key teams/parties associated with:
   - Strategy and portfolio / prioritisation of data initiatives
@@ -83,7 +87,7 @@ Clarity on the responsibilities and capabilities of key teams is essential for e
 
 Governance frameworks and processes define how decisions are made, enforced, and improved across the data lifecycle.
 
-**Recommended:**
+**Recommended artefacts**
 
 - Description of the organisation's governance frameworks, policies, standards, processes, and bodies that are relevant to the scope of concern.
 
@@ -92,6 +96,23 @@ Governance frameworks and processes define how decisions are made, enforced, and
 
 Understanding how billing is structured enables transparency, cost accountability, and alignment with financial governance.
 
-**Recommended:**
+**Recommended artefacts**
 
 - Description of the organisation's structures in terms of billing, and how cost centres may relate to billing reports, delegations, and associated observability requirements.
+- Cost allocation models and chargeback mechanisms
+- Budget management and forecasting processes
+- Financial governance and approval workflows
+- Cost optimization strategies and monitoring
+- Integration with enterprise resource planning (ERP) systems
+- Compliance with financial reporting standards and regulations
+
+<br>
+<br>
+
+## Next Steps
+
+Once the enterprise-level context is established, proceed to [Level 1 - Domain Architecture](level_1.md) to explore domain-centric design principles and architectural patterns that support the organization's strategic objectives.
+
+---
+
+*This document provides the foundational context for enterprise data architecture. For specific implementation guidance, refer to the appropriate level within this architecture framework.*
