@@ -9,7 +9,7 @@ This blueprint consists of a collection of resources that describe Intuitas' opi
 
 ## Copyright
 
-This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025. All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
+This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025. All rights reserved. Any referenced  or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
 
 ## Licence
 
