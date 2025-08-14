@@ -4,7 +4,57 @@
 
 <br>
 
-This blueprint consists of a collection of resources that describe Intuitas' opinionated approach to designing and delivering Data, AI and Governance solutions. It is representative of large multi-domain enterprise deployments, however concepts should be adapted to each organisation as appropriate.
+This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data, AI and Governance solutions. 
+
+It is the result of R&D, commonly asked questions and real-life lessons learned.
+
+The ideas presented are opinionated and reflect the Intuitas design philosophy. They are proven in practice and supported by working demo environments.
+
+## Design Principles
+
+ Principles provide the foundational guidance for our approach, ensuring transparency in decision-making, effective trade-off evaluation, and alignment to strategic priorities. 
+ 
+ The ideas and architecture patterns presented here are opinionated - reflecting Intuitas' design philosophy, established practices and the product landscape.
+ 
+ Organisations are encouraged to consider these as well as any existing principles that matter most to them.
+ 
+| Principle | Description |
+|-----------|-------------|
+| **1. "Think big, start small"** | Balance rapid delivery with the right strategic positioning and design so that investments deliver sustained benefits without creating new challenges. |
+| **2. Empowered Autonomy** | Enable domain experts in business and clinical environments to manage data independently while leveraging shared, scalable, and consistent foundations. |
+| **3. Disciplined Core, Flexible Edge** | Implement a federated governance and core engineering model that enhances policy consistency and reliability across Queensland Health, while enabling rapid, local/domain-specific product delivery. |
+| **4. Actionable Data** | Default to real-time and supported data extraction across all data of all types—including unstructured—supported by platforms that are ready to deliver timely, decision-enabling insights + AI/ML applications. |
+| **5. Make It Easy to Do the Right Thing** | Provide automation, services, and platforms that simplify workflows and guide users to adopt effective, secure, and policy-aligned practices effortlessly. |
+| **6. Cost Transparency and Efficiency** | Promote reuse and economies of scale with transparent cost models, ensuring consumers pay only for value-driven usage while removing barriers to sharing. |
+| **7. Adaptability for Growth and Change** | Ensure platforms adapt seamlessly to evolving business needs, data growth, and diverse workloads. |
+| **8. Interoperability and Inclusion** | Facilitate smooth integration across cloud, on-prem, and diverse technology stacks (i.e. byo), reducing participation barriers. |
+| **9. Flexibility Through Standards** | Leverage standards-based, technology-agnostic components to maintain flexibility and prevent vendor lock-in. |
+
+## How to use this resource
+
+### **Getting Started**
+
+- **Leaders and Architects**: Focus on Levels 0-1 to establish strategic alignment, enterprise patterns and governance
+- **Domain/Functional and Technical Teams**: Emphasize Level 2 for practical implementation guidance within established enterprise frameworks  
+
+
+### **Iterative Approach**
+- The framework supports "think big, start small" - establish enterprise context and patterns early, then implement incrementally
+- Each level builds upon the previous, but can be revisited and refined as your organization's capabilities mature
+- Living guidance that evolves with your implementation experience and changing requirements
+
+- **Level 0 Context Setting**: Start by defining organisational objectives, domain structures, and strategic objectives before making any architectural and governance decisions
+- **Level 1 Enterprise Architecture**: Apply enterprise-wide architectural patterns and reference topologies that align with your established context
+- **Level 2 Domain/Solution Architecture**: Implement domain-specific solutions that instantiate the enterprise patterns for your particular use cases
+- Use the **Naming Standards and Conventions** guide alongside any level to ensure consistency
+
+## Disclaimer
+
+
+
+This is a living, continuously updated resource — which means it's unpolished in places. Every effort is made to ensure the currency, accuracy, and representation of products and features at the time of writing. Positions reflect only features in general availability, and this knowledgebase will be updated as they evolve.
+
+Readers are encouraged to verify the content and consider their local context. No liability is accepted for any error or omission arising from the use of this resource.
 
 ## Contact
 
