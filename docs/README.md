@@ -19,7 +19,9 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 
 **Living resource** - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
 
-**Currency** – Positions and guidance reflect the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information promptly as features evolve, no guarantee of timeliness is provided. Readers are encouraged to independently validate all claims.
+**Validation** – Positions and guidance reflect the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information promptly as features evolve, timeliness of these updates is not guaranteed. 
+
+**General** - All investigative findings and associated commentary are general in nature and do not reflect all scenarios and workloads. Readers are encouraged to independently validate all claims and conduct benchmarking against their own use cases and projected workloads.
 
 see the [copyright, licencing and disclaimer information](#terms)
 <br>

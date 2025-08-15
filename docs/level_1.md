@@ -495,11 +495,11 @@ As an Enterprise Metastore Admin:
 ## Enterprise Billing
 ---
 
->  Out of the box Databricks usage dashboard to be tested at workspace level
-
 Large organisations typically need to track and allocate costs to organisational units, cost centres, projects, teams and individuals.
 
-Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform (i.e. Databricks) must to align.
+Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform must to align.
+
+
 
 Recommendations here align with the following Domain topology:
 
@@ -602,7 +602,7 @@ Additional useful references:
     - Reinventing the wheel
     - Over utilisation
 ```
-<br>
+
 **As a Domain (workspace) Admin**
 ```md
 1. What workloads are not being tagged/tracked?
@@ -621,6 +621,9 @@ Additional useful references:
     - Redundant tasks
     - Inefficient queries
 ```
+
+<br>
+
 
 
 

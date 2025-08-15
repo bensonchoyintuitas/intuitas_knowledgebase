@@ -38,17 +38,18 @@ This section describes Domain-level instantiations of the enterprise-level refer
     - [Data understandability](level_2.md#data-understandability)
     - [Privacy Preservation](level_2.md#privacy-preservation)
     - [Audit](level_2.md#audit)
-- [Billing](level_2.md#billing)
 
 
+<div align="center">
 
-*Example reference architecture:*
+*Example Platform and Pipeline Reference Architecture*
 
 <a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
     <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
 <br>
+</div>
 
 ## Business architecture
 
@@ -67,14 +68,18 @@ Understanding them is necessary to understand:
 
 A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
 
-*Example glossary from Intuitas' Glossary builder tool:*
+<div align="center">
+
+*Example glossary from Intuitas' Glossary builder tool*
 <br>
 <a href="../img/glossary.png" target="_blank">
     <img src="../img/glossary.png"  alt="Example glossary from Intuitas' Glossary builder tool" width="75%">
 </a>
 <br>
 
-Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
+</div>
+
+Contact us to access the tool.
 
 ### Business metrics
 ---
@@ -88,14 +93,23 @@ Metrics are the measurements of the performance of the business processes. They 
 - frequency
 
 <br>
+<br>
+
 ## Infrastructure
 ---
-> This section is a work in progress
+> This section is planned for future development
 ### Environments, Workspaces and Storage
+
+<div align="center">
+
+*Workspaces, Environments and Storage*
+<br>
+
 <a href="../img/workspaces_environments_storage.png" target="_blank">
     <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
 </a>
 
+</div>
 This diagram illustrates a **data lakehouse architecture** with the following components and flow:
 
 
@@ -133,7 +147,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 ### Secrets
 
 ---
-> This section is a work in progress
+> This section is planned for future development
 - Management
 - Areas of use
 - Handling practices
@@ -166,7 +180,7 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 
 ### CICD and Repository
 ---
-> This section is a work in progress
+> This section is planned for future development
 - Description of git workflows for CICD in terms of:
     - Infrastructure
     - Data engineering
@@ -198,12 +212,20 @@ Various tools can be used to provide insight into different aspects of the archi
 #### dbt observability - Elementary
 Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a>
 
+<div align="center">
+
+*dbt warehouse observability*
+<br>
+
 <a href="../img/observability.png" target="_blank">
     <img src="../img/observability.png"  alt="Observability Diagram">
 </a>
-<br>
 
+<br>
+<br>
 <a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
+
+</div>
 
 Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
 
@@ -284,11 +306,17 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
     - **Silver: Data according to business.** ([see Data and information models](level_2.md#data-and-information-models))
     - **Gold: Data according to requirements.**
 
+<div align="center">
+
+*Data layers and stages*
+<br>
+
 <a href="../img/data_layers_and_stages.png" target="_blank">
     <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
 </a>
 
 <br>
+</div>
 
 These map to naming standards and conventions for [Catalog](naming_standards_and_conventions.md#catalog-naming-and-conventions), [Schemas](naming_standards_and_conventions.md#schema-and-object-conventions) and [dbt](naming_standards_and_conventions.md#dbt).
 
@@ -416,8 +444,11 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 - Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)
 
 <br>
+<br>
 
-Example:
+<div align="center">
+
+*Example Catalog to storage mapping:*
 <br>
 
 <a href="../img/catalog_to_storage_mapping.png">
@@ -426,11 +457,15 @@ Example:
 
 <br>
 
+</div>
+
 ## Data Engineering
 ---
 
 ### Ingestion
 ---
+
+*Note: These patterns and findings reflect GA functionality only as as at the date of publication and research. Refer to respective product roadmaps and documentation for the latest guidance on functionality.*
 
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.
 
@@ -441,12 +476,19 @@ It should be:
 
 <br>
 <br>
-Example batch ingestion options:
+<div align="center">
+
+*Example batch ingestion options:*
+<br>
+
 <a href="../img/ingestion_patterns.png" target="_blank">
     <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
 </a>
+</div>
 
 #### Ingestion patterns and notes:
+
+<br>
 
 - Pattern 1: streaming: kafka -> landing -> databricks autoloader -> ods
     - see repo [Bronze Landing to ODS Project](https://github.com/bensonchoyintuitas/health_lakehouse__engineering__databricks)
@@ -475,19 +517,21 @@ Rejected patterns:
 ### Transformation
 ---
 
-> This section is a work in progress
+> This section is planned for future development
 #### Batch and Micro-batch SQL transformation
 - dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
 
 #### Streaming SQL transformation
-> This section is a work in progress
+> This section is planned for future development
 
 #### Non SQL transformation
-> This section is a work in progress
+> This section is planned for future development
 
 
 ### Data sharing and delivery patterns
 ---
+
+*Note: These patterns and findings reflect GA functionality only as as at the date of publication and research. Refer to respective product roadmaps and documentation for the latest guidance on functionality.*
 
 Data can be shared and delivered to consumers through various channels, each differing in:
 
@@ -499,10 +543,15 @@ Data can be shared and delivered to consumers through various channels, each dif
 
 The following subsections offer more details about the channels depicted below.
 
+<div align="center">
+
+*Sharing and delivery visualisation channels*
+<br>
+
 <a href="../img/sharing_delivery_visualisation.png" target="_blank">
     <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
 </a>
-
+</div>
 
 #### Row Level Security
 see [Row Level Security](#row-level-security)
@@ -568,7 +617,7 @@ see [Row Level Security](#row-level-security)
 
 #### **API Access**
 ---
-> This section is a work in progress
+> This section is planned for future development
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.
 
 References:
@@ -578,7 +627,7 @@ References:
 
 #### **Snowflake Access**
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 - Snowflake access is provided by Databricks Delta Sharing.
 - Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 [see external tables](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta)
@@ -696,7 +745,7 @@ Evaluation:
 #### Push
 ---
 
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -706,7 +755,7 @@ For consideration:
 
 ### Visualisation
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -719,7 +768,7 @@ For consideration:
 
 ## AI/ML
 
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -736,7 +785,7 @@ This section describes how Enterprise-level governance will be implemented throu
 
 ### Data lifecycle and asset management
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -746,7 +795,7 @@ For consideration:
 
 ### Data access management
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -758,7 +807,7 @@ For consideration:
 
 ### Data quality
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -768,7 +817,7 @@ For consideration:
 
 ### Data understandability
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -779,7 +828,7 @@ For consideration:
 
 ### Privacy Preservation 
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
@@ -797,37 +846,33 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 
 #### Row Level Security
 ---
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
 - dynamic views
 - precomputed views
+- costs and overheads of various patterns of sharing of RLS-applied data
 
 #### Audit
 ---
 
-> This section is a work in progress
+> This section is planned for future development
 
 For consideration:
 
 - audit log queries
 
-##### Example questions and associated queries
-```
-As a Domain (workspace) Admin:
+##### Typical observability requirements by role
 
+**As a Domain (workspace) Admin**
+```md
 1. Where are there misconfigured catalogs / schemas / objects?
 2. Who is sharing what to who and is that permitted (as per access approvals?)
 3. Who is accessing data and are they permitted (as per access approvals?)
-
 ```
-
+<br>
 
 
 <br>
-
-## Billing
-
-For more context and concepts, refer to the [Enterprise Billing](level_1.md#enterprise-billing) section in Level 1.
 
