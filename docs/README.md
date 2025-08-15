@@ -19,7 +19,9 @@ It provides strategic, enterprise and solution level resources - distilled from 
 The ideas and patterns are opinionated, shaped by the Intuitas design philosophy, and can be demonstrated by working environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
 
 <br>
+
 >#### *To build a home, you need a plan — but for it to thrive, you need a town plan.*
+
 <br>
 <br>
 
@@ -39,7 +41,6 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 ---
 
 - [Overview](#overview)
-- [Get help](#get-help)
 - [Design Principles](#design-principles)
 - [Getting Started](#getting-started)
 - [Licencing and disclaimer](#licencing-and-disclaimer)
