@@ -17,90 +17,21 @@ It distills insights from our R&D, answers to common questions, and lessons lear
 The ideas are intentionally opinionated, shaped by the Intuitas design philosophy, and proven in practice—supported by working demonstration environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
 
 <br>
-
-> **Important notes:**
-> 
-> - Living resource - This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
-> - Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made > to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*
-> - Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.
-> - See the [copyright, licencing and disclaimer information](#terms)
 <br>
 <br>
 
 
-## Get help
+
+
+# Table of Contents
 ---
 
- at [office@intuitas.com](mailto:office@intuitas.com) to:
+- [Overview](#overview)
+- [Get help](#get-help)
+- [Design Principles](#design-principles)
+- [Getting Started](#getting-started)
+- [Licencing and disclaimer](#licencing-and-disclaimer)
 
-- Find out more, or provide feedback.
-- Access our demonstration environment or any of the tools and technologies presented
-- Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
-<br>
-<br>
-
-# Overview
----
-
-This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
-<br>
-
-## Design Principles
----
-
-Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
-
-Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.
-
-<br>
-
-| # | Principle | Description |
-|---|-----------|-------------|
-| 1 | **Think big, start small** | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
-| 2 | **Empowered Autonomy** | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
-| 3 | **Disciplined Core, Flexible Edge** | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
-| 4 | **Actionable Data** | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
-| 5 | **Make It Easy to Do the Right Thing** | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
-| 6 | **Cost Transparency and Efficiency** | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
-| 7 | **Adaptability for Growth** | Platforms seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
-| 8 | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
-| 9 | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
-
-<br>
-<br>
-
-## Getting Started
----
-
-An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.
-
-1. **Level 0: Context Setting** - Define organisational objectives, domain structures, and strategic goals
-2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
-3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
-4. **Standards & Conventions** - Apply consistent naming and conventions throughout
-
-<br>
-<br>
-
-Choose your starting point:
-
-| Role | Recommended Path | Focus Areas |
-|------|------------------|-------------|
-| **Leaders & Architects** | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
-| **Domain & Technical Teams** | Level 2 | Practical implementation within established enterprise frameworks |
-
-
-
-<br>
-<br>
-
----
-<br>
-<br>
-
-
-## Table of Contents
----
 
 ### **Level 0: Enterprise Context**
 - [Organisational & Domain Definition](level_0.md#org-domain-definition)
@@ -163,8 +94,80 @@ Choose your starting point:
 <br>
 <br>
 
+## Get help
+---
 
-## Terms
+Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
+
+- Find out more, or provide feedback.
+- Access our demonstration environment or any of the tools and technologies presented
+- Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
+<br>
+<br>
+
+# Overview
+---
+
+This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
+<br>
+
+> **Important notes:**
+> 
+> - Living resource - This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
+> - Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made > to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*
+> - Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.
+> - See the [copyright, licencing and disclaimer information](#terms)
+<br>
+<br>
+
+## Design Principles
+---
+
+Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
+
+Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.
+
+<br>
+
+| # | Principle | Description |
+|---|-----------|-------------|
+| 1 | **Think big, start small** | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
+| 2 | **Empowered Autonomy** | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
+| 3 | **Disciplined Core, Flexible Edge** | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
+| 4 | **Actionable Data** | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
+| 5 | **Make It Easy to Do the Right Thing** | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
+| 6 | **Cost Transparency and Efficiency** | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
+| 7 | **Adaptability for Growth** | Platforms seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
+| 8 | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
+| 9 | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
+
+<br>
+<br>
+
+## Getting Started
+---
+
+An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.
+
+1. **Level 0: Context Setting** - Define organisational objectives, domain structures, and strategic goals
+2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
+3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
+4. **Standards & Conventions** - Apply consistent naming and conventions throughout
+
+<br>
+
+Choose your starting point:
+
+| Role | Recommended Path | Focus Areas |
+|------|------------------|-------------|
+| **Leaders & Architects** | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
+| **Domain & Technical Teams** | Level 2 | Practical implementation within established enterprise frameworks |
+
+<br>
+<br>
+
+
+## Licencing and disclaimer
 ---
 
 **Copyright:** This knowledgebase and associated content are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
