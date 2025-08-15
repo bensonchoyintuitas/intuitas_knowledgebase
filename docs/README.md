@@ -23,8 +23,17 @@ The ideas and patterns are opinionated, shaped by the Intuitas design philosophy
 <br>
 <br>
 
+## Get help
+---
 
+Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 
+- Find out more, or provide feedback.
+- Access our demonstration environment or any of the tools and technologies presented
+- Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
+<br>
+<br>
+<br>
 
 # Table of Contents
 ---
@@ -97,16 +106,7 @@ The ideas and patterns are opinionated, shaped by the Intuitas design philosophy
 <br>
 <br>
 
-## Get help
----
 
-Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
-
-- Find out more, or provide feedback.
-- Access our demonstration environment or any of the tools and technologies presented
-- Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
-<br>
-<br>
 
 # Overview
 ---
