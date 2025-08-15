@@ -77,10 +77,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#infrastructure" class="nav-link">Infrastructure</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#data-architecture" class="nav-link">Data Architecture</a>
               <ul class="nav flex-column">
               </ul>
@@ -94,6 +90,10 @@
               </ul>
             </li>
             <li class="nav-item" data-bs-level="2"><a href="#data-governance" class="nav-link">Data governance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#infrastructure" class="nav-link">Infrastructure</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -118,16 +118,6 @@
 <li><a href="./#business-metrics">Business metrics</a></li>
 </ul>
 </li>
-<li><a href="./#infrastructure">Infrastructure</a><ul>
-<li><a href="./#environments-workspaces-and-storage">Environments, Workspaces and Storage</a></li>
-<li><a href="./#secrets">Secrets</a></li>
-<li><a href="./#storage">Storage</a></li>
-<li><a href="./#cicd-and-repository">CICD and Repository</a></li>
-<li><a href="./#observability">Observability</a></li>
-<li><a href="./#networking">Networking</a></li>
-<li><a href="./#orchestration">Orchestration</a></li>
-</ul>
-</li>
 <li><a href="./#data-architecture">Data Architecture</a><ul>
 <li><a href="./#data-and-information-models">Data and information models</a></li>
 <li><a href="./#domain-glossary">Domain glossary</a></li>
@@ -149,6 +139,16 @@
 <li><a href="./#data-understandability">Data understandability</a></li>
 <li><a href="./#privacy-preservation">Privacy Preservation</a></li>
 <li><a href="./#audit">Audit</a></li>
+</ul>
+</li>
+<li><a href="./#infrastructure">Infrastructure</a><ul>
+<li><a href="./#environments-workspaces-and-storage">Environments, Workspaces and Storage</a></li>
+<li><a href="./#secrets">Secrets</a></li>
+<li><a href="./#storage">Storage</a></li>
+<li><a href="./#cicd-and-repository">CICD and Repository</a></li>
+<li><a href="./#observability">Observability</a></li>
+<li><a href="./#networking">Networking</a></li>
+<li><a href="./#orchestration">Orchestration</a></li>
 </ul>
 </li>
 </ul>
@@ -198,163 +198,6 @@ Understanding them is necessary to understand:
 - frequency</p>
 <p><br>
 <br></p>
-<h2 id="infrastructure">Infrastructure</h2>
-<hr />
-<blockquote>
-<p>This section is planned for future development</p>
-</blockquote>
-<h3 id="environments-workspaces-and-storage">Environments, Workspaces and Storage</h3>
-<div align="center">
-
-<em>Workspaces, Environments and Storage</em>
-<br>
-
-<a href="../img/workspaces_environments_storage.png" target="_blank">
-    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
-</a>
-
-</div>
-<p>This diagram illustrates a <strong>data lakehouse architecture</strong> with the following components and flow:</p>
-<p><strong>Data Sources</strong></p>
-<p>Data originates from multiple sources such as:
-  - Databases
-  - Kafka or event streaming
-  - APIs or Python scripts
-  - SharePoint (or similar sources)</p>
-<p><strong>Enterprise Engineering Layer</strong></p>
-<ul>
-<li>Centralized enterprise workspaces are managed here with multiple environments. 
-While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:</li>
-<li>Each workspace contains:</li>
-<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
-</ul>
-<p><strong>Domain-Specific Layer</strong></p>
-<ul>
-<li>Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. </li>
-<li><strong>PROD</strong>, <strong>TEST</strong>, and <strong>DEV</strong> storage containers within a single lakehouse storage account for domain-specific data management.</li>
-<li>Local <strong>Bronze</strong> for domain-specific engineering of domain-local data (not managed by enterprise engineering)</li>
-<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
-</ul>
-<p><strong>Data Catalog</strong></p>
-<ul>
-<li>A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:</li>
-<li>Enables discovery and governance of data.</li>
-<li>Optional external catalog storage.</li>
-</ul>
-<h3 id="secrets">Secrets</h3>
-<hr />
-<blockquote>
-<p>This section is planned for future development
-- Management
-- Areas of use
-- Handling practices</p>
-</blockquote>
-<h3 id="storage">Storage</h3>
-<hr />
-<h4 id="lakehouse-storage">Lakehouse storage</h4>
-<p>Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
-This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.</p>
-<ul>
-<li>Resource: ADLSGen2</li>
-<li>Tier: Standard/Premium (depends on workload)</li>
-<li>Redundancy: </li>
-<li>Minimum ZRS or GRS for prod</li>
-<li>Minimum LRS for poc, dev, test and preprod</li>
-</ul>
-<h4 id="generic-blob-storage">Generic Blob storage</h4>
-<p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
-<ul>
-<li>Resource: ADLSGen2</li>
-<li>Generic storage account name: sa{organisation_name}{domain_name}{functional_description}</li>
-<li>Tier: Standard/Premium (depends on workload)</li>
-<li>Redundancy: </li>
-<li>Minimum ZRS or GRS for prod</li>
-<li>Minimum LRS for poc, dev, test and preprod</li>
-</ul>
-<h3 id="cicd-and-repository">CICD and Repository</h3>
-<hr />
-<blockquote>
-<p>This section is planned for future development
-- Description of git workflows for CICD in terms of:
-    - Infrastructure
-    - Data engineering
-    - Analytics engineering
-    - Data science / AIML
-    - BI, Reports and other products</p>
-</blockquote>
-<h4 id="tools">Tools</h4>
-<ul>
-<li>Github</li>
-<li>Azure Devops</li>
-<li>Databricks Asset Bundles</li>
-</ul>
-<h4 id="repositories">Repositories</h4>
-<ul>
-<li>Infrastructure</li>
-<li>dbt projects (separate for each domain)<ul>
-<li>potential for enterprise level stitching of lineage</li>
-</ul>
-</li>
-<li>Data engineering code (separate for each domain) using Databricks Asset Bundles</li>
-</ul>
-<h3 id="observability">Observability</h3>
-<hr />
-<p>Various tools can be used to provide insight into different aspects of the architecture:</p>
-<ul>
-<li>dbt observability - Elementary</li>
-<li>Databricks observability - Databricks monitoring dashboards</li>
-<li>ADF - Native adf monitoring</li>
-</ul>
-<h4 id="dbt-observability-elementary">dbt observability - Elementary</h4>
-<p>Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a></p>
-<div align="center">
-
-<em>dbt warehouse observability</em>
-<br>
-
-<a href="../img/observability.png" target="_blank">
-    <img src="../img/observability.png"  alt="Observability Diagram">
-</a>
-
-<br>
-<br>
-<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
-
-</div>
-
-<p>Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:</p>
-<ul>
-<li>Data freshness: Ensures your data is up to date.</li>
-<li>Volume anomalies: Detects unexpected changes in row counts.</li>
-<li>Schema changes: Monitors additions, deletions, or modifications of columns.</li>
-<li>Test results: Checks if your dbt tests are passing or failing.</li>
-<li>Custom metrics: Allows you to define your own checks.</li>
-</ul>
-<p>It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.</p>
-<h3 id="networking">Networking</h3>
-<hr />
-<p>By default - all resources reside within the same VNet with private endpoints.</p>
-<p>Service endpoints and policies are enabled.</p>
-<h3 id="orchestration">Orchestration</h3>
-<hr />
-<h4 id="tools_1">Tools</h4>
-<ul>
-<li>Azure Data Factory (if needed)</li>
-<li>Databricks Workflows (for both databricks and dbt)</li>
-</ul>
-<h3 id="security">Security</h3>
-<hr />
-<h4 id="tools_2">Tools</h4>
-<ul>
-<li>Azure Entra</li>
-<li>Azure Key Vault</li>
-<li>Unity Catalog <ul>
-<li>System access reports</li>
-</ul>
-</li>
-</ul>
-<p><br></p>
-<p><br></p>
 <h2 id="data-architecture">Data Architecture</h2>
 <hr />
 <p>Data Architecture refers to how data is physically structured, stored, and accessed within an organisation. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. </p>
@@ -974,8 +817,163 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 2. Who is sharing what to who and is that permitted (as per access approvals?)
 3. Who is accessing data and are they permitted (as per access approvals?)
 </code></pre>
-<p><br></p>
-<p><br></p></div>
+<p><br>
+<br></p>
+<h2 id="infrastructure">Infrastructure</h2>
+<hr />
+<blockquote>
+<p>This section is planned for future development</p>
+</blockquote>
+<h3 id="environments-workspaces-and-storage">Environments, Workspaces and Storage</h3>
+<div align="center">
+
+<em>Workspaces, Environments and Storage</em>
+<br>
+
+<a href="../img/workspaces_environments_storage.png" target="_blank">
+    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
+</a>
+
+</div>
+<p>This diagram illustrates a <strong>data lakehouse architecture</strong> with the following components and flow:</p>
+<p><strong>Data Sources</strong></p>
+<p>Data originates from multiple sources such as:
+  - Databases
+  - Kafka or event streaming
+  - APIs or Python scripts
+  - SharePoint (or similar sources)</p>
+<p><strong>Enterprise Engineering Layer</strong></p>
+<ul>
+<li>Centralized enterprise workspaces are managed here with multiple environments. 
+While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:</li>
+<li>Each workspace contains:</li>
+<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
+</ul>
+<p><strong>Domain-Specific Layer</strong></p>
+<ul>
+<li>Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. </li>
+<li><strong>PROD</strong>, <strong>TEST</strong>, and <strong>DEV</strong> storage containers within a single lakehouse storage account for domain-specific data management.</li>
+<li>Local <strong>Bronze</strong> for domain-specific engineering of domain-local data (not managed by enterprise engineering)</li>
+<li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
+</ul>
+<p><strong>Data Catalog</strong></p>
+<ul>
+<li>A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:</li>
+<li>Enables discovery and governance of data.</li>
+<li>Optional external catalog storage.</li>
+</ul>
+<h3 id="secrets">Secrets</h3>
+<hr />
+<blockquote>
+<p>This section is planned for future development
+- Management
+- Areas of use
+- Handling practices</p>
+</blockquote>
+<h3 id="storage">Storage</h3>
+<hr />
+<h4 id="lakehouse-storage">Lakehouse storage</h4>
+<p>Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
+This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.</p>
+<ul>
+<li>Resource: ADLSGen2</li>
+<li>Tier: Standard/Premium (depends on workload)</li>
+<li>Redundancy: </li>
+<li>Minimum ZRS or GRS for prod</li>
+<li>Minimum LRS for poc, dev, test and preprod</li>
+</ul>
+<h4 id="generic-blob-storage">Generic Blob storage</h4>
+<p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
+<ul>
+<li>Resource: ADLSGen2</li>
+<li>Generic storage account name: sa{organisation_name}{domain_name}{functional_description}</li>
+<li>Tier: Standard/Premium (depends on workload)</li>
+<li>Redundancy: </li>
+<li>Minimum ZRS or GRS for prod</li>
+<li>Minimum LRS for poc, dev, test and preprod</li>
+</ul>
+<h3 id="cicd-and-repository">CICD and Repository</h3>
+<hr />
+<blockquote>
+<p>This section is planned for future development
+- Description of git workflows for CICD in terms of:
+    - Infrastructure
+    - Data engineering
+    - Analytics engineering
+    - Data science / AIML
+    - BI, Reports and other products</p>
+</blockquote>
+<h4 id="tools">Tools</h4>
+<ul>
+<li>Github</li>
+<li>Azure Devops</li>
+<li>Databricks Asset Bundles</li>
+</ul>
+<h4 id="repositories">Repositories</h4>
+<ul>
+<li>Infrastructure</li>
+<li>dbt projects (separate for each domain)<ul>
+<li>potential for enterprise level stitching of lineage</li>
+</ul>
+</li>
+<li>Data engineering code (separate for each domain) using Databricks Asset Bundles</li>
+</ul>
+<h3 id="observability">Observability</h3>
+<hr />
+<p>Various tools can be used to provide insight into different aspects of the architecture:</p>
+<ul>
+<li>dbt observability - Elementary</li>
+<li>Databricks observability - Databricks monitoring dashboards</li>
+<li>ADF - Native adf monitoring</li>
+</ul>
+<h4 id="dbt-observability-elementary">dbt observability - Elementary</h4>
+<p>Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a></p>
+<div align="center">
+
+<em>dbt warehouse observability</em>
+<br>
+
+<a href="../img/observability.png" target="_blank">
+    <img src="../img/observability.png"  alt="Observability Diagram">
+</a>
+
+<br>
+<br>
+<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
+
+</div>
+
+<p>Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:</p>
+<ul>
+<li>Data freshness: Ensures your data is up to date.</li>
+<li>Volume anomalies: Detects unexpected changes in row counts.</li>
+<li>Schema changes: Monitors additions, deletions, or modifications of columns.</li>
+<li>Test results: Checks if your dbt tests are passing or failing.</li>
+<li>Custom metrics: Allows you to define your own checks.</li>
+</ul>
+<p>It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.</p>
+<h3 id="networking">Networking</h3>
+<hr />
+<p>By default - all resources reside within the same VNet with private endpoints.</p>
+<p>Service endpoints and policies are enabled.</p>
+<h3 id="orchestration">Orchestration</h3>
+<hr />
+<h4 id="tools_1">Tools</h4>
+<ul>
+<li>Azure Data Factory (if needed)</li>
+<li>Databricks Workflows (for both databricks and dbt)</li>
+</ul>
+<h3 id="security">Security</h3>
+<hr />
+<h4 id="tools_2">Tools</h4>
+<ul>
+<li>Azure Entra</li>
+<li>Azure Key Vault</li>
+<li>Unity Catalog <ul>
+<li>System access reports</li>
+</ul>
+</li>
+</ul></div>
             </div>
         </div>
 

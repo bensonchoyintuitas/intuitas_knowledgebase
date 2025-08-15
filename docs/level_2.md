@@ -14,14 +14,6 @@ This section describes Domain-level instantiations of the enterprise-level refer
     - [Business processes](level_2.md#business-processes)
     - [Business glossary](level_2.md#business-glossary)
     - [Business metrics](level_2.md#business-metrics)
-- [Infrastructure](level_2.md#infrastructure)
-    - [Environments, Workspaces and Storage](level_2.md#environments-workspaces-and-storage)
-    - [Secrets](level_2.md#secrets)
-    - [Storage](level_2.md#storage)
-    - [CICD and Repository](level_2.md#cicd-and-repository)
-    - [Observability](level_2.md#observability)
-    - [Networking](level_2.md#networking)
-    - [Orchestration](level_2.md#orchestration)
 - [Data Architecture](level_2.md#data-architecture)
     - [Data and information models](level_2.md#data-and-information-models)
     - [Domain glossary](level_2.md#domain-glossary)
@@ -39,7 +31,14 @@ This section describes Domain-level instantiations of the enterprise-level refer
     - [Data understandability](level_2.md#data-understandability)
     - [Privacy Preservation](level_2.md#privacy-preservation)
     - [Audit](level_2.md#audit)
-
+- [Infrastructure](level_2.md#infrastructure)
+    - [Environments, Workspaces and Storage](level_2.md#environments-workspaces-and-storage)
+    - [Secrets](level_2.md#secrets)
+    - [Storage](level_2.md#storage)
+    - [CICD and Repository](level_2.md#cicd-and-repository)
+    - [Observability](level_2.md#observability)
+    - [Networking](level_2.md#networking)
+    - [Orchestration](level_2.md#orchestration)
 
 <div align="center">
 
@@ -96,179 +95,6 @@ Metrics are the measurements of the performance of the business processes. They 
 <br>
 <br>
 
-## Infrastructure
----
-> This section is planned for future development
-### Environments, Workspaces and Storage
-
-<div align="center">
-
-<em>Workspaces, Environments and Storage</em>
-<br>
-
-<a href="../img/workspaces_environments_storage.png" target="_blank">
-    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
-</a>
-
-</div>
-This diagram illustrates a **data lakehouse architecture** with the following components and flow:
-
-
-**Data Sources**
-
-Data originates from multiple sources such as:
-  - Databases
-  - Kafka or event streaming
-  - APIs or Python scripts
-  - SharePoint (or similar sources)
-
-
-**Enterprise Engineering Layer**
-
-- Centralized enterprise workspaces are managed here with multiple environments. 
-While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:
-- Each workspace contains:
-- Data from prod catalogs can be **shared** to other domains.
-
-
-**Domain-Specific Layer**
-
-- Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. 
-- **PROD**, **TEST**, and **DEV** storage containers within a single lakehouse storage account for domain-specific data management.
-- Local **Bronze** for domain-specific engineering of domain-local data (not managed by enterprise engineering)
-- Data from prod catalogs can be **shared** to other domains.
-
-**Data Catalog**
-
-- A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:
-- Enables discovery and governance of data.
-- Optional external catalog storage.
-
-
-### Secrets
-
----
-> This section is planned for future development
-- Management
-- Areas of use
-- Handling practices
-
-### Storage
----
-
-#### Lakehouse storage
-
-Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
-This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
-
-- Resource: ADLSGen2
-- Tier: Standard/Premium (depends on workload)
-- Redundancy: 
-   - Minimum ZRS or GRS for prod
-   - Minimum LRS for poc, dev, test and preprod
-
-
-#### Generic Blob storage
-
-Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.
-
-- Resource: ADLSGen2
-- Generic storage account name: sa{organisation_name}{domain_name}{functional_description}
-- Tier: Standard/Premium (depends on workload)
-- Redundancy: 
-   - Minimum ZRS or GRS for prod
-   - Minimum LRS for poc, dev, test and preprod
-
-### CICD and Repository
----
-> This section is planned for future development
-- Description of git workflows for CICD in terms of:
-    - Infrastructure
-    - Data engineering
-    - Analytics engineering
-    - Data science / AIML
-    - BI, Reports and other products
-
-#### Tools
-- Github
-- Azure Devops
-- Databricks Asset Bundles
-
-#### Repositories
-
-- Infrastructure
-- dbt projects (separate for each domain)
-    - potential for enterprise level stitching of lineage
-- Data engineering code (separate for each domain) using Databricks Asset Bundles
-
-### Observability
----
-
-Various tools can be used to provide insight into different aspects of the architecture:
-
-- dbt observability - Elementary
-- Databricks observability - Databricks monitoring dashboards
-- ADF - Native adf monitoring
-
-#### dbt observability - Elementary
-Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a>
-
-<div align="center">
-
-<em>dbt warehouse observability</em>
-<br>
-
-<a href="../img/observability.png" target="_blank">
-    <img src="../img/observability.png"  alt="Observability Diagram">
-</a>
-
-<br>
-<br>
-<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
-
-</div>
-
-Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
-
-- Data freshness: Ensures your data is up to date.
-- Volume anomalies: Detects unexpected changes in row counts.
-- Schema changes: Monitors additions, deletions, or modifications of columns.
-- Test results: Checks if your dbt tests are passing or failing.
-- Custom metrics: Allows you to define your own checks.
-
-It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.
-
-
-### Networking
----
-By default - all resources reside within the same VNet with private endpoints.
-
-Service endpoints and policies are enabled.
-
-### Orchestration
----
-
-#### Tools
-
-- Azure Data Factory (if needed)
-- Databricks Workflows (for both databricks and dbt)
-
-### Security
----
-
-#### Tools
-
-- Azure Entra
-- Azure Key Vault
-- Unity Catalog 
-    - System access reports
-
-<br>
-
-
-
-
-<br>
 
 ## Data Architecture
 ---
@@ -824,7 +650,6 @@ For consideration:
 - data object metadata
 
 
-
 ### Privacy Preservation 
 ---
 > This section is planned for future development
@@ -871,7 +696,172 @@ For consideration:
 3. Who is accessing data and are they permitted (as per access approvals?)
 ```
 <br>
-
-
 <br>
 
+
+## Infrastructure
+---
+> This section is planned for future development
+### Environments, Workspaces and Storage
+
+<div align="center">
+
+<em>Workspaces, Environments and Storage</em>
+<br>
+
+<a href="../img/workspaces_environments_storage.png" target="_blank">
+    <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
+</a>
+
+</div>
+This diagram illustrates a **data lakehouse architecture** with the following components and flow:
+
+
+**Data Sources**
+
+Data originates from multiple sources such as:
+  - Databases
+  - Kafka or event streaming
+  - APIs or Python scripts
+  - SharePoint (or similar sources)
+
+
+**Enterprise Engineering Layer**
+
+- Centralized enterprise workspaces are managed here with multiple environments. 
+While work can be achieved within a single workspace and lakehouse storage account, decoupling the workspaces and storage accounts allow for more isolated change at the infrastructure level - in line with engineering requirements:
+- Each workspace contains:
+- Data from prod catalogs can be **shared** to other domains.
+
+
+**Domain-Specific Layer**
+
+- Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. 
+- **PROD**, **TEST**, and **DEV** storage containers within a single lakehouse storage account for domain-specific data management.
+- Local **Bronze** for domain-specific engineering of domain-local data (not managed by enterprise engineering)
+- Data from prod catalogs can be **shared** to other domains.
+
+**Data Catalog**
+
+- A centralized data catalog (unity catalog) serves as a metadata repository for the entire architecture:
+- Enables discovery and governance of data.
+- Optional external catalog storage.
+
+
+### Secrets
+
+---
+> This section is planned for future development
+- Management
+- Areas of use
+- Handling practices
+
+### Storage
+---
+
+#### Lakehouse storage
+
+Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
+This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.
+
+- Resource: ADLSGen2
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+
+#### Generic Blob storage
+
+Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.
+
+- Resource: ADLSGen2
+- Generic storage account name: sa{organisation_name}{domain_name}{functional_description}
+- Tier: Standard/Premium (depends on workload)
+- Redundancy: 
+   - Minimum ZRS or GRS for prod
+   - Minimum LRS for poc, dev, test and preprod
+
+### CICD and Repository
+---
+> This section is planned for future development
+- Description of git workflows for CICD in terms of:
+    - Infrastructure
+    - Data engineering
+    - Analytics engineering
+    - Data science / AIML
+    - BI, Reports and other products
+
+#### Tools
+- Github
+- Azure Devops
+- Databricks Asset Bundles
+
+#### Repositories
+
+- Infrastructure
+- dbt projects (separate for each domain)
+    - potential for enterprise level stitching of lineage
+- Data engineering code (separate for each domain) using Databricks Asset Bundles
+
+### Observability
+---
+
+Various tools can be used to provide insight into different aspects of the architecture:
+
+- dbt observability - Elementary
+- Databricks observability - Databricks monitoring dashboards
+- ADF - Native adf monitoring
+
+#### dbt observability - Elementary
+Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a>
+
+<div align="center">
+
+<em>dbt warehouse observability</em>
+<br>
+
+<a href="../img/observability.png" target="_blank">
+    <img src="../img/observability.png"  alt="Observability Diagram">
+</a>
+
+<br>
+<br>
+<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
+
+</div>
+
+Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:
+
+- Data freshness: Ensures your data is up to date.
+- Volume anomalies: Detects unexpected changes in row counts.
+- Schema changes: Monitors additions, deletions, or modifications of columns.
+- Test results: Checks if your dbt tests are passing or failing.
+- Custom metrics: Allows you to define your own checks.
+
+It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.
+
+
+### Networking
+---
+By default - all resources reside within the same VNet with private endpoints.
+
+Service endpoints and policies are enabled.
+
+### Orchestration
+---
+
+#### Tools
+
+- Azure Data Factory (if needed)
+- Databricks Workflows (for both databricks and dbt)
+
+### Security
+---
+
+#### Tools
+
+- Azure Entra
+- Azure Key Vault
+- Unity Catalog 
+    - System access reports
