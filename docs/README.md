@@ -1,4 +1,7 @@
-<a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
+| <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.*|
+|:---:|---|
+
+<br>
 
 # Enterprise Data Intelligence Blueprint
 
@@ -11,24 +14,25 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 
 ## Important Notes
 
-**This is a living resource** - which means it's unpolished in places. It is continuously updated and refined based on ongoing R&D, lessons learned and feature assessments. 
+**Living resource** - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
 
-**Currency** - Positions and guidance reflect only features in general availability at the time of writing. Content will be updated as features change or mature.
+**Currency** – Positions and guidance reflect the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information promptly as features evolve, no guarantee of timeliness is provided. Readers are encouraged to independently validate all claims.
 
----
+See the [Copyright, Licencing and Disclaimer information](#terms)
 
-## Get Help
+## Get help
 
-Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
+ at [office@intuitas.com](mailto:office@intuitas.com) to:
 
 - Find out more, or provide feedback.
 - Access our demonstration environment or any of the tools and technologies presented
 - Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
 
-
 ---
+<br>
+<br>
 
-## Overview
+# Overview
 
 This comprehensive blueprint provides practical guidance for designing and delivering enterprise-scale Data, AI, and Governance solutions. It uses 
 
@@ -40,7 +44,6 @@ This comprehensive blueprint provides practical guidance for designing and deliv
 
 Built from extensive R&D, customer engagements, lessons learned and benchmarks.
 
----
 
 ## Design Principles
 
@@ -61,12 +64,11 @@ Organisations should consider these principles alongside any existing frameworks
 | **8** | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
 | **9** | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
 
-
-
-
 ---
+<br>
+<br>
 
-## Getting Started
+# Getting Started
 
 ### **Choose Your Starting Point**
 
@@ -146,10 +148,11 @@ An iterative approach means each level builds upon the previous but can be revis
 
 ### **Standards**
 - **[Naming Standards & Conventions](naming_standards_and_conventions.md)** 
-
+<br>
+<br>
 ---
 
-## Legal
+## Terms
 
 **Copyright:** This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced  or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
 
@@ -157,21 +160,20 @@ An iterative approach means each level builds upon the previous but can be revis
 
 **Disclaimer:** Content is provided for general information only.  It does not constitute professional advice and should not be relied on as a substitute for advice tailored to your circumstances. No liability is accepted for errors or omissions. Always consider your local context and verify applicability before considering its use.
 
----
-
-
 
 
 <div align="center">
 
 
+
 ### 
 
 
+<br>
 <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
 <br>
+
 📧 [office@intuitas.com](mailto:office@intuitas.com)
 
-*Your trusted data and AI advisor* <br>
 
 </div>
