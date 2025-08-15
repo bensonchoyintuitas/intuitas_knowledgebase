@@ -128,7 +128,9 @@ This comprehensive blueprint provides practical patterns for designing and deliv
 ---
 
 >#### *“The alternative to good design is always bad design. There is no such thing as no design.” - Adam Judge*
+
 <br>
+
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
 Readers should consider the priority and implication of these principles alongside any existing principles applicable within their organisation.
