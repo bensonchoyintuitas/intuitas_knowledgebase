@@ -59,7 +59,7 @@ Our use of this term draws inspiration from Domain-Driven Design and Data Mesh p
 
 <div align="center">
 
-<em>Example domains for a Healthcare organisation</em>
+<em>Illustative example domains for a Healthcare organisation</em>
 <br>
 <a href="../img/domain-example.png" target="_blank">
     <img src="../img/domain-example.png"  alt="Example domains for a Healthcare organisation" width="75%">
@@ -68,15 +68,6 @@ Our use of this term draws inspiration from Domain-Driven Design and Data Mesh p
 </div>
 
 
-<div align="center">
-
-<em>Example domain design using Intuitas' Domain builder tool</em>
-<br>
-<a href="../img/domains.png" target="_blank">
-    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
-</a>
-<br>
-</div>
 
 #### **Domain**
 
@@ -86,11 +77,19 @@ Domains relate to functional and organisational boundaries, and represent closel
 - Domains serve their own objectives while also offering products and services of value to other domains and the broader enterprise.
 - Domain can exist at different levels of granularity and their boundaries may not be obvious. They are not necessarily a reflection of the organisational chart.
 
-
 #### **Subdomain**
 
 A subdomain is a lower-level domain within a parent domain that groups data and capability related to a specific business or function area.
 
+<div align="center">
+
+<em>Example of authoring domains using Intuitas' Domain builder tool</em>
+<br>
+<a href="../img/domains.png" target="_blank">
+    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+</a>
+<br>
+</div>
 
 #### **Data Mesh**
 

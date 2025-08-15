@@ -43,7 +43,7 @@ This section describes Domain-level instantiations of the enterprise-level refer
 
 <div align="center">
 
-*Example Platform and Pipeline Reference Architecture*
+<em>Example Platform and Pipeline Reference Architecture</em>
 
 <a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
     <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
@@ -71,7 +71,7 @@ A business glossary is a list of terms and definitions that are relevant to the 
 
 <div align="center">
 
-*Example glossary from Intuitas' Glossary builder tool*
+<em>Example glossary from Intuitas' Glossary builder tool</em>
 <br>
 <a href="../img/glossary.png" target="_blank">
     <img src="../img/glossary.png"  alt="Example glossary from Intuitas' Glossary builder tool" width="75%">
@@ -103,7 +103,7 @@ Metrics are the measurements of the performance of the business processes. They 
 
 <div align="center">
 
-*Workspaces, Environments and Storage*
+<em>Workspaces, Environments and Storage</em>
 <br>
 
 <a href="../img/workspaces_environments_storage.png" target="_blank">
@@ -215,7 +215,7 @@ Elementary is a dbt observability tool available in both Open Source and Cloud S
 
 <div align="center">
 
-*dbt warehouse observability*
+<em>dbt warehouse observability</em>
 <br>
 
 <a href="../img/observability.png" target="_blank">
@@ -309,7 +309,7 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 
 <div align="center">
 
-*Data layers and stages*
+<em>Data layers and stages</em>
 <br>
 
 <a href="../img/data_layers_and_stages.png" target="_blank">
@@ -449,7 +449,7 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 
 <div align="center">
 
-*Example Catalog to storage mapping:*
+<em>Example Catalog to storage mapping:</em>
 <br>
 
 <a href="../img/catalog_to_storage_mapping.png">
@@ -479,7 +479,7 @@ It should be:
 <br>
 <div align="center">
 
-*Example batch ingestion options:*
+<em>Example batch ingestion options:</em>
 <br>
 
 <a href="../img/ingestion_patterns.png" target="_blank">
@@ -546,7 +546,7 @@ The following subsections offer more details about the channels depicted below.
 
 <div align="center">
 
-*Sharing and delivery visualisation channels*
+<em>Sharing and delivery visualisation channels</em>
 <br>
 
 <a href="../img/sharing_delivery_visualisation.png" target="_blank">
