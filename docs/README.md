@@ -18,15 +18,12 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 
 <br>
 
-*Please note:*
-
-*Living resource - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.*
-
-*Currency of information – The information provided reflects the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information as features evolve, the timeliness of these updates cannot be guaranteed.* 
-
-*Use discretion - The information provided is general in nature and may not cover all scenarios or workloads. Readers are encouraged to independently validate all claims and benchmark against their own use cases and projected workloads.*
-
-See the [copyright, licencing and disclaimer information](#terms)
+> **Important notes:**
+> 
+> - Living resource - This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
+> - Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made > to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*
+> - Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.
+> - See the [copyright, licencing and disclaimer information](#terms)
 <br>
 <br>
 
