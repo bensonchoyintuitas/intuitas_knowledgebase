@@ -177,10 +177,11 @@
 <h3 id="domain-centric-design"><strong>Domain-Centric Design</strong></h3>
 <p>Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.</p>
 <div align="center">
+
 *Example domains from Intuitas' Domain builder tool:*
 <br>
 <a href="../img/domains.png" target="_blank">
-    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+    <img src="../img/domains.png"  alt="Example domains from Intuitas' Domain builder tool" width="75%">
 </a>
 <br>
 </div>
@@ -215,6 +216,9 @@
 <li>impacts accessibility, costs, support and overall experience.</li>
 </ul>
 <div align="center">
+
+*Platform and Pipeline Reference Architecture*
+<br>
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
@@ -248,7 +252,7 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 <div align="center">
 
 *Example of hybrid federated mesh topology:*
-
+<br>
 <img src="../img/hybrid_federated_mesh_topology.png" >
 
 </div>
@@ -266,8 +270,8 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 <p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
 <div align="center">
 
-*Example:*
-
+*Example Platform and Pipeline Reference Architecture*
+<br>
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
 </div>
@@ -282,8 +286,8 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 </ul>
 <div align="center">
 
-*Example*
-
+*Example logical data warehouse topology*
+<br>
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
 
@@ -344,6 +348,9 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 </ul>
 <p>Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.</p>
 <div align="center">
+
+*Data and Semantic Lineage*
+<br>
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
 </div>
 <p><br></p>
@@ -360,6 +367,9 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 </ul>
 <p>The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.</p>
 <div align="center">
+
+*Metadata logical architecture*
+<br>
 <img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
 
 <br>
@@ -375,6 +385,9 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 </ul>
 <p>The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.</p>
 <div align="center">
+
+*Metadata flow*
+<br>
 <img src="../img/metadata_flow.png" alt="Metadata flow">
 </div>
 
@@ -384,25 +397,34 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 <p>Metadata is essential for effective data governance, providing necessary context and information about data assets, with the following metadata and tools being core to this capability.</p>
 <h4 id="semantic-modelling-mastering-and-lineage">Semantic modelling, mastering and lineage</h4>
 <p><strong>Snappy</strong> serves as a 'business-first' enterprise domain, model, standards and glossary authoring and mastering tool, and acts as the key driver of semantic lineage linking between true on-the-ground semantics, reference models and physical as-built metadata in Datahub. </p>
-<p><br>
+<div align="center">
+
+*Modelling Domains, Glossaries and Models in Intuitas' snappy tool*
+
+<br>
 <a href="../img/snappy.png" target="_blank">
     <img src="../img/snappy.png"  alt="Intuitas' snappy tool" width="100%">
 </a>
 <br>
-Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access the tool.
+Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
-<br></p>
+<br>
+</div>
+
 <h4 id="unified-metadata-repository">Unified metadata repository</h4>
 <p><strong>DataHub</strong> serves as a consolidation layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
 <p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.</p>
 <div align="center">
+
+*Example: Datahub Lineage*
+<br>
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
 </a>
 <br>
 <br>
 
-*Enterprise-wide summary of assets:*
+*Example: Enterprise-wide summary of assets*
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
@@ -410,7 +432,7 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <br>
 <br>
 
-*Browse by business domain and filters:*
+*Example: Browse by business domain and filters*
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
@@ -418,7 +440,7 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <br>
 <br>
 
-*Metadata search by term:*
+*Example: Metadata search by term*
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
@@ -426,14 +448,14 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <br>
 <br>
 
-*User-driven mapping of glossary terms to measures:*
+*Example: User-driven mapping of glossary terms to measures*
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
 <br>
 
-*User-driven tagging of PII:*
+*Example: User-driven tagging of PII*
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
@@ -463,7 +485,7 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <p><br></p>
 <div align="center">
 
-*Databricks AI-driven semantic detection*
+*Example: Databricks AI-driven semantic detection*
 
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
@@ -538,6 +560,9 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <p>Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform (i.e. Databricks) must to align.</p>
 <p>Recommendations here align with the following Domain topology:</p>
 <div align="center">
+
+*Administration and Billing Scopes*
+<br>
 <img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
 <br>
@@ -584,6 +609,9 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <li>Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (See Dynamic Billing Solution below. Available on request) - see repo <a href="https://github.com/bensonchoyintuitas/databricks_system_tools/">Databricks System Tools</a></li>
 </ul>
 <div align="center">
+
+*Dynamic Billing Solution*
+<br>
 <img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
 
 <br>

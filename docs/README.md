@@ -1,5 +1,6 @@
-<a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.*
-:---|:---
+| | |
+|:---|:---|
+| <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.* |
 
 <br>
 
@@ -11,16 +12,22 @@ It distills insights from our R&D, answers to common questions, and lessons lear
 
 The ideas are intentionally opinionated, shaped by the Intuitas design philosophy, and proven in practice—supported by working demonstration environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
 
+<br>
+<br>
 
-## Important Notes
+### Important Notes
 
 **Living resource** - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
 
 **Currency** – Positions and guidance reflect the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information promptly as features evolve, no guarantee of timeliness is provided. Readers are encouraged to independently validate all claims.
 
-See the [Copyright, Licencing and Disclaimer information](#terms)
+see the [copyright, licencing and disclaimer information](#terms)
+<br>
+<br>
+---
 
 ## Get help
+---
 
  at [office@intuitas.com](mailto:office@intuitas.com) to:
 
@@ -30,22 +37,14 @@ See the [Copyright, Licencing and Disclaimer information](#terms)
 
 ---
 <br>
-<br>
 
 # Overview
 
-This comprehensive blueprint provides practical guidance for designing and delivering enterprise-scale Data, AI, and Governance solutions. It uses 
-
-**What you'll find here:**
-- Real-world tested architecture patterns
-- Opinionated design principles based on proven practices  
-- Step-by-step implementation guidance
-- Working demo environments and examples
-
-Built from extensive R&D, customer engagements, lessons learned and benchmarks.
+This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
 
 
 ## Design Principles
+---
 
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
@@ -68,7 +67,8 @@ Organisations should consider these principles alongside any existing frameworks
 <br>
 <br>
 
-# Getting Started
+## Getting Started
+---
 
 ### **Choose Your Starting Point**
 
@@ -90,9 +90,10 @@ An iterative approach means each level builds upon the previous but can be revis
 ---
 
 ## Documentation Structure
+---
 
 ### **Level 0: Enterprise Context**
-- [organisational & Domain Definition](level_0.md#org-domain-definition)
+- [Organisational & Domain Definition](level_0.md#org-domain-definition)
 - [Strategies and Objectives](level_0.md#strategies-and-objectives)  
 - [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
 - [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
@@ -146,13 +147,14 @@ An iterative approach means each level builds upon the previous but can be revis
     - [Privacy Preservation](level_2.md#privacy-preservation)
     - [Audit Capabilities](level_2.md#audit)
 
-### **Standards**
+### **Standards and conventions**
 - **[Naming Standards & Conventions](naming_standards_and_conventions.md)** 
 <br>
 <br>
 ---
 
 ## Terms
+---
 
 **Copyright:** This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced  or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
 
@@ -160,7 +162,8 @@ An iterative approach means each level builds upon the previous but can be revis
 
 **Disclaimer:** Content is provided for general information only.  It does not constitute professional advice and should not be relied on as a substitute for advice tailored to your circumstances. No liability is accepted for errors or omissions. Always consider your local context and verify applicability before considering its use.
 
-
+<br>
+---
 
 <div align="center">
 

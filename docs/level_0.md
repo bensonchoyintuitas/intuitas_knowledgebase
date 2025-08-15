@@ -30,13 +30,15 @@ Understanding the structure of the organisation and its domains is foundational 
 - Description of the organisational boundary and any external organisations that are within the scope of concern.
 - Description of domains and subdomains within the organisation that may have a material bearing on the data governance and data management operating model.
 
+<div align="center">
+
 *Example domains from Intuitas' Domain builder tool:*
 <br>
 <a href="../img/domains.png" target="_blank">
     <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
 </a>
 <br>
-
+</div>
 
 ## Strategies and Objectives
 

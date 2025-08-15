@@ -55,10 +55,11 @@ The following key concepts are used throughout this knowledgebase.
 Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
 <div align="center">
+
 *Example domains from Intuitas' Domain builder tool:*
 <br>
 <a href="../img/domains.png" target="_blank">
-    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+    <img src="../img/domains.png"  alt="Example domains from Intuitas' Domain builder tool" width="75%">
 </a>
 <br>
 </div>
@@ -113,6 +114,9 @@ The arrangement of domains:
 - impacts accessibility, costs, support and overall experience.
 
 <div align="center">
+
+*Platform and Pipeline Reference Architecture*
+<br>
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
@@ -150,7 +154,7 @@ Key characteristics of this topology include:
 <div align="center">
 
 *Example of hybrid federated mesh topology:*
-
+<br>
 <img src="../img/hybrid_federated_mesh_topology.png" >
 
 </div>
@@ -178,8 +182,8 @@ Describes the logical components (including infrastructure, applications and com
 
 <div align="center">
 
-*Example:*
-
+*Example Platform and Pipeline Reference Architecture*
+<br>
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
 </div>
@@ -196,8 +200,8 @@ Describes the logical components (including infrastructure, applications and com
 
 <div align="center">
 
-*Example*
-
+*Example logical data warehouse topology*
+<br>
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
 
@@ -265,6 +269,9 @@ Semantic lineage and Data lineage are critical concepts in a Modern Data Intelli
 Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.
 
 <div align="center">
+
+*Data and Semantic Lineage*
+<br>
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
 </div>
 <br>
@@ -284,6 +291,9 @@ Metadata exists in various types, formats, and purposes, each essential for enab
 The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.
 
 <div align="center">
+
+*Metadata logical architecture*
+<br>
 <img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
 
 <br>
@@ -302,6 +312,9 @@ Metadata consolidation and synchronisation are critical for achieving a consiste
 The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.
 
 <div align="center">
+
+*Metadata flow*
+<br>
 <img src="../img/metadata_flow.png" alt="Metadata flow">
 </div>
 
@@ -316,6 +329,10 @@ Metadata is essential for effective data governance, providing necessary context
 
 **Snappy** serves as a 'business-first' enterprise domain, model, standards and glossary authoring and mastering tool, and acts as the key driver of semantic lineage linking between true on-the-ground semantics, reference models and physical as-built metadata in Datahub. 
 
+<div align="center">
+
+*Modelling Domains, Glossaries and Models in Intuitas' snappy tool*
+
 <br>
 <a href="../img/snappy.png" target="_blank">
     <img src="../img/snappy.png"  alt="Intuitas' snappy tool" width="100%">
@@ -324,19 +341,24 @@ Metadata is essential for effective data governance, providing necessary context
 Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
+</div>
+
 #### Unified metadata repository
 
 **DataHub** serves as a consolidation layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.
 
 The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
 <div align="center">
+
+*Example: Datahub Lineage*
+<br>
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
 </a>
 <br>
 <br>
 
-*Enterprise-wide summary of assets:*
+*Example: Enterprise-wide summary of assets*
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
@@ -344,7 +366,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Browse by business domain and filters:*
+*Example: Browse by business domain and filters*
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
@@ -352,7 +374,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Metadata search by term:*
+*Example: Metadata search by term*
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
@@ -360,14 +382,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*User-driven mapping of glossary terms to measures:*
+*Example: User-driven mapping of glossary terms to measures*
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
 <br>
 
-*User-driven tagging of PII:*
+*Example: User-driven tagging of PII*
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
@@ -396,7 +418,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <div align="center">
 
-*Databricks AI-driven semantic detection*
+*Example: Databricks AI-driven semantic detection*
 
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
@@ -482,6 +504,9 @@ Here is where the Business Architecture of the organisation, domain topology, in
 Recommendations here align with the following Domain topology:
 
 <div align="center">
+
+*Administration and Billing Scopes*
+<br>
 <img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
 <br>
@@ -519,6 +544,9 @@ Recommendations here align with the following Domain topology:
 - Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (See Dynamic Billing Solution below. Available on request) - see repo [Databricks System Tools](https://github.com/bensonchoyintuitas/databricks_system_tools/)
 
 <div align="center">
+
+*Dynamic Billing Solution*
+<br>
 <img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
 
 <br>
