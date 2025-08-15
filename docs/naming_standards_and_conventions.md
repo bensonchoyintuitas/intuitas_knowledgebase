@@ -1,8 +1,7 @@
 # Naming Conventions
 [Return to home](README.md)
 
-All naming is in lower case.
-
+These naming standards are opinionated and designed to ensure consistency, governance, and automation across an organisation. They largely reflect an Azure Databricks environment, however can be adapted to other platforms. Organisations should adapt these standards to fit their existing internal conventions.
 <br>
 
 ## Table of Contents
