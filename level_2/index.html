@@ -156,11 +156,17 @@
 </li>
 <li><a href="./#billing">Billing</a></li>
 </ul>
-<p><em>Example reference architecture:</em></p>
-<p><a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
+<div align="center">
+
+*Example Platform and Pipeline Reference Architecture*
+
+<a href="../img/logical_platform_and_pipeline_reference_architecture.png" target="_blank">
     <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
-</a></p>
-<p><br></p>
+</a>
+
+<br>
+</div>
+
 <h2 id="business-architecture">Business architecture</h2>
 <h3 id="business-processes">Business processes</h3>
 <hr />
@@ -172,13 +178,18 @@ Understanding them is necessary to understand:
 <h3 id="business-glossary">Business glossary</h3>
 <hr />
 <p>A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.</p>
-<p><em>Example glossary from Intuitas' Glossary builder tool:</em>
+<div align="center">
+
+*Example glossary from Intuitas' Glossary builder tool*
 <br>
 <a href="../img/glossary.png" target="_blank">
     <img src="../img/glossary.png"  alt="Example glossary from Intuitas' Glossary builder tool" width="75%">
 </a>
-<br></p>
-<p>Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access the tool.</p>
+<br>
+
+</div>
+
+<p>Contact us to access the tool.</p>
 <h3 id="business-metrics">Business metrics</h3>
 <hr />
 <p>Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
@@ -189,16 +200,24 @@ Understanding them is necessary to understand:
 - source(s)
 - metric owner
 - frequency</p>
-<p><br></p>
+<p><br>
+<br></p>
 <h2 id="infrastructure">Infrastructure</h2>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <h3 id="environments-workspaces-and-storage">Environments, Workspaces and Storage</h3>
-<p><a href="../img/workspaces_environments_storage.png" target="_blank">
+<div align="center">
+
+*Workspaces, Environments and Storage*
+<br>
+
+<a href="../img/workspaces_environments_storage.png" target="_blank">
     <img src="../img/workspaces_environments_storage.png"  alt="Workspaces, Environments and Storage">
-</a></p>
+</a>
+
+</div>
 <p>This diagram illustrates a <strong>data lakehouse architecture</strong> with the following components and flow:</p>
 <p><strong>Data Sources</strong></p>
 <p>Data originates from multiple sources such as:
@@ -229,7 +248,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 <h3 id="secrets">Secrets</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is planned for future development
 - Management
 - Areas of use
 - Handling practices</p>
@@ -259,7 +278,7 @@ This can then be modified according to costs, requirements, policies, projected 
 <h3 id="cicd-and-repository">CICD and Repository</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is planned for future development
 - Description of git workflows for CICD in terms of:
     - Infrastructure
     - Data engineering
@@ -292,11 +311,21 @@ This can then be modified according to costs, requirements, policies, projected 
 </ul>
 <h4 id="dbt-observability-elementary">dbt observability - Elementary</h4>
 <p>Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a></p>
-<p><a href="../img/observability.png" target="_blank">
+<div align="center">
+
+*dbt warehouse observability*
+<br>
+
+<a href="../img/observability.png" target="_blank">
     <img src="../img/observability.png"  alt="Observability Diagram">
 </a>
-<br></p>
-<p><a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a></p>
+
+<br>
+<br>
+<a href="https://dlintuitasweb.z8.web.core.windows.net/index.html#/report/dashboard" target="_blank">Example observability dashboard for Intuitas Engineering Domain</a>
+
+</div>
+
 <p>Elementary acts as a health monitor and quality checker for dbt projects by automatically tracking, alerting, and reporting on:</p>
 <ul>
 <li>Data freshness: Ensures your data is up to date.</li>
@@ -366,10 +395,18 @@ This can then be modified according to costs, requirements, policies, projected 
 </ul>
 </li>
 </ul>
-<p><a href="../img/data_layers_and_stages.png" target="_blank">
+<div align="center">
+
+*Data layers and stages*
+<br>
+
+<a href="../img/data_layers_and_stages.png" target="_blank">
     <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
-</a></p>
-<p><br></p>
+</a>
+
+<br>
+</div>
+
 <p>These map to naming standards and conventions for <a href="../naming_standards_and_conventions/#catalog-naming-and-conventions">Catalog</a>, <a href="../naming_standards_and_conventions/#schema-and-object-conventions">Schemas</a> and <a href="../naming_standards_and_conventions/#dbt">dbt</a>.</p>
 <h4 id="metadata-layer"><strong>Metadata layer</strong></h4>
 <p>Contains engineering and governance of data managed within the platform. The format of this will vary depending on the choice of engineering and governance toolsets and associated metamodels within the solution as well as across the broader enterprise.  <a href="../level_1/#enterprise-metadata-architecture">see Enterprise Metadata Architecture</a> </p>
@@ -479,29 +516,45 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <li>Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)</li>
 <li>Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)</li>
 </ul>
-<p><br></p>
-<p>Example:
+<p><br>
 <br></p>
-<p><a href="../img/catalog_to_storage_mapping.png">
+<div align="center">
+
+*Example Catalog to storage mapping:*
+<br>
+
+<a href="../img/catalog_to_storage_mapping.png">
     <img src="../img/catalog_to_storage_mapping.png" alt="Catalog to storage mapping" width="50%">
-</a></p>
-<p><br></p>
+</a>
+
+<br>
+
+</div>
+
 <h2 id="data-engineering">Data Engineering</h2>
 <hr />
 <h3 id="ingestion">Ingestion</h3>
 <hr />
+<p><em>Note: These patterns and findings reflect GA functionality only as as at the date of publication and research. Refer to respective product roadmaps and documentation for the latest guidance on functionality.</em></p>
 <p>Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.</p>
 <p>It should be:
 - Scalable, Resilient, Maintainable, Governed
 - Pattern-based, automated and Metadata-driven where possible
 - Batch and stream-based</p>
 <p><br>
+<br></p>
+<div align="center">
+
+*Example batch ingestion options:*
 <br>
-Example batch ingestion options:
+
 <a href="../img/ingestion_patterns.png" target="_blank">
     <img src="../img/ingestion_patterns.png"  alt="Ingestion patterns">
-</a></p>
+</a>
+</div>
+
 <h4 id="ingestion-patterns-and-notes">Ingestion patterns and notes:</h4>
+<p><br></p>
 <ul>
 <li>
 <p>Pattern 1: streaming: kafka -&gt; landing -&gt; databricks autoloader -&gt; ods</p>
@@ -547,7 +600,7 @@ Example batch ingestion options:
 <h3 id="transformation">Transformation</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <h4 id="batch-and-micro-batch-sql-transformation">Batch and Micro-batch SQL transformation</h4>
 <ul>
@@ -555,14 +608,15 @@ Example batch ingestion options:
 </ul>
 <h4 id="streaming-sql-transformation">Streaming SQL transformation</h4>
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <h4 id="non-sql-transformation">Non SQL transformation</h4>
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <h3 id="data-sharing-and-delivery-patterns">Data sharing and delivery patterns</h3>
 <hr />
+<p><em>Note: These patterns and findings reflect GA functionality only as as at the date of publication and research. Refer to respective product roadmaps and documentation for the latest guidance on functionality.</em></p>
 <p>Data can be shared and delivered to consumers through various channels, each differing in:</p>
 <ul>
 <li>Cost</li>
@@ -572,9 +626,16 @@ Example batch ingestion options:
 <li>Maintainability</li>
 </ul>
 <p>The following subsections offer more details about the channels depicted below.</p>
-<p><a href="../img/sharing_delivery_visualisation.png" target="_blank">
+<div align="center">
+
+*Sharing and delivery visualisation channels*
+<br>
+
+<a href="../img/sharing_delivery_visualisation.png" target="_blank">
     <img src="../img/sharing_delivery_visualisation.png"  alt="Sharing and delivery visualisation">
-</a></p>
+</a>
+</div>
+
 <h4 id="row-level-security">Row Level Security</h4>
 <p>see <a href="#row-level-security">Row Level Security</a></p>
 <h4 id="pull-direct-access">Pull / direct access</h4>
@@ -654,7 +715,7 @@ Example batch ingestion options:
 <h4 id="api-access"><strong>API Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress
+<p>This section is planned for future development
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.</p>
 </blockquote>
 <p>References:</p>
@@ -665,7 +726,7 @@ Example batch ingestion options:
 <h4 id="snowflake-access"><strong>Snowflake Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <ul>
 <li>Snowflake access is provided by Databricks Delta Sharing.</li>
@@ -799,7 +860,7 @@ Example batch ingestion options:
 <h4 id="push">Push</h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -810,7 +871,7 @@ Example batch ingestion options:
 <h3 id="visualisation">Visualisation</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -822,7 +883,7 @@ Example batch ingestion options:
 <p><br></p>
 <h2 id="aiml">AI/ML</h2>
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -837,7 +898,7 @@ Example batch ingestion options:
 <h3 id="data-lifecycle-and-asset-management">Data lifecycle and asset management</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -847,7 +908,7 @@ Example batch ingestion options:
 <h3 id="data-access-management">Data access management</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -859,7 +920,7 @@ Example batch ingestion options:
 <h3 id="data-quality">Data quality</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -869,7 +930,7 @@ Example batch ingestion options:
 <h3 id="data-understandability">Data understandability</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -879,7 +940,7 @@ Example batch ingestion options:
 <h3 id="privacy-preservation">Privacy Preservation</h3>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
@@ -895,33 +956,52 @@ Example batch ingestion options:
 <h4 id="row-level-security_1">Row Level Security</h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
 <li>dynamic views</li>
 <li>precomputed views</li>
+<li>costs and overheads of various patterns of sharing of RLS-applied data</li>
 </ul>
 <h4 id="audit">Audit</h4>
 <hr />
 <blockquote>
-<p>This section is a work in progress</p>
+<p>This section is planned for future development</p>
 </blockquote>
 <p>For consideration:</p>
 <ul>
 <li>audit log queries</li>
 </ul>
-<h5 id="example-questions-and-associated-queries">Example questions and associated queries</h5>
-<pre><code>As a Domain (workspace) Admin:
-
-1. Where are there misconfigured catalogs / schemas / objects?
+<h5 id="typical-observability-requirements-by-role">Typical observability requirements by role</h5>
+<p><strong>As a Domain (workspace) Admin</strong></p>
+<pre><code class="language-md">1. Where are there misconfigured catalogs / schemas / objects?
 2. Who is sharing what to who and is that permitted (as per access approvals?)
 3. Who is accessing data and are they permitted (as per access approvals?)
-
 </code></pre>
 <p><br></p>
+<p><br></p>
 <h2 id="billing">Billing</h2>
-<p>For more context and concepts, refer to the <a href="../level_1/#enterprise-billing">Enterprise Billing</a> section in Level 1.</p></div>
+<p>For more context and concepts, refer to the <a href="../level_1/#enterprise-billing">Enterprise Billing</a> section in Level 1.</p>
+<h5 id="typical-billing-requirements-by-role">Typical billing requirements by role</h5>
+<p><strong>As a Domain (workspace) Admin</strong></p>
+<pre><code class="language-md">1. What workloads are not being tagged/tracked?
+2. What is my domain spending as a whole?
+    - In databricks DBUs
+    - Inclusive of cloud
+3. What are my subteams spending on within the workspace I administer?
+    - In databricks DBUs
+    - Inclusive of cloud
+4. What are the most expensive activities?
+    - By user
+    - By job
+5. Where are we wasting money as an enterprise?
+    - Reinventing the wheel
+    - Over utilising
+    - Redundant tasks
+    - Inefficient queries
+</code></pre>
+<p><br></p></div>
             </div>
         </div>
 
