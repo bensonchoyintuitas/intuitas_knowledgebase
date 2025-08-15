@@ -34,7 +34,8 @@ Understanding the structure of the organisation and its domains is foundational 
 
 <div align="center">
 
-*Example domains for a Healthcare organisation*
+*Illustrative example of domains for a Healthcare organisation*
+
 <br>
 <a href="../img/domain-example.png" target="_blank">
     <img src="../img/domain-example.png"  alt="Example domains for a Healthcare organisation" width="75%">
