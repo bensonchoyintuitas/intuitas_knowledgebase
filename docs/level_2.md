@@ -8,6 +8,7 @@ This section describes Domain-level instantiations of the enterprise-level refer
 
 
 ## Table of Contents
+---
 
 - [Business architecture](level_2.md#business-architecture)
     - [Business processes](level_2.md#business-processes)

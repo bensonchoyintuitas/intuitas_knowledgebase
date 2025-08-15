@@ -6,6 +6,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
 <br>
 
 ## Table of Contents
+---
 
 - [Key concepts](level_1.md#key-concepts)
     - [Domain](level_1.md#domain)

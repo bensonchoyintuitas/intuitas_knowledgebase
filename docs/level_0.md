@@ -10,6 +10,7 @@ Establishing a clear enterprise-level context ensures that investments in data, 
 <br>
 
 ## Table of Contents
+---
 
 - [Org + Domain Definition](#org-domain-definition)
 - [Strategies and Objectives](#strategies-and-objectives)

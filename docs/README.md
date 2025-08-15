@@ -18,16 +18,15 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 
 <br>
 
+*Please note:*
 
-### Note
+*Living resource - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.*
 
-**Living resource** - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
+*Currency of information – The information provided reflects the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information as features evolve, the timeliness of these updates cannot be guaranteed.* 
 
-**Validation** – Positions and guidance reflect the product landscape and functionality available in general release at the time of writing. While every effort is made to maintain accuracy and update information promptly as features evolve, timeliness of these updates is not guaranteed. 
+*Use discretion - The information provided is general in nature and may not cover all scenarios or workloads. Readers are encouraged to independently validate all claims and benchmark against their own use cases and projected workloads.*
 
-**General** - All investigative findings and associated commentary are general in nature and do not reflect all scenarios and workloads. Readers are encouraged to independently validate all claims and conduct benchmarking against their own use cases and projected workloads.
-
-see the [copyright, licencing and disclaimer information](#terms)
+See the [copyright, licencing and disclaimer information](#terms)
 <br>
 <br>
 
@@ -41,6 +40,7 @@ see the [copyright, licencing and disclaimer information](#terms)
 - Access our demonstration environment or any of the tools and technologies presented
 - Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
 <br>
+<br>
 
 # Overview
 ---
@@ -53,23 +53,22 @@ This comprehensive blueprint provides practical patterns for designing and deliv
 
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
-Organisations should consider these principles alongside any existing frameworks that matter most to their context.
+Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.
 
 <br>
 
 | # | Principle | Description |
 |---|-----------|-------------|
-| 1 | Think big, start small | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
-| 2 | Empowered Autonomy | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
-| 3 | Disciplined Core, Flexible Edge | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
-| 4 | Actionable Data | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
-| 5 | Make It Easy to Do the Right Thing | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
-| 6 | Cost Transparency and Efficiency | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
-| 7 | Adaptability for Growth | Platforms that seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
-| 8 | Interoperability and Inclusion | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
-| 9 | Flexibility Through Standards | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
+| 1 | **Think big, start small** | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
+| 2 | **Empowered Autonomy** | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
+| 3 | **Disciplined Core, Flexible Edge** | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
+| 4 | **Actionable Data** | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
+| 5 | **Make It Easy to Do the Right Thing** | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
+| 6 | **Cost Transparency and Efficiency** | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
+| 7 | **Adaptability for Growth** | Platforms that seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
+| 8 | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
+| 9 | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
 
----
 <br>
 <br>
 
@@ -80,31 +79,8 @@ Organisations should consider these principles alongside any existing frameworks
 
 | Role | Recommended Path | Focus Areas |
 |------|------------------|-------------|
-| Leaders & Architects | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
-| Domain & Technical Teams | Level 2 | Practical implementation within established enterprise frameworks |
-
-### Iterative Approach
-
-// ... existing code ...
-
-- [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)
-
----
-<br>
-<br>
-
-## Getting Started
----
-
-Choose your starting point:
-<br>
-
-| Role | Recommended Path | Focus Areas |
-|------|------------------|-------------|
-| **Leaders & Architects** | **Levels 0-1** | Strategic alignment, enterprise patterns, governance frameworks |
-| **Domain & Technical Teams** | **Level 2** | Practical implementation within established enterprise frameworks |
-
-<br>
+| **Leaders & Architects** | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
+| **Domain & Technical Teams** | Level 2 | Practical implementation within established enterprise frameworks |
 
 ### Iterative Approach
 
@@ -116,10 +92,15 @@ An iterative approach means each level builds upon the previous but can be revis
 4. **Standards & Conventions** - Apply consistent naming and conventions throughout
 <br>
 
+---
+<br>
+<br>
+<br>
 
 
 
-## Documentation Structure
+
+## Table of Contents
 ---
 
 ### **Level 0: Enterprise Context**
@@ -136,7 +117,7 @@ An iterative approach means each level builds upon the previous but can be revis
 - [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture)
 - [Enterprise Data Warehouse Reference Architecture](level_1.md#enterprise-logical-data-warehouse-reference-architecture)
 - [Enterprise Information and Data Architecture](level_1.md#enterprise-information-and-data-architecture)
-- **[Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)**
+- **[Enterprise Metadata](level_1.md#enterprise-metadata-architecture)**
     - [Architecture Principles](level_1.md#metadata-architecture-principles)
     - [Semantic and Data Lineage](level_1.md#semantic-and-data-lineage)
     - [Metadata Objects and Elements](level_1.md#metadata-objects-and-elements)
@@ -178,7 +159,9 @@ An iterative approach means each level builds upon the previous but can be revis
     - [Audit Capabilities](level_2.md#audit)
 
 ### **Standards and conventions**
-- **[Naming Standards & Conventions](naming_standards_and_conventions.md)** 
+- [Naming Standards & Conventions](naming_standards_and_conventions.md)
+<br>
+---
 <br>
 <br>
 
@@ -186,7 +169,7 @@ An iterative approach means each level builds upon the previous but can be revis
 ## Terms
 ---
 
-**Copyright:** This knowledge base and its contents are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced  or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
+**Copyright:** This knowledgebase and associated content are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
 
 **License:** Free use, reproduction, and adaptation permitted with prior consent and appropriate attribution to Intuitas PTY LTD. Referenced third-party content is subject to the copyright terms of their respective owners. 
 
