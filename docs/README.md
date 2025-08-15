@@ -1,5 +1,5 @@
-| <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.*|
-|:---:|---|
+<a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.*
+:---|:---
 
 <br>
 
