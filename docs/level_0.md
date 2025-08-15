@@ -7,6 +7,7 @@ This section outlines the foundational enterprise-wide concepts that inform and 
 
 Establishing a clear enterprise-level context ensures that investments in data, capabilities, and infrastructure are purposefully aligned with the organisation’s strategic vision, operating model, and capacity. This alignment is essential for delivering meaningful, sustainable outcomes that reflect the organisation’s unique context and long-term goals.
 
+
 <br>
 
 ## Table of Contents
@@ -33,13 +34,14 @@ Understanding the structure of the organisation and its domains is foundational 
 
 <div align="center">
 
-*Example domains from Intuitas' Domain builder tool:*
+*Example domains for a Healthcare organisation*
 <br>
-<a href="../img/domains.png" target="_blank">
-    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+<a href="../img/domain-example.png" target="_blank">
+    <img src="../img/domain-example.png"  alt="Example domains for a Healthcare organisation" width="75%">
 </a>
 <br>
 </div>
+
 
 ## Strategies and Objectives
 
@@ -119,4 +121,3 @@ Once the enterprise-level context is established, proceed to [Level 1 - Domain A
 
 ---
 
-*This document provides the foundational context for enterprise data architecture. For specific implementation guidance, refer to the appropriate level within this architecture framework.*

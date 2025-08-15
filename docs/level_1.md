@@ -55,25 +55,36 @@ The following key concepts are used throughout this knowledgebase.
 
 Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
+Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles. See [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+
 <div align="center">
 
-*Example domains from Intuitas' Domain builder tool:*
+*Example domains for a Healthcare organisation*
 <br>
-<a href="../img/domains.png" target="_blank">
-    <img src="../img/domains.png"  alt="Example domains from Intuitas' Domain builder tool" width="75%">
+<a href="../img/domain-example.png" target="_blank">
+    <img src="../img/domain-example.png"  alt="Example domains for a Healthcare organisation" width="75%">
 </a>
 <br>
 </div>
 
-see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+
+<div align="center">
+
+*Example domain design using Intuitas' Domain builder tool*
+<br>
+<a href="../img/domains.png" target="_blank">
+    <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
+</a>
+<br>
+</div>
 
 #### **Domain**
 
 Domains relate to functional and organisational boundaries, and represent closely related areas of responsibility and focus.
 
-- Each domain encapsulates functional responsibilities, services, processes, information, expertise, and governance.
+- Each domain encapsulates functional responsibilities, services, processes, information, expertise, costing and governance.
 - Domains serve their own objectives while also offering products and services of value to other domains and the broader enterprise.
-- Our use of this term draws inspiration from Domain-Driven Design and Data Mesh principles.
+- Domain can exist at different levels of granularity and their boundaries may not be obvious. They are not necessarily a reflection of the organisational chart.
 
 
 #### **Subdomain**
@@ -85,11 +96,11 @@ A subdomain is a lower-level domain within a parent domain that groups data and 
 
 A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations and organisations will embody its principles with varying degrees of maturity and success. 
 
-see [Data Mesh: Principles](https://martinfowler.com/articles/data-mesh-principles.html)
+See [Data Mesh: Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 
 #### **Domain Topology**
 
-A Domain Topology is a representation of how domains are structured, positioned in the enterprise, and how they interact with each other. see [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90?gi=631b1b9f4dbb)
+A Domain Topology is a representation of how domains are structured, positioned in the enterprise, and how they interact with each other. See [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90?gi=631b1b9f4dbb)
 
 #### **Data Fabric**
 
@@ -122,7 +133,7 @@ The arrangement of domains:
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
-Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
+Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
 
 </div>
 
