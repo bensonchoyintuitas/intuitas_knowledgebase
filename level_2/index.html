@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Level 2 - Domain-Level (Solution) Architecture and Patterns - Intuitas Data Intelligence Blueprint</title>
+        <title>Level 2 - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -39,6 +39,15 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a href="../level_0/" class="nav-link">Level 0</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_1/" class="nav-link">Level 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Level 2</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
@@ -49,6 +58,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../level_1/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../about/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -69,6 +88,10 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#level-2-domain-level-solution-architecture-and-patterns" class="nav-link">Level 2 - Domain-Level (Solution) Architecture and Patterns</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#why-it-matters" class="nav-link">Why It Matters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
               <ul class="nav flex-column">
               </ul>
@@ -107,6 +130,8 @@
 <h1 id="level-2-domain-level-solution-architecture-and-patterns">Level 2 - Domain-Level (Solution) Architecture and Patterns</h1>
 <p><a href="../">Return to home</a></p>
 <p>This section describes Domain-level instantiations of the enterprise-level reference architecture. i.e. solutions (See <a href="../level_1/#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a>)</p>
+<h2 id="why-it-matters">Why It Matters</h2>
+<p>At the domain level, applying solution architecture patterns and standards ensures consistency, interoperability, and compliance, enabling faster delivery, reducing rework, and ensuring each solution strengthens the enterprise “town plan.”</p>
 <p><br>
 <br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -164,16 +189,29 @@
 </div>
 
 <h2 id="business-architecture">Business architecture</h2>
+<h3 id="use-cases-and-business-requirements">Use cases and business requirements</h3>
+<hr />
+<p>Business requirements, use cases, and use case roadmaps together define what a solution must achieve, how it will be applied, and when capabilities will be delivered according to agreed priorities. These priorities may sit at the enterprise, domain level or both.</p>
+<p>Understanding them is necessary to understand:</p>
+<ul>
+<li>the outcomes the solution must enable or improve</li>
+<li>the measures of success, constraints, and scope that shape design</li>
+<li>how the solution will be used to meet specific business needs</li>
+<li>the sequence and priority of delivering capabilities to maximise business value</li>
+</ul>
 <h3 id="business-processes">Business processes</h3>
 <hr />
-<p>Business processes are the activities and tasks that are performed to achieve the goals of the business.
-Understanding them is necessary to understand:
-- the context in which data is captured and used
-- concepts and entities that are relevant to the domain
-- the relationships between different processes and data</p>
+<p>Business processes are the activities and tasks that are performed to achieve the goals of the business. Understanding them is necessary to understand:</p>
+<ul>
+<li>the context in which data is captured and used</li>
+<li>concepts and entities that are relevant to the domain and scope of use case</li>
+<li>the relationships between different processes and data</li>
+<li>the context for measures and metrics</li>
+</ul>
 <h3 id="business-glossary">Business glossary</h3>
 <hr />
-<p>A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.</p>
+<p>A business glossary is a curated list of terms and definitions relevant to the business (at both the Enterprise and Domain levels). Understanding these terms and how they map across the organisation by stakeholders and systems is critical to consistent understanding and usage of concepts. </p>
+<p>It is core part of <a href="../level_1/#enterprise-metadata-architecture">Enterprise Metadata Architecture</a>.</p>
 <div align="center">
 
 <em>Example glossary from Intuitas' Glossary builder tool</em>
@@ -185,17 +223,21 @@ Understanding them is necessary to understand:
 
 </div>
 
-<p>Contact us to access the tool.</p>
+<p>Contact us at 📧 <a href="mailto:office@intuitas.com">office@intuitas.com</a> to learn more about the tool.</p>
 <h3 id="business-metrics">Business metrics</h3>
 <hr />
-<p>Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
-- name
-- definition
-- formula (with reference to data elements and definitions in the business glossary)
-- dimensions
-- source(s)
-- metric owner
-- frequency</p>
+<p>Measures are raw, quantifiable values that capture facts about business activities (e.g., total sales, number of customers).</p>
+<p>Metrics are calculated or derived indicators that assess the performance of business processes, often using one or more measures (e.g., sales growth rate, customer churn rate).</p>
+<p>Both require capture, at a minimum, of:</p>
+<ul>
+<li>name</li>
+<li>definition</li>
+<li>formula (with reference to concepts and terms as defined in the business glossary)</li>
+<li>associated dimensions</li>
+<li>source(s)</li>
+<li>metric owner</li>
+<li>frequency</li>
+</ul>
 <p><br>
 <br></p>
 <h2 id="data-architecture">Data Architecture</h2>
@@ -438,7 +480,7 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="transformation">Transformation</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
 <h4 id="batch-and-micro-batch-sql-transformation">Batch and Micro-batch SQL transformation</h4>
 <ul>
@@ -446,11 +488,11 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 </ul>
 <h4 id="streaming-sql-transformation">Streaming SQL transformation</h4>
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
 <h4 id="non-sql-transformation">Non SQL transformation</h4>
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
 <h3 id="data-sharing-and-delivery-patterns">Data sharing and delivery patterns</h3>
 <hr />
@@ -474,8 +516,6 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 </a>
 </div>
 
-<h4 id="row-level-security">Row Level Security</h4>
-<p>see <a href="#row-level-security">Row Level Security</a></p>
 <h4 id="pull-direct-access">Pull / direct access</h4>
 <hr />
 <h4 id="databricks-delta-sharing-practices"><strong>Databricks Delta sharing practices</strong></h4>
@@ -553,9 +593,11 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h4 id="api-access"><strong>API Access</strong></h4>
 <hr />
 <blockquote>
-<p>This section is planned for future development
-- The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.</p>
+<p>Currently under development</p>
 </blockquote>
+<ul>
+<li>The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.</li>
+</ul>
 <p>References:</p>
 <ul>
 <li>https://docs.databricks.com/api/workspace/statementexecution</li>
@@ -563,9 +605,6 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 </ul>
 <h4 id="snowflake-access"><strong>Snowflake Access</strong></h4>
 <hr />
-<blockquote>
-<p>This section is planned for future development</p>
-</blockquote>
 <ul>
 <li>Snowflake access is provided by Databricks Delta Sharing.</li>
 <li>Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 <a href="https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta">see external tables</a></li>
@@ -698,9 +737,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h4 id="push">Push</h4>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>adf</li>
 <li>databricks</li>
@@ -709,9 +748,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="visualisation">Visualisation</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>Powerbi</li>
 <li>Databricks dashboards</li>
@@ -721,9 +760,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <p><br></p>
 <h2 id="aiml">AI/ML</h2>
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>MLOps</li>
 <li>Training</li>
@@ -736,9 +775,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="data-lifecycle-and-asset-management">Data lifecycle and asset management</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>data contracts and policy</li>
 <li>data asset tagging</li>
@@ -746,9 +785,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="data-access-management">Data access management</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>data access request management</li>
 <li>data contracts</li>
@@ -758,9 +797,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="data-quality">Data quality</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>data quality checking and reporting</li>
 <li>data standards and quality business rule management</li>
@@ -768,9 +807,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="data-understandability">Data understandability</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>data lineage</li>
 <li>data object metadata</li>
@@ -778,9 +817,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="privacy-preservation">Privacy Preservation</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>row level security</li>
 <li>data masking</li>
@@ -791,12 +830,12 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <p>https://docs.databricks.com/en/tables/row-and-column-filters.html#limitations</p>
 <p>"If you want to filter data when you share it using Delta Sharing, you must use dynamic views."</p>
 <p>Use dynamic views if you need to apply transformation logic, such as filters and masks, to read-only tables and if it is acceptable for users to refer to the dynamic views using different names.</p>
-<h4 id="row-level-security_1">Row Level Security</h4>
+<h4 id="row-level-security">Row Level Security</h4>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>dynamic views</li>
 <li>precomputed views</li>
@@ -805,9 +844,9 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h4 id="audit">Audit</h4>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
-<p>For consideration:</p>
+<p>Areas for consideration include:</p>
 <ul>
 <li>audit log queries</li>
 </ul>
@@ -822,7 +861,7 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h2 id="infrastructure">Infrastructure</h2>
 <hr />
 <blockquote>
-<p>This section is planned for future development</p>
+<p>Currently under development</p>
 </blockquote>
 <h3 id="environments-workspaces-and-storage">Environments, Workspaces and Storage</h3>
 <div align="center">
@@ -865,11 +904,14 @@ While work can be achieved within a single workspace and lakehouse storage accou
 <h3 id="secrets">Secrets</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development
-- Management
-- Areas of use
-- Handling practices</p>
+<p>Currently under development</p>
 </blockquote>
+<p>Areas for consideration include:</p>
+<ul>
+<li>Management</li>
+<li>Areas of use</li>
+<li>Handling practices</li>
+</ul>
 <h3 id="storage">Storage</h3>
 <hr />
 <h4 id="lakehouse-storage">Lakehouse storage</h4>
@@ -895,23 +937,38 @@ This can then be modified according to costs, requirements, policies, projected 
 <h3 id="cicd-and-repository">CICD and Repository</h3>
 <hr />
 <blockquote>
-<p>This section is planned for future development
-- Description of git workflows for CICD in terms of:
-    - Infrastructure
-    - Data engineering
-    - Analytics engineering
-    - Data science / AIML
-    - BI, Reports and other products</p>
+<p>Currently under development</p>
 </blockquote>
+<p>Areas for consideration include:</p>
+<ul>
+<li>
+<p>Description of git workflows for CICD in terms of:</p>
+<ul>
+<li>Infrastructure</li>
+<li>Data engineering</li>
+<li>Analytics engineering</li>
+<li>Data science / AIML</li>
+<li>BI, Reports and other products</li>
+</ul>
+</li>
+</ul>
 <h4 id="tools">Tools</h4>
+<blockquote>
+<p>Currently under development</p>
+</blockquote>
+<p>Areas for consideration include:</p>
 <ul>
 <li>Github</li>
 <li>Azure Devops</li>
 <li>Databricks Asset Bundles</li>
 </ul>
 <h4 id="repositories">Repositories</h4>
+<blockquote>
+<p>Currently under development</p>
+</blockquote>
+<p>Areas for consideration include:</p>
 <ul>
-<li>Infrastructure</li>
+<li>Infrastructure IAC repos (Terraform)</li>
 <li>dbt projects (separate for each domain)<ul>
 <li>potential for enterprise level stitching of lineage</li>
 </ul>
@@ -920,7 +977,7 @@ This can then be modified according to costs, requirements, policies, projected 
 </ul>
 <h3 id="observability">Observability</h3>
 <hr />
-<p>Various tools can be used to provide insight into different aspects of the architecture:</p>
+<p>Tools included in reference architecture:</p>
 <ul>
 <li>dbt observability - Elementary</li>
 <li>Databricks observability - Databricks monitoring dashboards</li>
@@ -954,18 +1011,27 @@ This can then be modified according to costs, requirements, policies, projected 
 <p>It leverages dbt artifacts (such as run results and sources) to send alerts to Slack, email, or other tools. Additionally, it can automatically generate reports after dbt runs, enabling early detection of issues without manual intervention.</p>
 <h3 id="networking">Networking</h3>
 <hr />
-<p>By default - all resources reside within the same VNet with private endpoints.</p>
-<p>Service endpoints and policies are enabled.</p>
+<p>Areas for consideration include:</p>
+<ul>
+<li>By default - all resources reside within the same VNet with private endpoints.</li>
+<li>Service endpoints and policies can be enabled - however consider impacts on private endpoints.</li>
+</ul>
 <h3 id="orchestration">Orchestration</h3>
 <hr />
-<h4 id="tools_1">Tools</h4>
+<blockquote>
+<p>Currently under development</p>
+</blockquote>
+<h4 id="tools-included-in-reference-architecture">Tools included in reference architecture</h4>
 <ul>
 <li>Azure Data Factory (if needed)</li>
 <li>Databricks Workflows (for both databricks and dbt)</li>
 </ul>
 <h3 id="security">Security</h3>
 <hr />
-<h4 id="tools_2">Tools</h4>
+<blockquote>
+<p>Currently under development</p>
+</blockquote>
+<h4 id="tools-included-in-reference-architecture_1">Tools included in reference architecture</h4>
 <ul>
 <li>Azure Entra</li>
 <li>Azure Key Vault</li>

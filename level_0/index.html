@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Level 0 - Enterprise-level context - Intuitas Data Intelligence Blueprint</title>
+        <title>Level 0 - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -39,6 +39,15 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Level 0</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_1/" class="nav-link">Level 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_2/" class="nav-link">Level 2</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
@@ -49,6 +58,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../level_1/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -97,7 +116,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#billing-structures" class="nav-link">Billing Structures</a>
+            <li class="nav-item" data-bs-level="2"><a href="#funding-and-costing-structures" class="nav-link">Funding and costing structures</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -131,11 +150,11 @@
 <p><br>
 <br></p>
 <h2 id="org-domain-definition">Org + Domain Definition</h2>
-<p>Understanding the structure of the organisation and its domains is foundational to defining governance, environment and metadata boundaries. While organisations can look to industry patterns and reference architectures for guidance, they are also unique. See <a href="../level_1/#domain-centric-design">Domain-Centric Design</a> to see further definition.</p>
+<p>Understanding the organisation’s structure and domains is key to setting governance, environment, and metadata boundaries. While industry patterns and reference architectures can guide, each organisation is unique. See <a href="../level_1/#domain-centric-design">Domain-Centric Design</a> for more.</p>
 <p><strong>Recommended artefacts:</strong></p>
 <ul>
-<li>Description of the organisational boundary and any external organisations that are within the scope of concern.</li>
-<li>Description of domains and subdomains within the organisation that may have a material bearing on the data governance and data management operating model.</li>
+<li>Description of the organisational boundary, including any external organisations in scope.</li>
+<li>Description of domains and subdomains that impact the data governance and management model.</li>
 </ul>
 <div align="center">
 
@@ -149,59 +168,50 @@
 </div>
 
 <h2 id="strategies-and-objectives">Strategies and Objectives</h2>
-<p>This section outlines the strategic context in which data, technology, and governance initiatives operate.</p>
+<p>Investing in data initiatives without a clear strategic context risks misalignment and wasted effort. A well-defined strategic context for data, technology, and governance ensures initiatives align with organisational goals, set the right priorities, have a clear scope, support effective governance, and build strong investment and benefits cases.</p>
 <p><strong>Recommended artefacts</strong></p>
 <ul>
-<li>Description of the organisation's strategies and objectives at the whole-of-enterprise level:</li>
-<li>Business strategies, objectives, plans, and initiatives</li>
-<li>Technology strategies, objectives, plans, and initiatives</li>
-<li>Data and AI strategies, objectives, plans, and initiatives</li>
+<li>Assessment of relevant business, technology, and data/AI strategies, plans, and initiatives.</li>
 </ul>
 <h2 id="key-systems-and-data-assets">Key Systems and Data Assets</h2>
-<p>Identifying the systems and data assets in scope supports effective governance, architecture, and planning.</p>
+<p>Identifying and profiling key systems and data assets in the context of strategic benefits and use cases provides a strong foundation for effective planning, design, and risk management.</p>
 <p><strong>Recommended artefacts</strong></p>
 <ul>
-<li>Description of the organisation's key systems within the scope of concern (e.g., CMDB).</li>
-<li>Information Asset Register (IAR)</li>
+<li>Description of the organisation's relevant systems and data sets (e.g. CMDB, Information Asset Register), including associated governance arrangements and technical characteristics.</li>
 </ul>
 <h2 id="team-capabilities-and-roles">Team Capabilities and Roles</h2>
-<p>Clarity on the responsibilities and capabilities of key teams is essential for executing data strategy and maintaining accountability.</p>
+<p>Clarity on the responsibilities and capabilities of key teams is essential to executing the data strategy, maintaining accountability, ensuring all support functions are adequately fulfilled, and  costs remain predictable.</p>
 <p><strong>Recommended artefacts</strong></p>
 <ul>
-<li>Description of in-scope key teams/parties associated with:</li>
-<li>Strategy and portfolio / prioritisation of data initiatives</li>
-<li>Data creation within the business domains</li>
-<li>Data management</li>
-<li>Data governance (quality, access)</li>
-<li>Data consumption</li>
-<li>Data engineering and integration</li>
-<li>Data analysis and reporting</li>
-<li>Data application development</li>
-<li>Data ops support</li>
-<li>Data security</li>
-<li>Data and information architecture</li>
-<li>Infrastructure and platform provisioning and management</li>
-<li>RACI matrix for key teams/parties</li>
-<li>Current and target operating and service management model</li>
-<li>Maturity and skill assessment of key teams/parties</li>
+<li>RACI matrix for associated teams/parties with consideration of functions including but not limted to:</li>
+<li>Data lifecycle – creation, management, governance (quality, access), security, and consumption</li>
+<li>Data enablement – engineering, integration, analysis, reporting, and application development</li>
+<li>Data foundations – information architecture, infrastructure, and platform provisioning and management</li>
+<li>
+<p>Operational support – DataOps, monitoring, and ongoing maintenance</p>
+</li>
+<li>
+<p>Current and target operating and service management model</p>
+</li>
+<li>Maturity and skill assessment of key teams/parties relative to role definition</li>
+<li>Strategy for using external partnerships and vendors to address capability gaps</li>
 </ul>
 <h2 id="governance-structures">Governance Structures</h2>
-<p>Governance frameworks and processes define how decisions are made, enforced, and improved across the data lifecycle.</p>
+<p>Governance frameworks and processes define how decisions are made, enforced, and improved across the data lifecycle. These may already exist in some organisations, while in others they need to be developed.</p>
 <p><strong>Recommended artefacts</strong></p>
 <ul>
-<li>Description of the organisation's governance frameworks, policies, standards, processes, and bodies that are relevant to the scope of concern.</li>
+<li>Description of governance frameworks, policies, standards, processes, and bodies relevant to the scope of concern.</li>
+<li>In some cases - proposals and terms of reference for new governance structures.</li>
 </ul>
-<h2 id="billing-structures">Billing Structures</h2>
-<p>Understanding how billing is structured enables transparency, cost accountability, and alignment with financial governance.</p>
+<h2 id="funding-and-costing-structures">Funding and costing structures</h2>
+<p>Understanding how the organisation plans and allocates funding and costs is critical to design, as it shapes the internal dynamics and “marketplace” for data and products. It influences stakeholder behaviour, drives collaboration (or competition), and determines how quickly solutions reach the market. </p>
+<p>This, in turn, affects standards alignment, investment in shared capabilities, sustainability, and the ability to scale and innovate.</p>
 <p><strong>Recommended artefacts</strong></p>
 <ul>
-<li>Description of the organisation's structures in terms of billing, and how cost centres may relate to billing reports, delegations, and associated observability requirements.</li>
-<li>Cost allocation models and chargeback mechanisms</li>
-<li>Budget management and forecasting processes</li>
-<li>Financial governance and approval workflows</li>
-<li>Cost optimization strategies and monitoring</li>
-<li>Integration with enterprise resource planning (ERP) systems</li>
-<li>Compliance with financial reporting standards and regulations</li>
+<li>Billing structures – including how cost centres map to reports, delegations, and observability (important for transparency and accountability)</li>
+<li>Cost allocation and chargeback models – critical for encouraging reuse, managing shared services, and clarifying ownership</li>
+<li>Budgeting and forecasting – ensures sustainable funding for data platforms, products, and capabilities</li>
+<li>Cost optimisation and monitoring – helps manage platform efficiency and avoid waste, and how the accountabilities are distributed for their control</li>
 </ul>
 <p><br>
 <br></p>
