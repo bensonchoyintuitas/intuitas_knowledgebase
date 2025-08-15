@@ -3,7 +3,7 @@
     <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
   </div>
   <div style="flex: 1;">
-    <em>We help organisations cut through the noise, turning data and AI into results.</em>
+    <em>We help organisations cut through the complexity, turning data and AI into results.</em>
   </div>
 </div>
 
