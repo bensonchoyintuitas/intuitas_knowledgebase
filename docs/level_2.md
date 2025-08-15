@@ -321,6 +321,7 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.
 
 It should be:
+
 - Scalable, Resilient, Maintainable, Governed
 - Pattern-based, automated and Metadata-driven where possible
 - Batch and stream-based
