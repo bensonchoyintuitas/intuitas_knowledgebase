@@ -7,7 +7,6 @@
   </div>
 </div>
 
-<br>
 
 # Enterprise Data Intelligence Blueprint
 
@@ -18,9 +17,9 @@ It distills insights from our R&D, answers to common questions, and lessons lear
 The ideas are intentionally opinionated, shaped by the Intuitas design philosophy, and proven in practice—supported by working demonstration environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
 
 <br>
-<br>
 
-### Important Notes
+
+### Note
 
 **Living resource** - This content is continuously updated and refined through ongoing R&D, lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
 
@@ -31,7 +30,7 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 see the [copyright, licencing and disclaimer information](#terms)
 <br>
 <br>
----
+
 
 ## Get help
 ---
@@ -41,11 +40,10 @@ see the [copyright, licencing and disclaimer information](#terms)
 - Find out more, or provide feedback.
 - Access our demonstration environment or any of the tools and technologies presented
 - Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
-
----
 <br>
 
 # Overview
+---
 
 This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
 
@@ -57,18 +55,19 @@ Our approach is guided by nine foundational principles that ensure transparency 
 
 Organisations should consider these principles alongside any existing frameworks that matter most to their context.
 
+<br>
 
 | # | Principle | Description |
 |---|-----------|-------------|
-| **1** | **Think big, start small** | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
-| **2** | **Empowered Autonomy** | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
-| **3** | **Disciplined Core, Flexible Edge** | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
-| **4** | **Actionable Data** | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
-| **5** | **Make It Easy to Do the Right Thing** | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
-| **6** | **Cost Transparency and Efficiency** | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
-| **7** | **Adaptability for Growth** | Platforms that seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
-| **8** | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
-| **9** | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
+| 1 | Think big, start small | Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt. |
+| 2 | Empowered Autonomy | Enable domain experts to manage data independently while leveraging shared, scalable foundations. |
+| 3 | Disciplined Core, Flexible Edge | Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery. |
+| 4 | Actionable Data | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
+| 5 | Make It Easy to Do the Right Thing | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
+| 6 | Cost Transparency and Efficiency | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
+| 7 | Adaptability for Growth | Platforms that seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
+| 8 | Interoperability and Inclusion | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
+| 9 | Flexibility Through Standards | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
 
 ---
 <br>
@@ -77,14 +76,37 @@ Organisations should consider these principles alongside any existing frameworks
 ## Getting Started
 ---
 
-### **Choose Your Starting Point**
+### Choose Your Starting Point
+
+| Role | Recommended Path | Focus Areas |
+|------|------------------|-------------|
+| Leaders & Architects | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
+| Domain & Technical Teams | Level 2 | Practical implementation within established enterprise frameworks |
+
+### Iterative Approach
+
+// ... existing code ...
+
+- [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture)
+
+---
+<br>
+<br>
+
+## Getting Started
+---
+
+Choose your starting point:
+<br>
 
 | Role | Recommended Path | Focus Areas |
 |------|------------------|-------------|
 | **Leaders & Architects** | **Levels 0-1** | Strategic alignment, enterprise patterns, governance frameworks |
 | **Domain & Technical Teams** | **Level 2** | Practical implementation within established enterprise frameworks |
 
-### **Iterative Approach**
+<br>
+
+### Iterative Approach
 
 An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.
 
@@ -92,9 +114,10 @@ An iterative approach means each level builds upon the previous but can be revis
 2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
 3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
 4. **Standards & Conventions** - Apply consistent naming and conventions throughout
+<br>
 
 
----
+
 
 ## Documentation Structure
 ---
@@ -158,7 +181,7 @@ An iterative approach means each level builds upon the previous but can be revis
 - **[Naming Standards & Conventions](naming_standards_and_conventions.md)** 
 <br>
 <br>
----
+
 
 ## Terms
 ---
@@ -169,15 +192,14 @@ An iterative approach means each level builds upon the previous but can be revis
 
 **Disclaimer:** Content is provided for general information only.  It does not constitute professional advice and should not be relied on as a substitute for advice tailored to your circumstances. No liability is accepted for errors or omissions. Always consider your local context and verify applicability before considering its use.
 
-<br>
 ---
+<br>
+<br>
+
+
+
 
 <div align="center">
-
-
-
-### 
-
 
 <br>
 <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
