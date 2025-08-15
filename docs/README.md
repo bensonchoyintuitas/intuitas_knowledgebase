@@ -15,12 +15,12 @@ This blueprint consists of a collection of resources that describe Intuitas' app
 
 It provides strategic, enterprise and solution level resources - distilled from our R&D, common questions, and lessons learned from real-world operations. 
 
-
 The ideas and patterns are opinionated, shaped by the Intuitas design philosophy, and can be demonstrated by working environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
 
 <br>
 
->#### *To build a home, you need a plan — but for it to thrive, you need a town plan.*
+>#### *“To build a home, you need a plan — but for it to thrive, you need a town plan."*
+
 
 <br>
 <br>
@@ -127,6 +127,8 @@ This comprehensive blueprint provides practical patterns for designing and deliv
 ## Design Principles
 ---
 
+>#### *“The alternative to good design is always bad design. There is no such thing as no design.” - Adam Judge*
+<br>
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
 Readers should consider the priority and implication of these principles alongside any existing principles applicable within their organisation.
