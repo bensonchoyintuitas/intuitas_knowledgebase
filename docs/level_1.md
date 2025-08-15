@@ -54,12 +54,14 @@ The following key concepts are used throughout this knowledgebase.
 
 Using domains as logical governance boundaries helps ensure data ownership and accountability. This approach aligns with the data mesh principle of decentralizing data management and providing domain teams with autonomy.
 
+<div align="center">
 *Example domains from Intuitas' Domain builder tool:*
 <br>
 <a href="../img/domains.png" target="_blank">
     <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
 </a>
 <br>
+</div>
 
 see [Domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
 
@@ -110,12 +112,14 @@ The arrangement of domains:
 - defines expectations on how data+products are shared, built, managed and governed
 - impacts accessibility, costs, support and overall experience.
 
+<div align="center">
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
 Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
 
+</div>
 
 <br>
 
