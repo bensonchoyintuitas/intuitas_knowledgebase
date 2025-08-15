@@ -122,7 +122,7 @@ Source: [Data Mesh: Topologies and domain granularity](https://towardsdatascienc
 ### Hybrid federated mesh topology
 ---
 
-This blueprint depicts a Hybrid Federated Mesh Topology, common in large enterprises. It integrates various distributed functional domains with a unified raw data engineering capability. While tailored for this topology, the guidance is broadly applicable to other configurations.
+This blueprint depicts a Hybrid Federated Mesh Topology, increasingly common in large enterprises and mature engineering practices. It integrates various distributed functional domains with a unified raw data engineering capability. While tailored for this topology, the guidance is broadly applicable to other configurations.
 
 Key characteristics of this topology include:
 
@@ -143,8 +143,13 @@ Key characteristics of this topology include:
 - Collaboration-focused: Teams act as both data producers and consumers, fostering reuse and efficiency.
 - Federated governance: Ensures standards while allowing teams to manage their data locally.
 
+<div align="center">
+
+*Example of hybrid federated mesh topology:*
 
 <img src="../img/hybrid_federated_mesh_topology.png" >
+
+</div>
 
 Hybrid federated mesh topology reflects a common scenario whereby centralisation occurs upstream for improved consolidation and standardisation around engineering, while federation occurs downstream for improved analytical flexibility and responsiveness. 
 
@@ -167,9 +172,13 @@ Allowing domains to access 'gold' data from other domains and, where appropriate
 
 Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.
 
+<div align="center">
+
 *Example:*
 
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
+
+</div>
 
 <br>
 
@@ -181,9 +190,14 @@ Describes the logical components (including infrastructure, applications and com
 - Reflects the domain topology.
 - Provides unified access to data warehouse products from across domains via a common catalog.
 
+<div align="center">
+
 *Example*
 
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
+
+
+</div>
 
 <br>
 
@@ -246,8 +260,9 @@ Semantic lineage and Data lineage are critical concepts in a Modern Data Intelli
 
 Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.
 
+<div align="center">
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
-
+</div>
 <br>
 
 ### Metadata Objects and Elements
@@ -264,9 +279,11 @@ Metadata exists in various types, formats, and purposes, each essential for enab
 
 The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.
 
+<div align="center">
 <img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
 
 <br>
+</div>
 
 ### Metadata Consolidation and Synchronisation
 ---
@@ -280,7 +297,9 @@ Metadata consolidation and synchronisation are critical for achieving a consiste
 
 The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.
 
-<img src="../img/metadata_flow.png"  alt="Metadata flow">
+<div align="center">
+<img src="../img/metadata_flow.png" alt="Metadata flow">
+</div>
 
 <br>
 
@@ -306,10 +325,10 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 **DataHub** serves as a consolidation layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.
 
 The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
+<div align="center">
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
 </a>
-
 <br>
 <br>
 
@@ -350,6 +369,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
 </a>
 <br>
+</div>
 
 #### Analytics engineering metadata 
 
@@ -370,14 +390,16 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
     - detect definitions using AI where they are missing
 
 <br>
+<div align="center">
 
 *Databricks AI-driven semantic detection*
+
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
     <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="75%">
 </a>
 <br>
-
+</div>
 
 **Recommendations and Notes:**
 
@@ -455,10 +477,11 @@ Here is where the Business Architecture of the organisation, domain topology, in
 
 Recommendations here align with the following Domain topology:
 
+<div align="center">
 <img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
 <br>
-
+</div>
 
 ### Databricks features for usage tracking
 ---
@@ -491,15 +514,20 @@ Recommendations here align with the following Domain topology:
 - By default, only Databricks Account administrators have access to system tables such as billing. This is a highly privileged role and is not fit for sharing broadly. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables)
 - Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (See Dynamic Billing Solution below. Available on request) - see repo [Databricks System Tools](https://github.com/bensonchoyintuitas/databricks_system_tools/)
 
-
+<div align="center">
 <img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
 
 <br>
+</div>
 
 #### Usage reports
 
 - Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables. [Learn more](https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage)
 - Once workspace administrators have been delegated access to system tables, they can import a refactored version of the Databricks Usage Dashboard which are repointed to the RLS views. (See Dynamic Billing Solution above. Available on request)
+
+Additional useful references:
+- [Top 10 Queries to use with System Tables](https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331)
+- [Unlocking Cost Optimization Insights with Databricks System Tables](https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf)
 
 ### Domain / Workspace Administrator Role
 
@@ -562,10 +590,6 @@ Recommendations here align with the following Domain topology:
     - Inefficient queries
 ```
 
-### References to recommended practices
-
-- [Top 10 Queries to use with System Tables](https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331)
-- [Unlocking Cost Optimization Insights with Databricks System Tables](https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf)
 
 
 

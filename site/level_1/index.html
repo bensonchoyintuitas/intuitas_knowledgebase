@@ -218,7 +218,7 @@
 <p><br></p>
 <h3 id="hybrid-federated-mesh-topology">Hybrid federated mesh topology</h3>
 <hr />
-<p>This blueprint depicts a Hybrid Federated Mesh Topology, common in large enterprises. It integrates various distributed functional domains with a unified raw data engineering capability. While tailored for this topology, the guidance is broadly applicable to other configurations.</p>
+<p>This blueprint depicts a Hybrid Federated Mesh Topology, increasingly common in large enterprises and mature engineering practices. It integrates various distributed functional domains with a unified raw data engineering capability. While tailored for this topology, the guidance is broadly applicable to other configurations.</p>
 <p>Key characteristics of this topology include:</p>
 <p><strong>Hybrid of Data Fabric and Data Mesh:</strong></p>
 <ul>
@@ -237,7 +237,14 @@
 <li>Collaboration-focused: Teams act as both data producers and consumers, fostering reuse and efficiency.</li>
 <li>Federated governance: Ensures standards while allowing teams to manage their data locally.</li>
 </ul>
-<p><img src="../img/hybrid_federated_mesh_topology.png" ></p>
+<div align="center">
+
+*Example of hybrid federated mesh topology:*
+
+<img src="../img/hybrid_federated_mesh_topology.png" >
+
+</div>
+
 <p>Hybrid federated mesh topology reflects a common scenario whereby centralisation occurs upstream for improved consolidation and standardisation around engineering, while federation occurs downstream for improved analytical flexibility and responsiveness. </p>
 <p><strong>Centralising engineering</strong></p>
 <p>Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organization.</p>
@@ -249,8 +256,14 @@
 <h2 id="enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</h2>
 <hr />
 <p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
-<p><em>Example:</em></p>
-<p><img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture"></p>
+<div align="center">
+
+*Example:*
+
+<img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
+
+</div>
+
 <p><br></p>
 <h2 id="enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</h2>
 <hr />
@@ -259,8 +272,15 @@
 <li>Reflects the domain topology.</li>
 <li>Provides unified access to data warehouse products from across domains via a common catalog.</li>
 </ul>
-<p><em>Example</em></p>
-<p><img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture"></p>
+<div align="center">
+
+*Example*
+
+<img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
+
+
+</div>
+
 <p><br></p>
 <h2 id="enterprise-information-and-data-architecture">Enterprise Information and Data Architecture</h2>
 <hr />
@@ -315,7 +335,9 @@
 </li>
 </ul>
 <p>Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.</p>
-<p><img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage"></p>
+<div align="center">
+<img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
+</div>
 <p><br></p>
 <h3 id="metadata-objects-and-elements">Metadata Objects and Elements</h3>
 <hr />
@@ -329,8 +351,12 @@
 <li>Integration, Data Sharing, and Interoperability</li>
 </ul>
 <p>The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.</p>
-<p><img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture"></p>
-<p><br></p>
+<div align="center">
+<img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
+
+<br>
+</div>
+
 <h3 id="metadata-consolidation-and-synchronisation">Metadata Consolidation and Synchronisation</h3>
 <hr />
 <p>Metadata consolidation and synchronisation are critical for achieving a consistent, unified view of data assets, enabling reliable lineage, governance, and context across the data ecosystem. This approach:</p>
@@ -340,7 +366,10 @@
 <li><strong>Enables Automation and Governance:</strong> Supports data quality, access control, and policy enforcement through unified metadata APIs and standardized governance models.</li>
 </ul>
 <p>The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.</p>
-<p><img src="../img/metadata_flow.png"  alt="Metadata flow"></p>
+<div align="center">
+<img src="../img/metadata_flow.png" alt="Metadata flow">
+</div>
+
 <p><br></p>
 <h3 id="data-architecture-and-governance-metadata">Data Architecture and Governance Metadata</h3>
 <hr />
@@ -357,45 +386,53 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <br></p>
 <h4 id="unified-metadata-repository">Unified metadata repository</h4>
 <p><strong>DataHub</strong> serves as a consolidation layer that connects and integrates end-to-end data lineage, business domain models, and their associated glossaries and data assets.</p>
-<p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
+<p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.</p>
+<div align="center">
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
-</a></p>
-<p><br>
-<br></p>
-<p><em>Enterprise-wide summary of assets:</em>
+</a>
+<br>
+<br>
+
+*Enterprise-wide summary of assets:*
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
 </a>
 <br>
-<br></p>
-<p><em>Browse by business domain and filters:</em>
+<br>
+
+*Browse by business domain and filters:*
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
 </a>
 <br>
-<br></p>
-<p><em>Metadata search by term:</em>
+<br>
+
+*Metadata search by term:*
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
 </a>
 <br>
-<br></p>
-<p><em>User-driven mapping of glossary terms to measures:</em>
+<br>
+
+*User-driven mapping of glossary terms to measures:*
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
-<br></p>
-<p><em>User-driven tagging of PII:</em>
+<br>
+
+*User-driven tagging of PII:*
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
 </a>
-<br></p>
+<br>
+</div>
+
 <h4 id="analytics-engineering-metadata">Analytics engineering metadata</h4>
 <ul>
 <li><strong>dbt Docs</strong> is the authoritative source for metadata related to SQL analytics engineering.  </li>
@@ -416,12 +453,17 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 </li>
 </ul>
 <p><br></p>
-<p><em>Databricks AI-driven semantic detection</em>
+<div align="center">
+
+*Databricks AI-driven semantic detection*
+
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
     <img src="../img/metadata_databricks_catalog_ai_gen.png"  alt="Databricks AI-driven semantic detection" width="75%">
 </a>
-<br></p>
+<br>
+</div>
+
 <p><strong>Recommendations and Notes:</strong></p>
 <ul>
 <li><a href="https://docs.databricks.com/en/connect/unity-catalog/cloud-storage/managed-storage.html">Assign managed storage</a> at the <strong>catalog level</strong> to enforce logical data isolation.  </li>
@@ -487,8 +529,12 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <p>Large organisations typically need to track and allocate costs to organisational units, cost centres, projects, teams and individuals.</p>
 <p>Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform (i.e. Databricks) must to align.</p>
 <p>Recommendations here align with the following Domain topology:</p>
-<p><img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes"></p>
-<p><br></p>
+<div align="center">
+<img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
+
+<br>
+</div>
+
 <h3 id="databricks-features-for-usage-tracking">Databricks features for usage tracking</h3>
 <hr />
 <h4 id="metadata-and-tags">Metadata and tags</h4>
@@ -529,13 +575,20 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
 <li>By default, only Databricks Account administrators have access to system tables such as billing. This is a highly privileged role and is not fit for sharing broadly. <a href="https://learn.microsoft.com/en-au/azure/databricks/admin/system-tables">Learn more</a></li>
 <li>Workspace administrators need to be delegated access to system tables, and likely restricted to their domain / workspace via dynamic system catalog views with RLS applied based on workspace ID. (See Dynamic Billing Solution below. Available on request) - see repo <a href="https://github.com/bensonchoyintuitas/databricks_system_tools/">Databricks System Tools</a></li>
 </ul>
-<p><img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution"></p>
-<p><br></p>
+<div align="center">
+<img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
+
+<br>
+</div>
+
 <h4 id="usage-reports">Usage reports</h4>
 <ul>
 <li>Databricks supplies an out of the box Databricks Usage Dashboard which requires Account-level rights to view (To use the imported dashboard, a user must have the SELECT permissions on the system.billing.usage and system.billing.list_prices tables. <a href="https://learn.microsoft.com/en-au/azure/databricks/admin/account-settings/usage">Learn more</a></li>
 <li>Once workspace administrators have been delegated access to system tables, they can import a refactored version of the Databricks Usage Dashboard which are repointed to the RLS views. (See Dynamic Billing Solution above. Available on request)</li>
 </ul>
+<p>Additional useful references:
+- <a href="https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331">Top 10 Queries to use with System Tables</a>
+- <a href="https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf">Unlocking Cost Optimization Insights with Databricks System Tables</a></p>
 <h3 id="domain-workspace-administrator-role">Domain / Workspace Administrator Role</h3>
 <ul>
 <li>Workspaces are a container for clusters, and hence are a natural fit for representing a Domain scope.</li>
@@ -600,12 +653,7 @@ Visit <a href="https://snappy.intuitas.com">snappy.intuitas.com</a> to access th
     - Over utilising
     - Redundant tasks
     - Inefficient queries
-</code></pre>
-<h3 id="references-to-recommended-practices">References to recommended practices</h3>
-<ul>
-<li><a href="https://community.databricks.com/t5/technical-blog/top-10-queries-to-use-with-system-tables/ba-p/82331">Top 10 Queries to use with System Tables</a></li>
-<li><a href="https://www.linkedin.com/pulse/unlocking-cost-optimization-insights-databricks-system-toraskar-nniaf">Unlocking Cost Optimization Insights with Databricks System Tables</a></li>
-</ul></div>
+</code></pre></div>
             </div>
         </div>
 
