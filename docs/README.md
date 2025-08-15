@@ -111,7 +111,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
 <br>
 
-> **Important notes:**
+> **Important considerations:**
 > 
 > - Living resource - This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
 > - Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made > to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*
