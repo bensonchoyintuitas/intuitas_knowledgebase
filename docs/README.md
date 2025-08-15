@@ -43,7 +43,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 - [Overview](#overview)
 - [Design Principles](#design-principles)
 - [Getting Started](#getting-started)
-- [Licencing and disclaimer](#licencing-and-disclaimer)
+- [Licensing and disclaimer](#licensing-and-disclaimer)
 
 
 ### **Level 0: Enterprise Context**

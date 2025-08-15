@@ -42,7 +42,7 @@ This section describes enterprise-wide and cross-domain data and data platform a
         - [Usage reports](level_1.md#usage-reports)
     - [Domain / Workspace Administrator Role](level_1.md#domain-workspace-administrator-role)
     - [Tagging convention](level_1.md#tagging-convention)
-    - [References to recommended practices](level_1.md#references-to-recommended-practices)
+
 
 <br>
 
@@ -59,7 +59,7 @@ Our use of this term draws inspiration from Domain-Driven Design and Data Mesh p
 
 <div align="center">
 
-*Example domains for a Healthcare organisation*
+<em>Example domains for a Healthcare organisation</em>
 <br>
 <a href="../img/domain-example.png" target="_blank">
     <img src="../img/domain-example.png"  alt="Example domains for a Healthcare organisation" width="75%">
@@ -70,7 +70,7 @@ Our use of this term draws inspiration from Domain-Driven Design and Data Mesh p
 
 <div align="center">
 
-*Example domain design using Intuitas' Domain builder tool*
+<em>Example domain design using Intuitas' Domain builder tool</em>
 <br>
 <a href="../img/domains.png" target="_blank">
     <img src="../img/domains.png"  alt="xample domains from Intuitas' Domain builder tool" width="75%">
