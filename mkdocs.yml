@@ -1,11 +1,15 @@
 site_name: Intuitas Data Intelligence Blueprint
 nav:
   - Home: README.md
+  - Level 0: level_0.md
+  - Level 1: level_1.md
+  - Level 2: level_2.md
   - About: about.md
 
 theme: 
   name: mkdocs
   logo: assets/intuitas.png
+  prev_next_buttons_location: none
 
 extra_css:
   - assets/custom.css

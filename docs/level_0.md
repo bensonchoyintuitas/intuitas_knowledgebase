@@ -18,19 +18,20 @@ Establishing a clear enterprise-level context ensures that investments in data, 
 - [Key Systems and Data Assets](#key-systems-and-data-assets)
 - [Team Capabilities and Roles](#team-capabilities-and-roles)
 - [Governance Structures](#governance-structures)
-- [Billing Structures](#billing-structures)
+- [Funding and costing structures](#funding-and-costing-structures)
 
 <br>
 <br>
 
 ## Org + Domain Definition
 
-Understanding the structure of the organisation and its domains is foundational to defining governance, environment and metadata boundaries. While organisations can look to industry patterns and reference architectures for guidance, they are also unique. See [Domain-Centric Design](level_1.md#domain-centric-design) to see further definition.
+Understanding the organisation’s structure and domains is key to setting governance, environment, and metadata boundaries. While industry patterns and reference architectures can guide, each organisation is unique. See [Domain-Centric Design](level_1.md#domain-centric-design) for more.
+
 
 **Recommended artefacts:**
 
-- Description of the organisational boundary and any external organisations that are within the scope of concern.
-- Description of domains and subdomains within the organisation that may have a material bearing on the data governance and data management operating model.
+- Description of the organisational boundary, including any external organisations in scope.
+- Description of domains and subdomains that impact the data governance and management model.
 
 <div align="center">
 
@@ -46,72 +47,60 @@ Understanding the structure of the organisation and its domains is foundational 
 
 ## Strategies and Objectives
 
-This section outlines the strategic context in which data, technology, and governance initiatives operate.
+Investing in data initiatives without a clear strategic context risks misalignment and wasted effort. A well-defined strategic context for data, technology, and governance ensures initiatives align with organisational goals, set the right priorities, have a clear scope, support effective governance, and build strong investment and benefits cases.
 
 **Recommended artefacts**
 
-- Description of the organisation's strategies and objectives at the whole-of-enterprise level:
-  - Business strategies, objectives, plans, and initiatives
-  - Technology strategies, objectives, plans, and initiatives
-  - Data and AI strategies, objectives, plans, and initiatives
-
+- Assessment of relevant business, technology, and data/AI strategies, plans, and initiatives.
 
 ## Key Systems and Data Assets
 
-Identifying the systems and data assets in scope supports effective governance, architecture, and planning.
+Identifying and profiling key systems and data assets in the context of strategic benefits and use cases provides a strong foundation for effective planning, design, and risk management.
 
 **Recommended artefacts**
 
-- Description of the organisation's key systems within the scope of concern (e.g., CMDB).
-- Information Asset Register (IAR)
+- Description of the organisation's relevant systems and data sets (e.g. CMDB, Information Asset Register), including associated governance arrangements and technical characteristics.
 
 
 ## Team Capabilities and Roles
 
-Clarity on the responsibilities and capabilities of key teams is essential for executing data strategy and maintaining accountability.
+Clarity on the responsibilities and capabilities of key teams is essential to executing the data strategy, maintaining accountability, ensuring all support functions are adequately fulfilled, and  costs remain predictable.
 
 **Recommended artefacts**
 
-- Description of in-scope key teams/parties associated with:
-  - Strategy and portfolio / prioritisation of data initiatives
-  - Data creation within the business domains
-  - Data management
-  - Data governance (quality, access)
-  - Data consumption
-  - Data engineering and integration
-  - Data analysis and reporting
-  - Data application development
-  - Data ops support
-  - Data security
-  - Data and information architecture
-  - Infrastructure and platform provisioning and management
-- RACI matrix for key teams/parties
+- RACI matrix for associated teams/parties with consideration of functions including but not limted to:
+  - Data lifecycle – creation, management, governance (quality, access), security, and consumption
+  - Data enablement – engineering, integration, analysis, reporting, and application development
+  - Data foundations – information architecture, infrastructure, and platform provisioning and management
+  - Operational support – DataOps, monitoring, and ongoing maintenance
+
 - Current and target operating and service management model
-- Maturity and skill assessment of key teams/parties
+- Maturity and skill assessment of key teams/parties relative to role definition
+- Strategy for using external partnerships and vendors to address capability gaps
 
 
 ## Governance Structures
 
-Governance frameworks and processes define how decisions are made, enforced, and improved across the data lifecycle.
+Governance frameworks and processes define how decisions are made, enforced, and improved across the data lifecycle. These may already exist in some organisations, while in others they need to be developed.
 
 **Recommended artefacts**
 
-- Description of the organisation's governance frameworks, policies, standards, processes, and bodies that are relevant to the scope of concern.
+- Description of governance frameworks, policies, standards, processes, and bodies relevant to the scope of concern.
+- In some cases - proposals and terms of reference for new governance structures.
 
 
-## Billing Structures
+## Funding and costing structures
 
-Understanding how billing is structured enables transparency, cost accountability, and alignment with financial governance.
+Understanding how the organisation plans and allocates funding and costs is critical to design, as it shapes the internal dynamics and “marketplace” for data and products. It influences stakeholder behaviour, drives collaboration (or competition), and determines how quickly solutions reach the market. 
+
+This, in turn, affects standards alignment, investment in shared capabilities, sustainability, and the ability to scale and innovate.
 
 **Recommended artefacts**
 
-- Description of the organisation's structures in terms of billing, and how cost centres may relate to billing reports, delegations, and associated observability requirements.
-- Cost allocation models and chargeback mechanisms
-- Budget management and forecasting processes
-- Financial governance and approval workflows
-- Cost optimization strategies and monitoring
-- Integration with enterprise resource planning (ERP) systems
-- Compliance with financial reporting standards and regulations
+- Billing structures – including how cost centres map to reports, delegations, and observability (important for transparency and accountability)
+- Cost allocation and chargeback models – critical for encouraging reuse, managing shared services, and clarifying ownership
+- Budgeting and forecasting – ensures sustainable funding for data platforms, products, and capabilities
+- Cost optimisation and monitoring – helps manage platform efficiency and avoid waste, and how the accountabilities are distributed for their control
 
 <br>
 <br>

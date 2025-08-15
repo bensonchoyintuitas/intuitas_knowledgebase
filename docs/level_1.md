@@ -1,7 +1,13 @@
 # Level 1 - Enterprise-level architecture
 [Return to home](README.md)
 
-This section describes enterprise-wide and cross-domain data and data platform architecture concepts.
+This section builds on the Level 0 - Enterprise and Strategic Context to describe enterprise-wide and cross-domain data and data platform architecture concepts.
+
+## Why It Matters
+
+Establishing a clear enterprise-wide, cross-domain design—the “town plan” for data—ensures that platform architecture, capabilities, and investments are purposefully coordinated across the organisation. 
+
+This reduces duplication, enables shared infrastructure, and is critical to building a scalable, interoperable, and sustainable data platform aligned with the organisation’s long-term vision.
 
 <br>
 
@@ -128,15 +134,16 @@ The arrangement of domains:
 
 <div align="center">
 
-*Platform and Pipeline Reference Architecture*
+<em>Platform and Pipeline Reference Architecture</em>
 <br>
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
+</div>
+
 Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
 
-</div>
 
 <br>
 
@@ -166,7 +173,7 @@ Key characteristics of this topology include:
 
 <div align="center">
 
-*Example of hybrid federated mesh topology:*
+<em>Example of hybrid federated mesh topology:</em>
 <br>
 <img src="../img/hybrid_federated_mesh_topology.png" >
 
@@ -195,7 +202,7 @@ Describes the logical components (including infrastructure, applications and com
 
 <div align="center">
 
-*Example Platform and Pipeline Reference Architecture*
+<em>Example Platform and Pipeline Reference Architecture</em>
 <br>
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
@@ -206,14 +213,20 @@ Describes the logical components (including infrastructure, applications and com
 ## Enterprise (Logical) Data Warehouse Reference Architecture
 ---
 
-**Logical Data Warehouse topology**
+An enterprise logical data warehouse retains the core properties of a traditional data warehouse—integrated, consistent, and analytics-ready data—while operating in a distributed, domain-oriented model.
 
-- Reflects the domain topology.
-- Provides unified access to data warehouse products from across domains via a common catalog.
+**Logical Data Warehouse topology** is characterised by:
+
+- Federated governance – shared policies and standards, but distributed custodianship, applied across the domain topology.
+- Unified access – a common entry point for querying and consuming data regardless of its physical location
+- Enterprise metadata – consistent definitions, lineage, and discovery across all domains via shared catalog.
+
+This approach combines the scalability and agility of decentralised ownership with the trust and coherence of an enterprise-wide data platform.
+
 
 <div align="center">
 
-*Example logical data warehouse topology*
+<em>Example logical data warehouse topology</em>
 <br>
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
@@ -248,42 +261,37 @@ Other secondary considerations:
 Metadata is an umbrella term encompassing various types of data that play critical roles across multiple domains, supporting the description, governance, and operational use of data and technology assets. It can be actively curated or generated as a byproduct of processes and systems.
 
 
-**Recommendations**
-
-To support enterprise-wide consistency and governance, it is recommended to define and maintain:
-
-- Applicable metadata standards  
-- An enterprise metadata architecture and metamodel  
-- Metadata governance framework, including roles (e.g., stewards) and operational processes  
-
 ### Metadata Architecture Principles
 ---
 
 The following principles reflect our design philosophy to ensure sustainable and effective metadata capability
 
-- **Accessible**: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.
-- **Dynamic**: Automate collection and updates to keep metadata fresh and reduce manual work.
-- **Contextual**: Bridge the gaps between business, technical, governance and architecture perspectives and serve the right metadata, in the right place, in the right format for the audience. 
-- **Integrated**: Metadata exists in an ecosystem across tools to support diverse workflows.
-- **Consistency**: Use common standards, terms, and structures; Ensure all metadata is current and in-sync.
-- **Secure**: Protect metadata as it may contain sensitive details.
-- **Accountability**: Clearly define roles for ownership and stewardship.
-- **Agnostic**: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.
+| Principle | Description |
+|-----------|-------------|
+| **Accessible** | Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders. |
+| **Dynamic** | Automate collection and updates to keep metadata fresh and reduce manual work. |
+| **Contextual** | Bridge the gaps between business, technical, governance and architecture perspectives and serve the right metadata, in the right place, in the right format for the audience. |
+| **Integrated** | Metadata exists in an ecosystem across tools to support diverse workflows. |
+| **Consistency** | Use common standards, terms, and structures; Ensure all metadata is current and in-sync. |
+| **Secure** | Protect metadata as it may contain sensitive details. |
+| **Accountability** | Clearly define roles for ownership and stewardship. |
+| **Agnostic** | Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability. |
 
 
 ### Semantic and Data lineage
 ---
-Semantic lineage and Data lineage are critical concepts in a Modern Data Intelligence Capability:
+Semantic lineage and data lineage are critical concepts in a modern data intelligence capability to ensure clarity, trust, and traceability of data — from its business meaning to its technical origins and transformations:
 
-- **Semantic Lineage** refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.
+- **Semantic Lineage** maps business terms, definitions, and relationships across the data ecosystem, showing how concepts are represented and transformed across systems and domains.
 
-- **Data Lineage** captures the technical flow of data from its source to its destination, including all transformations and processing steps. It provides visibility into how data moves through the organisation's systems and helps ensure data quality, compliance, and governance.
+- **Data Lineage** tracks the technical flow of data from source to destination, including all transformations, to provide visibility, support data quality, and meet compliance and governance needs.
 
-Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.
+Together, they give a complete view of business and technical data flows, enabling stronger governance and management of data assets. Because they are often difficult to align and keep in sync, a **unified approach**, as provided in the reference architecture, is critical.
+
 
 <div align="center">
 
-*Data and Semantic Lineage*
+<em>Data and Semantic Lineage</em>
 <br>
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
 </div>
@@ -305,7 +313,7 @@ The diagram below shows metadata objects and elements created and managed across
 
 <div align="center">
 
-*Metadata logical architecture*
+<em>Metadata logical architecture</em>
 <br>
 <img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
 
@@ -326,7 +334,7 @@ The diagram below illustrates metadata objects and elements that are created and
 
 <div align="center">
 
-*Metadata flow*
+<em>Metadata flow</em>
 <br>
 <img src="../img/metadata_flow.png" alt="Metadata flow">
 </div>
@@ -344,7 +352,7 @@ Metadata is essential for effective data governance, providing necessary context
 
 <div align="center">
 
-*Modelling Domains, Glossaries and Models in Intuitas' snappy tool*
+<em>Modelling Domains, Glossaries and Models in Intuitas' snappy tool</em>
 
 <br>
 <a href="../img/snappy.png" target="_blank">
@@ -363,7 +371,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.
 <div align="center">
 
-*Example: Datahub Lineage*
+<em>Example: Datahub Lineage</em>
 <br>
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
@@ -371,7 +379,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Example: Enterprise-wide summary of assets*
+<em>Example: Enterprise-wide summary of assets</em>
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
@@ -379,7 +387,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Example: Browse by business domain and filters*
+<em>Example: Browse by business domain and filters</em>
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
@@ -387,7 +395,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Example: Metadata search by term*
+<em>Example: Metadata search by term</em>
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
@@ -395,14 +403,14 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <br>
 
-*Example: User-driven mapping of glossary terms to measures*
+<em>Example: User-driven mapping of glossary terms to measures</em>
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
 <br>
 
-*Example: User-driven tagging of PII*
+<em>Example: User-driven tagging of PII</em>
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
@@ -431,7 +439,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 <br>
 <div align="center">
 
-*Example: Databricks AI-driven semantic detection*
+<em>Example: Databricks AI-driven semantic detection</em>
 
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
@@ -518,7 +526,7 @@ Recommendations here align with the following Domain topology:
 
 <div align="center">
 
-*Administration and Billing Scopes*
+<em>Administration and Billing Scopes</em>
 <br>
 <img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
@@ -558,7 +566,7 @@ Recommendations here align with the following Domain topology:
 
 <div align="center">
 
-*Dynamic Billing Solution*
+<em>Dynamic Billing Solution</em>
 <br>
 <img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
 

@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Level 1 - Enterprise-level architecture - Intuitas Data Intelligence Blueprint</title>
+        <title>Level 1 - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -39,6 +39,15 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a href="../level_0/" class="nav-link">Level 0</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Level 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_2/" class="nav-link">Level 2</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
@@ -49,6 +58,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../level_0/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../level_2/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -69,6 +88,10 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#level-1-enterprise-level-architecture" class="nav-link">Level 1 - Enterprise-level architecture</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#why-it-matters" class="nav-link">Why It Matters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
               <ul class="nav flex-column">
               </ul>
@@ -118,7 +141,10 @@
 
 <h1 id="level-1-enterprise-level-architecture">Level 1 - Enterprise-level architecture</h1>
 <p><a href="../">Return to home</a></p>
-<p>This section describes enterprise-wide and cross-domain data and data platform architecture concepts.</p>
+<p>This section builds on the Level 0 - Enterprise and Strategic Context to describe enterprise-wide and cross-domain data and data platform architecture concepts.</p>
+<h2 id="why-it-matters">Why It Matters</h2>
+<p>Establishing a clear enterprise-wide, cross-domain design—the “town plan” for data—ensures that platform architecture, capabilities, and investments are purposefully coordinated across the organisation. </p>
+<p>This reduces duplication, enables shared infrastructure, and is critical to building a scalable, interoperable, and sustainable data platform aligned with the organisation’s long-term vision.</p>
 <p><br></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <hr />
@@ -228,16 +254,15 @@
 </ul>
 <div align="center">
 
-*Platform and Pipeline Reference Architecture*
+<em>Platform and Pipeline Reference Architecture</em>
 <br>
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
     <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
 </a>
 
-Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&source=user_profile_page---------19-------------97abd6c0aad1---------------)
-
 </div>
 
+<p>Source: <a href="https://towardsdatascience.com/data-mesh-topologies-and-domain-granularity-65290a4ebb90/?gi=631b1b9f4dbb&amp;source=user_profile_page---------19-------------97abd6c0aad1---------------">Data Mesh: Topologies and domain granularity, Strengholt P., 2022</a></p>
 <p><br></p>
 <h3 id="hybrid-federated-mesh-topology">Hybrid federated mesh topology</h3>
 <hr />
@@ -262,7 +287,7 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 </ul>
 <div align="center">
 
-*Example of hybrid federated mesh topology:*
+<em>Example of hybrid federated mesh topology:</em>
 <br>
 <img src="../img/hybrid_federated_mesh_topology.png" >
 
@@ -281,7 +306,7 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <p>Describes the logical components (including infrastructure, applications and common services) that make up a default data and analytics solution, offered and supported by the enterprise. This artefact can then be used as the basis of developing domain-specific overlays.</p>
 <div align="center">
 
-*Example Platform and Pipeline Reference Architecture*
+<em>Example Platform and Pipeline Reference Architecture</em>
 <br>
 <img src="../img/logical_platform_and_pipeline_reference_architecture.png"  alt="Platform and Pipeline Reference Architecture">
 
@@ -290,14 +315,17 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <p><br></p>
 <h2 id="enterprise-logical-data-warehouse-reference-architecture">Enterprise (Logical) Data Warehouse Reference Architecture</h2>
 <hr />
-<p><strong>Logical Data Warehouse topology</strong></p>
+<p>An enterprise logical data warehouse retains the core properties of a traditional data warehouse—integrated, consistent, and analytics-ready data—while operating in a distributed, domain-oriented model.</p>
+<p><strong>Logical Data Warehouse topology</strong> is characterised by:</p>
 <ul>
-<li>Reflects the domain topology.</li>
-<li>Provides unified access to data warehouse products from across domains via a common catalog.</li>
+<li>Federated governance – shared policies and standards, but distributed custodianship, applied across the domain topology.</li>
+<li>Unified access – a common entry point for querying and consuming data regardless of its physical location</li>
+<li>Enterprise metadata – consistent definitions, lineage, and discovery across all domains via shared catalog.</li>
 </ul>
+<p>This approach combines the scalability and agility of decentralised ownership with the trust and coherence of an enterprise-wide data platform.</p>
 <div align="center">
 
-*Example logical data warehouse topology*
+<em>Example logical data warehouse topology</em>
 <br>
 <img src="../img/enterprise_logical_data_warehouse_architecture.png"  alt="Enterprise logical data warehouse architecture">
 
@@ -326,41 +354,66 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <h2 id="enterprise-metadata-architecture">Enterprise Metadata Architecture</h2>
 <hr />
 <p>Metadata is an umbrella term encompassing various types of data that play critical roles across multiple domains, supporting the description, governance, and operational use of data and technology assets. It can be actively curated or generated as a byproduct of processes and systems.</p>
-<p><strong>Recommendations</strong></p>
-<p>To support enterprise-wide consistency and governance, it is recommended to define and maintain:</p>
-<ul>
-<li>Applicable metadata standards  </li>
-<li>An enterprise metadata architecture and metamodel  </li>
-<li>Metadata governance framework, including roles (e.g., stewards) and operational processes  </li>
-</ul>
 <h3 id="metadata-architecture-principles">Metadata Architecture Principles</h3>
 <hr />
 <p>The following principles reflect our design philosophy to ensure sustainable and effective metadata capability</p>
-<ul>
-<li><strong>Accessible</strong>: Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.</li>
-<li><strong>Dynamic</strong>: Automate collection and updates to keep metadata fresh and reduce manual work.</li>
-<li><strong>Contextual</strong>: Bridge the gaps between business, technical, governance and architecture perspectives and serve the right metadata, in the right place, in the right format for the audience. </li>
-<li><strong>Integrated</strong>: Metadata exists in an ecosystem across tools to support diverse workflows.</li>
-<li><strong>Consistency</strong>: Use common standards, terms, and structures; Ensure all metadata is current and in-sync.</li>
-<li><strong>Secure</strong>: Protect metadata as it may contain sensitive details.</li>
-<li><strong>Accountability</strong>: Clearly define roles for ownership and stewardship.</li>
-<li><strong>Agnostic</strong>: Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Accessible</strong></td>
+<td>Metadata must be easy to find, search, and use and maintain by business, technical and governance stakeholders.</td>
+</tr>
+<tr>
+<td><strong>Dynamic</strong></td>
+<td>Automate collection and updates to keep metadata fresh and reduce manual work.</td>
+</tr>
+<tr>
+<td><strong>Contextual</strong></td>
+<td>Bridge the gaps between business, technical, governance and architecture perspectives and serve the right metadata, in the right place, in the right format for the audience.</td>
+</tr>
+<tr>
+<td><strong>Integrated</strong></td>
+<td>Metadata exists in an ecosystem across tools to support diverse workflows.</td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td>Use common standards, terms, and structures; Ensure all metadata is current and in-sync.</td>
+</tr>
+<tr>
+<td><strong>Secure</strong></td>
+<td>Protect metadata as it may contain sensitive details.</td>
+</tr>
+<tr>
+<td><strong>Accountability</strong></td>
+<td>Clearly define roles for ownership and stewardship.</td>
+</tr>
+<tr>
+<td><strong>Agnostic</strong></td>
+<td>Avoid vendor lock-in where possible. Keep metadata portable and open to ensure flexibility and interoperability.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="semantic-and-data-lineage">Semantic and Data lineage</h3>
 <hr />
-<p>Semantic lineage and Data lineage are critical concepts in a Modern Data Intelligence Capability:</p>
+<p>Semantic lineage and data lineage are critical concepts in a modern data intelligence capability to ensure clarity, trust, and traceability of data — from its business meaning to its technical origins and transformations:</p>
 <ul>
 <li>
-<p><strong>Semantic Lineage</strong> refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.</p>
+<p><strong>Semantic Lineage</strong> maps business terms, definitions, and relationships across the data ecosystem, showing how concepts are represented and transformed across systems and domains.</p>
 </li>
 <li>
-<p><strong>Data Lineage</strong> captures the technical flow of data from its source to its destination, including all transformations and processing steps. It provides visibility into how data moves through the organisation's systems and helps ensure data quality, compliance, and governance.</p>
+<p><strong>Data Lineage</strong> tracks the technical flow of data from source to destination, including all transformations, to provide visibility, support data quality, and meet compliance and governance needs.</p>
 </li>
 </ul>
-<p>Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.</p>
+<p>Together, they give a complete view of business and technical data flows, enabling stronger governance and management of data assets. Because they are often difficult to align and keep in sync, a <strong>unified approach</strong>, as provided in the reference architecture, is critical.</p>
 <div align="center">
 
-*Data and Semantic Lineage*
+<em>Data and Semantic Lineage</em>
 <br>
 <img src="../img/metadata_data_and_semantic_lineage_conceptual.png"  alt="Data and Semantic Lineage">
 </div>
@@ -379,7 +432,7 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <p>The diagram below shows metadata objects and elements created and managed across various tools and contexts, each serving different purposes.</p>
 <div align="center">
 
-*Metadata logical architecture*
+<em>Metadata logical architecture</em>
 <br>
 <img src="../img/metadata_logical_architecture.png"  alt="Metadata logical architecture">
 
@@ -397,7 +450,7 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <p>The diagram below illustrates metadata objects and elements that are created and managed across diverse tools and contexts—each serving a distinct role in the broader data and technology ecosystem.</p>
 <div align="center">
 
-*Metadata flow*
+<em>Metadata flow</em>
 <br>
 <img src="../img/metadata_flow.png" alt="Metadata flow">
 </div>
@@ -410,7 +463,7 @@ Source: [Data Mesh: Topologies and domain granularity, Strengholt P., 2022](http
 <p><strong>Snappy</strong> serves as a 'business-first' enterprise domain, model, standards and glossary authoring and mastering tool, and acts as the key driver of semantic lineage linking between true on-the-ground semantics, reference models and physical as-built metadata in Datahub. </p>
 <div align="center">
 
-*Modelling Domains, Glossaries and Models in Intuitas' snappy tool*
+<em>Modelling Domains, Glossaries and Models in Intuitas' snappy tool</em>
 
 <br>
 <a href="../img/snappy.png" target="_blank">
@@ -427,7 +480,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <p>The diagram below illustrates how DataHub consolidates lineage across diverse platforms, domains, and projects providing a comprehensive view of data flows and relationships throughout the ecosystem.</p>
 <div align="center">
 
-*Example: Datahub Lineage*
+<em>Example: Datahub Lineage</em>
 <br>
 <a href="../img/dbt-chained-lineage.png" target="_blank">
     <img src="../img/dbt-chained-lineage.png"  alt="Datahub Lineage" >
@@ -435,7 +488,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
 
-*Example: Enterprise-wide summary of assets*
+<em>Example: Enterprise-wide summary of assets</em>
 <br>
 <a href="../img/metadata_dashboard.png" target="_blank">
     <img src="../img/metadata_dashboard.png"  alt="Enterprise-wide summary of assets" width="75%">
@@ -443,7 +496,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
 
-*Example: Browse by business domain and filters*
+<em>Example: Browse by business domain and filters</em>
 <br>
 <a href="../img/metadata_clinical_catalog.png" target="_blank">
     <img src="../img/metadata_clinical_catalog.png"  alt="Browse by business domain and filters" width="75%">
@@ -451,7 +504,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
 
-*Example: Metadata search by term*
+<em>Example: Metadata search by term</em>
 <br>
 <a href="../img/metadata_search.png" target="_blank">
     <img src="../img/metadata_search.png"  alt="Metadata search by term" width="75%">
@@ -459,14 +512,14 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <br>
 <br>
 
-*Example: User-driven mapping of glossary terms to measures*
+<em>Example: User-driven mapping of glossary terms to measures</em>
 <br>
 <a href="../img/metadata_manual_glossary_mapping.png" target="_blank">
     <img src="../img/metadata_manual_glossary_mapping.png"  alt="User-driven mapping of glossary terms" width="75%">
 </a>
 <br>
 
-*Example: User-driven tagging of PII*
+<em>Example: User-driven tagging of PII</em>
 <br>
 <a href="../img/metadata_manual_pii_tagging.png" target="_blank">
     <img src="../img/metadata_manual_pii_tagging.png"  alt="User-driven tagging of PII" width="75%">
@@ -496,7 +549,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <p><br></p>
 <div align="center">
 
-*Example: Databricks AI-driven semantic detection*
+<em>Example: Databricks AI-driven semantic detection</em>
 
 <br>
 <a href="../img/metadata_databricks_catalog_ai_gen.png" target="_blank">
@@ -569,7 +622,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 <p>Recommendations here align with the following Domain topology:</p>
 <div align="center">
 
-*Administration and Billing Scopes*
+<em>Administration and Billing Scopes</em>
 <br>
 <img src="../img/administration_and_billing_scopes.png"  alt="Administration and Billing Scopes">
 
@@ -618,7 +671,7 @@ Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
 </ul>
 <div align="center">
 
-*Dynamic Billing Solution*
+<em>Dynamic Billing Solution</em>
 <br>
 <img src="../img/dynamic_billing.png"  alt="Dynamic Billing Solution">
 

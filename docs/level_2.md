@@ -3,6 +3,10 @@
 
 This section describes Domain-level instantiations of the enterprise-level reference architecture. i.e. solutions (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
 
+## Why It Matters
+
+At the domain level, applying solution architecture patterns and standards ensures consistency, interoperability, and compliance, enabling faster delivery, reducing rework, and ensuring each solution strengthens the enterprise “town plan.”
+
 <br>
 <br>
 
@@ -23,7 +27,7 @@ This section describes Domain-level instantiations of the enterprise-level refer
 - [Data Engineering](level_2.md#data-engineering)
     - [Ingestion](level_2.md#ingestion)
     - [Transformation](level_2.md#transformation)
-    - [Data Sharing and Delivery Patterns](level_2.md#data-sharing-and-delivery-patterns)
+    - [Data sharing and delivery patterns](level_2.md#data-sharing-and-delivery-patterns)
 - [Data governance](level_2.md#data-governance)
     - [Data lifecycle and asset management](level_2.md#data-lifecycle-and-asset-management)
     - [Data access management](level_2.md#data-access-management)
@@ -53,20 +57,36 @@ This section describes Domain-level instantiations of the enterprise-level refer
 
 ## Business architecture
 
+### Use cases and business requirements
+---
+
+
+Business requirements, use cases, and use case roadmaps together define what a solution must achieve, how it will be applied, and when capabilities will be delivered according to agreed priorities. These priorities may sit at the enterprise, domain level or both.
+
+Understanding them is necessary to understand:
+
+- the outcomes the solution must enable or improve
+- the measures of success, constraints, and scope that shape design
+- how the solution will be used to meet specific business needs
+- the sequence and priority of delivering capabilities to maximise business value
+
 
 ### Business processes
 ---
 
-Business processes are the activities and tasks that are performed to achieve the goals of the business.
-Understanding them is necessary to understand:
+Business processes are the activities and tasks that are performed to achieve the goals of the business. Understanding them is necessary to understand:
+
 - the context in which data is captured and used
-- concepts and entities that are relevant to the domain
+- concepts and entities that are relevant to the domain and scope of use case
 - the relationships between different processes and data
+- the context for measures and metrics
 
 ### Business glossary
 ---
 
-A business glossary is a list of terms and definitions that are relevant to the business. see Domain Glossary.
+A business glossary is a curated list of terms and definitions relevant to the business (at both the Enterprise and Domain levels). Understanding these terms and how they map across the organisation by stakeholders and systems is critical to consistent understanding and usage of concepts. 
+
+It is core part of [Enterprise Metadata Architecture](level_1.md#enterprise-metadata-architecture).
 
 <div align="center">
 
@@ -79,15 +99,21 @@ A business glossary is a list of terms and definitions that are relevant to the 
 
 </div>
 
-Contact us to access the tool.
+Contact us at 📧 <a href="mailto:office@intuitas.com">office@intuitas.com</a> to learn more about the tool.
 
 ### Business metrics
 ---
-Metrics are the measurements of the performance of the business processes. They should be documented according to a defined template that captures, at a minimum, the following:
+
+Measures are raw, quantifiable values that capture facts about business activities (e.g., total sales, number of customers).
+
+Metrics are calculated or derived indicators that assess the performance of business processes, often using one or more measures (e.g., sales growth rate, customer churn rate).
+
+Both require capture, at a minimum, of:
+
 - name
 - definition
-- formula (with reference to data elements and definitions in the business glossary)
-- dimensions
+- formula (with reference to concepts and terms as defined in the business glossary)
+- associated dimensions
 - source(s)
 - metric owner
 - frequency
@@ -342,15 +368,15 @@ Rejected patterns:
 ### Transformation
 ---
 
-> This section is planned for future development
+> Currently under development
 #### Batch and Micro-batch SQL transformation
 - dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
 
 #### Streaming SQL transformation
-> This section is planned for future development
+> Currently under development
 
 #### Non SQL transformation
-> This section is planned for future development
+> Currently under development
 
 
 ### Data sharing and delivery patterns
@@ -378,8 +404,6 @@ The following subsections offer more details about the channels depicted below.
 </a>
 </div>
 
-#### Row Level Security
-see [Row Level Security](#row-level-security)
 
 
 #### Pull / direct access
@@ -442,7 +466,8 @@ see [Row Level Security](#row-level-security)
 
 #### **API Access**
 ---
-> This section is planned for future development
+> Currently under development
+
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.
 
 References:
@@ -452,7 +477,6 @@ References:
 
 #### **Snowflake Access**
 ---
-> This section is planned for future development
 
 - Snowflake access is provided by Databricks Delta Sharing.
 - Snowflake access is also provided by Databricks Delta Lake external tables over ADLSGen2 [see external tables](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-delta)
@@ -570,9 +594,9 @@ Evaluation:
 #### Push
 ---
 
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - adf
 - databricks
@@ -580,9 +604,9 @@ For consideration:
 
 ### Visualisation
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - Powerbi
 - Databricks dashboards
@@ -593,9 +617,9 @@ For consideration:
 
 ## AI/ML
 
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - MLOps
 - Training
@@ -610,9 +634,9 @@ This section describes how Enterprise-level governance will be implemented throu
 
 ### Data lifecycle and asset management
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - data contracts and policy
 - data asset tagging
@@ -620,9 +644,9 @@ For consideration:
 
 ### Data access management
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - data access request management
 - data contracts
@@ -632,9 +656,9 @@ For consideration:
 
 ### Data quality
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - data quality checking and reporting
 - data standards and quality business rule management
@@ -642,9 +666,9 @@ For consideration:
 
 ### Data understandability
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - data lineage
 - data object metadata
@@ -652,9 +676,9 @@ For consideration:
 
 ### Privacy Preservation 
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - row level security
 - data masking
@@ -670,9 +694,9 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 
 #### Row Level Security
 ---
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - dynamic views
 - precomputed views
@@ -681,9 +705,9 @@ For consideration:
 #### Audit
 ---
 
-> This section is planned for future development
+> Currently under development
 
-For consideration:
+Areas for consideration include:
 
 - audit log queries
 
@@ -701,7 +725,7 @@ For consideration:
 
 ## Infrastructure
 ---
-> This section is planned for future development
+> Currently under development
 ### Environments, Workspaces and Storage
 
 <div align="center">
@@ -751,7 +775,10 @@ While work can be achieved within a single workspace and lakehouse storage accou
 ### Secrets
 
 ---
-> This section is planned for future development
+> Currently under development
+
+Areas for consideration include:
+
 - Management
 - Areas of use
 - Handling practices
@@ -784,8 +811,12 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 
 ### CICD and Repository
 ---
-> This section is planned for future development
+> Currently under development
+
+Areas for consideration include:
+
 - Description of git workflows for CICD in terms of:
+
     - Infrastructure
     - Data engineering
     - Analytics engineering
@@ -793,13 +824,20 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
     - BI, Reports and other products
 
 #### Tools
+> Currently under development
+
+Areas for consideration include:
+
 - Github
 - Azure Devops
 - Databricks Asset Bundles
 
 #### Repositories
+> Currently under development
 
-- Infrastructure
+Areas for consideration include:
+
+- Infrastructure IAC repos (Terraform)
 - dbt projects (separate for each domain)
     - potential for enterprise level stitching of lineage
 - Data engineering code (separate for each domain) using Databricks Asset Bundles
@@ -807,13 +845,14 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 ### Observability
 ---
 
-Various tools can be used to provide insight into different aspects of the architecture:
+Tools included in reference architecture:
 
 - dbt observability - Elementary
 - Databricks observability - Databricks monitoring dashboards
 - ADF - Native adf monitoring
 
 #### dbt observability - Elementary
+
 Elementary is a dbt observability tool available in both Open Source and Cloud Service forms. For more information, visit: <a href="https://docs.elementary-data.com/introduction" target="_blank">Elementary Documentation</a>
 
 <div align="center">
@@ -844,22 +883,28 @@ It leverages dbt artifacts (such as run results and sources) to send alerts to S
 
 ### Networking
 ---
-By default - all resources reside within the same VNet with private endpoints.
 
-Service endpoints and policies are enabled.
+Areas for consideration include:
+
+- By default - all resources reside within the same VNet with private endpoints.
+- Service endpoints and policies can be enabled - however consider impacts on private endpoints.
+
+
 
 ### Orchestration
 ---
+> Currently under development
 
-#### Tools
+#### Tools included in reference architecture
 
 - Azure Data Factory (if needed)
 - Databricks Workflows (for both databricks and dbt)
 
 ### Security
 ---
+> Currently under development
 
-#### Tools
+#### Tools included in reference architecture
 
 - Azure Entra
 - Azure Key Vault

@@ -13,14 +13,13 @@
 
 This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data, AI and Governance solutions. 
 
-It provides strategic, enterprise and solution level resources - distilled from our R&D, common questions, and lessons learned from real-world operations. 
+This knowledgebase provides Intuitas’ customer and partners community with strategic, enterprise, and solution-level resources — distilled from our R&D, frequently asked questions, and real-world experience.
 
-The ideas and patterns are opinionated, shaped by the Intuitas design philosophy, and can be demonstrated by working environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
+The ideas and patterns reflect the Intuitas design philosophy and are intentionally opinionated. They can be demonstrated in working environments on request. While rooted in large, multi-domain enterprise deployments, they are adaptable to organisations of any size or type.
 
 <br>
 
 >#### *“To build a home, you need a plan — but for it to thrive, you need a town plan."*
-
 
 <br>
 <br>
@@ -32,7 +31,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 
 - Find out more, or provide feedback.
 - Access our demonstration environment or any of the tools and technologies presented
-- Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
+- Get further help in: strategy, architecture, planning, training, implementation and governance.
 <br>
 <br>
 <br>
@@ -52,13 +51,13 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 - [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
 - [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
 - [Governance Structures](level_0.md#governance-structures)
-- [Billing Structures](level_0.md#billing-structures)
+- [Funding and costing structures](level_0.md#funding-and-costing-structures)
 
 ### **Level 1: Enterprise Architecture**
 - [Key Concepts](level_1.md#key-concepts)
-- [Reference Topologies](level_1.md#reference-topologies)
+- [Reference topologies](level_1.md#reference-topologies)
 - [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture)
-- [Enterprise Data Warehouse Reference Architecture](level_1.md#enterprise-logical-data-warehouse-reference-architecture)
+- [Enterprise (Logical) Data Warehouse Reference Architecture](level_1.md#enterprise-logical-data-warehouse-reference-architecture)
 - [Enterprise Information and Data Architecture](level_1.md#enterprise-information-and-data-architecture)
 - **[Enterprise Metadata](level_1.md#enterprise-metadata-architecture)**
     - [Architecture Principles](level_1.md#metadata-architecture-principles)
@@ -76,10 +75,10 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
     - [Business Glossary](level_2.md#business-glossary)  
     - [Business Metrics](level_2.md#business-metrics)
 - **[Infrastructure](level_2.md#infrastructure)**
-    - [Environments, Workspaces & Storage](level_2.md#environments-workspaces-and-storage)
-    - [Secrets Management](level_2.md#secrets)
-    - [Storage Architecture](level_2.md#storage)
-    - [CI/CD and Repository](level_2.md#cicd-and-repository)
+    - [Environments, Workspaces and Storage](level_2.md#environments-workspaces-and-storage)
+    - [Secrets](level_2.md#secrets)
+    - [Storage](level_2.md#storage)
+    - [CICD and Repository](level_2.md#cicd-and-repository)
     - [Observability](level_2.md#observability)
     - [Networking](level_2.md#networking)
     - [Orchestration](level_2.md#orchestration)
@@ -90,16 +89,16 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
     - [Data Layers and Stages](level_2.md#data-layers-and-stages)
     - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-to-storage-mapping)
 - **[Data Engineering](level_2.md#data-engineering)**
-    - [Ingestion Patterns](level_2.md#ingestion)
+    - [Ingestion](level_2.md#ingestion)
     - [Transformation](level_2.md#transformation)
-    - [Data Sharing & Delivery](level_2.md#data-sharing-and-delivery-patterns)
+    - [Data sharing and delivery patterns](level_2.md#data-sharing-and-delivery-patterns)
 - **[Data Governance](level_2.md#data-governance)**
-    - [Lifecycle & Asset Management](level_2.md#data-lifecycle-and-asset-management)
-    - [Access Management](level_2.md#data-access-management)
+    - [Data lifecycle and asset management](level_2.md#data-lifecycle-and-asset-management)
+    - [Data access management](level_2.md#data-access-management)
     - [Data Quality](level_2.md#data-quality)
     - [Data Understandability](level_2.md#data-understandability)
     - [Privacy Preservation](level_2.md#privacy-preservation)
-    - [Audit Capabilities](level_2.md#audit)
+    - [Audit](level_2.md#audit)
 
 ### **Standards and conventions**
 - [Naming Standards & Conventions](naming_standards_and_conventions.md)
@@ -113,28 +112,25 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 ---
 
 This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
-<br>
 
-> **Important considerations:**
-> 
-> - Living resource - This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
-> - Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made > to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*
-> - Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.
-> - See the [Copyright, Licensing and Disclaimer information](#licensing-and-disclaimer)
+This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
+
+See the [Copyright, Licensing and Disclaimer information](#licensing-and-disclaimer)
+
 <br>
 <br>
 
 ## Design Principles
 ---
 
+<br>
+
 >#### *“The alternative to good design is always bad design. There is no such thing as no design.” - Adam Judge*
 
 <br>
-
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
 Readers should consider the priority and implication of these principles alongside any existing principles applicable within their organisation.
-
 <br>
 
 | # | Principle | Description |
@@ -161,7 +157,6 @@ An iterative approach means each level builds upon the previous but can be revis
 2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
 3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
 4. **Standards & Conventions** - Apply consistent naming and conventions throughout
-
 <br>
 
 Choose your starting point:
@@ -182,8 +177,15 @@ Choose your starting point:
 
 **License:** Free use, reproduction, and adaptation permitted with prior consent and appropriate attribution to Intuitas PTY LTD. Referenced third-party content is subject to the copyright terms of their respective owners. 
 
-**Disclaimer:** Content is provided for general information only.  It does not constitute professional advice and should not be relied on as a substitute for advice tailored to your circumstances. No liability is accepted for errors or omissions. Always consider your local context and verify applicability before considering its use.
+**Disclaimer:** 
 
+- Content is provided for general information only
+- The information provided is general in nature and may not cover all scenarios or workloads. It does not constitute professional advice and should not be relied on as a substitute for advice tailored to your circumstances. 
+- The information provided reflects the product landscape and  functionality available in general release at the time of publishing. While every effort is made to maintain accuracy and update information as features evolve, the timeliness of these updates cannot be guaranteed.
+- No liability is accepted by Intuitas PTY LTD for errors or omissions. 
+- Readers are encouraged to independently validate all claims and undertake benchmark against their own use cases and projected workloads.
+
+<br>
 ---
 <br>
 <br>
