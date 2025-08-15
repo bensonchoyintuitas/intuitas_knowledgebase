@@ -1,6 +1,11 @@
-| | |
-|:---|:---|
-| <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a> | *We help organisations navigate the complexity and noise to achieve their unique objectives with data.* |
+<div style="display: flex; align-items: center; background: transparent; border: none; margin-bottom: 20px;">
+  <div style="margin-right: 20px;">
+    <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
+  </div>
+  <div style="flex: 1;">
+    <em>We help organisations cut through the noise, turning data and AI into results.</em>
+  </div>
+</div>
 
 <br>
 
