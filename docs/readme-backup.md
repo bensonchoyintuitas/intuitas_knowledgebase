@@ -40,7 +40,7 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 
 ### **Iterative Approach**
 - The framework supports "think big, start small" - establish enterprise context and patterns early, then implement incrementally
-- Each level builds upon the previous, but can be revisited and refined as your organization's capabilities mature
+- Each level builds upon the previous, but can be revisited and refined as your organisation's capabilities mature
 - Living guidance that evolves with your implementation experience and changing requirements
 
 - **Level 0 Context Setting**: Start by defining organisational objectives, domain structures, and strategic objectives before making any architectural and governance decisions

@@ -176,7 +176,7 @@ Hybrid federated mesh topology reflects a common scenario whereby centralisation
 
 **Centralising engineering**
 
-Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organization.
+Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organisation.
 
 **Distributed Local engineering**
 
@@ -277,7 +277,7 @@ Semantic lineage and Data lineage are critical concepts in a Modern Data Intelli
 
 - **Semantic Lineage** refers to the mapping of business terms, definitions, and relationships across the data ecosystem. It helps stakeholders understand how business concepts are represented and transformed across different systems and domains.
 
-- **Data Lineage** captures the technical flow of data from its source to its destination, including all transformations and processing steps. It provides visibility into how data moves through the organization's systems and helps ensure data quality, compliance, and governance.
+- **Data Lineage** captures the technical flow of data from its source to its destination, including all transformations and processing steps. It provides visibility into how data moves through the organisation's systems and helps ensure data quality, compliance, and governance.
 
 Together, these concepts provide a comprehensive view of both the business and technical aspects of data flow, enabling better understanding, governance, and management of data assets.
 

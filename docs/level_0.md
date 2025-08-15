@@ -118,7 +118,7 @@ Understanding how billing is structured enables transparency, cost accountabilit
 
 ## Next Steps
 
-Once the enterprise-level context is established, proceed to [Level 1 - Domain Architecture](level_1.md) to explore domain-centric design principles and architectural patterns that support the organization's strategic objectives.
+Once the enterprise-level context is established, proceed to [Level 1 - Domain Architecture](level_1.md) to explore domain-centric design principles and architectural patterns that support the organisation's strategic objectives.
 
 ---
 

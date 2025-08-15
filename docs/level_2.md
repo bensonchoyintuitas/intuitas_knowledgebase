@@ -273,7 +273,7 @@ Service endpoints and policies are enabled.
 ## Data Architecture
 ---
 
-Data Architecture refers to how data is physically structured, stored, and accessed within an organization. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. 
+Data Architecture refers to how data is physically structured, stored, and accessed within an organisation. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. 
 
 ### Data and information models
 ---
