@@ -93,7 +93,9 @@ A subdomain is a lower-level domain within a parent domain that groups data and 
 
 #### **Data Mesh**
 
-A data mesh is a decentralized approach to data management that empowers domain teams to own their data and build data products. The then shares data as products with other domains. It emphasizes autonomy, flexibility, and interoperability. This approach is not necessarily appropriate for all organisations and organisations will embody its principles with varying degrees of maturity and success. 
+A data mesh is a decentralized approach to data management that shifts ownership and accountability to domain teams, enabling them to treat their data as a product. Each domain is responsible for creating, maintaining, and sharing high-quality, discoverable, and interoperable data products with other domains.
+
+The data mesh approach emphasizes domain autonomy, self-serve infrastructure, interoperability, and federated governance. It is not a one-size-fits-all model; its suitability depends on an organisation’s context, culture, and capabilities, and its adoption will vary in maturity and success across organisations.
 
 See [Data Mesh: Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 

@@ -436,7 +436,6 @@ A solution served to the consumption layer is likely to contain a mix of Silver 
 ### Lakehouse Catalog to Storage Mapping
 ---
 
-
 Unity catalog objects (catalogs, schemas, objects) are mapped to:
 
 - Storage accounts
@@ -445,11 +444,10 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 - Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)
 
 <br>
-<br>
 
 <div align="center">
 
-<em>Example Catalog to storage mapping:</em>
+<em>Illustrative example of Catalog to storage mapping:</em>
 <br>
 
 <a href="../img/catalog_to_storage_mapping.png">
