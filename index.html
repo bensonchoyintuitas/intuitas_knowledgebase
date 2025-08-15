@@ -79,6 +79,11 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#enterprise-data-intelligence-blueprint" class="nav-link">Enterprise Data Intelligence Blueprint</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#get-help" class="nav-link">Get help</a>
               <ul class="nav flex-column">
               </ul>
@@ -96,11 +101,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#terms" class="nav-link">Terms</a>
+            <li class="nav-item" data-bs-level="2"><a href="#licencing-and-disclaimer" class="nav-link">Licencing and disclaimer</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -124,135 +125,18 @@
 <p>This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data, AI and Governance solutions. </p>
 <p>It distills insights from our R&amp;D, answers to common questions, and lessons learned from real-world experience.</p>
 <p>The ideas are intentionally opinionated, shaped by the Intuitas design philosophy, and proven in practice—supported by working demonstration environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.</p>
-<p><br></p>
-<blockquote>
-<p><strong>Important notes:</strong></p>
-<ul>
-<li>Living resource - This content is continuously updated and refined through ongoing R&amp;D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.</li>
-<li>Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made &gt; to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*</li>
-<li>Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.</li>
-<li>See the <a href="#terms">copyright, licencing and disclaimer information</a>
+<p><br>
 <br>
-<br></li>
-</ul>
-</blockquote>
-<h2 id="get-help">Get help</h2>
+<br></p>
+<h1 id="table-of-contents">Table of Contents</h1>
 <hr />
-<p>at <a href="mailto:office@intuitas.com">office@intuitas.com</a> to:</p>
 <ul>
-<li>Find out more, or provide feedback.</li>
-<li>Access our demonstration environment or any of the tools and technologies presented</li>
-<li>Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
-<br>
-<br></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#get-help">Get help</a></li>
+<li><a href="#design-principles">Design Principles</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#licencing-and-disclaimer">Licencing and disclaimer</a></li>
 </ul>
-<h1 id="overview">Overview</h1>
-<hr />
-<p>This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&amp;D, customer engagements, lessons learned and benchmarks.
-<br></p>
-<h2 id="design-principles">Design Principles</h2>
-<hr />
-<p>Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. </p>
-<p>Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.</p>
-<p><br></p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Principle</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><strong>Think big, start small</strong></td>
-<td>Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt.</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>Empowered Autonomy</strong></td>
-<td>Enable domain experts to manage data independently while leveraging shared, scalable foundations.</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>Disciplined Core, Flexible Edge</strong></td>
-<td>Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery.</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>Actionable Data</strong></td>
-<td>Real-time, comprehensive data extraction (structured &amp; unstructured) with platforms ready for immediate insights and AI/ML.</td>
-</tr>
-<tr>
-<td>5</td>
-<td><strong>Make It Easy to Do the Right Thing</strong></td>
-<td>Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly.</td>
-</tr>
-<tr>
-<td>6</td>
-<td><strong>Cost Transparency and Efficiency</strong></td>
-<td>Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers.</td>
-</tr>
-<tr>
-<td>7</td>
-<td><strong>Adaptability for Growth</strong></td>
-<td>Platforms seamlessly adapt to evolving business needs, data growth, and diverse workloads.</td>
-</tr>
-<tr>
-<td>8</td>
-<td><strong>Interoperability and Inclusion</strong></td>
-<td>Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own).</td>
-</tr>
-<tr>
-<td>9</td>
-<td><strong>Flexibility Through Standards</strong></td>
-<td>Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in.</td>
-</tr>
-</tbody>
-</table>
-<p><br>
-<br></p>
-<h2 id="getting-started">Getting Started</h2>
-<hr />
-<p>An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.</p>
-<ol>
-<li><strong>Level 0: Context Setting</strong> - Define organisational objectives, domain structures, and strategic goals</li>
-<li><strong>Level 1: Enterprise Architecture</strong> - Apply enterprise-wide patterns and reference topologies  </li>
-<li><strong>Level 2: Domain Solutions</strong> - Implement domain-specific solutions using enterprise patterns</li>
-<li><strong>Standards &amp; Conventions</strong> - Apply consistent naming and conventions throughout</li>
-</ol>
-<p><br>
-<br></p>
-<p>Choose your starting point:</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>Recommended Path</th>
-<th>Focus Areas</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Leaders &amp; Architects</strong></td>
-<td>Levels 0-1</td>
-<td>Strategic alignment, enterprise patterns, governance frameworks</td>
-</tr>
-<tr>
-<td><strong>Domain &amp; Technical Teams</strong></td>
-<td>Level 2</td>
-<td>Practical implementation within established enterprise frameworks</td>
-</tr>
-</tbody>
-</table>
-<p><br>
-<br></p>
-<hr />
-<p><br>
-<br></p>
-<h2 id="table-of-contents">Table of Contents</h2>
-<hr />
 <h3 id="level-0-enterprise-context"><strong>Level 0: Enterprise Context</strong></h3>
 <ul>
 <li><a href="level_0/#org-domain-definition">Organisational &amp; Domain Definition</a></li>
@@ -332,7 +216,129 @@
 <br>
 <br></li>
 </ul>
-<h2 id="terms">Terms</h2>
+<h2 id="get-help">Get help</h2>
+<hr />
+<p>Contact us at <a href="mailto:office@intuitas.com">office@intuitas.com</a> to:</p>
+<ul>
+<li>Find out more, or provide feedback.</li>
+<li>Access our demonstration environment or any of the tools and technologies presented</li>
+<li>Get help with any of our professional services: strategy, architecture, training, implementation, advice and guidance
+<br>
+<br></li>
+</ul>
+<h1 id="overview">Overview</h1>
+<hr />
+<p>This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&amp;D, customer engagements, lessons learned and benchmarks.
+<br></p>
+<blockquote>
+<p><strong>Important notes:</strong></p>
+<ul>
+<li>Living resource - This content is continuously updated and refined through ongoing R&amp;D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.</li>
+<li>Currency of information – The information provided reflects the product landscape and  functionality available in general release at the time of writing. While every effort is made &gt; to maintain accuracy and update information as features evolve, the timeliness of these  updates cannot be guaranteed.*</li>
+<li>Use discretion - The information provided is general in nature and may not cover all  scenarios or workloads. Readers are encouraged to independently validate all claims and  benchmark against their own use cases and projected workloads.</li>
+<li>See the <a href="#terms">copyright, licencing and disclaimer information</a>
+<br>
+<br></li>
+</ul>
+</blockquote>
+<h2 id="design-principles">Design Principles</h2>
+<hr />
+<p>Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. </p>
+<p>Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.</p>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Principle</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Think big, start small</strong></td>
+<td>Balance rapid delivery with strategic positioning. Deliver value iteratively. Ensure investments deliver sustained benefits without creating technical debt.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Empowered Autonomy</strong></td>
+<td>Enable domain experts to manage data independently while leveraging shared, scalable foundations.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Disciplined Core, Flexible Edge</strong></td>
+<td>Federated governance model that ensures policy consistency while enabling rapid, domain-specific delivery.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Actionable Data</strong></td>
+<td>Real-time, comprehensive data extraction (structured &amp; unstructured) with platforms ready for immediate insights and AI/ML.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Make It Easy to Do the Right Thing</strong></td>
+<td>Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Cost Transparency and Efficiency</strong></td>
+<td>Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Adaptability for Growth</strong></td>
+<td>Platforms seamlessly adapt to evolving business needs, data growth, and diverse workloads.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Interoperability and Inclusion</strong></td>
+<td>Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own).</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Flexibility Through Standards</strong></td>
+<td>Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in.</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<h2 id="getting-started">Getting Started</h2>
+<hr />
+<p>An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.</p>
+<ol>
+<li><strong>Level 0: Context Setting</strong> - Define organisational objectives, domain structures, and strategic goals</li>
+<li><strong>Level 1: Enterprise Architecture</strong> - Apply enterprise-wide patterns and reference topologies  </li>
+<li><strong>Level 2: Domain Solutions</strong> - Implement domain-specific solutions using enterprise patterns</li>
+<li><strong>Standards &amp; Conventions</strong> - Apply consistent naming and conventions throughout</li>
+</ol>
+<p><br></p>
+<p>Choose your starting point:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Recommended Path</th>
+<th>Focus Areas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Leaders &amp; Architects</strong></td>
+<td>Levels 0-1</td>
+<td>Strategic alignment, enterprise patterns, governance frameworks</td>
+</tr>
+<tr>
+<td><strong>Domain &amp; Technical Teams</strong></td>
+<td>Level 2</td>
+<td>Practical implementation within established enterprise frameworks</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<h2 id="licencing-and-disclaimer">Licencing and disclaimer</h2>
 <hr />
 <p><strong>Copyright:</strong> This knowledgebase and associated content are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.</p>
 <p><strong>License:</strong> Free use, reproduction, and adaptation permitted with prior consent and appropriate attribution to Intuitas PTY LTD. Referenced third-party content is subject to the copyright terms of their respective owners. </p>
@@ -431,5 +437,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-08-15 02:28:58.521483+00:00
+Build Date UTC : 2025-08-15 02:34:42.129941+00:00
 -->
