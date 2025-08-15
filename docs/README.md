@@ -62,7 +62,7 @@ Readers should consider the priority and implication of these principles alongsi
 | 4 | **Actionable Data** | Real-time, comprehensive data extraction (structured & unstructured) with platforms ready for immediate insights and AI/ML. |
 | 5 | **Make It Easy to Do the Right Thing** | Provide automation and platforms that guide users toward secure, policy-aligned practices effortlessly. |
 | 6 | **Cost Transparency and Efficiency** | Transparent cost models with pay-for-value usage while promoting reuse and removing sharing barriers. |
-| 7 | **Adaptability for Growth** | Platforms that seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
+| 7 | **Adaptability for Growth** | Platforms seamlessly adapt to evolving business needs, data growth, and diverse workloads. |
 | 8 | **Interoperability and Inclusion** | Smooth integration across cloud, on-premises, and diverse technology stacks (bring-your-own). |
 | 9 | **Flexibility Through Standards** | Technology-agnostic, standards-based components that maintain flexibility and prevent vendor lock-in. |
 
