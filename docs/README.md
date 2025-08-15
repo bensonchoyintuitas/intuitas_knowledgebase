@@ -43,7 +43,7 @@ The ideas are intentionally opinionated, shaped by the Intuitas design philosoph
 ---
 
 This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
-
+<br>
 
 ## Design Principles
 ---
@@ -72,29 +72,31 @@ Readers should consider the priority and implication of these principles alongsi
 ## Getting Started
 ---
 
-### Choose Your Starting Point
-
-| Role | Recommended Path | Focus Areas |
-|------|------------------|-------------|
-| **Leaders & Architects** | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
-| **Domain & Technical Teams** | Level 2 | Practical implementation within established enterprise frameworks |
-
-### Iterative Approach
-
 An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.
 
 1. **Level 0: Context Setting** - Define organisational objectives, domain structures, and strategic goals
 2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
 3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
 4. **Standards & Conventions** - Apply consistent naming and conventions throughout
+
+<br>
+<br>
+
+Choose your starting point:
+
+| Role | Recommended Path | Focus Areas |
+|------|------------------|-------------|
+| **Leaders & Architects** | Levels 0-1 | Strategic alignment, enterprise patterns, governance frameworks |
+| **Domain & Technical Teams** | Level 2 | Practical implementation within established enterprise frameworks |
+
+
+
+<br>
 <br>
 
 ---
 <br>
 <br>
-<br>
-
-
 
 
 ## Table of Contents
@@ -158,7 +160,6 @@ An iterative approach means each level builds upon the previous but can be revis
 ### **Standards and conventions**
 - [Naming Standards & Conventions](naming_standards_and_conventions.md)
 <br>
----
 <br>
 <br>
 
@@ -185,7 +186,7 @@ An iterative approach means each level builds upon the previous but can be revis
 <a href="https://www.intuitas.com"><img src="img/intuitas.png" width="200"/></a>
 <br>
 
-📧 [office@intuitas.com](mailto:office@intuitas.com)
+📧 <a href="mailto:office@intuitas.com">office@intuitas.com</a>
 
 
 </div>
