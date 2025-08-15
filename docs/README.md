@@ -10,11 +10,15 @@
 
 # Enterprise Data Intelligence Blueprint
 
+
 This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data, AI and Governance solutions. 
 
-It distills insights from our R&D, answers to common questions, and lessons learned from real-world experience.
+It provides strategic, enterprise and solution level resources - distilled from our R&D, common questions, and lessons learned from real-world operations. 
 
-The ideas are intentionally opinionated, shaped by the Intuitas design philosophy, and proven in practice—supported by working demonstration environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
+>### *To build a home, you need a plan — but for it to thrive, you need a town plan.*
+
+The ideas and patterns are opinionated, shaped by the Intuitas design philosophy, and can be demonstrated by working environments. While grounded in large, multi-domain enterprise deployments, they can be adapted to suit organisations of any scale or type.
+
 
 <br>
 <br>
@@ -125,7 +129,7 @@ This comprehensive blueprint provides practical patterns for designing and deliv
 
 Our approach is guided by nine foundational principles that ensure transparency in decision-making, effective trade-off evaluation, and strategic alignment. 
 
-Readers should consider the priority and implication of these principles alongside any existing principles applicable withing their organisation.
+Readers should consider the priority and implication of these principles alongside any existing principles applicable within their organisation.
 
 <br>
 
@@ -167,7 +171,7 @@ Choose your starting point:
 <br>
 
 
-## Licencing and disclaimer
+## Licensing and disclaimer
 ---
 
 **Copyright:** This knowledgebase and associated content are the original works of © Intuitas PTY LTD, 2025.  All rights reserved. Any referenced or third-party materials remain the property of their respective copyright holders. Every effort has been made to accurately reference and attribute existing content, and no claim of ownership is made over such materials.
