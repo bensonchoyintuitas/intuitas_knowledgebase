@@ -3,6 +3,7 @@
 
 This section describes Domain-level instantiations of the enterprise-level reference architecture. i.e. solutions (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
 
+<br>
 ## Why It Matters
 
 At the domain level, applying solution architecture patterns and standards ensures consistency, interoperability, and compliance, enabling faster delivery, reducing rework, and ensuring each solution strengthens the enterprise “town plan.”
@@ -369,15 +370,15 @@ Rejected patterns:
 ### Transformation
 ---
 
-> Currently under development
+> Under development. (Contact us to know more).
 #### Batch and Micro-batch SQL transformation
 - dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
 
 #### Streaming SQL transformation
-> Currently under development
+> Under development. (Contact us to know more).
 
 #### Non SQL transformation
-> Currently under development
+> Under development. (Contact us to know more).
 
 
 ### Data sharing and delivery patterns
@@ -467,7 +468,7 @@ The following subsections offer more details about the channels depicted below.
 
 #### **API Access**
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 - The Databricks SQL Statement Execution API can be used to execute SQL statements on a SQL warehouse and fetch the result.
 
@@ -595,7 +596,7 @@ Evaluation:
 #### Push
 ---
 
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -605,7 +606,7 @@ Areas for consideration include:
 
 ### Visualisation
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -618,7 +619,7 @@ Areas for consideration include:
 
 ## AI/ML
 
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -635,7 +636,7 @@ This section describes how Enterprise-level governance will be implemented throu
 
 ### Data lifecycle and asset management
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -645,7 +646,7 @@ Areas for consideration include:
 
 ### Data access management
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -657,7 +658,7 @@ Areas for consideration include:
 
 ### Data quality
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -667,7 +668,7 @@ Areas for consideration include:
 
 ### Data understandability
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -677,7 +678,7 @@ Areas for consideration include:
 
 ### Privacy Preservation 
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -695,7 +696,7 @@ Use dynamic views if you need to apply transformation logic, such as filters and
 
 #### Row Level Security
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -706,7 +707,7 @@ Areas for consideration include:
 #### Audit
 ---
 
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -726,7 +727,7 @@ Areas for consideration include:
 
 ## Infrastructure
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 ### Environments, Workspaces and Storage
 
 <div align="center">
@@ -776,7 +777,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 ### Secrets
 
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -812,7 +813,7 @@ Generic Blob storage can be used for all non-lakehouse data; or alternatively wi
 
 ### CICD and Repository
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -825,7 +826,7 @@ Areas for consideration include:
     - BI, Reports and other products
 
 #### Tools
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -834,7 +835,7 @@ Areas for consideration include:
 - Databricks Asset Bundles
 
 #### Repositories
-> Currently under development
+> Under development. (Contact us to know more).
 
 Areas for consideration include:
 
@@ -894,7 +895,7 @@ Areas for consideration include:
 
 ### Orchestration
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 #### Tools included in reference architecture
 
@@ -903,7 +904,7 @@ Areas for consideration include:
 
 ### Security
 ---
-> Currently under development
+> Under development. (Contact us to know more).
 
 #### Tools included in reference architecture
 

@@ -3,6 +3,7 @@
 
 This section builds on the Level 0 - Enterprise and Strategic Context to describe enterprise-wide and cross-domain data and data platform architecture concepts.
 
+<br>
 ## Why It Matters
 
 Establishing a clear enterprise-wide, cross-domain design—the “town plan” for data—ensures that platform architecture, capabilities, and investments are purposefully coordinated across the organisation. 

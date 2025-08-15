@@ -3,6 +3,7 @@
 
 This section outlines the foundational enterprise-wide concepts that inform and guide data and platform architecture decisions across the organisation. It sets the strategic and business context within which all lower-level architectural decisions should be made.
 
+<br>
 ## Why It Matters
 
 Establishing a clear enterprise-level context ensures that investments in data, capabilities, and infrastructure are purposefully aligned with the organisation’s strategic vision, operating model, and capacity. This alignment is essential for delivering meaningful, sustainable outcomes that reflect the organisation’s unique context and long-term goals.
