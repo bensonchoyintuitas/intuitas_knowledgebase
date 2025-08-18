@@ -898,9 +898,7 @@ targets:
 </code></pre>
 <p><br></p>
 <h2 id="security">Security</h2>
-<blockquote>
-<p>Under development. (Contact us to know more).</p>
-</blockquote>
+<p>Security standards and conventioned provided here provide a starter set, however existing organisational and applicable industry standards should take precedence. Consult with your cybersecurity advisor.</p>
 <h3 id="entra">Entra</h3>
 <blockquote>
 <p>Under development. (Contact us to know more).</p>
@@ -915,22 +913,14 @@ targets:
 <p><strong>Entra Group Names</strong>:</p>
 <ul>
 <li>Pattern:  <code>grp-&lt;org&gt;-&lt;domain&gt;-&lt;plat&gt;-&lt;scope&gt;-&lt;role&gt;-&lt;env&gt;[-&lt;region&gt;][-ext-&lt;partner&gt;][-idx]</code></li>
-</ul>
-<p><strong>Format rules</strong>:</p>
-<ul>
 <li>Lowercase, hyphen-separated; no spaces.</li>
 <li>Keep to ≤ 120 chars total.</li>
 <li>No PII in names.</li>
 <li>Use Security groups (not M365) for RBAC; enable PIM where appropriate e.g. Admins.</li>
 </ul>
-<p><strong>Controlled vocabularies</strong>:</p>
+<p><strong>role</strong>:</p>
 <ul>
-<li>
-<p><role> (principle of least privilege applies):</p>
-</li>
-<li>
-<p>owner — full control of the named scope</p>
-</li>
+<li>owner — full control of the named scope</li>
 <li>admin — administrative (non-ownership) rights</li>
 <li>contrib — create/modify within scope</li>
 <li>editor — modify data/artifacts, not permissions</li>
@@ -938,35 +928,26 @@ targets:
 <li>steward — governance/metadata rights</li>
 <li>custodian — key/secret/storage control</li>
 <li>operator — run/ops rights (pipelines, jobs)</li>
-<li>
-<p>viewer — read dashboards/reports</p>
-</li>
-<li>
-<p><plat>:</p>
-</li>
-<li>
-<p>dbx (Databricks), uc (Unity Catalog), pbi (Power BI), adf (Data Factory),</p>
-</li>
-<li>
-<p>dlk (Data Lake), sql (Azure SQL), kva (Key Vault), syn (Synapse)</p>
-</li>
-<li>
-<p><scope> (or object):</p>
-</li>
-<li>
-<p>Databricks Workspace: ws-<WorkspaceName></p>
-</li>
+<li>viewer — read dashboards/reports</li>
+</ul>
+<p><br></p>
+<p><strong>plat:</strong></p>
+<ul>
+<li>dbx (Databricks), uc (Unity Catalog), pbi (Power BI), adf (Data Factory),</li>
+<li>dlk (Data Lake), sql (Azure SQL), kva (Key Vault), syn (Synapse)</li>
+</ul>
+<p><br></p>
+<p><strong>scope</strong> (or object):</p>
+<ul>
+<li>Databricks Workspace: ws-<WorkspaceName></li>
 <li>Unity Catalog: uc-meta (metastore), uc-cat-<Catalog>, uc-sch-<Catalog>.<Schema>, uc-obj-<Catalog>.<Schema>.<Object></li>
 <li>Power BI: pbi-ws-<Workspace></li>
-<li>
-<p>Data Lake: dlk-path-/datalake/<area>/<path></p>
-</li>
-<li>
+<li>Data Lake: dlk-path-/datalake/<area>/<path></li>
+</ul>
+<p><br></p>
 <p><em>Examples</em>:</p>
-</li>
-<li>
-<p><em>GRP-INTUITAS-CLIN-DBX-WS-Analytics-ADMIN-PRD</em></p>
-</li>
+<ul>
+<li><em>GRP-INTUITAS-CLIN-DBX-WS-Analytics-ADMIN-PRD</em></li>
 <li><em>GRP-INTUITAS-CLIN-UC-UC-CAT-Claims-OWNER-PRD</em></li>
 <li><em>GRP-INTUITAS-CLIN-UC-UC-SCH-Claims.Curated-READER-UAT</em></li>
 <li><em>GRP-INTUITAS-FIN-PBI-PBI-WS-ExecDash-VIEWER-PRD</em></li>
@@ -974,6 +955,8 @@ targets:
 <li><em>GRP-INTUITAS-CLIN-DLK-DLK-PATH-/curated/claims/READER-PRD-AUE</em></li>
 <li><em>GRP-INTUITAS-CLIN-DBX-WS-PartnerLake-READER-PRD-EXT-ACME</em></li>
 </ul>
+<p><br>
+<br></p>
 <h3 id="policies">Policies</h3>
 <blockquote>
 <p>Under development. (Contact us to know more).</p>
@@ -986,6 +969,7 @@ targets:
 <li>Incident response and escalation procedures</li>
 <li>Access review and recertification</li>
 </ul>
+<p><br></p>
 <h3 id="frameworks">Frameworks</h3>
 <blockquote>
 <p>Under development. (Contact us to know more).</p>

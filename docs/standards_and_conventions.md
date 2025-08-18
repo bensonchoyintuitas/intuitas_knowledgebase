@@ -789,7 +789,8 @@ targets:
 <br>
 
 ## Security
-> Under development. (Contact us to know more).
+
+Security standards and conventioned provided here provide a starter set, however existing organisational and applicable industry standards should take precedence. Consult with your cybersecurity advisor.
 
 ### Entra
 > Under development. (Contact us to know more).
@@ -806,41 +807,42 @@ Recommended areas to align to organisational governance and cyber requirements:
 **Entra Group Names**:
 
 - Pattern:  `grp-<org>-<domain>-<plat>-<scope>-<role>-<env>[-<region>][-ext-<partner>][-idx]`
-
-**Format rules**:
-
 - Lowercase, hyphen-separated; no spaces.
 - Keep to ≤ 120 chars total.
 - No PII in names.
 - Use Security groups (not M365) for RBAC; enable PIM where appropriate e.g. Admins.
 
-**Controlled vocabularies**:
+**role**:
 
-- <role> (principle of least privilege applies):
+- owner — full control of the named scope
+- admin — administrative (non-ownership) rights
+- contrib — create/modify within scope
+- editor — modify data/artifacts, not permissions
+- reader — read-only
+- steward — governance/metadata rights
+- custodian — key/secret/storage control
+- operator — run/ops rights (pipelines, jobs)
+- viewer — read dashboards/reports
 
-   - owner — full control of the named scope
-   - admin — administrative (non-ownership) rights
-   - contrib — create/modify within scope
-   - editor — modify data/artifacts, not permissions
-   - reader — read-only
-   - steward — governance/metadata rights
-   - custodian — key/secret/storage control
-   - operator — run/ops rights (pipelines, jobs)
-   - viewer — read dashboards/reports
+<br>
 
-- <plat>:
+**plat:**
 
-   - dbx (Databricks), uc (Unity Catalog), pbi (Power BI), adf (Data Factory),
-   - dlk (Data Lake), sql (Azure SQL), kva (Key Vault), syn (Synapse)
+- dbx (Databricks), uc (Unity Catalog), pbi (Power BI), adf (Data Factory),
+- dlk (Data Lake), sql (Azure SQL), kva (Key Vault), syn (Synapse)
 
-- <scope> (or object):
+<br>
 
-   - Databricks Workspace: ws-<WorkspaceName>
-   - Unity Catalog: uc-meta (metastore), uc-cat-<Catalog>, uc-sch-<Catalog>.<Schema>, uc-obj-<Catalog>.<Schema>.<Object>
-   - Power BI: pbi-ws-<Workspace>
-   - Data Lake: dlk-path-/datalake/<area>/<path>
+**scope** (or object):
 
-- *Examples*:
+- Databricks Workspace: ws-<WorkspaceName>
+- Unity Catalog: uc-meta (metastore), uc-cat-<Catalog>, uc-sch-<Catalog>.<Schema>, uc-obj-<Catalog>.<Schema>.<Object>
+- Power BI: pbi-ws-<Workspace>
+- Data Lake: dlk-path-/datalake/<area>/<path>
+
+<br>
+
+*Examples*:
 
    - *GRP-INTUITAS-CLIN-DBX-WS-Analytics-ADMIN-PRD*
    - *GRP-INTUITAS-CLIN-UC-UC-CAT-Claims-OWNER-PRD*
@@ -849,6 +851,9 @@ Recommended areas to align to organisational governance and cyber requirements:
    - *GRP-INTUITAS-ENT-KVA-KVA-Keys-CUSTODIAN-PRD*
    - *GRP-INTUITAS-CLIN-DLK-DLK-PATH-/curated/claims/READER-PRD-AUE*
    - *GRP-INTUITAS-CLIN-DBX-WS-PartnerLake-READER-PRD-EXT-ACME*
+
+<br>
+<br>
 
 ### Policies
 > Under development. (Contact us to know more).
@@ -861,6 +866,7 @@ Recommended areas to align to non-functional requirements:
 - Incident response and escalation procedures
 - Access review and recertification
 
+<br>
 ### Frameworks
 > Under development. (Contact us to know more).
 
