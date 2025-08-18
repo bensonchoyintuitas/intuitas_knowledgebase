@@ -1,7 +1,7 @@
 # Level 2 - Domain-Level (Solution) Architecture and Patterns
 [Return to home](README.md)
 
-This section shows how the [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture), [Standards and Conventions](standards_and_conventions.md) are are applied within individual [domains](level_1.md#domain) to create solutions.
+This section shows how the [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture) as well as [standards](standards_and_conventions.md) are applied within individual [domains](level_1.md#domain) to create solutions.
 
 <br>
 ## Why It Matters
