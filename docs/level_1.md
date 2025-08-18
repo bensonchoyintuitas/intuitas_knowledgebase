@@ -424,7 +424,7 @@ The diagram below illustrates how DataHub consolidates lineage across diverse pl
 - **dbt Docs** is the authoritative source for metadata related to SQL analytics engineering.  
 - It captures object, column, and lineage metadata, and provides a rich interface for discovery and documentation.  
 - dbt schema metadata is integrated with Databricks Unity Catalog.  
-- For more information, refer to [naming standards and conventions](naming_standards_and_conventions.md#dbt).
+- For more information, refer to [standards and conventions](standards_and_conventions.md#dbt).
 
 
 #### Databricks Unity Catalog Metastore
@@ -522,7 +522,7 @@ Large organisations typically need to track and allocate costs to organisational
 Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform must to align.
 
 See:
-- [Enterprise Billing Solutions](level_0.md##funding-and-costing-structures)
+- [Funding and costing structures](level_0.md#funding-and-costing-structures)
 - [Observability Solutions](level_2.md#observability)
 
 Recommendations here align with the following Domain topology:

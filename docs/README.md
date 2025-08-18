@@ -109,7 +109,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
     - [Audit](level_2.md#audit)
 
 ### **Standards and conventions**
-- [Standards & Conventions](naming_standards_and_conventions.md)
+- [Standards & Conventions](standards_and_conventions.md)
 <br>
 <br>
 <br>
@@ -128,7 +128,7 @@ Organisations may begin at any level depending on their maturity, but all levels
 1. **[Level 0: Context Setting](level_0.md)** - Define organisational objectives, domain structures, and strategic goals
 2. **[Level 1: Enterprise Architecture](level_1.md)** - Apply enterprise-wide patterns and reference topologies  
 3. **[Level 2: Domain Solutions](level_2.md)** - Implement domain-specific solutions using enterprise patterns
-4. **[Standards & Conventions](naming_standards_and_conventions.md)** - Apply consistent naming and conventions throughout
+4. **[Standards & Conventions](standards_and_conventions.md)** - Apply consistent naming and conventions throughout
 <br>
 
 

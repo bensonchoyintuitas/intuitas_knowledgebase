@@ -48,6 +48,9 @@
                                 <a href="./" class="nav-link active" aria-current="page">Level 2</a>
                             </li>
                             <li class="nav-item">
+                                <a href="../standards_and_conventions/" class="nav-link">Standards</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
@@ -64,7 +67,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../about/" class="nav-link">
+                                <a rel="next" href="../standards_and_conventions/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -129,7 +132,7 @@
 
 <h1 id="level-2-domain-level-solution-architecture-and-patterns">Level 2 - Domain-Level (Solution) Architecture and Patterns</h1>
 <p><a href="../">Return to home</a></p>
-<p>This section shows how the <a href="../level_1/#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a>, <a href="../naming_standards_and_conventions/">Standards and Conventions</a> are are applied within individual <a href="../level_1/#domain">domains</a> to create solutions.</p>
+<p>This section shows how the <a href="../level_1/#enterprise-data-platform-reference-architecture">Enterprise Data Platform Reference Architecture</a>, <a href="../standards_and_conventions/">Standards and Conventions</a> are are applied within individual <a href="../level_1/#domain">domains</a> to create solutions.</p>
 <p><br></p>
 <h2 id="why-it-matters">Why It Matters</h2>
 <p>Using common patterns and standards at the domain level keeps solutions consistent and compatible. This speeds up delivery, avoids rework, and ensures every solution contributes to and strengthens the overall enterprise “town plan.”</p>
@@ -289,7 +292,7 @@
 <br>
 </div>
 
-<p>These map to naming standards and conventions for <a href="../naming_standards_and_conventions/#catalog-naming-and-conventions">Catalog</a>, <a href="../naming_standards_and_conventions/#schema-and-object-conventions">Schemas</a> and <a href="../naming_standards_and_conventions/#dbt">dbt</a>.</p>
+<p>These map to naming standards and conventions for <a href="../standards_and_conventions/#catalog-naming-and-conventions">Catalog</a>, <a href="../standards_and_conventions/#schema-and-object-conventions">Schemas</a> and <a href="../standards_and_conventions/#dbt">dbt</a>.</p>
 <h4 id="metadata-layer"><strong>Metadata layer</strong></h4>
 <p>Contains engineering and governance of data managed within the platform. The format of this will vary depending on the choice of engineering and governance toolsets and associated metamodels within the solution as well as across the broader enterprise.  <a href="../level_1/#enterprise-metadata-architecture">see Enterprise Metadata Architecture</a> </p>
 <h4 id="bronze-layer-data-according-to-source"><strong>Bronze layer: Data according to source</strong></h4>
@@ -487,7 +490,7 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 </blockquote>
 <h4 id="batch-and-micro-batch-sql-transformation">Batch and Micro-batch SQL transformation</h4>
 <ul>
-<li>dbt <a href="../naming_standards_and_conventions/#dbt">see dbt standards</a></li>
+<li>dbt <a href="../standards_and_conventions/#dbt">see dbt standards</a></li>
 </ul>
 <h4 id="streaming-sql-transformation">Streaming SQL transformation</h4>
 <blockquote>
@@ -526,7 +529,7 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <li>Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
 -Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.</li>
 <li>Costs: In Delta Sharing, the cost of compute is generally borne by the data consumer, not the data provider. Other costs include storage API calls and data transfer.</li>
-<li>Naming standards and conventions <a href="../naming_standards_and_conventions/#delta-sharing">see naming standards</a></li>
+<li>Naming standards and conventions <a href="../standards_and_conventions/#delta-sharing">see naming standards</a></li>
 <li>Tightly scope the share as per the principal of least privilege:<ul>
 <li>Share only the necessary data</li>
 <li>Single purpose, single recipient</li>

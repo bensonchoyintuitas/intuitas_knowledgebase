@@ -14,12 +14,12 @@ Establishing a clear enterprise-level context ensures that investments in data, 
 ## Table of Contents
 ---
 
-- [Org + Domain Definition](#org-domain-definition)
-- [Strategies and Objectives](#strategies-and-objectives)
-- [Key Systems and Data Assets](#key-systems-and-data-assets)
-- [Team Capabilities and Roles](#team-capabilities-and-roles)
-- [Governance Structures](#governance-structures)
-- [Funding and costing structures](#funding-and-costing-structures)
+- [Org + Domain Definition](level_0.md#org-domain-definition)
+- [Strategies and Objectives](level_0.md#strategies-and-objectives)
+- [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
+- [Team Capabilities and Roles](level_0.md#team-capabilities-and-roles)
+- [Governance Structures](level_0.md#governance-structures)
+- [Funding and costing structures](level_0.md#funding-and-costing-structures)
 
 <br>
 <br>

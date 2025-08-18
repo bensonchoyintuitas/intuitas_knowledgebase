@@ -1,7 +1,7 @@
 # Level 2 - Domain-Level (Solution) Architecture and Patterns
 [Return to home](README.md)
 
-This section shows how the [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture), [Standards and Conventions](naming_standards_and_conventions.md) are are applied within individual [domains](level_1.md#domain) to create solutions.
+This section shows how the [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture), [Standards and Conventions](standards_and_conventions.md) are are applied within individual [domains](level_1.md#domain) to create solutions.
 
 <br>
 ## Why It Matters
@@ -172,7 +172,7 @@ Data and analytics pipelines flow through data layers and stages. Conventions va
 <br>
 </div>
 
-These map to naming standards and conventions for [Catalog](naming_standards_and_conventions.md#catalog-naming-and-conventions), [Schemas](naming_standards_and_conventions.md#schema-and-object-conventions) and [dbt](naming_standards_and_conventions.md#dbt).
+These map to naming standards and conventions for [Catalog](standards_and_conventions.md#catalog-naming-and-conventions), [Schemas](standards_and_conventions.md#schema-and-object-conventions) and [dbt](standards_and_conventions.md#dbt).
 
 #### **Metadata layer**
 
@@ -372,7 +372,7 @@ Rejected patterns:
 
 > Under development. (Contact us to know more).
 #### Batch and Micro-batch SQL transformation
-- dbt [see dbt standards](naming_standards_and_conventions.md#dbt)
+- dbt [see dbt standards](standards_and_conventions.md#dbt)
 
 #### Streaming SQL transformation
 > Under development. (Contact us to know more).
@@ -416,7 +416,7 @@ The following subsections offer more details about the channels depicted below.
 - Databricks Delta Sharing allows read-only access directly to data (table, view, change feed) in the lakehouse storage account. This allows for the use of the data in external tools such as BI tools, ETL tools, etc. without the need to use a databricks cluster / sql endpoint. 
 -Permissions: Delta sharing is a feature of Databricks Unity Catalog that requires enablement and authorised user/group permissions for the feature as well as the shared object.
 - Costs: In Delta Sharing, the cost of compute is generally borne by the data consumer, not the data provider. Other costs include storage API calls and data transfer.
-- Naming standards and conventions [see naming standards](naming_standards_and_conventions.md#delta-sharing)
+- Naming standards and conventions [see naming standards](standards_and_conventions.md#delta-sharing)
 - Tightly scope the share as per the principal of least privilege:
     - Share only the necessary data
     - Single purpose, single recipient
