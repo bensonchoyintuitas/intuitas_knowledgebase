@@ -140,11 +140,11 @@ Domain-level models often align more closely to real-world business semantics an
 <br>
 <div align="center">
 
-<em>Illustrative Example of a Conceptual Information Model</em>
+<em>Example of modelling a Domain-scoped Conceptual Information Model</em>
 <br>
 
 <a href="../img/snappy_models.png" target="_blank">
-    <img src="../img/snappy_models.png"  alt="Illustrative Example of a Conceptual Information Model">
+    <img src="../img/snappy_models.png"  alt="Example of modelling a Domain-scoped Conceptual Information Model" width="75%">
 </a>
 
 <br>
@@ -156,9 +156,44 @@ See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 ### Domain glossary
 ---
 
-- Expand on the enterprise glossary and add domain specific terms and definitions.
-    - In cases where domain definitions are synonymous with enterprise definitions, the enterprise glossary should be referenced.
-    - In cases where definitions are conflicting, governance should be applied to resolve the conflict.
+The Domain Glossary complements the Domain Model by describing concepts in clear business language. It defines domain-specific terms, synonyms, and the context in which they are used, along with properties such as attributes, keys, measures, and metrics.
+
+A well-curated Domain Glossary:
+
+- Ensures clarity, reduces ambiguity, and strengthens alignment between business understanding and technical implementation. 
+- Builds on the Enterprise Glossary: Extend the enterprise glossary with domain-specific definitions.
+- References when aligned: Where a domain term is synonymous with an enterprise definition, the enterprise glossary should be referenced rather than duplicated.
+- Resolves when conflicting: Where definitions diverge or conflict, governance processes must be applied to reconcile differences and ensure consistency.
+
+
+<br>
+<div align="center">
+
+<em>Example of authoring a Domain-scoped Glossary aligned to the CIM and Enterprise Glossary</em>
+<br>
+
+<a href="../img/snappy_domain_glossary.png" target="_blank">
+    <img src="../img/snappy_domain_glossary.png"  alt="Example of a Domain-scoped Glossary mapped to an Enterprise Glossary" width="75%">
+</a>
+
+<br>
+</div>
+
+<br>
+<br>
+<div align="center">
+
+<em>Example of syncing the Glossary term to real-life Data and Products</em>
+<br>
+
+<a href="../img/datahub_domain_glossary_encounter.png" target="_blank">
+    <img src="../img/datahub_domain_glossary_encounter.png"  alt="Example of syncing the Glossary term to real-life Data and Products" width="75%">
+</a>
+
+<br>
+</div>
+
+
 
 ### Domain data and warehouse models
 ---
