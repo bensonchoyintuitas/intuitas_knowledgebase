@@ -246,10 +246,28 @@
 <br></p>
 <h2 id="data-architecture">Data Architecture</h2>
 <hr />
-<p>Data Architecture refers to how data is physically structured, stored, and accessed within an organisation. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. </p>
+<p>Data Architecture defines how data is structured, stored, and accessed. It spans storage design, data models, integration, and governance to ensure trusted, reusable, and consistent data.</p>
 <h3 id="data-and-information-models">Data and information models</h3>
 <hr />
-<p>Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. </p>
+<ul>
+<li><strong>Conceptual Models</strong> – capture high-level business concepts and rules in plain language, creating a shared understanding between business and IT.</li>
+<li><strong>Logical Models</strong> – refine concepts into entities, attributes, and relationships, ensuring clarity and consistency across domains while remaining technology-agnostic.</li>
+<li><strong>Physical Models</strong> – implement the design in databases and systems, optimised for performance, scalability, and integration.</li>
+</ul>
+<p>Domain-level models often align more closely to real-world business semantics and rules than the enterprise-wide model. While they may not map one-to-one with enterprise or other domain models, cross-mapping is essential to identify dependencies, ensure conformance (e.g., shared dimensions, master data), and support integration across the organisation.</p>
+<p><br></p>
+<div align="center">
+
+<em>Illustrative Example of a Conceptual Information Model</em>
+<br>
+
+<a href="../img/snappy_models.png" target="_blank">
+    <img src="../img/snappy_models.png"  alt="Illustrative Example of a Conceptual Information Model">
+</a>
+
+<br>
+</div>
+
 <p>See <a href="https://martinfowler.com/bliki/BoundedContext.html">Bounded context</a></p>
 <h3 id="domain-glossary">Domain glossary</h3>
 <hr />

@@ -126,12 +126,30 @@ Both require capture, at a minimum, of:
 ## Data Architecture
 ---
 
-Data Architecture refers to how data is physically structured, stored, and accessed within an organisation. It encompasses the design and management of data storage systems, data models, data integration processes, and data governance practices. 
+Data Architecture defines how data is structured, stored, and accessed. It spans storage design, data models, integration, and governance to ensure trusted, reusable, and consistent data.
 
 ### Data and information models
 ---
 
-Domain-level data and information models are typically closer aligned to real-world business semantics and business rules, which may not necessarily align with the broader enterprise or other domains. 
+- **Conceptual Models** – capture high-level business concepts and rules in plain language, creating a shared understanding between business and IT.
+- **Logical Models** – refine concepts into entities, attributes, and relationships, ensuring clarity and consistency across domains while remaining technology-agnostic.
+- **Physical Models** – implement the design in databases and systems, optimised for performance, scalability, and integration.
+
+Domain-level models often align more closely to real-world business semantics and rules than the enterprise-wide model. While they may not map one-to-one with enterprise or other domain models, cross-mapping is essential to identify dependencies, ensure conformance (e.g., shared dimensions, master data), and support integration across the organisation.
+
+<br>
+<div align="center">
+
+<em>Illustrative Example of a Conceptual Information Model</em>
+<br>
+
+<a href="../img/snappy_models.png" target="_blank">
+    <img src="../img/snappy_models.png"  alt="Illustrative Example of a Conceptual Information Model">
+</a>
+
+<br>
+</div>
+
 
 See [Bounded context](https://martinfowler.com/bliki/BoundedContext.html)
 
