@@ -45,7 +45,7 @@ These standards are opinionated and designed to ensure consistency, governance, 
       - [Branch Lifecycle](standards_and_conventions.md#branch-lifecycle)
       - [Databricks Asset Bundles](standards_and_conventions.md#databricks-asset-bundles)
    - [Security](standards_and_conventions.md#security)
-      - [Entra Group Names](standards_and_conventions.md#entra-group-names)
+      - [Entra](standards_and_conventions.md#entra)
       - [Policies](standards_and_conventions.md#policies)
       - [Frameworks](standards_and_conventions.md#frameworks)
 <br>
@@ -791,20 +791,70 @@ targets:
 ## Security
 > Under development. (Contact us to know more).
 
-### Entra Group Names
+### Entra
 > Under development. (Contact us to know more).
 
-Recommended standards and guidelines:
+Most organisations will already have an established set of groups and conventions. Where there are gaps, the following can still be considered.
+
+Recommended areas to align to organisational governance and cyber requirements:
 
 - Naming conventions for admin, service, and user groups
 - Role-based access alignment (least privilege, separation of duties)
 - Alignment to domains - Cross-domain vs. domain-specific group patterns
 
 
+**Entra Group Names**:
+
+- Pattern:  `grp-<org>-<domain>-<plat>-<scope>-<role>-<env>[-<region>][-ext-<partner>][-idx]`
+
+**Format rules**:
+
+- Lowercase, hyphen-separated; no spaces.
+- Keep to ≤ 120 chars total.
+- No PII in names.
+- Use Security groups (not M365) for RBAC; enable PIM where appropriate e.g. Admins.
+
+**Controlled vocabularies**:
+
+- <role> (principle of least privilege applies):
+
+   - owner — full control of the named scope
+   - admin — administrative (non-ownership) rights
+   - contrib — create/modify within scope
+   - editor — modify data/artifacts, not permissions
+   - reader — read-only
+   - steward — governance/metadata rights
+   - custodian — key/secret/storage control
+   - operator — run/ops rights (pipelines, jobs)
+   - viewer — read dashboards/reports
+
+- <plat>:
+
+   - dbx (Databricks), uc (Unity Catalog), pbi (Power BI), adf (Data Factory),
+   - dlk (Data Lake), sql (Azure SQL), kva (Key Vault), syn (Synapse)
+
+- <scope> (or object):
+
+   - Databricks Workspace: ws-<WorkspaceName>
+   - Unity Catalog: uc-meta (metastore), uc-cat-<Catalog>, uc-sch-<Catalog>.<Schema>, uc-obj-<Catalog>.<Schema>.<Object>
+   - Power BI: pbi-ws-<Workspace>
+   - Data Lake: dlk-path-/datalake/<area>/<path>
+
+- *Examples*:
+
+   - *GRP-INTUITAS-CLIN-DBX-WS-Analytics-ADMIN-PRD*
+   - *GRP-INTUITAS-CLIN-UC-UC-CAT-Claims-OWNER-PRD*
+   - *GRP-INTUITAS-CLIN-UC-UC-SCH-Claims.Curated-READER-UAT*
+   - *GRP-INTUITAS-FIN-PBI-PBI-WS-ExecDash-VIEWER-PRD*
+   - *GRP-INTUITAS-ENT-KVA-KVA-Keys-CUSTODIAN-PRD*
+   - *GRP-INTUITAS-CLIN-DLK-DLK-PATH-/curated/claims/READER-PRD-AUE*
+   - *GRP-INTUITAS-CLIN-DBX-WS-PartnerLake-READER-PRD-EXT-ACME*
+
 ### Policies
 > Under development. (Contact us to know more).
 
-Recommended standards and guidelines:
+Recommended areas to align to non-functional requirements:
+
 - Data retention (duration, archival, legal hold)
 - Key retention and rotation cycles
 - Backup and recovery standards
@@ -814,7 +864,7 @@ Recommended standards and guidelines:
 ### Frameworks
 > Under development. (Contact us to know more).
 
-Recommended standards and guidelines:
+Recommended areas to align to industry and cyber compliance:
 
 - Engineering standards (e.g., code repositories, CI/CD security, IaC policies)
 - Security frameworks (e.g., NIST, ISO 27001, CIS Benchmarks, Zero Trust)
