@@ -1,12 +1,12 @@
 # Level 2 - Domain-Level (Solution) Architecture and Patterns
 [Return to home](README.md)
 
-This section describes Domain-level instantiations of the enterprise-level reference architecture. i.e. solutions (See [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture))
+This section shows how the [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture), [Standards and Conventions](naming_standards_and_conventions.md) are are applied within individual [domains](level_1.md#domain) to create solutions.
 
 <br>
 ## Why It Matters
 
-At the domain level, applying solution architecture patterns and standards ensures consistency, interoperability, and compliance, enabling faster delivery, reducing rework, and ensuring each solution strengthens the enterprise “town plan.”
+Using common patterns and standards at the domain level keeps solutions consistent and compatible. This speeds up delivery, avoids rework, and ensures every solution contributes to and strengthens the overall enterprise “town plan.”
 
 <br>
 <br>
@@ -75,12 +75,12 @@ Understanding them is necessary to understand:
 ### Business processes
 ---
 
-Business processes are the activities and tasks that are performed to achieve the goals of the business. Understanding them is necessary to understand:
+Business processes are the activities and tasks undertaken to achieve business goals. Understanding them allows the data architecture to uncover:
 
-- the context in which data is captured and used
-- concepts and entities that are relevant to the domain and scope of use case
-- the relationships between different processes and data
-- the context for measures and metrics
+- the context in which information is captured and used
+- key concepts and entities relevant to the domain or use case
+- relationships between processes and data
+- the basis for defining measures and metrics
 
 ### Business glossary
 ---
@@ -300,7 +300,7 @@ Unity catalog objects (catalogs, schemas, objects) are mapped to:
 
 <div align="center">
 
-<em>Illustrative example of Catalog to storage mapping:</em>
+<em>Illustrative example of Catalog to storage mapping in the Intuitas Demo Environment:</em>
 <br>
 
 <a href="../img/catalog_to_storage_mapping.png">

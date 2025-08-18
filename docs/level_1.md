@@ -135,10 +135,10 @@ The arrangement of domains:
 
 <div align="center">
 
-<em>Platform and Pipeline Reference Architecture</em>
+<em>Enterprise Domain Reference Topologies</em>
 <br>
 <a href="../img/enterprise_domain_reference_topologies.png" target="_blank">
-    <img src="../img/enterprise_domain_reference_topologies.png"  alt="Platform and Pipeline Reference Architecture">
+    <img src="../img/enterprise_domain_reference_topologies.png"  alt="Enterprise Domain Reference Topologies">
 </a>
 
 </div>
@@ -521,7 +521,9 @@ Large organisations typically need to track and allocate costs to organisational
 
 Here is where the Business Architecture of the organisation, domain topology, infrastructure topology (such as workspace delegations) and features of the chosen platform must to align.
 
-
+See:
+- [Enterprise Billing Solutions](level_0.md##funding-and-costing-structures)
+- [Observability Solutions](level_2.md#observability)
 
 Recommendations here align with the following Domain topology:
 

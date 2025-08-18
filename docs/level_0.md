@@ -92,9 +92,16 @@ Governance frameworks and processes define how decisions are made, enforced, and
 
 ## Funding and costing structures
 
-Understanding how the organisation plans and allocates funding and costs is critical to design, as it shapes the internal dynamics and “marketplace” for data and products. It influences stakeholder behaviour, drives collaboration (or competition), and determines how quickly solutions reach the market. 
+How funding and costs are allocated directly shape the internal “marketplace” for data and analytics. These structures determine whether teams collaborate or compete, influence speed of delivery and standards alignment, and define the organisation’s capacity to scale and innovate. The architecture reflects this through:
 
-This, in turn, affects standards alignment, investment in shared capabilities, sustainability, and the ability to scale and innovate.
+- system-wide, domain, and role-level accountabilities. 
+- policies and guardrails to prevent bill-shock 
+- observability and optimisation 
+
+See:
+- [Enterprise Billing Solutions](level_1.md#enterprise-billing)
+- [Observability Solutions](level_2.md#observability)
+
 
 **Recommended artefacts**
 

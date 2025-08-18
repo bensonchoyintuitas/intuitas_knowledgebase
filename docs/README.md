@@ -11,11 +11,19 @@
 # Enterprise Data Intelligence Blueprint
 
 
-This blueprint consists of a collection of resources that describe Intuitas' approach to designing and delivering Data, AI and Governance solutions. 
+This blueprint brings together resources that capture Intuitas’ approach to designing and delivering Data, AI, and Governance solutions.
 
-This knowledgebase provides Intuitas’ customer and partners community with strategic, enterprise, and solution-level resources — distilled from our R&D, frequently asked questions, and real-world experience.
+It is a continually evolving resource, offering insights into strategic, enterprise, and solution-level practices—distilled from our R&D, common questions, and real-world experience.
 
-The ideas and patterns reflect the Intuitas design philosophy and are intentionally opinionated. They can be demonstrated in working environments on request. While rooted in large, multi-domain enterprise deployments, they are adaptable to organisations of any size or type.
+The ideas and patterns reflect Intuitas’ design philosophy:
+
+- grounded in large, multi-domain enterprise deployments, yet adaptable to organisations of any size or type
+- evolving, opinionated, and open to challenge
+- demonstrable in working environments on request
+
+We share this blueprint with our customer and partner community to promote our vision of 'good design', help avoid pitfalls, and speed up delivery.
+
+We encourage you to explore, share and build on this information, with proper attribution to Intuitas and consideration as set out in our [license and disclaimer](#licensing-and-disclaimer).
 
 <br>
 
@@ -45,7 +53,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 - [Licensing and disclaimer](#licensing-and-disclaimer)
 
 
-### **Level 0: Enterprise Context**
+### **[Level 0: Enterprise Context](level_0.md)**
 - [Organisational & Domain Definition](level_0.md#org-domain-definition)
 - [Strategies and Objectives](level_0.md#strategies-and-objectives)  
 - [Key Systems and Data Assets](level_0.md#key-systems-and-data-assets)
@@ -53,7 +61,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 - [Governance Structures](level_0.md#governance-structures)
 - [Funding and costing structures](level_0.md#funding-and-costing-structures)
 
-### **Level 1: Enterprise Architecture**
+### **[Level 1: Enterprise Architecture](level_1.md)**
 - [Key Concepts](level_1.md#key-concepts)
 - [Reference topologies](level_1.md#reference-topologies)
 - [Enterprise Data Platform Reference Architecture](level_1.md#enterprise-data-platform-reference-architecture)
@@ -69,7 +77,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 - [Enterprise Data Governance](level_1.md#enterprise-data-governance)
 - [Enterprise Billing](level_1.md#enterprise-billing)
 
-### **Level 2: Domain Architecture**
+### **[Level 2: Domain Architecture](level_2.md)**
 - **[Business Architecture](level_2.md#business-architecture)**
     - [Business Processes](level_2.md#business-processes)
     - [Business Glossary](level_2.md#business-glossary)  
@@ -101,7 +109,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
     - [Audit](level_2.md#audit)
 
 ### **Standards and conventions**
-- [Naming Standards & Conventions](naming_standards_and_conventions.md)
+- [Standards & Conventions](naming_standards_and_conventions.md)
 <br>
 <br>
 <br>
@@ -111,9 +119,18 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 # Overview
 ---
 
-This comprehensive blueprint provides practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It has been curated  from extensive R&D, customer engagements, lessons learned and benchmarks.
+This blueprint is comprehensive and intentionally opinionated, providing practical patterns for designing and delivering enterprise-scale Data, AI, and Governance solutions. It is continuously refined through ongoing R&D, customer engagements, lessons learned, and evaluations of the evolving product landscape.
 
-This content is continuously updated and refined through ongoing R&D,  lessons learned, and feature evaluations. Some sections may remain unpolished as they evolve.
+It follows an iterative approach where each level builds on the previous one, while remaining flexible to be revisited and refined as capabilities mature.
+
+Organisations may begin at any level depending on their maturity, but all levels should be considered and validated for applicability:
+
+1. **[Level 0: Context Setting](level_0.md)** - Define organisational objectives, domain structures, and strategic goals
+2. **[Level 1: Enterprise Architecture](level_1.md)** - Apply enterprise-wide patterns and reference topologies  
+3. **[Level 2: Domain Solutions](level_2.md)** - Implement domain-specific solutions using enterprise patterns
+4. **[Standards & Conventions](naming_standards_and_conventions.md)** - Apply consistent naming and conventions throughout
+<br>
+
 
 See the [Copyright, Licensing and Disclaimer information](#licensing-and-disclaimer)
 
@@ -151,15 +168,7 @@ Readers should consider the priority and implication of these principles alongsi
 ## Getting Started
 ---
 
-An iterative approach means each level builds upon the previous but can be revisited and refined as capabilities mature.
-
-1. **Level 0: Context Setting** - Define organisational objectives, domain structures, and strategic goals
-2. **Level 1: Enterprise Architecture** - Apply enterprise-wide patterns and reference topologies  
-3. **Level 2: Domain Solutions** - Implement domain-specific solutions using enterprise patterns
-4. **Standards & Conventions** - Apply consistent naming and conventions throughout
-<br>
-
-Choose your starting point:
+Recommended starting point by role:
 
 | Role | Recommended Path | Focus Areas |
 |------|------------------|-------------|
