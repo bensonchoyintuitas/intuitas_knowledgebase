@@ -49,6 +49,7 @@ These standards are opinionated and designed to ensure consistency, governance, 
       - [Policies](standards_and_conventions.md#policies)
       - [Frameworks](standards_and_conventions.md#frameworks)
 <br>
+<br>
 
 ## Mesh
 
@@ -788,15 +789,34 @@ targets:
 <br>
 
 ## Security
+> Under development. (Contact us to know more).
 
 ### Entra Group Names
-TBC
+> Under development. (Contact us to know more).
+
+Recommended standards and guidelines:
+
+- Naming conventions for admin, service, and user groups
+- Role-based access alignment (least privilege, separation of duties)
+- Alignment to domains - Cross-domain vs. domain-specific group patterns
+
 
 ### Policies
-- **Data Retention**
-- **Key Retention**
+> Under development. (Contact us to know more).
+
+Recommended standards and guidelines:
+- Data retention (duration, archival, legal hold)
+- Key retention and rotation cycles
+- Backup and recovery standards
+- Incident response and escalation procedures
+- Access review and recertification
 
 ### Frameworks
-- **Engineering**
-- **Security**
+> Under development. (Contact us to know more).
+
+Recommended standards and guidelines:
+
+- Engineering standards (e.g., code repositories, CI/CD security, IaC policies)
+- Security frameworks (e.g., NIST, ISO 27001, CIS Benchmarks, Zero Trust)
+- Compliance mappings (HIPAA, GDPR, SOC2, local regulatory obligations)
 
