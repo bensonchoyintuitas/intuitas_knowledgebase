@@ -360,8 +360,6 @@ Metadata is essential for effective data governance, providing necessary context
     <img src="../img/snappy.png"  alt="Intuitas' snappy tool" width="100%">
 </a>
 <br>
-Visit [snappy.intuitas.com](https://snappy.intuitas.com) to access the tool.
-<br>
 <br>
 </div>
 
