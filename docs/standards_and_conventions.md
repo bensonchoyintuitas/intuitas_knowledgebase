@@ -161,12 +161,57 @@ No standard naming conventions for files and folders.
 ---
 This section provides naming standards and conventions for Databricks.
 
+
+
 ### Workspace and cluster names
 ---
 
 - Workspace name: `ws-{organisation_name}_{domain_name}`
 - Cluster name: `{personal_name/shared_name} Cluster`
 - Workflow name: `{dev/test} {workflow_name}`
+
+
+### Jobs and Pipelines
+
+#### Job names
+---
+
+- Job names: `{domain}__{layer}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}`
+- *e.g. clinical__bronze__ingest__fhircdr__dev*
+
+#### For Delta Live Table (DLT) Pipelines
+---
+- Pipeline names: `{domain_name}__{layer}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}`
+- *e.g. clinical__bronze__pipeline__fhircdr__dev*
+- *e.g. supplychain__gold__pipeline__inventorymart__prod* 
+
+- Note on {layer}: If the 'business outcome' is Gold, you call it Gold, even if it produces Bronze + Silver on the way.
+*i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated gold-layer dataset called Inventory Mart"*
+
+- Include pipeline so it’s distinguishable from ad hoc jobs.
+- Dataset can be a logical grouping (e.g., patient, encounter, claims).
+
+#### Orchestration job names
+---
+
+- Orchestration job names: `{domain}__orchestration__{workflow-name}{optional: __schedule}{optional: __version}__{env}`
+- *e.g. clinical__orchestrate__fhirworkflow__daily__dev*
+
+which then orchestrates: 
+
+- *clinical__bronze__pipeline__fhircdr__prod*
+- *clinical__silver__pipeline__fhirclean__prod*
+- *clinical__gold__pipeline__clinicalmart__prod*
+
+#### Job logging
+
+- event log catalog: `{domain}__audit__{env}`
+- event log schema: `audit__event_log`
+
+
+#### Optional
+- Versioning (if needed): add v1, v2 if a job is redesigned but old one stays around.
+- Scheduling frequency (optional): suffix with _hourly, _daily, _weekly if relevant.
 
 ### Catalog naming and conventions
 ---
@@ -191,8 +236,8 @@ In the examples provided - we have opted for domain level - with schema separati
 
 ### Externally mounted (lakehouse federation) Catalog Names
 
-- Catalog name: `{domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g:_environment}`
-- *e.g: intuitas_corporate_ext__sqlonpremsource*
+- Foreign Catalog name: `{domain_name (owner)} _fc__{source_system}{optional:__other_useful_descriptors e.g:_environment}`
+- *e.g: intuitas_corporate_fc__sqlonpremsource*
 
 ### Catalog Metadata tags:
 
