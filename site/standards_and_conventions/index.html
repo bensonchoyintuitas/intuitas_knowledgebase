@@ -306,6 +306,52 @@
 <li>Cluster name: <code>{personal_name/shared_name} Cluster</code></li>
 <li>Workflow name: <code>{dev/test} {workflow_name}</code></li>
 </ul>
+<h3 id="jobs-and-pipelines">Jobs and Pipelines</h3>
+<h4 id="job-names">Job names</h4>
+<hr />
+<ul>
+<li>Job names: <code>{domain}__{layer}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}</code></li>
+<li><em>e.g. clinical__bronze__ingest__fhircdr__dev</em></li>
+</ul>
+<h4 id="for-delta-live-table-dlt-pipelines">For Delta Live Table (DLT) Pipelines</h4>
+<hr />
+<ul>
+<li>Pipeline names: <code>{domain_name}__{layer}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}</code></li>
+<li><em>e.g. clinical__bronze__pipeline__fhircdr__dev</em></li>
+<li>
+<p><em>e.g. supplychain__gold__pipeline__inventorymart__prod</em> </p>
+</li>
+<li>
+<p>Note on {layer}: If the 'business outcome' is Gold, you call it Gold, even if it produces Bronze + Silver on the way.
+<em>i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated gold-layer dataset called Inventory Mart"</em></p>
+</li>
+<li>
+<p>Include pipeline so it’s distinguishable from ad hoc jobs.</p>
+</li>
+<li>Dataset can be a logical grouping (e.g., patient, encounter, claims).</li>
+</ul>
+<h4 id="orchestration-job-names">Orchestration job names</h4>
+<hr />
+<ul>
+<li>Orchestration job names: <code>{domain}__orchestration__{workflow-name}{optional: __schedule}{optional: __version}__{env}</code></li>
+<li><em>e.g. clinical__orchestrate__fhirworkflow__daily__dev</em></li>
+</ul>
+<p>which then orchestrates: </p>
+<ul>
+<li><em>clinical__bronze__pipeline__fhircdr__prod</em></li>
+<li><em>clinical__silver__pipeline__fhirclean__prod</em></li>
+<li><em>clinical__gold__pipeline__clinicalmart__prod</em></li>
+</ul>
+<h4 id="job-logging">Job logging</h4>
+<ul>
+<li>event log catalog: <code>{domain}__audit__{env}</code></li>
+<li>event log schema: <code>audit__event_log</code></li>
+</ul>
+<h4 id="optional">Optional</h4>
+<ul>
+<li>Versioning (if needed): add v1, v2 if a job is redesigned but old one stays around.</li>
+<li>Scheduling frequency (optional): suffix with _hourly, _daily, _weekly if relevant.</li>
+</ul>
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
 <hr />
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
@@ -325,8 +371,8 @@
 </ul>
 <h3 id="externally-mounted-lakehouse-federation-catalog-names">Externally mounted (lakehouse federation) Catalog Names</h3>
 <ul>
-<li>Catalog name: <code>{domain_name (owner)} _ext__{source_system}{optional:__other_useful_descriptors e.g:_environment}</code></li>
-<li><em>e.g: intuitas_corporate_ext__sqlonpremsource</em></li>
+<li>Foreign Catalog name: <code>{domain_name (owner)} _fc__{source_system}{optional:__other_useful_descriptors e.g:_environment}</code></li>
+<li><em>e.g: intuitas_corporate_fc__sqlonpremsource</em></li>
 </ul>
 <h3 id="catalog-metadata-tags">Catalog Metadata tags:</h3>
 <p>The following metadata should be added when creating a catalog:</p>
