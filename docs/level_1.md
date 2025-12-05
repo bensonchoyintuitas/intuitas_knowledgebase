@@ -16,9 +16,9 @@ This reduces duplication, enables shared infrastructure, and is critical to buil
 ---
 
 - [Key concepts](level_1.md#key-concepts)
+    - [Domain-Centric Design](level_1.md#domain-centric-design) 
     - [Domain](level_1.md#domain)
     - [Subdomain](level_1.md#subdomain)
-    - [Domain-Centric Design](level_1.md#domain-centric-design) 
     - [Data Mesh](level_1.md#data-mesh)
     - [Domain Topology](level_1.md#domain-topology)
     - [Data Fabric](level_1.md#data-fabric)
