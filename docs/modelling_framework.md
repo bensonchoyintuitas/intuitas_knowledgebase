@@ -1,6 +1,9 @@
 # Intuitas Data Modelling Framework
+[Return to home](README.md)
 
 > Updated 5/12/2025
+
+See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
 
 ## Overview
 
@@ -62,7 +65,7 @@ Conceptual models should focus on:
 - Key relationships between concepts
 - High-level business rules
 
-See [Modelling Standards and Conventions](#modelling-standards-and-conventions) for further detail on notation and modelling standards.
+See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
 
 #### What NOT to Include
 
@@ -102,7 +105,7 @@ Logical models add detail to conceptual models:
 - **Attribute definitions:** All attributes with clear definitions and business rules
 - **Normalisation:** Apply normalisation principles where relevant to ensure data integrity
 
-See [Modelling Standards and Conventions](#modelling-standards-and-conventions) for further detail on notation and modelling standards.
+See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
 
 ### Physical (Data) Models 
 
@@ -149,7 +152,7 @@ Physical models take different forms depending on the storage technology and use
 
 > **Note:** In practice, we often only have access to a physical data model without documentation of the underlying conceptual or logical models. Regardless, a logical model is still implied by the physical implementation and can be reverse-engineered to understand the business meaning.
 
-See [Modelling Standards and Conventions](#modelling-standards-and-conventions) for further detail on notation and modelling standards.
+See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
 
 ## Enterprise Context
 
@@ -372,31 +375,3 @@ Examples:
 
 
 
-
-
-## Modelling Standards and Conventions
-
-*Work in progress*
-
-Conceptual
-Naming
-Diagrammatic represenations
-
-Logical
-Naming
-- Entity
-- Attribute
-- Key
-Diagrammatic represenation
-(crows foot or multiplicity)
-
-Physical
-- Relational
-- Databricks naming
-    - catalog, schema/database
-    - Dimensional
-    - table/view, column
-
-## Modelling Tools
-No standard as long as it conforms
-Ideally backed by a metamodel for better reuseability, change tracking, and built in integrity and constraints
