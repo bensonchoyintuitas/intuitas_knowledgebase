@@ -117,21 +117,25 @@
 <h2 id="overview">Overview</h2>
 <p>This resource provides a lightweight framework for describing and developing data models. It draws from a range of suggested practices, with references provided where appropriate.</p>
 <h2 id="quick-jump-to">Quick Jump To</h2>
-<p><strong>Core Model Types</strong>
-- <a href="#conceptual-information-models">Conceptual Models</a>
-- <a href="#logical-information-models">Logical Models</a>
-- <a href="#physical-data-models">Physical Models</a>
-- <a href="#domain-topology">Domain Topology</a>
-- <a href="#domain-models">Domain Models</a>
-- <a href="#canonical-models">Canonical Models</a></p>
-<p><strong>Specialised Model Types</strong>
-- <a href="#business-process-models">Business Process Models</a>
-- <a href="#data-warehouse-models">Data Warehouse Models</a>
-  - <a href="#data-vault-model">Data Vault Model</a>
-  - <a href="#dimensional-kimball-model">Dimensional (Kimball) Model</a>
-  - <a href="#canonical-models-and-conformed-dimensions">Conformed Dimensions</a>
-  - <a href="#dimensional-bus-matrix">Dimensional Bus Matrix</a>
-- <a href="#semantic-layers">Semantic Layers</a></p>
+<p><strong>Core Model Types</strong></p>
+<ul>
+<li><a href="#conceptual-information-models">Conceptual Models</a></li>
+<li><a href="#logical-information-models">Logical Models</a></li>
+<li><a href="#physical-data-models">Physical Models</a></li>
+<li><a href="#domain-topology">Domain Topology</a></li>
+<li><a href="#domain-models">Domain Models</a></li>
+<li><a href="#canonical-models">Canonical Models</a></li>
+</ul>
+<p><strong>Specialised Model Types</strong></p>
+<ul>
+<li><a href="#business-process-models">Business Process Models</a></li>
+<li><a href="#data-warehouse-models">Data Warehouse Models</a></li>
+<li><a href="#data-vault-model">Data Vault Model</a></li>
+<li><a href="#dimensional-kimball-model">Dimensional (Kimball) Model</a></li>
+<li><a href="#canonical-models-and-conformed-dimensions">Conformed Dimensions</a></li>
+<li><a href="#dimensional-bus-matrix">Dimensional Bus Matrix</a></li>
+<li><a href="#semantic-layers">Semantic Layers</a></li>
+</ul>
 <h2 id="modelling-concepts">Modelling Concepts</h2>
 <p>We prefer to emphasise the semantic difference between business information design and technical data implementation:</p>
 <ul>
@@ -154,72 +158,96 @@
 - <strong>Named:</strong> What do we call it? Align to agreed terms within the domain</p>
 <p>Concept names may differ across the enterprise. Use the <strong>business glossary</strong> to map domain-specific terms as synonyms to canonical enterprise terms.</p>
 <h4 id="what-to-include">What to Include</h4>
-<p>Conceptual models should focus on:
-- Core business concepts (entities)
-- Key relationships between concepts
-- High-level business rules</p>
+<p>Conceptual models should focus on:</p>
+<ul>
+<li>Core business concepts (entities)</li>
+<li>Key relationships between concepts</li>
+<li>High-level business rules</li>
+</ul>
 <p>See <a href="../modelling_standards_and_conventions/">Modelling Standards and Conventions</a> for further detail on notation and modelling standards.</p>
 <h4 id="what-not-to-include">What NOT to Include</h4>
-<p>Conceptual models should <strong>not</strong> include implementation details such as:
-- Primary keys
-- Surrogate keys
-- Data types
-- Cardinality precision beyond "one" vs "many"</p>
+<p>Conceptual models should <strong>not</strong> include implementation details such as:</p>
+<ul>
+<li>Primary keys</li>
+<li>Surrogate keys</li>
+<li>Data types</li>
+<li>Cardinality precision beyond "one" vs "many"</li>
+</ul>
 <h4 id="on-levelling-subtypes-and-supertypes">On levelling, Subtypes and Supertypes</h4>
 <p><strong>Determining the Right Level:</strong>
-Choosing the appropriate level of abstraction is challenging:
-- <strong>Too abstract:</strong> Not practical (e.g., "Thing" as a supertype)
-- <strong>Too granular:</strong> Too much to manage, not reflective of actual data variations (should be attributes or variants of a class instead)</p>
-<p><strong>General guidance</strong> (refer to Simsion's data modelling principles):
-- <strong>Subtypes</strong> represent meaningful specialisations of a concept (e.g., "Individual Customer" and "Corporate Customer" as subtypes of "Customer")
-- <strong>Classification dimensions</strong> help determine what to model as subtypes vs attributes (e.g., "Customer Type" could be an attribute, while fundamental differences in what data is captured might warrant subtypes)
-- Some modelling tools allow multiple classification hierarchies—avoid this complexity where possible; choose the primary classification dimension</p>
-<p><strong>Modelling rules for subtypes:</strong>
-- <strong>Mutually exclusive:</strong> Yes—an instance must belong to only one subtype
-- <strong>Collectively exhaustive:</strong> Flexible—while desirable in theory, models are often works in progress and not all subtypes may be identified initially</p>
+Choosing the appropriate level of abstraction is challenging:</p>
+<ul>
+<li><strong>Too abstract:</strong> Not practical (e.g., "Thing" as a supertype)</li>
+<li><strong>Too granular:</strong> Too much to manage, not reflective of actual data variations (should be attributes or variants of a class instead)</li>
+</ul>
+<p><strong>General guidance</strong> (refer to Simsion's data modelling principles):</p>
+<ul>
+<li><strong>Subtypes</strong> represent meaningful specialisations of a concept (e.g., "Individual Customer" and "Corporate Customer" as subtypes of "Customer")</li>
+<li><strong>Classification dimensions</strong> help determine what to model as subtypes vs attributes (e.g., "Customer Type" could be an attribute, while fundamental differences in what data is captured might warrant subtypes)</li>
+<li>Some modelling tools allow multiple classification hierarchies—avoid this complexity where possible; choose the primary classification dimension</li>
+</ul>
+<p><strong>Modelling rules for subtypes:</strong></p>
+<ul>
+<li><strong>Mutually exclusive:</strong> Yes—an instance must belong to only one subtype</li>
+<li><strong>Collectively exhaustive:</strong> Flexible—while desirable in theory, models are often works in progress and not all subtypes may be identified initially</li>
+</ul>
 <h3 id="logical-information-models">Logical (Information) Models</h3>
 <p>Logical models are also technology-independent and business-oriented. They extend conceptual models by introducing structure and precision while remaining implementation-agnostic.</p>
 <h4 id="what-to-include_1">What to Include</h4>
-<p>Logical models add detail to conceptual models:
-- <strong>Keys and identifiers:</strong> Natural and alternate keys that uniquely identify entities
-- <strong>Cardinality:</strong> Precise relationship cardinality (1:1, 1:M, M:N)
-- <strong>Optionality:</strong> Whether relationships and attributes are mandatory or optional
-- <strong>Attribute definitions:</strong> All attributes with clear definitions and business rules
-- <strong>Normalisation:</strong> Apply normalisation principles where relevant to ensure data integrity</p>
+<p>Logical models add detail to conceptual models:</p>
+<ul>
+<li><strong>Keys and identifiers:</strong> Natural and alternate keys that uniquely identify entities</li>
+<li><strong>Cardinality:</strong> Precise relationship cardinality (1:1, 1:M, M:N)</li>
+<li><strong>Optionality:</strong> Whether relationships and attributes are mandatory or optional</li>
+<li><strong>Attribute definitions:</strong> All attributes with clear definitions and business rules</li>
+<li><strong>Normalisation:</strong> Apply normalisation principles where relevant to ensure data integrity</li>
+</ul>
 <p>See <a href="../modelling_standards_and_conventions/">Modelling Standards and Conventions</a> for further detail on notation and modelling standards.</p>
 <h3 id="physical-data-models">Physical (Data) Models</h3>
 <p>These conceptual and logical models are then implemented as <strong>Physical</strong> models.</p>
-<p>These models:
-- Focus on data storage and implementation
-- Describe how data is actually stored and accessed
-- Are technology-specific (e.g., tables, columns, indexes, partitions)
-- Are concerned with performance, storage optimisation, and technical constraints
-- Audience: database developers, engineers</p>
+<p>These models:</p>
+<ul>
+<li>Focus on data storage and implementation</li>
+<li>Describe how data is actually stored and accessed</li>
+<li>Are technology-specific (e.g., tables, columns, indexes, partitions)</li>
+<li>Are concerned with performance, storage optimisation, and technical constraints</li>
+<li>Audience: database developers, engineers</li>
+</ul>
 <h4 id="common-physical-model-formats">Common Physical Model Formats</h4>
 <p>Physical models take different forms depending on the storage technology and use case:</p>
-<p><strong>Relational (Normalised):</strong>
-- Traditional 3NF (Third Normal Form) relational models
-- Optimised for transactional systems (OLTP)
-- Minimises redundancy and ensures data integrity
-- Common in operational databases (e.g., PostgreSQL, SQL Server, Oracle)</p>
-<p><strong>Dimensional:</strong>
-- Star and snowflake schemas
-- Optimised for analytical queries and reporting (OLAP)
-- Denormalised for query performance
-- See <a href="#dimensional-kimball-model">Dimensional (Kimball) Models</a> for details</p>
-<p><strong>Semi-Structured:</strong>
-- JSON, XML, Parquet, Avro
-- Flexible schema supporting nested and hierarchical data
-- Common in data lakes, NoSQL databases, and modern cloud platforms (e.g., MongoDB, Delta Lake, Databricks)
-- Balances structure with flexibility</p>
-<p><strong>Graph:</strong>
-- Node and edge structures
-- Optimised for relationship-heavy queries
-- Common in graph databases (e.g., Neo4j, Amazon Neptune)</p>
-<p><strong>Key-Value and Document:</strong>
-- Simple key-value pairs or document stores
-- Optimised for high-speed lookups and scalability
-- Common in NoSQL databases (e.g., DynamoDB, Cosmos DB, Redis)</p>
+<p><strong>Relational (Normalised):</strong></p>
+<ul>
+<li>Traditional 3NF (Third Normal Form) relational models</li>
+<li>Optimised for transactional systems (OLTP)</li>
+<li>Minimises redundancy and ensures data integrity</li>
+<li>Common in operational databases (e.g., PostgreSQL, SQL Server, Oracle)</li>
+</ul>
+<p><strong>Dimensional:</strong></p>
+<ul>
+<li>Star and snowflake schemas</li>
+<li>Optimised for analytical queries and reporting (OLAP)</li>
+<li>Denormalised for query performance</li>
+<li>See <a href="#dimensional-kimball-model">Dimensional (Kimball) Models</a> for details</li>
+</ul>
+<p><strong>Semi-Structured:</strong></p>
+<ul>
+<li>JSON, XML, Parquet, Avro</li>
+<li>Flexible schema supporting nested and hierarchical data</li>
+<li>Common in data lakes, NoSQL databases, and modern cloud platforms (e.g., MongoDB, Delta Lake, Databricks)</li>
+<li>Balances structure with flexibility</li>
+</ul>
+<p><strong>Graph:</strong></p>
+<ul>
+<li>Node and edge structures</li>
+<li>Optimised for relationship-heavy queries</li>
+<li>Common in graph databases (e.g., Neo4j, Amazon Neptune)</li>
+</ul>
+<p><strong>Key-Value and Document:</strong></p>
+<ul>
+<li>Simple key-value pairs or document stores</li>
+<li>Optimised for high-speed lookups and scalability</li>
+<li>Common in NoSQL databases (e.g., DynamoDB, Cosmos DB, Redis)</li>
+</ul>
 <blockquote>
 <p><strong>Note:</strong> In practice, we often only have access to a physical data model without documentation of the underlying conceptual or logical models. Regardless, a logical model is still implied by the physical implementation and can be reverse-engineered to understand the business meaning.</p>
 </blockquote>
@@ -248,10 +276,12 @@ Choosing the appropriate level of abstraction is challenging:
 </div>
 
 <h3 id="domain-models">Domain Models</h3>
-<p>Under Domain-Centric Design, domains are considered authoritative for their own scope of information definitions. Domains:
-- Own the meaning of their concepts
-- Define lifecycle and validity rules
-- Act as the system of semantic truth for their scope</p>
+<p>Under Domain-Centric Design, domains are considered authoritative for their own scope of information definitions. Domains:</p>
+<ul>
+<li>Own the meaning of their concepts</li>
+<li>Define lifecycle and validity rules</li>
+<li>Act as the system of semantic truth for their scope</li>
+</ul>
 <p>A <strong>Domain Model</strong> describes the business concepts relevant to a particular domain. These models:</p>
 <ul>
 <li>Focus on business meaning rather than technical implementation  </li>
@@ -305,11 +335,13 @@ Examples of concepts that are <em>not</em> business objects include:</p>
 <p><strong>In this framework, we prefer "Domain"</strong> as it ties more readily to governance and ownership boundaries, supporting clear accountability for data products and business outcomes.</p>
 <h3 id="canonical-models">Canonical Models</h3>
 <p>Where conceptual and logical concepts need to be standardised across domains and systems (e.g., for common service APIs, interoperability, or conformed dimensions), these models can be considered <strong>canonical</strong>—i.e., they represent the authoritative, agreed-upon definition across the enterprise. </p>
-<p>Canonical models:
-- Can be conceptual and logical at a minimum
-- Can also be described physically if applicable to a particular cross-system or cross-business-domain context
-- Represent standardised information contracts between domains and systems
-- Support interoperability and consistent interpretation of shared concepts</p>
+<p>Canonical models:</p>
+<ul>
+<li>Can be conceptual and logical at a minimum</li>
+<li>Can also be described physically if applicable to a particular cross-system or cross-business-domain context</li>
+<li>Represent standardised information contracts between domains and systems</li>
+<li>Support interoperability and consistent interpretation of shared concepts</li>
+</ul>
 <p>Canonical models should only exist where:</p>
 <ul>
 <li>Multiple domains integrate</li>
@@ -331,14 +363,16 @@ Examples of concepts that are <em>not</em> business objects include:</p>
 <p>See also: <a href="#dimensional-kimball-model">Fact Tables and Business Processes in Dimensional Modeling</a></p>
 <h3 id="data-warehouse-models">Data Warehouse Models</h3>
 <p>Data warehouses transform data through a range of stages, each with inherent physical model structures, in a way that is ultimately optimised for performance and analysis—while preserving the underlying conceptual and logical semantics. </p>
-<p>These stages typically:
-- <strong>Conform to standards:</strong> Transform disparate data sources and their physical models to align with <a href="#canonical-models">canonical naming, structures, and formats</a>
-- <strong>Apply reference data:</strong> Map source values to standardised reference data and business terminology
-- <strong>Ensure quality:</strong> Perform data quality checks and cleansing processes to ensure reliability
-- <strong>Preserve history:</strong> Maintain historical records as required for time-based analysis
-- <strong>Enrich with metadata:</strong> Add technical and business metadata to support discovery and governance
-- <strong>Optimise for consumption:</strong> Structure data according to business requirements and access patterns (e.g., <a href="#dimensional-kimball-model">dimensional models</a>, <a href="#data-vault-model">data vault</a>)
-- <strong>Aggregate:</strong> Summarise data at appropriate levels for analytical consumption</p>
+<p>These stages typically:</p>
+<ul>
+<li><strong>Conform to standards:</strong> Transform disparate data sources and their physical models to align with <a href="#canonical-models">canonical naming, structures, and formats</a></li>
+<li><strong>Apply reference data:</strong> Map source values to standardised reference data and business terminology</li>
+<li><strong>Ensure quality:</strong> Perform data quality checks and cleansing processes to ensure reliability</li>
+<li><strong>Preserve history:</strong> Maintain historical records as required for time-based analysis</li>
+<li><strong>Enrich with metadata:</strong> Add technical and business metadata to support discovery and governance</li>
+<li><strong>Optimise for consumption:</strong> Structure data according to business requirements and access patterns (e.g., <a href="#dimensional-kimball-model">dimensional models</a>, <a href="#data-vault-model">data vault</a>)</li>
+<li><strong>Aggregate:</strong> Summarise data at appropriate levels for analytical consumption</li>
+</ul>
 <p>Each stage may have distinct physical model structures optimised for its specific purpose, while maintaining alignment to the underlying logical and conceptual models.</p>
 <h4 id="data-vault-model">Data Vault Model</h4>
 <p>The core of the Data Vault model are core business concepts and their associations as described in Enterprise/Domain Conceptual Models. We do not elaborate on them here. Refer to Data Vault 2.0 standards for further guidance.</p>
@@ -359,11 +393,13 @@ Examples of concepts that are <em>not</em> business objects include:</p>
 </ul>
 <h4 id="dimensional-bus-matrix">Dimensional Bus Matrix</h4>
 <p>A <strong>Dimensional Bus Matrix</strong> (or <strong>Bus Matrix</strong>) is a tool, popularized by Ralph Kimball, used in dimensional modelling to systematically map the intersection between business processes (facts) and the descriptive dimensions they use. It is especially valuable for scalable data warehouse or analytics platform design, as it enables modular development and clear alignment to business needs.</p>
-<p><strong>The bus matrix:</strong>
-- Is a two-dimensional grid or table
-- Has business processes (typically facts, e.g., "Orders," "Shipments," "Payments") as rows
-- Has dimensions (e.g., "Customer," "Product," "Time," "Geography") as columns
-- Each cell indicates whether a dimension is associated with (applies to) a given process</p>
+<p><strong>The bus matrix:</strong></p>
+<ul>
+<li>Is a two-dimensional grid or table</li>
+<li>Has business processes (typically facts, e.g., "Orders," "Shipments," "Payments") as rows</li>
+<li>Has dimensions (e.g., "Customer," "Product," "Time," "Geography") as columns</li>
+<li>Each cell indicates whether a dimension is associated with (applies to) a given process</li>
+</ul>
 <h5 id="key-benefits">Key benefits:</h5>
 <ul>
 <li><strong>Identifies conformed dimensions:</strong> Shows which dimensions should be shared and standardised across different areas of the business for consistency and integrative analysis</li>
@@ -418,11 +454,13 @@ Examples of concepts that are <em>not</em> business objects include:</p>
 <h3 id="semantic-layers">Semantic Layers</h3>
 <p>In modern data architecture, a <em>semantic layer</em> (or <em>semantic model</em>) is a business-oriented abstraction layer that makes data easier to understand and use by presenting it in business terms rather than physical structures.</p>
 <p>Semantic layers are interpretive layers that depend on domain and canonical models for the definition of base entities. However, they may establish authoritative definitions for derived metrics, business calculations, and analytical measures within their consumption context.</p>
-<p>They:
-- Translate physical data structures into business concepts<br />
-- Encapsulate business logic, measures, and calculations<br />
-- Provide consistent definitions for metrics within a given analytical context<br />
-- Simplify access for analytics, reporting, and self-service use  </p>
+<p>They:</p>
+<ul>
+<li>Translate physical data structures into business concepts  </li>
+<li>Encapsulate business logic, measures, and calculations  </li>
+<li>Provide consistent definitions for metrics within a given analytical context  </li>
+<li>Simplify access for analytics, reporting, and self-service use  </li>
+</ul>
 <p>Semantic layers emphasise conceptual and logical meaning over physical storage and implementation. While they have physical representations (e.g., models, views, metadata objects), these are abstractions over authoritative sources rather than systems of record.</p>
 <p>Examples:</p>
 <ul>
