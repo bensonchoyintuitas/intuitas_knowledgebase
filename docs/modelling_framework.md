@@ -41,6 +41,7 @@ We prefer to emphasise the semantic difference between business information desi
 Some organisations use "data model" as an umbrella term for all three layers (conceptual data model, logical data model, physical data model), and that is also acceptable.
 
 Business information concepts that are applicable across the Enterprise or belong to specific domains are modelled across two layers: **Conceptual** and **Logical**. These models:
+
 - Are **semantic** models because they focus on the meaning (semantics) of information and business concepts
 - Describe what information exists and how it relates
 - Are technology-agnostic
@@ -54,6 +55,7 @@ Conceptual models represent concepts and business meaning only, without implemen
 #### Identifying Concepts
 
 What constitutes a concept?
+
 - **Identifiable:** Can it be uniquely recognised?
 - **Meaningful:** Is it relevant to business processes or needs to be tracked?
 - **Named:** What do we call it? Align to agreed terms within the domain
