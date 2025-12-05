@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Intuitas Data Modelling Standards and Conventions - Intuitas Data Intelligence Blueprint</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../assets/custom.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Intuitas Data Intelligence Blueprint</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_0/" class="nav-link">Level 0</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_1/" class="nav-link">Level 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../level_2/" class="nav-link">Level 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../standards_and_conventions/" class="nav-link">Standards</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#intuitas-data-modelling-standards-and-conventions" class="nav-link">Intuitas Data Modelling Standards and Conventions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#general-naming-conventions" class="nav-link">General Naming Conventions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conceptual-models" class="nav-link">Conceptual Models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#logical-models" class="nav-link">Logical Models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#physical-models" class="nav-link">Physical Models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#standard-suffix-and-prefix-inventory" class="nav-link">Standard Suffix and Prefix Inventory</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="intuitas-data-modelling-standards-and-conventions">Intuitas Data Modelling Standards and Conventions</h1>
+<p><a href="../">Return to home</a></p>
+<blockquote>
+<p>Updated 5/12/2025</p>
+</blockquote>
+<hr />
+<h2 id="general-naming-conventions">General Naming Conventions</h2>
+<h3 id="entity-naming-general-rules">Entity Naming (General Rules)</h3>
+<ul>
+<li>Use clear business language</li>
+<li>Use terminology familiar to business stakeholders and consistent with the business glossary</li>
+<li>In domain models, use terms appropriate to the business context and document synonyms in the business glossary</li>
+<li>Canonical entities must use terms that are formally agreed and recognised across domains</li>
+<li>Use singular nouns for entities (e.g., <code>Customer</code>, not <code>Customers</code>)</li>
+<li>Plurality is allowed only in dimensional fact tables (e.g., <code>fact_payments</code>). Dimension tables use singular (e.g., <code>dim_customer</code>)</li>
+<li>Avoid system-specific or technical terminology</li>
+<li>Avoid abbreviations unless universally understood</li>
+<li>Be specific: add context where needed (e.g., <code>AdminUser</code> vs <code>User</code>)</li>
+</ul>
+<h3 id="business-names-vs-physical-names">Business Names vs Physical Names</h3>
+<ul>
+<li>Business names use natural language with spaces (e.g., <code>Order Placed</code>)</li>
+<li>Business names are authoritative for semantic meaning</li>
+<li>Machine-safe identifiers (e.g., GUIDs) are internal metadata only</li>
+<li>Physical names follow platform-specific conventions (e.g., <code>order_placed</code>)</li>
+<li>The business glossary is the semantic source of truth</li>
+</ul>
+<p><strong>Example:</strong>
+- Business Name: <code>Order Placed</code>
+- Internal Identifier: <code>GUID-1234-5678</code>
+- Physical Name: <code>order_placed</code></p>
+<h3 id="events-and-transactions">Events and Transactions</h3>
+<p>Business events and transactions may be modelled in two valid ways:</p>
+<ul>
+<li>Model the <strong>entity</strong> itself, treating its lifecycle state as an attribute (e.g., <code>Order</code> with <code>Order Status</code> as an attribute)</li>
+<li>Model the entity in a <strong>state-specific form</strong> where the status is intrinsic to the concept (e.g., <code>Order Placed</code>, <code>Invoice Issued</code>)</li>
+</ul>
+<p>Choose the approach that best represents how the business actually thinks and works with the concept.</p>
+<h3 id="relationship-naming-conventions">Relationship Naming Conventions</h3>
+<ul>
+<li>Use business verbs, not technical terms</li>
+<li>Names must read as a business sentence</li>
+<li>Use present tense and active voice</li>
+<li>Avoid vague terms (e.g., "related to", "linked to")</li>
+<li>Choose precise verbs that express meaning</li>
+<li>Reflect ownership or composition explicitly where applicable</li>
+<li>Use domain-specific language</li>
+<li>Direction should be clear</li>
+</ul>
+<p><strong>Examples:</strong>
+- <code>Customer places Order</code>
+- <code>Policy covers Claim</code>
+- <code>Doctor refers Patient</code>
+- <code>Employer employs Worker</code>
+- <code>Patient receives Treatment</code>
+- <code>Supplier delivers Product</code></p>
+<p><strong>Avoid:</strong>
+- <code>has_fk</code>
+- <code>references</code>
+- <code>linked to</code>
+- <code>related to</code></p>
+<h4 id="relationship-directionality">Relationship Directionality</h4>
+<ul>
+<li>Every relationship has one authoritative direction and name</li>
+<li>Model one semantic relationship with one verb. Allow alternate read-paths in tooling or documentation, not duplicate relationships</li>
+<li>Do not create passive inversions (e.g., "is placed by" instead of "places")</li>
+<li>If you need a different semantic perspective, model it as a separate relationship</li>
+</ul>
+<h3 id="relationship-cardinality">Relationship Cardinality</h3>
+<p>There are two options:
+- Use crow's foot notation (shows 'one' with a line, 'many' with a branching crow's foot; commonly denotes relationships such as one-to-many, many-to-many, etc.)
+- Use multiplicity notation (explicitly labels relationship ends with numbers or ranges, e.g., '0..1', '1', '0..<em>', '1..</em>', indicating how many entities participate in the relationship)</p>
+<p><strong>Single direction (preferred):</strong>
+- <code>Customer places Order</code> ✓</p>
+<p><strong>Avoid passive inversion (same relationship, just reversed grammar):</strong>
+- <code>Order is placed by Customer</code> ✗</p>
+<p><strong>Separate relationships (different business concepts):</strong>
+- <code>Customer places Order</code> (ordering action)
+- <code>Customer is billed for Order</code> (financial relationship)</p>
+<hr />
+<h2 id="conceptual-models">Conceptual Models</h2>
+<h3 id="entities">Entities</h3>
+<ul>
+<li>Business Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
+<li>Optimised for clarity and business communication</li>
+</ul>
+<h3 id="diagrammatic-representation">Diagrammatic Representation</h3>
+<ul>
+<li>Boxes represent business concepts (entities)</li>
+<li>Lines represent relationships</li>
+</ul>
+<p><strong>Show:</strong>
+- Core concepts
+- Key relationships
+- Major business rules</p>
+<p><strong>Do not show:</strong>
+- Keys
+- Data types
+- Technical constraints
+- Detailed cardinality beyond simple one-to-many</p>
+<hr />
+<h2 id="logical-models">Logical Models</h2>
+<h3 id="entities_1">Entities</h3>
+<ul>
+<li>Use the same format as conceptual models</li>
+<li>Business Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
+<li>Optimised for clarity and business communication</li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li>Use Business Facing format with capitalised first letters and spaces</li>
+<li>Names must be business-meaningful</li>
+<li>Avoid embedding data types in names</li>
+<li>Prefer semantic names over technical ones</li>
+</ul>
+<h3 id="keys-logical-models">Keys (Logical Models)</h3>
+<h4 id="key-types">Key Types</h4>
+<p><strong>Natural or Surrogate (implementation characteristic):</strong>
+- <strong>Natural Key</strong>: Uses a real-world business identifier (e.g., <code>Invoice Number</code>, <code>Medicare Number</code>)
+- <strong>Surrogate Key</strong>: System-generated identifier (e.g., auto-increment, UUID)
+- This is a metadata property, not encoded in the name</p>
+<p><strong>Primary or Alternate (role in the model):</strong>
+- <strong>Primary Key (PK)</strong>: The chosen unique identifier for the entity
+- <strong>Alternate Key (AK)</strong>: Any other unique identifier
+- Tag primary keys as <code>(PK)</code> in logical models
+- All other unique keys are considered alternate keys</p>
+<h4 id="key-naming-pattern">Key Naming Pattern</h4>
+<p>Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. However, keys are likely to include one of the standard key/identifier suffixes (see <a href="#standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</a>).</p>
+<p>Examples:</p>
+<p><strong>Primary Keys:</strong>
+- <code>Customer ID</code> (PK) — may be natural or surrogate
+- <code>Order ID</code> (PK) — may be natural or surrogate</p>
+<p>Note: If a field is named \&lt;Entity&gt; ID in a canonical view, it must represent a business-meaningful identifier, not a generated surrogate.</p>
+<p><strong>Foreign Keys:</strong>
+- <code>Patient ID</code> (FK) — references <code>Patient ID</code> from another entity (the original key may be natural or surrogate)</p>
+<p><strong>Other unique identifiers are named according to business meaning:</strong>
+- <code>Invoice Number</code> (PK) — natural primary key
+- <code>Email Address</code> (AK) — natural alternate key
+- <code>Medicare Number</code> (AK) — natural alternate key
+- <code>National Health Identifier</code> (AK) — natural alternate key</p>
+<p><strong>Composite Keys:</strong>
+- The fact that they form a composite key is captured as metadata, not in naming
+- No special prefixes or suffixes are needed
+- Examples: <code>Flight Number</code> + <code>Departure Date</code> (PK) or <code>Account Number</code> + <code>Transaction Sequence</code> (PK)</p>
+<h3 id="diagrammatic-representation_1">Diagrammatic Representation</h3>
+<ul>
+<li>Consistent with conceptual models, with additional details to show attributes, key types</li>
+<li>Show relationships as lines and cardinality as crows foot or multiplicity notation.</li>
+</ul>
+<hr />
+<h2 id="physical-models">Physical Models</h2>
+<p>Physical models represent implemented storage structures and must follow deterministic, platform-safe naming conventions.</p>
+<p><strong>Singular vs Plural Naming:</strong>
+- <strong>Default</strong>: Use singular nouns for table names (e.g., <code>customer</code>, <code>invoice</code>, <code>payment</code>)
+- <strong>Exception - Dimensional Facts</strong>: Use plural nouns for fact tables (e.g., <code>fact_payments</code>, <code>fact_orders</code>)
+- <strong>Dimensional Dimensions</strong>: Use singular nouns (e.g., <code>dim_customer</code>, <code>dim_product</code>)</p>
+<h3 id="relational-structures">Relational Structures</h3>
+<h4 id="naming">Naming</h4>
+<p>All physical objects must use <strong>lowercase with underscores</strong> (<code>snake_case</code>).</p>
+<p><strong>General Rules:</strong>
+- No mixed case
+- No spaces
+- Use singular table names (except for dimensional model facts - see below)
+- Prefer clarity over brevity
+- Avoid source-system naming where possible</p>
+<p><strong>Tables:</strong>
+- Express business meaning
+- Use prefixes where appropriate (e.g., <code>fact_</code>, <code>dim_</code>)
+- Examples: <code>customer</code>, <code>invoice</code>, <code>fact_orders</code> (dimensional fact), <code>dim_patient</code> (dimensional dimension)</p>
+<p><strong>Columns:</strong>
+- Map directly from logical attributes
+- Use semantic names
+- Do not encode data types or storage formats
+- There are two options for handling units:
+  - A: embed the unit in the column name
+  - B: separate value and unit type as separate columns
+- Examples: <code>customer_id</code>, <code>invoice_number</code>, <code>order_datetime</code>, <code>total_amount</code>, <code>is_active</code></p>
+<h4 id="diagrammatic-representation_2">Diagrammatic Representation</h4>
+<ul>
+<li>Consistent with logical models</li>
+<li>Show relationships as lines and cardinality as crows foot or multiplicity notation.</li>
+</ul>
+<hr />
+<h4 id="databricks-conventions">Databricks Conventions</h4>
+<p>For detailed conventions and examples see <a href="../standards_and_conventions/#databricks">Databricks</a></p>
+<p><strong>Catalogs:</strong>
+- Catalogs represent domain-level scope (e.g., <code>intuitas_engineering_dev</code>, <code>intuitas_corporate_dev</code>)
+- May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls
+- Naming is lowercase, underscore-separated, and meaningful
+- Pattern: <code>{domain_name}{_environment}</code> (e.g., <code>intuitas_corporate_dev</code>)</p>
+<p><strong>Schemas:</strong>
+- Schemas represent layers, stages, zones, or source systems within a catalog
+- Use double underscores (<code>__</code>) as separators for schema components
+- Pattern: <code>{stage}__{zone}__{source_system}__{schema}</code> (e.g., <code>bronze__ods__fhirhouse__dbo</code>)
+- Full example: <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></p>
+<p><strong>Tables and Views:</strong>
+- Tables for persisted data
+- Views for logical abstraction
+- Names reflect business meaning, not source-system terminology</p>
+<p><strong>Columns:</strong>
+- Use <code>snake_case</code>
+- No abbreviations unless standard</p>
+<p><strong>Keys:</strong>
+- Primary keys: <code>&lt;table&gt;_id</code>
+- Foreign keys: <code>&lt;referenced_table&gt;_id</code>
+- Warehouse surrogate keys: <code>&lt;entity&gt;_key</code></p>
+<hr />
+<h3 id="dimensional-models">Dimensional Models</h3>
+<p>For detailed conventions and examples including staging models see the Information Marts sections of <a href="../standards_and_conventions/#schema-and-object-conventions">Schema and Object Conventions</a></p>
+<p><strong>Naming:</strong>
+- Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>)
+- Dimension tables prefixed with <code>dim_</code> and use <strong>singular</strong> entity names (e.g., <code>dim_customer</code>, <code>dim_date</code>)
+- Warehouse dimension keys: <code>&lt;entity&gt;_key</code> (the surrogate key used for joins in the warehouse)
+- Business keys: <code>&lt;entity&gt;_id</code> (the identifier from the source system)</p>
+<p><strong>Rationale:</strong> Fact tables contain multiple rows of events/transactions (plural), while dimension tables represent single entity instances (singular).</p>
+<p><strong>Gold Layer Examples:</strong></p>
+<p><em>Staging:</em>
+- <code>intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</code>
+- <code>intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</code>
+- <code>stg__dim_account__01_dedupe.sql</code></p>
+<p><em>Information Marts:</em>
+- <code>intuitas_corporate_dev.mart.fact_late_payments</code> — fact table
+- <code>intuitas_corporate_dev.mart.dim_customer</code> — dimension table
+- <code>mart__dim_account.sql</code> — dbt model file
+- <code>mart__dim_date.sql</code> — dbt model file</p>
+<p><strong>Keys:</strong>
+- <code>customer_key</code> — warehouse dimension key (surrogate key for joins)
+- <code>customer_id</code> — business identifier from source system</p>
+<p><strong>SCD Type 2 Columns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start_at</code></td>
+<td>Timestamp when this record version became effective</td>
+</tr>
+<tr>
+<td><code>end_at</code></td>
+<td>Timestamp when this record version expired (NULL for current records)</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>Timestamp from the source system indicating when the record was last modified</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default dbt Snapshot Columns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dbt_scd_id</code></td>
+<td>Unique identifier for each snapshot record (surrogate key)</td>
+</tr>
+<tr>
+<td><code>dbt_valid_from</code></td>
+<td>Timestamp when this record version became effective</td>
+</tr>
+<tr>
+<td><code>dbt_valid_to</code></td>
+<td>Timestamp when this record version expired (NULL for current records)</td>
+</tr>
+<tr>
+<td><code>dbt_updated_at</code></td>
+<td>Timestamp from the source system indicating when the record was last modified</td>
+</tr>
+<tr>
+<td><code>dbt_deleted</code></td>
+<td>(Optional) Boolean flag indicating if a record has been deleted from the source system</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</h2>
+<h3 id="identity-keys">Identity &amp; Keys</h3>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ID</code></td>
+<td>Primary business identifier</td>
+<td><code>Customer ID</code></td>
+<td><code>customer_id</code></td>
+</tr>
+<tr>
+<td><code>Key</code></td>
+<td>Warehouse dimension key (dimensional models only)</td>
+<td><code>Customer Key</code></td>
+<td><code>customer_key</code></td>
+</tr>
+<tr>
+<td><code>Number</code></td>
+<td>Business reference number</td>
+<td><code>Invoice Number</code></td>
+<td><code>invoice_number</code></td>
+</tr>
+<tr>
+<td><code>Code</code></td>
+<td>Coded business value</td>
+<td><code>Diagnosis Code</code></td>
+<td><code>diagnosis_code</code></td>
+</tr>
+<tr>
+<td><code>Reference</code></td>
+<td>External reference</td>
+<td><code>External Reference</code></td>
+<td><code>external_reference</code></td>
+</tr>
+<tr>
+<td><code>Identifier</code></td>
+<td>Explicit identifier (potentially many identifiers)</td>
+<td><code>National Identifier</code></td>
+<td><code>national_identifier</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="temporal-concepts">Temporal Concepts</h3>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Date</code></td>
+<td>Calendar date only</td>
+<td><code>Admission Date</code></td>
+<td><code>admission_date</code></td>
+</tr>
+<tr>
+<td><code>DateTime</code></td>
+<td>Timestamp (assumed UTC)</td>
+<td><code>Order DateTime</code></td>
+<td><code>order_datetime</code></td>
+</tr>
+<tr>
+<td><code>DateTime &lt;Timezone&gt;</code></td>
+<td>Timestamp in explicit timezone</td>
+<td><code>Order DateTime AEST</code></td>
+<td><code>order_datetime_aest</code></td>
+</tr>
+<tr>
+<td><code>Time</code></td>
+<td>Time only</td>
+<td><code>Appointment Time</code></td>
+<td><code>appointment_time</code></td>
+</tr>
+<tr>
+<td><code>From Date</code></td>
+<td>Validity start</td>
+<td><code>Policy From Date</code></td>
+<td><code>policy_from_date</code></td>
+</tr>
+<tr>
+<td><code>To Date</code></td>
+<td>Validity end</td>
+<td><code>Policy To Date</code></td>
+<td><code>policy_to_date</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="state-classification">State &amp; Classification</h3>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Status</code></td>
+<td>Lifecycle state</td>
+<td><code>Order Status</code></td>
+<td><code>order_status</code></td>
+</tr>
+<tr>
+<td><code>Type</code></td>
+<td>Classification</td>
+<td><code>Customer Type</code></td>
+<td><code>customer_type</code></td>
+</tr>
+<tr>
+<td><code>Category</code></td>
+<td>Grouping</td>
+<td><code>Product Category</code></td>
+<td><code>product_category</code></td>
+</tr>
+<tr>
+<td><code>Class</code></td>
+<td>Structural grouping</td>
+<td><code>Asset Class</code></td>
+<td><code>asset_class</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="quantities-measures">Quantities &amp; Measures</h3>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Count</code></td>
+<td>Quantity</td>
+<td><code>Item Count</code></td>
+<td><code>item_count</code></td>
+</tr>
+<tr>
+<td><code>Amount</code></td>
+<td>Monetary value</td>
+<td><code>Invoice Amount</code></td>
+<td><code>invoice_amount</code></td>
+</tr>
+<tr>
+<td><code>Value</code></td>
+<td>General numeric</td>
+<td><code>Score Value</code></td>
+<td><code>score_value</code></td>
+</tr>
+<tr>
+<td><code>Rate</code></td>
+<td>Rate</td>
+<td><code>Interest Rate</code></td>
+<td><code>interest_rate</code></td>
+</tr>
+<tr>
+<td><code>Ratio</code></td>
+<td>Proportion</td>
+<td><code>Utilisation Ratio</code></td>
+<td><code>utilisation_ratio</code></td>
+</tr>
+<tr>
+<td><code>Percentage</code></td>
+<td>Percentage</td>
+<td><code>Discount Percentage</code></td>
+<td><code>discount_percentage</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="boolean-indicators-prefix-convention">Boolean Indicators (Prefix Convention)</h3>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Is</code></td>
+<td>State check</td>
+<td><code>Is Active</code></td>
+<td><code>is_active</code></td>
+</tr>
+<tr>
+<td><code>Has</code></td>
+<td>Ownership</td>
+<td><code>Has Consent</code></td>
+<td><code>has_consent</code></td>
+</tr>
+<tr>
+<td><code>Can</code></td>
+<td>Capability</td>
+<td><code>Can Transact</code></td>
+<td><code>can_transact</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="audit-control">Audit &amp; Control</h3>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Meaning</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Created DateTime</code></td>
+<td>Creation timestamp</td>
+<td><code>Created DateTime</code></td>
+<td><code>created_datetime</code></td>
+</tr>
+<tr>
+<td><code>Updated DateTime</code></td>
+<td>Last update timestamp</td>
+<td><code>Updated DateTime</code></td>
+<td><code>updated_datetime</code></td>
+</tr>
+<tr>
+<td><code>Deleted DateTime</code></td>
+<td>Soft deletion</td>
+<td><code>Deleted DateTime</code></td>
+<td><code>deleted_datetime</code></td>
+</tr>
+<tr>
+<td><code>Effective From Date</code></td>
+<td>Valid from date</td>
+<td><code>Effective From Date</code></td>
+<td><code>effective_from_date</code></td>
+</tr>
+<tr>
+<td><code>Effective To Date</code></td>
+<td>Valid to date</td>
+<td><code>Effective To Date</code></td>
+<td><code>effective_to_date</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="summary-of-naming-rules">Summary of Naming Rules</h3>
+<p>Suffixes encode <strong>meaning</strong>, not technical data type or implementation details.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Logical/Conceptual</th>
+<th>Physical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary business identifier</td>
+<td><code>Customer ID</code></td>
+<td><code>customer_id</code></td>
+</tr>
+<tr>
+<td>Warehouse dimension key</td>
+<td><code>Customer Key</code></td>
+<td><code>customer_key</code></td>
+</tr>
+<tr>
+<td>Business reference</td>
+<td><code>Invoice Number</code>, <code>Diagnosis Code</code></td>
+<td><code>invoice_number</code>, <code>diagnosis_code</code></td>
+</tr>
+<tr>
+<td>Temporal meaning</td>
+<td><code>Order DateTime</code> (assumed UTC)</td>
+<td><code>order_datetime</code></td>
+</tr>
+<tr>
+<td>Classification</td>
+<td><code>Order Status</code>, <code>Customer Type</code></td>
+<td><code>order_status</code>, <code>customer_type</code></td>
+</tr>
+<tr>
+<td>Measures</td>
+<td><code>Invoice Amount</code>, <code>Interest Rate</code></td>
+<td><code>invoice_amount</code>, <code>interest_rate</code></td>
+</tr>
+<tr>
+<td>Boolean indicators</td>
+<td><code>Is Active</code>, <code>Has Consent</code></td>
+<td><code>is_active</code>, <code>has_consent</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="examples">Examples</h2>
+<h3 id="keys-business-facing">Keys (Business-facing)</h3>
+<ul>
+<li>Primary Business ID: <code>Customer ID</code> (PK)</li>
+<li>Business Reference: <code>Invoice Number</code> (could be PK or AK)</li>
+<li>Alternate Identifier: <code>National Identifier</code> (AK)</li>
+<li>Alternate Identifier: <code>Email Address</code> (AK)</li>
+<li>Warehouse Dimension Key: <code>Customer Key</code> (dimensional models)</li>
+<li>Physical Mapping: <code>customer_id</code>, <code>customer_key</code></li>
+</ul>
+<p>Note: Whether a key is natural or surrogate is metadata, not encoded in the name.</p>
+<h3 id="date-and-time">Date and Time</h3>
+<ul>
+<li>Business Name: <code>Order DateTime</code></li>
+<li>Physical Name (UTC): <code>order_datetime_utc</code></li>
+<li>Physical Name (Local): <code>order_datetime_aest</code></li>
+</ul>
+<h3 id="units">Units</h3>
+<p>There are two options for handling units:</p>
+<p><strong>Option 1: Embed the unit in the physical name</strong>
+- Business Name: <code>Weight</code> → Physical Name: <code>weight_kg</code>
+- Business Name: <code>Temperature</code> → Physical Name: <code>temperature_c</code></p>
+<p><strong>Option 2: Separate unit from the value</strong>
+- Measure Value: <code>measure_value</code>
+- Measure Unit: <code>measure_unit_code</code></p>
+<p>Example: Instead of <code>weight_kg</code>, use <code>weight</code> + <code>weight_unit_code</code> where the unit code might be 'kg', 'lb', etc.</p>
+<h3 id="events-and-transactions_1">Events and Transactions</h3>
+<ul>
+<li>Business Term: <code>Payment Received</code> → Model Name: <code>Payment Received</code> → Physical Name: <code>payment_received</code></li>
+<li>Business Term: <code>Invoice Issued</code> → Model Name: <code>Invoice Issued</code> → Physical Name: <code>invoice_issued</code></li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

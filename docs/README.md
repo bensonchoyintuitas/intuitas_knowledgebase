@@ -111,6 +111,11 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
 ### **Standards and conventions**
 - [Standards & Conventions](standards_and_conventions.md)
 <br>
+
+### **Modelling framework and standards**
+- [Modelling framework](modelling_framework.md)
+- [Modelling standards and conventions](modelling_standards_and_conventions.md)
+<br>
 <br>
 <br>
 

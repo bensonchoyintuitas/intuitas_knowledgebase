@@ -460,7 +460,7 @@ Staging models serve as intermediary models that transform source data into the 
 <li>
 <p>Schema naming convention: <code>{optional: data_stage__: (silver__)}{data_zone: (stg)}{optional: __domain name}{optional: __subdomain name(s)}</code></p>
 </li>
-<li>Object naming convention to align with target mart: <code>stg__(optional:d(dim)/f(fact)){_entity}{__object_description}{__n}{__transformation}</code></li>
+<li>Object naming convention to align with target mart: <code>stg__(optional:dim_/fact_){_entity}{__object_description}{__n}{__transformation}</code></li>
 <li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
 <li>
 <p><em>e.g: intuitas_corporate_dev.stg.accounts__02_business_validated</em> </p>
@@ -489,7 +489,7 @@ Staging models serve as intermediary models that transform source data into the 
 <li>
 <p>Schema naming convention: <code>{optional: data_stage__: (silver__)}{data_zone: (mart)}{__source_system_identifier}{optional:__source_channel}</code></p>
 </li>
-<li>Object naming convention: <code>(optional:d(dim)/f(fact)){__entity / __object_description}{optional:__source_system_identifier}{optional:__source_channel}</code></li>
+<li>Object naming convention: <code>(optional:dim_/fact_){__entity / __object_description}{optional:__source_system_identifier}{optional:__source_channel}</code></li>
 <li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment</em></li>
 <li><em>e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account</em></li>
 <li>
@@ -501,7 +501,7 @@ Staging models serve as intermediary models that transform source data into the 
 <li>
 <p>Schema naming convention: <code>{optional: data_stage__: (silver__)}{data_zone: (mart)}{optional: __domain name}{optional: __subdomain name(s)}</code></p>
 </li>
-<li>Object naming convention: <code>(optional:d(dim)/f(fact)){__unified entity / __object_description}</code></li>
+<li>Object naming convention: <code>(optional:dim_/fact_){__unified entity / __object_description}</code></li>
 <li><em>e.g: intuitas_corporate_dev.mart.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__corporate__finance.account</em> (unified)</li>
 <li><em>e.g: intuitas_corporate_dev.mart__finance.account</em> (unified)</li>
@@ -547,19 +547,19 @@ Optional warehousing construct.</p>
 <p>These models exist to stage gold marts.</p>
 <ul>
 <li>Schema naming convention: <code>{optional: data_stage__: (gold__)}{data_zone: (stg)}{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>d(dim)ension naming convention: <code>d(dim){__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}</code></li>
-<li>Fact naming convention: <code>f(fact){__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}</code></li>
+<li>Dimension naming convention: <code>dim_{__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}</code></li>
+<li>Fact naming convention: <code>fact_{__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}</code></li>
 <li>Denormalized (One Big Table) Object naming convention: <code>{entity / product description} (optional: __{source_system}__{source_channel}){__n}{__transformation}</code></li>
-<li><em>e.g: intuitas_corporate_dev.stg.f__late_payments__01__pivoted_by_order</em></li>
-<li><em>e.g: intuitas_corporate_dev.stg__corporate.f__late_payments__01__pivoted_by_order</em></li>
-<li><em>e.g: intuitas_corporate_dev.stg__corporate__finance.f__late_payments__01__pivoted_by_order</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order</em></li>
+<li><em>e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</em></li>
 </ul>
 <p><br></p>
 <p><strong>(Gold) Information Marts</strong>:</p>
 <ul>
 <li>Schema naming convention: <code>{optional: data_stage__: (gold__)}{data_zone: (mart)}{optional: __domain name}{optional: __subdomain name(s)}</code></li>
-<li>Dimension naming convention: <code>d(dim){__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
-<li>Fact naming convention: <code>f(fact){__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>Dimension naming convention: <code>dim_{__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
+<li>Fact naming convention: <code>fact_{__entity / __product description} (optional: __{source_system}__{source_channel})</code></li>
 <li>
 <p>Denormalized (One Big Table) Object naming convention: <code>{entity / product description} (optional: __{source_system}__{source_channel})</code></p>
 </li>
@@ -576,7 +576,7 @@ Optional warehousing construct.</p>
 </ul>
 <p><em>e.g:</em></p>
 <ul>
-<li><em>intuitas_corporate_dev.mart.f_late_payments</em></li>
+<li><em>intuitas_corporate_dev.mart.fact_late_payments</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf</em></li>
 <li><em>intuitas_corporate_dev.mart.regionally_grouped_account_payments</em> (union of old and new)</li>
@@ -646,7 +646,7 @@ Optional warehousing construct.</p>
 <ul>
 <li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg</code></li>
 <li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:d(dim)/f(fact)}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim_/fact_}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
 <ul>
 <li><em>e.g: intuitas_corporate_dev.stg.accounts__01_deduped</em></li>
 <li><em>e.g: intuitas_corporate_dev.stg.accounts__02_business_validated</em> </li>
@@ -662,17 +662,17 @@ Optional warehousing construct.</p>
 <p><strong>Mart Source-specific:</strong> </p>
 <ul>
 <li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:d(dim)/f(fact)}{__entity /_object_description}__{source_system}__{source_channel}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__entity /_object_description}__{source_system}__{source_channel}</code></li>
 </ul>
 <p><strong>Mart Non-source specific:</strong> </p>
 <ul>
 <li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:d(dim)/f(fact)}{__unified entity /_object_description}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__unified entity /_object_description}</code></li>
 </ul>
 <p><strong>Reference Data:</strong> </p>
 <ul>
 <li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:d(dim)/f(fact)} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim_/fact_} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
 </ul>
 <p><strong>Raw Vault:</strong> </p>
 <ul>
@@ -700,13 +700,13 @@ Optional warehousing construct.</p>
 <p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></p>
 </li>
 <li>
-<p>d(dim)ensions: </p>
+<p>Dimensions: </p>
 </li>
 <li>
 <p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></p>
 </li>
 <li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__d(dim){__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim_{__entity / product description} (optional: __{source_system} __{source_channel})</code></p>
 </li>
 <li>
 <p>Facts: </p>
@@ -715,7 +715,7 @@ Optional warehousing construct.</p>
 <p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></p>
 </li>
 <li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__f(fact){__entity / product description} (optional: __{source_system} __{source_channel}) {optional: __{source_system} __{source_channel}}</code></p>
+<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact_{__entity / product description} (optional: __{source_system} __{source_channel})</code></p>
 </li>
 <li>
 <p>Denormalized (One Big Table): </p>
@@ -745,12 +745,12 @@ Optional warehousing construct.</p>
 │   ├── _silver.md
 │   ├── mart  (entity centric objects)
 │   |    └── account
-│   |    |   └── mart__d_account.sql
+│   |    |   └── mart__dim_account.sql
 │   |    |       └── stg
-│   |    |           └── stg__d_account__01_dedupe.sql
-│   |    |           └── stg__d_account__02_filter.sql
+│   |    |           └── stg__dim_account__01_dedupe.sql
+│   |    |           └── stg__dim_account__02_filter.sql
 │   |    └── date
-│   |        └── mart__d_date.sql
+│   |        └── mart__dim_date.sql
 │   └── ref
 │       ├── _reference_data__models.yml
 │       ├── _reference_data__sources.yml
