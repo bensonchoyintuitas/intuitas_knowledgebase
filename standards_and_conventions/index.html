@@ -509,7 +509,8 @@ Staging models serve as intermediary models that transform source data into the 
 </ul>
 <p><br></p>
 <p><strong>Reference Data</strong>:
-Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.</p>
+For further context refer to <a href="../modelling_standards_and_conventions/#reference-data">Reference Data Standards and Conventions</a>.</p>
+<p>Our default position uses schemas to logically consolidate reference data (either across the enterprise or within domains) with clearly named schema for convenience:</p>
 <ul>
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference data set name} (optional:__{source_system}__{source_channel})</code></li>

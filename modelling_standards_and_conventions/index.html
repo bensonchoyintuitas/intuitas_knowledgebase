@@ -81,6 +81,10 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#intuitas-data-modelling-standards-and-conventions" class="nav-link">Intuitas Data Modelling Standards and Conventions</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#general-naming-conventions" class="nav-link">General Naming Conventions</a>
               <ul class="nav flex-column">
               </ul>
@@ -101,10 +105,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -116,7 +116,58 @@
 <p><a href="../">Return to home</a></p>
 <blockquote>
 <p>Updated 5/12/2025</p>
+<p><strong>Related Documents:</strong> This document focuses on naming conventions and standards. For platform-specific implementation patterns and architectural details, see <a href="../standards_and_conventions/">Standards and Conventions</a>. For conceptual framework and model types, see <a href="../modelling_framework/">Modelling Framework</a>.</p>
 </blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="./#general-naming-conventions">General Naming Conventions</a><ul>
+<li><a href="./#entity-naming-general-rules">Entity Naming (General Rules)</a></li>
+<li><a href="./#business-names-vs-physical-names">Business Names vs Physical Names</a></li>
+<li><a href="./#events-and-transactions">Events and Transactions</a></li>
+<li><a href="./#relationship-naming-conventions">Relationship Naming Conventions</a></li>
+<li><a href="./#relationship-directionality">Relationship Directionality</a></li>
+<li><a href="./#relationship-cardinality">Relationship Cardinality</a></li>
+</ul>
+</li>
+<li><a href="./#conceptual-models">Conceptual Models</a><ul>
+<li><a href="./#entities">Entities</a></li>
+<li><a href="./#diagrammatic-representation">Diagrammatic Representation</a></li>
+</ul>
+</li>
+<li><a href="./#logical-models">Logical Models</a><ul>
+<li><a href="./#entities-1">Entities</a></li>
+<li><a href="./#attributes">Attributes</a></li>
+<li><a href="./#measures-and-metrics">Measures and Metrics</a></li>
+<li><a href="./#keys-logical-models">Keys (Logical Models)</a></li>
+<li><a href="./#diagrammatic-representation-1">Diagrammatic Representation</a></li>
+</ul>
+</li>
+<li><a href="./#physical-models">Physical Models</a><ul>
+<li><a href="./#relational-structures">Relational Structures</a></li>
+<li><a href="./#databricks-conventions">Databricks Conventions</a></li>
+<li><a href="./#dimensional-models">Dimensional Models</a></li>
+<li><a href="./#reference-data">Reference Data</a></li>
+</ul>
+</li>
+<li><a href="./#standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</a><ul>
+<li><a href="./#identity--keys">Identity &amp; Keys</a></li>
+<li><a href="./#temporal-concepts">Temporal Concepts</a></li>
+<li><a href="./#state--classification">State &amp; Classification</a></li>
+<li><a href="./#quantities--measures">Quantities &amp; Measures</a></li>
+<li><a href="./#boolean-indicators-prefix-convention">Boolean Indicators (Prefix Convention)</a></li>
+<li><a href="./#audit--control">Audit &amp; Control</a></li>
+<li><a href="./#summary-of-naming-rules">Summary of Naming Rules</a></li>
+</ul>
+</li>
+<li><a href="./#examples">Examples</a><ul>
+<li><a href="./#keys">Keys</a></li>
+<li><a href="./#date-and-time">Date and Time</a></li>
+<li><a href="./#units">Units</a></li>
+<li><a href="./#events-and-transactions-examples">Events and Transactions (Examples)</a></li>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="general-naming-conventions">General Naming Conventions</h2>
 <h3 id="entity-naming-general-rules">Entity Naming (General Rules)</h3>
@@ -129,7 +180,7 @@
 <li>Plurality is allowed only in dimensional fact tables (e.g., <code>fact_payments</code>). Dimension tables use singular (e.g., <code>dim_customer</code>)</li>
 <li>Avoid system-specific or technical terminology</li>
 <li>Avoid abbreviations unless universally understood</li>
-<li>Be specific: add context where needed (e.g., <code>AdminUser</code> vs <code>User</code>)</li>
+<li>Be specific: add context where needed (e.g., <code>Admin User</code> vs <code>User</code>)</li>
 </ul>
 <h3 id="business-names-vs-physical-names">Business Names vs Physical Names</h3>
 <ul>
@@ -193,9 +244,12 @@
 - <code>Customer is billed for Order</code> (financial relationship)</p>
 <hr />
 <h2 id="conceptual-models">Conceptual Models</h2>
+<blockquote>
+<p>For conceptual modelling framework and principles, see <a href="../modelling_framework/#conceptual-information-models">Conceptual Models</a> in the Modelling Framework.</p>
+</blockquote>
 <h3 id="entities">Entities</h3>
 <ul>
-<li>Business Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
+<li>Business-Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
 <li>Optimised for clarity and business communication</li>
 </ul>
 <h3 id="diagrammatic-representation">Diagrammatic Representation</h3>
@@ -214,19 +268,41 @@
 - Detailed cardinality beyond simple one-to-many</p>
 <hr />
 <h2 id="logical-models">Logical Models</h2>
+<blockquote>
+<p>For logical modelling framework and principles, see <a href="../modelling_framework/#logical-information-models">Logical Models</a> in the Modelling Framework.</p>
+</blockquote>
 <h3 id="entities_1">Entities</h3>
 <ul>
 <li>Use the same format as conceptual models</li>
-<li>Business Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
+<li>Business-Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
 <li>Optimised for clarity and business communication</li>
 </ul>
 <h3 id="attributes">Attributes</h3>
 <ul>
-<li>Use Business Facing format with capitalised first letters and spaces</li>
+<li>Use Business-Facing format with capitalised first letters and spaces</li>
 <li>Names must be business-meaningful</li>
 <li>Avoid embedding data types in names</li>
 <li>Prefer semantic names over technical ones</li>
 </ul>
+<h3 id="measures-and-metrics">Measures and Metrics</h3>
+<blockquote>
+<p>For measures and metrics framework, governance, and placement principles, see <a href="../modelling_framework/#measures-and-metrics">Measures and Metrics</a> in the Modelling Framework.</p>
+</blockquote>
+<ul>
+<li>Use Business-Facing format with capitalised first letters and spaces (e.g., <code>Invoice Amount</code>, <code>Item Count</code>)</li>
+<li>Make names consistent with related entities and attributes</li>
+<li>Use semantic suffixes <a href="#quantities--measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
+</ul>
+<p><strong>Example:</strong>
+- <strong>Measure:</strong> <code>Total Sales Amount</code> — aggregated sum of sales transactions
+- <strong>Metric:</strong> <code>Average Order Value</code> — calculated as <code>Total Sales Amount / Order Count</code></p>
+<blockquote>
+<p><strong>Important:</strong> 
+- <strong>Keep metric names dimension-agnostic</strong>: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use <code>Sales Amount</code> not <code>Sales Amount by Product by Time</code>). 
+- <strong>Exception—Intrinsic dimensions</strong>: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., <code>Customer Lifetime Value</code> is calculated at customer grain by definition; <code>Monthly Revenue Growth Rate</code> compares month-to-month by definition).
+- <strong>Temporal metrics</strong>: Include time window qualifiers when the period defines the calculation logic (e.g., <code>Year-to-Date Sales Amount</code> accumulates from year start; <code>90-Day Rolling Average</code> uses a 90-day window).
+- <strong>Aggregation behavior</strong>: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.</p>
+</blockquote>
 <h3 id="keys-logical-models">Keys (Logical Models)</h3>
 <h4 id="key-types">Key Types</h4>
 <p><strong>Natural or Surrogate (implementation characteristic):</strong>
@@ -239,23 +315,66 @@
 - Tag primary keys as <code>(PK)</code> in logical models
 - All other unique keys are considered alternate keys</p>
 <h4 id="key-naming-pattern">Key Naming Pattern</h4>
-<p>Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. However, keys are likely to include one of the standard key/identifier suffixes (see <a href="#standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</a>).</p>
+<p>Naming follows these patterns for readability, but metadata remains the source of truth for key roles. i.e Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. </p>
+<blockquote>
+<p><strong>Default:</strong> When source systems or business glossaries explicitly define key names, preserve their terminology even if it deviates from this convention. Whether a key is natural or surrogate, primary or alternate is captured as metadata</p>
+<p><strong>Missing name:</strong> Where a name hasn't been provided, then preference <code>ID</code> suffix with natural/business keys and <code>Key</code> suffix with surrogate warehouse keys. </p>
+<p><strong>Canonical Models Rule:</strong> In canonical/enterprise views, fields named \&lt;Entity&gt; <code>ID</code> must represent business-meaningful identifiers recognizable across domains, not warehouse-generated surrogates. Use \&lt;Entity&gt; <code>Key</code> for warehouse surrogate keys.</p>
+</blockquote>
+<p><strong>Scenario Example:</strong></p>
+<ul>
+<li><strong>Source system (CRM):</strong> Provides a natural business identifier for the customer <code>customer_number</code>.</li>
+<li><strong>Logical model:</strong> The identifier is named <code>Customer Number</code>.</li>
+<li><strong>Physical staging layer:</strong> The identifier is stored as the column <code>customer_number</code> to reflect source system (CRM).</li>
+<li><strong>Canonical view:</strong> Exposes <code>Customer Number</code> with metadata indicating it is a natural primary key (NPK).</li>
+<li><strong>Dimensional model (Customer dimension):</strong> Introduces a warehouse surrogate key called <code>Customer Key</code> (physical column <code>customer_key</code>) to support SCD Type 2.</li>
+<li><strong>Fact tables (e.g. Sales fact):</strong> Store a foreign key column <code>customer_key</code> that references the <code>Customer</code> dimension.</li>
+<li><strong>Domain contracts (other marts using the conformed dimension):</strong> A <code>Sales</code> mart and a <code>Billing</code> mart both join their fact tables to the conformed <code>Customer</code> dimension via <code>customer_key</code> internally. The dimension still carries the natural identifier as <code>Customer Number</code> (physical column <code>customer_number</code>), and this is what domains expose in their canonical contracts so downstream consumers see a consistent business identifier rather than the surrogate key.</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<p><em>Applying the "missing name" rule (when creating new identifiers):</em></p>
+<p><strong>Primary Keys:</strong></p>
+<ul>
+<li><code>Customer ID</code> (PK) — natural business identifier (when no source name exists)</li>
+<li><code>Customer Key</code> (PK) — surrogate warehouse key (e.g., auto-increment, UUID)</li>
+<li><code>Order ID</code> (PK) — natural business identifier (when no source name exists)</li>
+</ul>
+<p><em>Applying the "default" rule (preserving source system names):</em></p>
+<p><strong>Primary Keys from Source:</strong></p>
+<ul>
+<li><code>Customer Number</code> (PK) — natural business identifier from source system</li>
+<li><code>Account Code</code> (PK) — natural business identifier from source system</li>
+</ul>
+<p><strong>Foreign Keys:</strong></p>
+<p>FKs can point to either natural or surrogate PKs and that the FK naming follows the target’s business term where possible:</p>
+<ul>
+<li><code>Patient ID</code> (FK) — references <code>Patient ID</code> from another entity (the original key may be natural or surrogate)</li>
+<li><code>Customer Order Key</code> (FK) — references the surrogate composite key </li>
+</ul>
+<p><strong>Warehouse Dimension Keys:</strong></p>
+<ul>
+<li><code>Customer Key</code> — surrogate key for dimensional models (used for joins in the warehouse)</li>
+<li>Physical mapping: <code>customer_key</code></li>
+</ul>
+<p><strong>Other unique identifiers named according to business meaning:</strong></p>
+<ul>
+<li><code>Invoice Number</code> (PK) — natural business reference number for an invoice</li>
+<li><code>Medicare Number</code> (AK) — natural alternate key for a patient</li>
+<li><code>National Health Identifier</code> (AK) — natural alternate key for a patient</li>
+</ul>
+<p><strong>Composite Keys:</strong></p>
+<ul>
+<li>Our preference is to give composite keys their own distinct name if the modelling tools allow for it.</li>
+<li>Each component follows the same naming conventions (Default or Missing name rules apply)</li>
+<li>If the composite is a natural key, use <code>ID</code> suffix; if any single component is surrogate use <code>Key</code> suffix</li>
+</ul>
 <p>Examples:</p>
-<p><strong>Primary Keys:</strong>
-- <code>Customer ID</code> (PK) — may be natural or surrogate
-- <code>Order ID</code> (PK) — may be natural or surrogate</p>
-<p>Note: If a field is named \&lt;Entity&gt; ID in a canonical view, it must represent a business-meaningful identifier, not a generated surrogate.</p>
-<p><strong>Foreign Keys:</strong>
-- <code>Patient ID</code> (FK) — references <code>Patient ID</code> from another entity (the original key may be natural or surrogate)</p>
-<p><strong>Other unique identifiers are named according to business meaning:</strong>
-- <code>Invoice Number</code> (PK) — natural primary key
-- <code>Email Address</code> (AK) — natural alternate key
-- <code>Medicare Number</code> (AK) — natural alternate key
-- <code>National Health Identifier</code> (AK) — natural alternate key</p>
-<p><strong>Composite Keys:</strong>
-- The fact that they form a composite key is captured as metadata, not in naming
-- No special prefixes or suffixes are needed
-- Examples: <code>Flight Number</code> + <code>Departure Date</code> (PK) or <code>Account Number</code> + <code>Transaction Sequence</code> (PK)</p>
+<ul>
+<li><code>Flight ID</code> (Natural PK) = <code>Flight Number</code> + <code>Departure Date</code> — logical name for the natural composite (all components natural)</li>
+<li><code>Enrollment ID</code> (Natural PK) = <code>Student Number</code> + <code>Course Number</code> — logical name for natural composite (all components natural)</li>
+<li><code>Daily Product Sales Key</code> (Surrogate PK) = <code>Product ID</code> + <code>Date Key (from DW)</code> + <code>Transaction Key (from DW)</code> — logical name for surrogate composite (at least one surrogate component)</li>
+<li><code>Customer Order Key</code> (Surrogate PK) = <code>Customer ID</code> + <code>Order Key (from DW)</code> — logical name for surrogate composite (mixed: surrogate + natural)</li>
+</ul>
 <h3 id="diagrammatic-representation_1">Diagrammatic Representation</h3>
 <ul>
 <li>Consistent with conceptual models, with additional details to show attributes, key types</li>
@@ -263,6 +382,9 @@
 </ul>
 <hr />
 <h2 id="physical-models">Physical Models</h2>
+<blockquote>
+<p>For physical modelling framework and common formats, see <a href="../modelling_framework/#physical-data-models">Physical Models</a> in the Modelling Framework.</p>
+</blockquote>
 <p>Physical models represent implemented storage structures and must follow deterministic, platform-safe naming conventions.</p>
 <p><strong>Singular vs Plural Naming:</strong>
 - <strong>Default</strong>: Use singular nouns for table names (e.g., <code>customer</code>, <code>invoice</code>, <code>payment</code>)
@@ -294,7 +416,6 @@
 <li>Consistent with logical models</li>
 <li>Show relationships as lines and cardinality as crows foot or multiplicity notation.</li>
 </ul>
-<hr />
 <h4 id="databricks-conventions">Databricks Conventions</h4>
 <p>For detailed conventions and examples see <a href="../standards_and_conventions/#databricks">Databricks</a></p>
 <p><strong>Catalogs:</strong>
@@ -312,21 +433,19 @@
 - Views for logical abstraction
 - Names reflect business meaning, not source-system terminology</p>
 <p><strong>Columns:</strong>
-- Use <code>snake_case</code>
+- Use lowercase <code>snake_case</code>
 - No abbreviations unless standard</p>
-<p><strong>Keys:</strong>
-- Primary keys: <code>&lt;table&gt;_id</code>
-- Foreign keys: <code>&lt;referenced_table&gt;_id</code>
-- Warehouse surrogate keys: <code>&lt;entity&gt;_key</code></p>
 <hr />
 <h3 id="dimensional-models">Dimensional Models</h3>
+<blockquote>
+<p>For dimensional modelling framework, conformed dimensions, and dimensional bus matrix, see <a href="../modelling_framework/#dimensional-kimball-model">Dimensional (Kimball) Model</a> in the Modelling Framework.</p>
+</blockquote>
 <p>For detailed conventions and examples including staging models see the Information Marts sections of <a href="../standards_and_conventions/#schema-and-object-conventions">Schema and Object Conventions</a></p>
 <p><strong>Naming:</strong>
-- Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>)
+- Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>) (pluralisation here is an exception in naming)
 - Dimension tables prefixed with <code>dim_</code> and use <strong>singular</strong> entity names (e.g., <code>dim_customer</code>, <code>dim_date</code>)
 - Warehouse dimension keys: <code>&lt;entity&gt;_key</code> (the surrogate key used for joins in the warehouse)
 - Business keys: <code>&lt;entity&gt;_id</code> (the identifier from the source system)</p>
-<p><strong>Rationale:</strong> Fact tables contain multiple rows of events/transactions (plural), while dimension tables represent single entity instances (singular).</p>
 <p><strong>Gold Layer Examples:</strong></p>
 <p><em>Staging:</em>
 - <code>intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</code>
@@ -350,15 +469,15 @@
 </thead>
 <tbody>
 <tr>
-<td><code>start_at</code></td>
+<td><code>effective_from_datetime</code></td>
 <td>Timestamp when this record version became effective</td>
 </tr>
 <tr>
-<td><code>end_at</code></td>
+<td><code>effective_to_datetime</code></td>
 <td>Timestamp when this record version expired (NULL for current records)</td>
 </tr>
 <tr>
-<td><code>updated_at</code></td>
+<td><code>updated_datetime</code></td>
 <td>Timestamp from the source system indicating when the record was last modified</td>
 </tr>
 </tbody>
@@ -394,6 +513,113 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Measures and Metrics:</strong></p>
+<ul>
+<li>Align to logical model naming but apply lowercase snake_case (e.g., invoice_amount)</li>
+</ul>
+<hr />
+<h3 id="reference-data">Reference Data</h3>
+<blockquote>
+<p>For reference data and master data framework, logical representation, and physical implementation patterns, see <a href="../modelling_framework/#master-data-and-reference-data">Master Data and Reference Data</a> in the Modelling Framework.</p>
+</blockquote>
+<p>Reference data plays a critical role in conformance by providing standardised values that enable mapping of source-specific codes to canonical enterprise definitions.</p>
+<h4 id="logical-modelling">Logical Modelling</h4>
+<p>Reference entities contain:
+- Natural keys (e.g., Country Code, Product Type Code)
+- Code and description attributes
+- Optional: effective dates, display sequences, parent references (hierarchies), business metadata
+- One-to-many relationships to domain entities</p>
+<p><strong>Example: Country Code Reference Entity</strong></p>
+<table>
+<thead>
+<tr>
+<th>country_code</th>
+<th>country_name</th>
+<th>iso_code_3</th>
+<th>display_sequence</th>
+<th>effective_from_date</th>
+<th>effective_to_date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AU</td>
+<td>Australia</td>
+<td>AUS</td>
+<td>10</td>
+<td>2020-01-01</td>
+<td>9999-12-31</td>
+</tr>
+<tr>
+<td>GB</td>
+<td>United Kingdom</td>
+<td>GBR</td>
+<td>20</td>
+<td>2020-01-01</td>
+<td>9999-12-31</td>
+</tr>
+<tr>
+<td>US</td>
+<td>United States</td>
+<td>USA</td>
+<td>30</td>
+<td>2020-01-01</td>
+<td>9999-12-31</td>
+</tr>
+<tr>
+<td>NZ</td>
+<td>New Zealand</td>
+<td>NZL</td>
+<td>40</td>
+<td>2020-01-01</td>
+<td>9999-12-31</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>Canada</td>
+<td>CAN</td>
+<td>50</td>
+<td>2020-01-01</td>
+<td>9999-12-31</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: Additional standard attributes (audit columns: created_timestamp, created_by, modified_timestamp, modified_by; optional: parent_code, version, source_system_id) would be included in the physical implementation.</em></p>
+<h4 id="physical-implementation">Physical Implementation</h4>
+<p>Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.</p>
+<ul>
+<li>
+<p><strong>Reference tables</strong> are stored in Bronze/ODS layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a></p>
+<pre><code>- Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
+- Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel}}`
+
+- e.g: intuitas_corporate.ref.account_code
+</code></pre>
+</li>
+<li>
+<p>Effectivity: <code>effective_from_date</code>, <code>effective_to_date</code>, (<code>is_active</code> is derivable)</p>
+</li>
+<li>Audit: <code>created_timestamp</code>, <code>created_by</code>, <code>modified_timestamp</code>, <code>modified_by</code></li>
+<li>Hierarchy: <code>parent_code</code></li>
+<li>Business: <code>description</code></li>
+<li>Technical: <code>version</code>, <code>source_system_id</code></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<ul>
+<li><strong>Mapping logic</strong> is applied in Silver/EDW layer staging models during transformation for domain/enterprise-wide application.</li>
+<li><strong>Consumption:</strong> Post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).</li>
+<li><strong>As dimension attributes:</strong> Reference values embedded directly in dimension tables (e.g., Product Type Code/Description in Product dimension) for filtering and grouping.</li>
+</ul>
+<p><strong>Change tracking:</strong></p>
+<ul>
+<li>Implement Type 1, 2, 4, or 6 slowly changing dimension strategies based on business requirements for point-in-time accuracy. When reference data changes frequently or has many attributes. </li>
+<li>Consider using mini-dimensions/outriggers—separate dimension tables linked via foreign keys—to efficiently track history without excessive row growth in the main dimension.</li>
+</ul>
+<p><strong>Recommended Practices:</strong></p>
+<ul>
+<li>Store codes and descriptions in fact tables only when necessary for performance</li>
+<li>Prefer dimension lookups to maintain single source of truth</li>
+</ul>
 <hr />
 <h2 id="standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</h2>
 <h3 id="identity-keys">Identity &amp; Keys</h3>
@@ -494,6 +720,12 @@
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
+<ul>
+<li>Business Name: <code>Order DateTime</code></li>
+<li>Physical Name (UTC, implied): <code>order_datetime</code></li>
+<li>Physical Name (Local timezone explicit): <code>order_datetime_aest</code></li>
+</ul>
 <h3 id="state-classification">State &amp; Classification</h3>
 <table>
 <thead>
@@ -703,38 +935,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="examples">Examples</h2>
-<h3 id="keys-business-facing">Keys (Business-facing)</h3>
-<ul>
-<li>Primary Business ID: <code>Customer ID</code> (PK)</li>
-<li>Business Reference: <code>Invoice Number</code> (could be PK or AK)</li>
-<li>Alternate Identifier: <code>National Identifier</code> (AK)</li>
-<li>Alternate Identifier: <code>Email Address</code> (AK)</li>
-<li>Warehouse Dimension Key: <code>Customer Key</code> (dimensional models)</li>
-<li>Physical Mapping: <code>customer_id</code>, <code>customer_key</code></li>
-</ul>
-<p>Note: Whether a key is natural or surrogate is metadata, not encoded in the name.</p>
-<h3 id="date-and-time">Date and Time</h3>
-<ul>
-<li>Business Name: <code>Order DateTime</code></li>
-<li>Physical Name (UTC): <code>order_datetime_utc</code></li>
-<li>Physical Name (Local): <code>order_datetime_aest</code></li>
-</ul>
-<h3 id="units">Units</h3>
-<p>There are two options for handling units:</p>
-<p><strong>Option 1: Embed the unit in the physical name</strong>
-- Business Name: <code>Weight</code> → Physical Name: <code>weight_kg</code>
-- Business Name: <code>Temperature</code> → Physical Name: <code>temperature_c</code></p>
-<p><strong>Option 2: Separate unit from the value</strong>
-- Measure Value: <code>measure_value</code>
-- Measure Unit: <code>measure_unit_code</code></p>
-<p>Example: Instead of <code>weight_kg</code>, use <code>weight</code> + <code>weight_unit_code</code> where the unit code might be 'kg', 'lb', etc.</p>
-<h3 id="events-and-transactions_1">Events and Transactions</h3>
-<ul>
-<li>Business Term: <code>Payment Received</code> → Model Name: <code>Payment Received</code> → Physical Name: <code>payment_received</code></li>
-<li>Business Term: <code>Invoice Issued</code> → Model Name: <code>Invoice Issued</code> → Physical Name: <code>invoice_issued</code></li>
-</ul></div>
+<hr /></div>
             </div>
         </div>
 
