@@ -4,7 +4,9 @@ nav:
   - Level 0: level_0.md
   - Level 1: level_1.md
   - Level 2: level_2.md
-  - Standards: standards_and_conventions.md
+  - Modelling Framework: modelling_framework.md
+  - Modelling Standards: modelling_standards_and_conventions.md
+  - Standards and Conventions: standards_and_conventions.md
   - About: about.md
 
 theme: 

@@ -264,7 +264,7 @@ Semantic layers depend on domain and canonical models for base entities but esta
 
 #### Measures and Metrics
 
-> For measures and metrics naming standards and suffix conventions, see [Measures and Metrics](modelling_standards_and_conventions.md#measures-and-metrics) and [Quantities & Measures](modelling_standards_and_conventions.md#quantities--measures) in Modelling Standards and Conventions.
+> For measures and metrics naming standards and suffix conventions, see [Measures and Metrics](modelling_standards_and_conventions.md#measures-and-metrics) and [Quantities & Measures](modelling_standards_and_conventions.md#quantities-measures) in Modelling Standards and Conventions.
 
 **Measures** and **metrics** are first-class semantic layer concepts that quantify business performance.
 

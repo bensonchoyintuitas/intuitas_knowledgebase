@@ -19,32 +19,27 @@
     - [Relationship Directionality](modelling_standards_and_conventions.md#relationship-directionality)
     - [Relationship Cardinality](modelling_standards_and_conventions.md#relationship-cardinality)
   - [Conceptual Models](modelling_standards_and_conventions.md#conceptual-models)
-    - [Entities](modelling_standards_and_conventions.md#entities)
-    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation)
+    - [Entities](modelling_standards_and_conventions.md#entities-conceptual)
+    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation-conceptual)
   - [Logical Models](modelling_standards_and_conventions.md#logical-models)
-    - [Entities](modelling_standards_and_conventions.md#entities-1)
+    - [Entities](modelling_standards_and_conventions.md#entities-logical)
     - [Attributes](modelling_standards_and_conventions.md#attributes)
     - [Measures and Metrics](modelling_standards_and_conventions.md#measures-and-metrics)
     - [Keys (Logical Models)](modelling_standards_and_conventions.md#keys-logical-models)
-    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation-1)
+    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation-logical)
   - [Physical Models](modelling_standards_and_conventions.md#physical-models)
     - [Relational Structures](modelling_standards_and_conventions.md#relational-structures)
     - [Databricks Conventions](modelling_standards_and_conventions.md#databricks-conventions)
     - [Dimensional Models](modelling_standards_and_conventions.md#dimensional-models)
     - [Reference Data](modelling_standards_and_conventions.md#reference-data)
   - [Standard Suffix and Prefix Inventory](modelling_standards_and_conventions.md#standard-suffix-and-prefix-inventory)
-    - [Identity & Keys](modelling_standards_and_conventions.md#identity--keys)
+    - [Identity & Keys](modelling_standards_and_conventions.md#identity-keys)
     - [Temporal Concepts](modelling_standards_and_conventions.md#temporal-concepts)
-    - [State & Classification](modelling_standards_and_conventions.md#state--classification)
-    - [Quantities & Measures](modelling_standards_and_conventions.md#quantities--measures)
+    - [State & Classification](modelling_standards_and_conventions.md#state-classification)
+    - [Quantities & Measures](modelling_standards_and_conventions.md#quantities-measures)
     - [Boolean Indicators (Prefix Convention)](modelling_standards_and_conventions.md#boolean-indicators-prefix-convention)
-    - [Audit & Control](modelling_standards_and_conventions.md#audit--control)
+    - [Audit & Control](modelling_standards_and_conventions.md#audit-control)
     - [Summary of Naming Rules](modelling_standards_and_conventions.md#summary-of-naming-rules)
-  - [Examples](modelling_standards_and_conventions.md#examples)
-    - [Keys](modelling_standards_and_conventions.md#keys)
-    - [Date and Time](modelling_standards_and_conventions.md#date-and-time)
-    - [Units](modelling_standards_and_conventions.md#units)
-    - [Events and Transactions (Examples)](modelling_standards_and_conventions.md#events-and-transactions-examples)
 
 ---
 
@@ -144,12 +139,12 @@ There are two options:
 
 > For conceptual modelling framework and principles, see [Conceptual Models](modelling_framework.md#conceptual-information-models) in the Modelling Framework.
 
-### Entities
+### Entities (Conceptual)
 
 - Business-Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
 - Optimised for clarity and business communication
 
-### Diagrammatic Representation
+### Diagrammatic Representation (Conceptual)
 
 - Boxes represent business concepts (entities)
 - Lines represent relationships
@@ -173,7 +168,7 @@ There are two options:
 
 > For logical modelling framework and principles, see [Logical Models](modelling_framework.md#logical-information-models) in the Modelling Framework.
 
-### Entities
+### Entities (Logical)
 
 - Use the same format as conceptual models
 - Business-Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
@@ -192,7 +187,7 @@ There are two options:
 
 - Use Business-Facing format with capitalised first letters and spaces (e.g., `Invoice Amount`, `Item Count`)
 - Make names consistent with related entities and attributes
-- Use semantic suffixes [Quantities & Measures](#quantities--measures) in the Standard Suffix Inventory.
+- Use semantic suffixes [Quantities & Measures](#quantities-measures) in the Standard Suffix Inventory.
 
 **Example:**
 
@@ -200,6 +195,7 @@ There are two options:
 - **Metric:** `Average Order Value` — calculated as `Total Sales Amount / Order Count`
 
 > **Important:** 
+
 > - **Keep metric names dimension-agnostic**: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use `Sales Amount` not `Sales Amount by Product by Time`). 
 > - **Exception—Intrinsic dimensions**: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., `Customer Lifetime Value` is calculated at customer grain by definition; `Monthly Revenue Growth Rate` compares month-to-month by definition).
 > - **Temporal metrics**: Include time window qualifiers when the period defines the calculation logic (e.g., `Year-to-Date Sales Amount` accumulates from year start; `90-Day Rolling Average` uses a 90-day window).
@@ -293,7 +289,7 @@ Examples:
 
 
 
-### Diagrammatic Representation
+### Diagrammatic Representation (Logical)
 
 - Consistent with conceptual models, with additional details to show attributes, key types
 - Show relationships as lines and cardinality as crows foot or multiplicity notation.
@@ -587,4 +583,3 @@ Suffixes encode **meaning**, not technical data type or implementation details.
 | Boolean indicators | `Is Active`, `Has Consent` | `is_active`, `has_consent` |
 
 ---
-
