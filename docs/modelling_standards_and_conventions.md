@@ -71,6 +71,7 @@
 - The business glossary is the semantic source of truth
 
 **Example:**
+
 - Business Name: `Order Placed`
 - Internal Identifier: `GUID-1234-5678`
 - Physical Name: `order_placed`
@@ -96,6 +97,7 @@ Choose the approach that best represents how the business actually thinks and wo
 - Direction should be clear
 
 **Examples:**
+
 - `Customer places Order`
 - `Policy covers Claim`
 - `Doctor refers Patient`
@@ -104,6 +106,7 @@ Choose the approach that best represents how the business actually thinks and wo
 - `Supplier delivers Product`
 
 **Avoid:**
+
 - `has_fk`
 - `references`
 - `linked to`
@@ -118,16 +121,20 @@ Choose the approach that best represents how the business actually thinks and wo
 
 ### Relationship Cardinality
 There are two options:
+
 - Use crow's foot notation (shows 'one' with a line, 'many' with a branching crow's foot; commonly denotes relationships such as one-to-many, many-to-many, etc.)
 - Use multiplicity notation (explicitly labels relationship ends with numbers or ranges, e.g., '0..1', '1', '0..*', '1..*', indicating how many entities participate in the relationship)
 
 **Single direction (preferred):**
+
 - `Customer places Order` ✓
 
 **Avoid passive inversion (same relationship, just reversed grammar):**
+
 - `Order is placed by Customer` ✗
 
 **Separate relationships (different business concepts):**
+
 - `Customer places Order` (ordering action)
 - `Customer is billed for Order` (financial relationship)
 
@@ -148,11 +155,13 @@ There are two options:
 - Lines represent relationships
 
 **Show:**
+
 - Core concepts
 - Key relationships
 - Major business rules
 
 **Do not show:**
+
 - Keys
 - Data types
 - Technical constraints
@@ -186,6 +195,7 @@ There are two options:
 - Use semantic suffixes [Quantities & Measures](#quantities--measures) in the Standard Suffix Inventory.
 
 **Example:**
+
 - **Measure:** `Total Sales Amount` — aggregated sum of sales transactions
 - **Metric:** `Average Order Value` — calculated as `Total Sales Amount / Order Count`
 
@@ -200,11 +210,13 @@ There are two options:
 #### Key Types
 
 **Natural or Surrogate (implementation characteristic):**
+
 - **Natural Key**: Uses a real-world business identifier (e.g., `Invoice Number`, `Medicare Number`)
 - **Surrogate Key**: System-generated identifier (e.g., auto-increment, UUID)
 - This is a metadata property, not encoded in the name
 
 **Primary or Alternate (role in the model):**
+
 - **Primary Key (PK)**: The chosen unique identifier for the entity
 - **Alternate Key (AK)**: Any other unique identifier
 - Tag primary keys as `(PK)` in logical models
@@ -282,6 +294,7 @@ Examples:
 
 
 ### Diagrammatic Representation
+
 - Consistent with conceptual models, with additional details to show attributes, key types
 - Show relationships as lines and cardinality as crows foot or multiplicity notation.
 
@@ -295,6 +308,7 @@ Examples:
 Physical models represent implemented storage structures and must follow deterministic, platform-safe naming conventions.
 
 **Singular vs Plural Naming:**
+
 - **Default**: Use singular nouns for table names (e.g., `customer`, `invoice`, `payment`)
 - **Exception - Dimensional Facts**: Use plural nouns for fact tables (e.g., `fact_payments`, `fact_orders`)
 - **Dimensional Dimensions**: Use singular nouns (e.g., `dim_customer`, `dim_product`)
@@ -306,6 +320,7 @@ Physical models represent implemented storage structures and must follow determi
 All physical objects must use **lowercase with underscores** (`snake_case`).
 
 **General Rules:**
+
 - No mixed case
 - No spaces
 - Use singular table names (except for dimensional model facts - see below)
@@ -313,11 +328,13 @@ All physical objects must use **lowercase with underscores** (`snake_case`).
 - Avoid source-system naming where possible
 
 **Tables:**
+
 - Express business meaning
 - Use prefixes where appropriate (e.g., `fact_`, `dim_`)
 - Examples: `customer`, `invoice`, `fact_orders` (dimensional fact), `dim_patient` (dimensional dimension)
 
 **Columns:**
+
 - Map directly from logical attributes
 - Use semantic names
 - Do not encode data types or storage formats
@@ -336,23 +353,27 @@ All physical objects must use **lowercase with underscores** (`snake_case`).
 For detailed conventions and examples see [Databricks](standards_and_conventions.md#databricks)
 
 **Catalogs:**
+
 - Catalogs represent domain-level scope (e.g., `intuitas_engineering_dev`, `intuitas_corporate_dev`)
 - May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls
 - Naming is lowercase, underscore-separated, and meaningful
 - Pattern: `{domain_name}{_environment}` (e.g., `intuitas_corporate_dev`)
 
 **Schemas:**
+
 - Schemas represent layers, stages, zones, or source systems within a catalog
 - Use double underscores (`__`) as separators for schema components
 - Pattern: `{stage}__{zone}__{source_system}__{schema}` (e.g., `bronze__ods__fhirhouse__dbo`)
 - Full example: `intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow`
 
 **Tables and Views:**
+
 - Tables for persisted data
 - Views for logical abstraction
 - Names reflect business meaning, not source-system terminology
 
 **Columns:**
+
 - Use lowercase `snake_case`
 - No abbreviations unless standard
 
@@ -368,6 +389,7 @@ For detailed conventions and examples see [Databricks](standards_and_conventions
 For detailed conventions and examples including staging models see the Information Marts sections of [Schema and Object Conventions](standards_and_conventions.md#schema-and-object-conventions)
 
 **Naming:**
+
 - Fact tables prefixed with `fact_` and use **plural** entity names (e.g., `fact_payments`, `fact_orders`) (pluralisation here is an exception in naming)
 - Dimension tables prefixed with `dim_` and use **singular** entity names (e.g., `dim_customer`, `dim_date`)
 - Warehouse dimension keys: `<entity>_key` (the surrogate key used for joins in the warehouse)
@@ -376,17 +398,20 @@ For detailed conventions and examples including staging models see the Informati
 **Gold Layer Examples:**
 
 *Staging:*
+
 - `intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order`
 - `intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order`
 - `stg__dim_account__01_dedupe.sql`
 
 *Information Marts:*
+
 - `intuitas_corporate_dev.mart.fact_late_payments` — fact table
 - `intuitas_corporate_dev.mart.dim_customer` — dimension table
 - `mart__dim_account.sql` — dbt model file
 - `mart__dim_date.sql` — dbt model file
 
 **Keys:**
+
 - `customer_key` — warehouse dimension key (surrogate key for joins)
 - `customer_id` — business identifier from source system
 
@@ -423,6 +448,7 @@ Reference data plays a critical role in conformance by providing standardised va
 #### Logical Modelling
 
 Reference entities contain:
+
 - Natural keys (e.g., Country Code, Product Type Code)
 - Code and description attributes
 - Optional: effective dates, display sequences, parent references (hierarchies), business metadata

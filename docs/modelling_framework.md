@@ -10,16 +10,19 @@ This resource provides a lightweight framework for describing and developing dat
 ## Table of Contents
 
 **Core Model Types**
+
 - [Conceptual (Information) Models](modelling_framework.md#conceptual-information-models)
 - [Logical (Information) Models](modelling_framework.md#logical-information-models)
 - [Physical (Data) Models](modelling_framework.md#physical-data-models)
 
 **Enterprise Context**
+
 - [Domain Topology](modelling_framework.md#domain-topology)
 - [Domain Models](modelling_framework.md#domain-models)
 - [Canonical Models](modelling_framework.md#canonical-models)
 
 **Specialised Model Types**
+
 - [Business Process Models](modelling_framework.md#business-process-models)
 - [Data Warehouse Models](modelling_framework.md#data-warehouse-models)
   - [Data Vault Model](modelling_framework.md#data-vault-model)
@@ -47,11 +50,13 @@ We distinguish between business information design and technical data implementa
 Conceptual models represent business meaning without implementation concerns.
 
 **What to Include:**
+
 - Core business concepts (entities) that are identifiable, meaningful, and properly named
 - Key relationships between concepts
 - High-level business rules
 
 **What to Exclude:**
+
 - Primary or surrogate keys
 - Data types
 - Precise cardinality (beyond "one" vs "many")
@@ -61,11 +66,13 @@ Conceptual models represent business meaning without implementation concerns.
 #### Subtypes and Supertypes
 
 **Choosing the Right Level:**
+
 - **Too abstract:** Not practical (e.g., "Thing")
 - **Too granular:** Should be attributes instead (e.g., "Customer Type")
 - **Just right:** Meaningful specialisations with distinct data requirements (e.g., "Individual Customer" vs "Corporate Customer")
 
 **Subtype Rules:**
+
 - **Mutually exclusive:** Each instance belongs to one subtype only
 - **Collectively exhaustive:** Desirable but flexible—models evolve over time
 
@@ -79,6 +86,7 @@ Conceptual models represent business meaning without implementation concerns.
 Logical models extend conceptual models with structure and precision while remaining technology-independent.
 
 **What to Include:**
+
 - **Keys and identifiers:** Natural and alternate keys
 - **Cardinality:** Precise relationships (1:1, 1:M, M:N)
 - **Optionality:** Mandatory vs optional relationships and attributes
@@ -130,10 +138,12 @@ A **Domain Topology** maps domains across the enterprise and their relationships
 Under Domain-Centric Design, domains are authoritative for their information definitions. They own concept meanings, define lifecycle rules, and act as the system of semantic truth for their scope.
 
 A **Domain Model** describes business concepts relevant to a domain, including:
+
 - **Business Objects:** Operational entities with identity, lifecycle, and direct participation in business processes (e.g., Patient, Order, Product)
 - **Supporting Concepts:** Qualities, rules, conditions, and classifications (e.g., Risk, Compliance, Status)
 
 **Relationship to Business Processes:**
+
 - Domain Models define **WHAT** (objects, attributes, relationships)
 - [Business Process Models](#business-process-models) define **HOW** (creation, transformation, consumption)
 - Processes reveal which objects matter, expose lifecycles, uncover rules, and clarify business language
@@ -148,16 +158,19 @@ A **Domain Model** describes business concepts relevant to a domain, including:
 Canonical models represent authoritative, agreed-upon definitions for concepts standardised across domains and systems (e.g., APIs, interoperability, conformed dimensions).
 
 **Characteristics:**
+
 - Conceptual and logical at minimum; physical where applicable
 - Represent standardised information contracts
 - Support interoperability and consistent interpretation
 
 **Use canonical models where:**
+
 - Multiple domains integrate
 - Semantic consistency is required
 - Cross-domain processes exchange information
 
 **Role in Cross-Domain Processes:**
+
 - Define integration points and standardised entities (e.g., canonical "Customer")
 - Enable process flows across domains (e.g., Sales → Fulfilment → Finance)
 - Document data contracts at each handoff point
@@ -193,6 +206,7 @@ Data Vault models centre on business concepts and associations from Enterprise/D
 > For dimensional model naming standards, SCD columns, and key conventions, see [Dimensional Models](modelling_standards_and_conventions.md#dimensional-models) in Modelling Standards and Conventions.
 
 Kimball Dimensional Modelling creates **Information Marts** using **Star Schemas**:
+
 - **Fact tables:** Quantitative metrics/events from business processes (sales, shipments, payments)
 - **Dimension tables:** Descriptive context (customer, product, date, region)
 
@@ -200,6 +214,7 @@ Intentionally denormalised for query performance and user-friendly analysis.
 
 **Conformed Dimensions:**
 Conformed dimensions are physical implementations of [canonical models](#canonical-models) in Dimensional models:
+
 - Ensure consistent definitions across fact tables and marts (e.g., shared Customer dimension across Sales, Support, Marketing)
 - Enable cross-process analysis and drill-across queries
 - Achieve "single version of truth" across analytical systems
@@ -209,11 +224,13 @@ Conformed dimensions are physical implementations of [canonical models](#canonic
 A **Bus Matrix** maps intersections between business processes (facts) and dimensions for scalable warehouse design.
 
 **Structure:**
+
 - Rows: Business processes (Orders, Shipments, Payments)
 - Columns: Dimensions (Customer, Product, Time, Geography)
 - Cells: ✓ indicates dimension usage
 
 **Benefits:**
+
 - Identifies common/conformed dimensions for consistency
 - Supports modular, independent implementation
 - Enables cross-process analytics
@@ -235,6 +252,7 @@ A **Bus Matrix** maps intersections between business processes (facts) and dimen
 Semantic layers are business-oriented abstraction layers that present data in business terms rather than physical structures.
 
 **Purpose:**
+
 - Translate physical structures into business concepts
 - Encapsulate business logic, measures, and calculations
 - Provide consistent metric definitions for analytics
@@ -251,16 +269,19 @@ Semantic layers depend on domain and canonical models for base entities but esta
 **Measures** and **metrics** are first-class semantic layer concepts that quantify business performance.
 
 **Measures:** Numeric values directly aggregated from data (e.g., `Sales Amount`, `Bed Days`)
+
 - Derived from fact events/transactions at a clear grain (per encounter, per day)
 - Aggregated using simple functions (SUM, COUNT, AVG)
 - Sensitive to filter context (time, domain, segment)
 
 **Metrics:** Business expressions combining measures (e.g., `Readmission Rate`, `Gross Margin %`)
+
 - Express performance or quality vs raw volume
 - Often use complex logic (conditionals, windows, exclusions)
 - Require clear definitions and assumptions
 
 **Additivity:** Classify measures by aggregation behaviour:
+
 - *Additive:* Sum across all dimensions (e.g., `Sales Amount`)
 - *Semi-additive:* Sum across some dimensions only (e.g., `Inventory Level` - products yes, time no)
 - *Non-additive:* Cannot sum meaningfully (e.g., ratios, rates)
@@ -269,6 +290,7 @@ Metrics inherit these behaviours. Record additivity as metadata to constrain agg
 
 **Logical Definition:**
 Measures/metrics should be defined against domain and canonical models and documented in the business glossary with:
+
 - Name, description, owning domain, stakeholders
 - Formal definition and calculation rule
 - Input entities, attributes, filters
@@ -284,12 +306,14 @@ Measures/metrics should be defined against domain and canonical models and docum
 **Placement Principles:**
 
 *Favour upstream (mart / dbt layer) when:*
+
 - Reused across dashboards/domains
 - Enterprise KPI or regulatory use
 - Complex business rules requiring testing
 - Needs governance and discoverability
 
 *Allow BI-layer-only when:*
+
 - Experimental or single-report scope
 - Simple presentation variant
 - Clearly not the system of record
@@ -297,6 +321,7 @@ Measures/metrics should be defined against domain and canonical models and docum
 > **Example:** Base measure `Total Encounters` defined in dbt. Power BI DAX adds interactive filter-aware metric: `Readmission Rate (Current Filters) = DIVIDE([Readmission Count], [Total Encounters])`
 
 **Governance:**
+
 - Govern like reference data with review/approval process
 - Retain effective dates and versions
 - Notify consumers of changes
@@ -308,11 +333,13 @@ Measures/metrics should be defined against domain and canonical models and docum
 > For reference data naming standards, logical modelling, and physical implementation conventions, see [Reference Data](modelling_standards_and_conventions.md#reference-data) in Modelling Standards and Conventions.
 
 **Master Data:** Core business entities critical to operations and shared across systems (e.g., Patient, Product, Provider, Location)
+
 - Managed as authoritative "single source of truth"
 - Subject to governance and quality processes
 - Forms backbone of conformed dimensions in data warehousing
 
 **Reference Data:** Stable, standardised values for categorisation and validation (e.g., Status codes, Country codes, Product Categories)
+
 - May be externally standardised (ISO) or internally maintained
 - Can be simple (code/name pairs) or hierarchical (see [Hierarchies](#hierarchies))
 - Managed enterprise-wide with optional source-specific variants
@@ -329,18 +356,21 @@ Physical form depends on analytical use, query patterns, history requirements, c
 **Physical Forms:**
 
 **1. Simple Lookup Tables**
+
 - Basic code-to-description translation
 - Minimal attributes (code, name, description)
 - No history tracking
 - Example: `ref_status_code`, `ref_currency`
 
 **2. Dimension Tables (Star Schema)**
+
 - Rich attributes and hierarchies
 - History tracking via SCD (Slowly Changing Dimensions)
 - Used for slicing, filtering, grouping
 - Example: `dim_product`, `dim_provider`, `dim_location`
 
 **3. Embedded in Fact Tables (Denormalised)**
+
 - Attributes embedded directly for performance
 - Trades storage for speed (avoids joins)
 - Example: Fact includes `status_code`, `status_name` columns
@@ -353,6 +383,7 @@ Physical form depends on analytical use, query patterns, history requirements, c
 Hierarchies are structured parent-child relationships representing natural groupings and aggregation levels.
 
 **Across Model Types:**
+
 - **Conceptual/Logical:** Business classifications and organisational structures (product categories, regions, org units)
 - **Physical:** Implemented via self-referencing foreign keys, hierarchy tables, or path encodings
 - **Dimensional:** Enable drill-down/roll-up analysis (Day → Month → Quarter → Year)
@@ -362,11 +393,13 @@ Hierarchies are structured parent-child relationships representing natural group
 #### Modelling Hierarchies: Subtypes vs. Relationships
 
 **Use Subtypes for "Is A" Taxonomies:**
+
 - Type distinctions with mutually exclusive subtypes
 - Example: Individual Customer *is a* Customer; Inpatient Encounter *is an* Encounter
 - Primary classification dimension for fundamentally different variants
 
 **Use Relationships for Other Hierarchies:**
+
 - Compositional (Part Of), categorical (Belongs To), organisational (Reports To)
 - Support multiple concurrent hierarchies
 - Example: Location entities (Room, Ward, Building, Campus) related via "Part Of"
