@@ -194,7 +194,7 @@ There are two options:
 - **Measure:** `Total Sales Amount` — aggregated sum of sales transactions
 - **Metric:** `Average Order Value` — calculated as `Total Sales Amount / Order Count`
 
-> **Important:** 
+**Important:** 
 
 - **Keep metric names dimension-agnostic**: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use `Sales Amount` not `Sales Amount by Product by Time`). 
 - **Exception—Intrinsic dimensions**: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., `Customer Lifetime Value` is calculated at customer grain by definition; `Monthly Revenue Growth Rate` compares month-to-month by definition).
