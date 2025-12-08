@@ -437,13 +437,12 @@ From a modelling perspective, semantic measures and metrics should be:
   - Validity period and version history (when the definition changed)  
   - Related KPIs, dashboards, and reports  
 
-Physically, measures and metrics can appear in multiple layers while remaining **logically consistent**:
-
+Physically, measures and metrics can appear in multiple layers while remaining **logically consistent**. Care must be taken to respect additive, semi-additive, and non-additive behaviours when aggregating them, especially as platforms differ in default aggregation behaviour:
 
 
 - **Information marts / fact tables**:
   - Base measures materialised as columns (e.g., `amount`, `quantity`, `length_of_stay_days`)  
-  - Sometimes pre-aggregated metrics for performance, with careful documentation  
+  - Sometimes pre-aggregated metrics both for performance and to enforce correct additivity behaviour, with careful documentation  
 
 - **dbt models and semantic layer**:
   - Base measures defined in dbt models and exposed via a dbt Semantic Layer or similar metadata  
