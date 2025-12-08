@@ -4,10 +4,11 @@
 
 > Updated 5/12/2025
 
+> **Related Documents:** This document focuses on naming conventions and standards. For platform-specific implementation patterns and architectural details, see [Standards and Conventions](standards_and_conventions.md). For conceptual framework and model types, see [Modelling Framework](modelling_framework.md).
+
 ---
 
 ## Table of Contents
----
 
 
   - [General Naming Conventions](#general-naming-conventions)
@@ -39,7 +40,7 @@
     - [Audit & Control](#audit--control)
     - [Summary of Naming Rules](#summary-of-naming-rules)
   - [Examples](#examples)
-    - [Keys (Business-facing)](#keys-business-facing)
+    - [Keys](#keys)
     - [Date and Time](#date-and-time)
     - [Units](#units)
     - [Events and Transactions (Examples)](#events-and-transactions-examples)
@@ -58,7 +59,7 @@
 - Plurality is allowed only in dimensional fact tables (e.g., `fact_payments`). Dimension tables use singular (e.g., `dim_customer`)
 - Avoid system-specific or technical terminology
 - Avoid abbreviations unless universally understood
-- Be specific: add context where needed (e.g., `AdminUser` vs `User`)
+- Be specific: add context where needed (e.g., `Admin User` vs `User`)
 
 ### Business Names vs Physical Names
 
@@ -135,7 +136,7 @@ There are two options:
 
 ### Entities
 
-- Business Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
+- Business-Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
 - Optimised for clarity and business communication
 
 ### Diagrammatic Representation
@@ -161,15 +162,22 @@ There are two options:
 ### Entities
 
 - Use the same format as conceptual models
-- Business Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
+- Business-Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
 - Optimised for clarity and business communication
 
 ### Attributes
 
-- Use Business Facing format with capitalised first letters and spaces
+- Use Business-Facing format with capitalised first letters and spaces
 - Names must be business-meaningful
 - Avoid embedding data types in names
 - Prefer semantic names over technical ones
+
+### Measures and Metrics
+
+- Use Business-Facing format with capitalised first letters and spaces (e.g., `Invoice Amount`, `Item Count`)
+- Make names consistent with related entities and attributes
+- Use semantic suffixes [Quantities & Measures](#quantities--measures) in the Standard Suffix Inventory.
+
 
 ### Keys (Logical Models)
 
@@ -256,9 +264,9 @@ All physical objects must use **lowercase with underscores** (`snake_case`).
 - Examples: `customer_id`, `invoice_number`, `order_datetime`, `total_amount`, `is_active`
 
 #### Diagrammatic Representation
+
 - Consistent with logical models
 - Show relationships as lines and cardinality as crows foot or multiplicity notation.
----
 
 #### Databricks Conventions
 
@@ -297,12 +305,10 @@ For detailed conventions and examples see [Databricks](standards_and_conventions
 For detailed conventions and examples including staging models see the Information Marts sections of [Schema and Object Conventions](standards_and_conventions.md#schema-and-object-conventions)
 
 **Naming:**
-- Fact tables prefixed with `fact_` and use **plural** entity names (e.g., `fact_payments`, `fact_orders`)
+- Fact tables prefixed with `fact_` and use **plural** entity names (e.g., `fact_payments`, `fact_orders`) (pluralisation here is an exception in naming)
 - Dimension tables prefixed with `dim_` and use **singular** entity names (e.g., `dim_customer`, `dim_date`)
 - Warehouse dimension keys: `<entity>_key` (the surrogate key used for joins in the warehouse)
 - Business keys: `<entity>_id` (the identifier from the source system)
-
-**Rationale:** Fact tables contain multiple rows of events/transactions (plural), while dimension tables represent single entity instances (singular).
 
 **Gold Layer Examples:**
 
@@ -325,9 +331,9 @@ For detailed conventions and examples including staging models see the Informati
 
 | Column | Description |
 |--------|-------------|
-| `start_at` | Timestamp when this record version became effective |
-| `end_at` | Timestamp when this record version expired (NULL for current records) |
-| `updated_at` | Timestamp from the source system indicating when the record was last modified |
+| `effective_from_datetime` | Timestamp when this record version became effective |
+| `effective_to_datetime` | Timestamp when this record version expired (NULL for current records) |
+| `updated_datetime` | Timestamp from the source system indicating when the record was last modified |
 
 **Default dbt Snapshot Columns:**
 
@@ -339,12 +345,15 @@ For detailed conventions and examples including staging models see the Informati
 | `dbt_updated_at` | Timestamp from the source system indicating when the record was last modified |
 | `dbt_deleted` | (Optional) Boolean flag indicating if a record has been deleted from the source system |
 
+**Measures and Metrics:**
+
+- Align to logical model naming but apply lowercase snake_case (e.g., invoice_amount)
+
 ---
 
 ### Reference Data
 
 Reference data plays a critical role in conformance by providing standardised values that enable mapping of source-specific codes to canonical enterprise definitions.
-
 
 #### Logical Modelling
 
@@ -366,7 +375,6 @@ Reference entities contain:
 
 *Note: Additional standard attributes (audit columns: created_timestamp, created_by, modified_timestamp, modified_by; optional: parent_code, version, source_system_id) would be included in the physical implementation.*
 
-
 #### Physical Implementation
 
 Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.
@@ -384,26 +392,23 @@ Raw Reference Data sourced from upstream systems may require their own staging a
 - Business: `description`
 - Technical: `version`, `source_system_id`
 
+**Usage:**
 
 - **Mapping logic** is applied in Silver/EDW layer staging models during transformation for domain/enterprise-wide application.
-- **Consumption** post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).
-
-
+- **Consumption:** Post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).
 - **As dimension attributes:** Reference values embedded directly in dimension tables (e.g., Product Type Code/Description in Product dimension) for filtering and grouping.
 
+**Change tracking:**
 
-**Change tracking:** 
 - Implement Type 1, 2, 4, or 6 slowly changing dimension strategies based on business requirements for point-in-time accuracy. When reference data changes frequently or has many attributes. 
 - Consider using mini-dimensions/outriggers—separate dimension tables linked via foreign keys—to efficiently track history without excessive row growth in the main dimension.
 
-
 **Recommended Practices:**
+
 - Store codes and descriptions in fact tables only when necessary for performance
 - Prefer dimension lookups to maintain single source of truth
 
-
-
-
+---
 
 ## Standard Suffix and Prefix Inventory
 
@@ -487,7 +492,7 @@ Suffixes encode **meaning**, not technical data type or implementation details.
 
 ## Examples
 
-### Keys (Business-facing)
+### Keys
 
 - Primary Business ID: `Customer ID` (PK)
 - Business Reference: `Invoice Number` (could be PK or AK)

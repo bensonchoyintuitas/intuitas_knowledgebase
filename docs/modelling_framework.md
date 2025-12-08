@@ -381,10 +381,10 @@ Hospital Campus
 
 **2. Flattened Dimension:** Lowest-grain entity with hierarchy level columns.
 
-| room_key | campus_name     | building_name | ward_name | room_name | start_at            | end_at | updated_at          |
-|----------|-----------------|---------------|-----------|-----------|---------------------|--------|---------------------|
-| 1001     | Hospital Campus | Building A    | Ward 1    | Room 101  | 2024-01-01 00:00:00 | NULL   | 2024-01-01 00:00:00 |
-| 1002     | Hospital Campus | Building A    | Ward 1    | Room 102  | 2024-01-01 00:00:00 | NULL   | 2024-01-01 00:00:00 |
+| room_key | campus_name     | building_name | ward_name | room_name | effective_from_datetime | effective_to_datetime | updated_datetime    |
+|----------|-----------------|---------------|-----------|-----------|-------------------------|----------------------|---------------------|
+| 1001     | Hospital Campus | Building A    | Ward 1    | Room 101  | 2024-01-01 00:00:00     | NULL                 | 2024-01-01 00:00:00 |
+| 1002     | Hospital Campus | Building A    | Ward 1    | Room 102  | 2024-01-01 00:00:00     | NULL                 | 2024-01-01 00:00:00 |
 
 Adjacency lists enable flexible navigation; flattened structures optimise star schema query performance.
 
@@ -415,10 +415,10 @@ All Products
 
 **2. Flattened Dimension:**
 
-| product_key | classification_lvl1 | classification_lvl2   | classification_lvl3 | classification_lvl4 | start_at            | end_at | updated_at          |
-|-------------|---------------------|-----------------------|---------------------|---------------------|---------------------|--------|---------------------|
-| 100         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems     | MRI Scanners        | 2024-01-01 00:00:00 | NULL   | 2024-01-01 00:00:00 |
-| 101         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems     | CT Scanners         | 2024-01-01 00:00:00 | NULL   | 2024-01-01 00:00:00 |
-| 102         | Pharmaceuticals     | Prescription Drugs    |                     |                     | 2024-01-01 00:00:00 | NULL   | 2024-01-01 00:00:00 |
+| product_key | classification_lvl1 | classification_lvl2   | classification_lvl3 | classification_lvl4 | effective_from_datetime | effective_to_datetime | updated_datetime    |
+|-------------|---------------------|-----------------------|---------------------|---------------------|-------------------------|----------------------|---------------------|
+| 100         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems     | MRI Scanners        | 2024-01-01 00:00:00     | NULL                 | 2024-01-01 00:00:00 |
+| 101         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems     | CT Scanners         | 2024-01-01 00:00:00     | NULL                 | 2024-01-01 00:00:00 |
+| 102         | Pharmaceuticals     | Prescription Drugs    |                     |                     | 2024-01-01 00:00:00     | NULL                 | 2024-01-01 00:00:00 |
 
-> **Note:** Naming follows [modelling standards](modelling_standards_and_conventions.md): surrogate keys use `_key` suffix; SCD Type 2 uses `start_at`, `end_at`, `updated_at`; entities are singular; hierarchy attributes use logical prefixes with incremental numbering.
+> **Note:** Naming follows [modelling standards](modelling_standards_and_conventions.md): surrogate keys use `_key` suffix; SCD Type 2 uses `effective_from_datetime`, `effective_to_datetime`, `updated_datetime`; entities are singular; hierarchy attributes use logical prefixes with incremental numbering.
