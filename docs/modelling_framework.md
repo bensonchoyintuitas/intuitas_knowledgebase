@@ -10,24 +10,25 @@ This resource provides a lightweight framework for describing and developing dat
 ## Table of Contents
 
 **Core Model Types**
-- [Conceptual Models](#conceptual-information-models)
-- [Logical Models](#logical-information-models)
-- [Physical Models](#physical-data-models)
+- [Conceptual (Information) Models](modelling_framework.md#conceptual-information-models)
+- [Logical (Information) Models](modelling_framework.md#logical-information-models)
+- [Physical (Data) Models](modelling_framework.md#physical-data-models)
 
 **Enterprise Context**
-- [Domain Topology](#domain-topology)
-- [Domain Models](#domain-models)
-- [Canonical Models](#canonical-models)
+- [Domain Topology](modelling_framework.md#domain-topology)
+- [Domain Models](modelling_framework.md#domain-models)
+- [Canonical Models](modelling_framework.md#canonical-models)
 
 **Specialised Model Types**
-- [Business Process Models](#business-process-models)
-- [Data Warehouse Models](#data-warehouse-models)
-  - [Data Vault Model](#data-vault-model)
-  - [Dimensional (Kimball) Model](#dimensional-kimball-model)
-  - [Dimensional Bus Matrix](#dimensional-bus-matrix)
-- [Semantic Layers](#semantic-layers)
-- [Master Data and Reference Data](#master-data-reference-data-and-associated-physical-models)
-- [Hierarchies](#hierarchies)
+- [Business Process Models](modelling_framework.md#business-process-models)
+- [Data Warehouse Models](modelling_framework.md#data-warehouse-models)
+  - [Data Vault Model](modelling_framework.md#data-vault-model)
+  - [Dimensional (Kimball) Model](modelling_framework.md#dimensional-kimball-model)
+  - [Dimensional Bus Matrix](modelling_framework.md#dimensional-bus-matrix)
+- [Semantic Layers](modelling_framework.md#semantic-layers)
+  - [Measures and Metrics](modelling_framework.md#measures-and-metrics)
+- [Master Data and Reference Data](modelling_framework.md#master-data-and-reference-data)
+- [Hierarchies](modelling_framework.md#hierarchies)
 
 
 ## Modelling Concepts
@@ -40,6 +41,8 @@ We distinguish between business information design and technical data implementa
 > Some organisations use "data model" as an umbrella term for all three layers, which is also acceptable.
 
 ### Conceptual (Information) Models
+
+> For naming standards and conventions, see [Conceptual Models](modelling_standards_and_conventions.md#conceptual-models) in Modelling Standards and Conventions.
 
 Conceptual models represent business meaning without implementation concerns.
 
@@ -71,6 +74,8 @@ Conceptual models represent business meaning without implementation concerns.
 
 ### Logical (Information) Models
 
+> For naming standards and conventions, see [Logical Models](modelling_standards_and_conventions.md#logical-models) in Modelling Standards and Conventions.
+
 Logical models extend conceptual models with structure and precision while remaining technology-independent.
 
 **What to Include:**
@@ -81,6 +86,8 @@ Logical models extend conceptual models with structure and precision while remai
 - **Normalisation:** Applied where relevant for data integrity
 
 ### Physical (Data) Models 
+
+> For naming standards and conventions, see [Physical Models](modelling_standards_and_conventions.md#physical-models) in Modelling Standards and Conventions.
 
 Physical models implement conceptual and logical models in specific technologies. They focus on storage, performance, and technical constraints for database developers and engineers.
 
@@ -118,6 +125,8 @@ A **Domain Topology** maps domains across the enterprise and their relationships
 
 ### Domain Models
 
+> For entity naming conventions in domain models, see [Entity Naming](modelling_standards_and_conventions.md#entity-naming-general-rules) in Modelling Standards and Conventions.
+
 Under Domain-Centric Design, domains are authoritative for their information definitions. They own concept meanings, define lifecycle rules, and act as the system of semantic truth for their scope.
 
 A **Domain Model** describes business concepts relevant to a domain, including:
@@ -133,6 +142,8 @@ A **Domain Model** describes business concepts relevant to a domain, including:
 > **Terminology:** We prefer "Domain" over "Subject Area" as it ties to governance and ownership boundaries, supporting clear accountability for data products and outcomes.
 
 ### Canonical Models
+
+> For canonical entity naming conventions, see [Entity Naming](modelling_standards_and_conventions.md#entity-naming-general-rules) in Modelling Standards and Conventions.
 
 Canonical models represent authoritative, agreed-upon definitions for concepts standardised across domains and systems (e.g., APIs, interoperability, conformed dimensions).
 
@@ -179,6 +190,8 @@ Data Vault models centre on business concepts and associations from Enterprise/D
 
 #### Dimensional (Kimball) Model
 
+> For dimensional model naming standards, SCD columns, and key conventions, see [Dimensional Models](modelling_standards_and_conventions.md#dimensional-models) in Modelling Standards and Conventions.
+
 Kimball Dimensional Modelling creates **Information Marts** using **Star Schemas**:
 - **Fact tables:** Quantitative metrics/events from business processes (sales, shipments, payments)
 - **Dimension tables:** Descriptive context (customer, product, date, region)
@@ -217,6 +230,8 @@ A **Bus Matrix** maps intersections between business processes (facts) and dimen
 
 ### Semantic Layers
 
+> For business-facing naming standards used in semantic layers, see [Business Names vs Physical Names](modelling_standards_and_conventions.md#business-names-vs-physical-names) in Modelling Standards and Conventions.
+
 Semantic layers are business-oriented abstraction layers that present data in business terms rather than physical structures.
 
 **Purpose:**
@@ -230,6 +245,8 @@ Semantic layers are business-oriented abstraction layers that present data in bu
 Semantic layers depend on domain and canonical models for base entities but establish authoritative definitions for derived metrics within their consumption context.  
 
 #### Measures and Metrics
+
+> For measures and metrics naming standards and suffix conventions, see [Measures and Metrics](modelling_standards_and_conventions.md#measures-and-metrics) and [Quantities & Measures](modelling_standards_and_conventions.md#quantities--measures) in Modelling Standards and Conventions.
 
 **Measures** and **metrics** are first-class semantic layer concepts that quantify business performance.
 
@@ -287,6 +304,8 @@ Measures/metrics should be defined against domain and canonical models and docum
 
 
 ### Master Data and Reference Data
+
+> For reference data naming standards, logical modelling, and physical implementation conventions, see [Reference Data](modelling_standards_and_conventions.md#reference-data) in Modelling Standards and Conventions.
 
 **Master Data:** Core business entities critical to operations and shared across systems (e.g., Patient, Product, Provider, Location)
 - Managed as authoritative "single source of truth"

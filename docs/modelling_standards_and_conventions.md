@@ -11,39 +11,40 @@
 ## Table of Contents
 
 
-  - [General Naming Conventions](#general-naming-conventions)
-    - [Entity Naming (General Rules)](#entity-naming-general-rules)
-    - [Business Names vs Physical Names](#business-names-vs-physical-names)
-    - [Events and Transactions](#events-and-transactions)
-    - [Relationship Naming Conventions](#relationship-naming-conventions)
-    - [Relationship Directionality](#relationship-directionality)
-    - [Relationship Cardinality](#relationship-cardinality)
-  - [Conceptual Models](#conceptual-models)
-    - [Entities](#entities)
-    - [Diagrammatic Representation](#diagrammatic-representation)
-  - [Logical Models](#logical-models)
-    - [Entities](#entities-1)
-    - [Attributes](#attributes)
-    - [Keys (Logical Models)](#keys-logical-models)
-    - [Diagrammatic Representation](#diagrammatic-representation-1)
-  - [Physical Models](#physical-models)
-    - [Relational Structures](#relational-structures)
-    - [Databricks Conventions](#databricks-conventions)
-    - [Dimensional Models](#dimensional-models)
-    - [Reference Data](#reference-data)
-  - [Standard Suffix and Prefix Inventory](#standard-suffix-and-prefix-inventory)
-    - [Identity & Keys](#identity--keys)
-    - [Temporal Concepts](#temporal-concepts)
-    - [State & Classification](#state--classification)
-    - [Quantities & Measures](#quantities--measures)
-    - [Boolean Indicators (Prefix Convention)](#boolean-indicators-prefix-convention)
-    - [Audit & Control](#audit--control)
-    - [Summary of Naming Rules](#summary-of-naming-rules)
-  - [Examples](#examples)
-    - [Keys](#keys)
-    - [Date and Time](#date-and-time)
-    - [Units](#units)
-    - [Events and Transactions (Examples)](#events-and-transactions-examples)
+  - [General Naming Conventions](modelling_standards_and_conventions.md#general-naming-conventions)
+    - [Entity Naming (General Rules)](modelling_standards_and_conventions.md#entity-naming-general-rules)
+    - [Business Names vs Physical Names](modelling_standards_and_conventions.md#business-names-vs-physical-names)
+    - [Events and Transactions](modelling_standards_and_conventions.md#events-and-transactions)
+    - [Relationship Naming Conventions](modelling_standards_and_conventions.md#relationship-naming-conventions)
+    - [Relationship Directionality](modelling_standards_and_conventions.md#relationship-directionality)
+    - [Relationship Cardinality](modelling_standards_and_conventions.md#relationship-cardinality)
+  - [Conceptual Models](modelling_standards_and_conventions.md#conceptual-models)
+    - [Entities](modelling_standards_and_conventions.md#entities)
+    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation)
+  - [Logical Models](modelling_standards_and_conventions.md#logical-models)
+    - [Entities](modelling_standards_and_conventions.md#entities-1)
+    - [Attributes](modelling_standards_and_conventions.md#attributes)
+    - [Measures and Metrics](modelling_standards_and_conventions.md#measures-and-metrics)
+    - [Keys (Logical Models)](modelling_standards_and_conventions.md#keys-logical-models)
+    - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation-1)
+  - [Physical Models](modelling_standards_and_conventions.md#physical-models)
+    - [Relational Structures](modelling_standards_and_conventions.md#relational-structures)
+    - [Databricks Conventions](modelling_standards_and_conventions.md#databricks-conventions)
+    - [Dimensional Models](modelling_standards_and_conventions.md#dimensional-models)
+    - [Reference Data](modelling_standards_and_conventions.md#reference-data)
+  - [Standard Suffix and Prefix Inventory](modelling_standards_and_conventions.md#standard-suffix-and-prefix-inventory)
+    - [Identity & Keys](modelling_standards_and_conventions.md#identity--keys)
+    - [Temporal Concepts](modelling_standards_and_conventions.md#temporal-concepts)
+    - [State & Classification](modelling_standards_and_conventions.md#state--classification)
+    - [Quantities & Measures](modelling_standards_and_conventions.md#quantities--measures)
+    - [Boolean Indicators (Prefix Convention)](modelling_standards_and_conventions.md#boolean-indicators-prefix-convention)
+    - [Audit & Control](modelling_standards_and_conventions.md#audit--control)
+    - [Summary of Naming Rules](modelling_standards_and_conventions.md#summary-of-naming-rules)
+  - [Examples](modelling_standards_and_conventions.md#examples)
+    - [Keys](modelling_standards_and_conventions.md#keys)
+    - [Date and Time](modelling_standards_and_conventions.md#date-and-time)
+    - [Units](modelling_standards_and_conventions.md#units)
+    - [Events and Transactions (Examples)](modelling_standards_and_conventions.md#events-and-transactions-examples)
 
 ---
 
@@ -134,6 +135,8 @@ There are two options:
 
 ## Conceptual Models
 
+> For conceptual modelling framework and principles, see [Conceptual Models](modelling_framework.md#conceptual-information-models) in the Modelling Framework.
+
 ### Entities
 
 - Business-Facing format with capitalised first letters and spaces (e.g., `Order Placed`, `Customer`, `Patient Encounter`)
@@ -159,6 +162,8 @@ There are two options:
 
 ## Logical Models
 
+> For logical modelling framework and principles, see [Logical Models](modelling_framework.md#logical-information-models) in the Modelling Framework.
+
 ### Entities
 
 - Use the same format as conceptual models
@@ -174,10 +179,21 @@ There are two options:
 
 ### Measures and Metrics
 
+> For measures and metrics framework, governance, and placement principles, see [Measures and Metrics](modelling_framework.md#measures-and-metrics) in the Modelling Framework.
+
 - Use Business-Facing format with capitalised first letters and spaces (e.g., `Invoice Amount`, `Item Count`)
 - Make names consistent with related entities and attributes
 - Use semantic suffixes [Quantities & Measures](#quantities--measures) in the Standard Suffix Inventory.
 
+**Example:**
+- **Measure:** `Total Sales Amount` — aggregated sum of sales transactions
+- **Metric:** `Average Order Value` — calculated as `Total Sales Amount / Order Count`
+
+> **Important:** 
+> - **Keep metric names dimension-agnostic**: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use `Sales Amount` not `Sales Amount by Product by Time`). 
+> - **Exception—Intrinsic dimensions**: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., `Customer Lifetime Value` is calculated at customer grain by definition; `Monthly Revenue Growth Rate` compares month-to-month by definition).
+> - **Temporal metrics**: Include time window qualifiers when the period defines the calculation logic (e.g., `Year-to-Date Sales Amount` accumulates from year start; `90-Day Rolling Average` uses a 90-day window).
+> - **Aggregation behavior**: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.
 
 ### Keys (Logical Models)
 
@@ -196,29 +212,74 @@ There are two options:
 
 #### Key Naming Pattern
 
-Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. However, keys are likely to include one of the standard key/identifier suffixes (see [Standard Suffix and Prefix Inventory](#standard-suffix-and-prefix-inventory)).
+Naming follows these patterns for readability, but metadata remains the source of truth for key roles. i.e Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. 
+
+
+> **Default:** When source systems or business glossaries explicitly define key names, preserve their terminology even if it deviates from this convention. Whether a key is natural or surrogate, primary or alternate is captured as metadata
+
+> **Missing name:** Where a name hasn't been provided, then preference `ID` suffix with natural/business keys and `Key` suffix with surrogate warehouse keys. 
+
+> **Canonical Models Rule:** In canonical/enterprise views, fields named \<Entity\> `ID` must represent business-meaningful identifiers recognizable across domains, not warehouse-generated surrogates. Use \<Entity\> `Key` for warehouse surrogate keys.
+
+**Scenario Example:**
+
+- **Source system (CRM):** Provides a natural business identifier for the customer `customer_number`.
+- **Logical model:** The identifier is named `Customer Number`.
+- **Physical staging layer:** The identifier is stored as the column `customer_number` to reflect source system (CRM).
+- **Canonical view:** Exposes `Customer Number` with metadata indicating it is a natural primary key (NPK).
+- **Dimensional model (Customer dimension):** Introduces a warehouse surrogate key called `Customer Key` (physical column `customer_key`) to support SCD Type 2.
+- **Fact tables (e.g. Sales fact):** Store a foreign key column `customer_key` that references the `Customer` dimension.
+- **Domain contracts (other marts using the conformed dimension):** A `Sales` mart and a `Billing` mart both join their fact tables to the conformed `Customer` dimension via `customer_key` internally. The dimension still carries the natural identifier as `Customer Number` (physical column `customer_number`), and this is what domains expose in their canonical contracts so downstream consumers see a consistent business identifier rather than the surrogate key.
+
+**Examples:**
+
+*Applying the "missing name" rule (when creating new identifiers):*
+
+**Primary Keys:**
+
+- `Customer ID` (PK) — natural business identifier (when no source name exists)
+- `Customer Key` (PK) — surrogate warehouse key (e.g., auto-increment, UUID)
+- `Order ID` (PK) — natural business identifier (when no source name exists)
+
+*Applying the "default" rule (preserving source system names):*
+
+**Primary Keys from Source:**
+
+- `Customer Number` (PK) — natural business identifier from source system
+- `Account Code` (PK) — natural business identifier from source system
+
+**Foreign Keys:**
+
+FKs can point to either natural or surrogate PKs and that the FK naming follows the target’s business term where possible:
+
+- `Patient ID` (FK) — references `Patient ID` from another entity (the original key may be natural or surrogate)
+- `Customer Order Key` (FK) — references the surrogate composite key 
+
+**Warehouse Dimension Keys:**
+
+- `Customer Key` — surrogate key for dimensional models (used for joins in the warehouse)
+- Physical mapping: `customer_key`
+
+**Other unique identifiers named according to business meaning:**
+
+- `Invoice Number` (PK) — natural business reference number for an invoice
+- `Medicare Number` (AK) — natural alternate key for a patient
+- `National Health Identifier` (AK) — natural alternate key for a patient
+
+**Composite Keys:**
+
+- Our preference is to give composite keys their own distinct name if the modelling tools allow for it.
+- Each component follows the same naming conventions (Default or Missing name rules apply)
+- If the composite is a natural key, use `ID` suffix; if any single component is surrogate use `Key` suffix
 
 Examples:
 
-**Primary Keys:**
-- `Customer ID` (PK) — may be natural or surrogate
-- `Order ID` (PK) — may be natural or surrogate
+- `Flight ID` (Natural PK) = `Flight Number` + `Departure Date` — logical name for the natural composite (all components natural)
+- `Enrollment ID` (Natural PK) = `Student Number` + `Course Number` — logical name for natural composite (all components natural)
+- `Daily Product Sales Key` (Surrogate PK) = `Product ID` + `Date Key (from DW)` + `Transaction Key (from DW)` — logical name for surrogate composite (at least one surrogate component)
+- `Customer Order Key` (Surrogate PK) = `Customer ID` + `Order Key (from DW)` — logical name for surrogate composite (mixed: surrogate + natural)
 
-Note: If a field is named \<Entity\> ID in a canonical view, it must represent a business-meaningful identifier, not a generated surrogate.
 
-**Foreign Keys:**
-- `Patient ID` (FK) — references `Patient ID` from another entity (the original key may be natural or surrogate)
-
-**Other unique identifiers are named according to business meaning:**
-- `Invoice Number` (PK) — natural primary key
-- `Email Address` (AK) — natural alternate key
-- `Medicare Number` (AK) — natural alternate key
-- `National Health Identifier` (AK) — natural alternate key
-
-**Composite Keys:**
-- The fact that they form a composite key is captured as metadata, not in naming
-- No special prefixes or suffixes are needed
-- Examples: `Flight Number` + `Departure Date` (PK) or `Account Number` + `Transaction Sequence` (PK)
 
 ### Diagrammatic Representation
 - Consistent with conceptual models, with additional details to show attributes, key types
@@ -228,6 +289,8 @@ Note: If a field is named \<Entity\> ID in a canonical view, it must represent a
 ---
 
 ## Physical Models
+
+> For physical modelling framework and common formats, see [Physical Models](modelling_framework.md#physical-data-models) in the Modelling Framework.
 
 Physical models represent implemented storage structures and must follow deterministic, platform-safe naming conventions.
 
@@ -290,17 +353,17 @@ For detailed conventions and examples see [Databricks](standards_and_conventions
 - Names reflect business meaning, not source-system terminology
 
 **Columns:**
-- Use `snake_case`
+- Use lowercase `snake_case`
 - No abbreviations unless standard
 
-**Keys:**
-- Primary keys: `<table>_id`
-- Foreign keys: `<referenced_table>_id`
-- Warehouse surrogate keys: `<entity>_key`
+
+
 
 ---
 
 ### Dimensional Models
+
+> For dimensional modelling framework, conformed dimensions, and dimensional bus matrix, see [Dimensional (Kimball) Model](modelling_framework.md#dimensional-kimball-model) in the Modelling Framework.
 
 For detailed conventions and examples including staging models see the Information Marts sections of [Schema and Object Conventions](standards_and_conventions.md#schema-and-object-conventions)
 
@@ -353,6 +416,8 @@ For detailed conventions and examples including staging models see the Informati
 
 ### Reference Data
 
+> For reference data and master data framework, logical representation, and physical implementation patterns, see [Master Data and Reference Data](modelling_framework.md#master-data-and-reference-data) in the Modelling Framework.
+
 Reference data plays a critical role in conformance by providing standardised values that enable mapping of source-specific codes to canonical enterprise definitions.
 
 #### Logical Modelling
@@ -365,7 +430,7 @@ Reference entities contain:
 
 **Example: Country Code Reference Entity**
 
-| Country_Code | Country_Name       | ISO_Code_3 | Display_Sequence | Effective_From_Date | Effective_To_Date |
+| country_code | country_name       | iso_code_3 | display_sequence | effective_from_date | effective_to_date |
 |--------------|--------------------|------------|------------------|---------------------|-------------------|
 | AU           | Australia          | AUS        | 10               | 2020-01-01          | 9999-12-31        |
 | GB           | United Kingdom     | GBR        | 20               | 2020-01-01          | 9999-12-31        |
@@ -434,6 +499,13 @@ Raw Reference Data sourced from upstream systems may require their own staging a
 | `From Date` | Validity start | `Policy From Date` | `policy_from_date` |
 | `To Date` | Validity end | `Policy To Date` | `policy_to_date` |
 
+Example:
+
+- Business Name: `Order DateTime`
+- Physical Name (UTC, implied): `order_datetime`
+- Physical Name (Local timezone explicit): `order_datetime_aest`
+
+
 ### State & Classification
 
 | Suffix | Meaning | Logical/Conceptual | Physical |
@@ -490,40 +562,3 @@ Suffixes encode **meaning**, not technical data type or implementation details.
 
 ---
 
-## Examples
-
-### Keys
-
-- Primary Business ID: `Customer ID` (PK)
-- Business Reference: `Invoice Number` (could be PK or AK)
-- Alternate Identifier: `National Identifier` (AK)
-- Alternate Identifier: `Email Address` (AK)
-- Warehouse Dimension Key: `Customer Key` (dimensional models)
-- Physical Mapping: `customer_id`, `customer_key`
-
-Note: Whether a key is natural or surrogate is metadata, not encoded in the name.
-
-### Date and Time
-
-- Business Name: `Order DateTime`
-- Physical Name (UTC): `order_datetime_utc`
-- Physical Name (Local): `order_datetime_aest`
-
-### Units
-
-There are two options for handling units:
-
-**Option 1: Embed the unit in the physical name**
-- Business Name: `Weight` → Physical Name: `weight_kg`
-- Business Name: `Temperature` → Physical Name: `temperature_c`
-
-**Option 2: Separate unit from the value**
-- Measure Value: `measure_value`
-- Measure Unit: `measure_unit_code`
-
-Example: Instead of `weight_kg`, use `weight` + `weight_unit_code` where the unit code might be 'kg', 'lb', etc.
-
-### Events and Transactions
-
-- Business Term: `Payment Received` → Model Name: `Payment Received` → Physical Name: `payment_received`
-- Business Term: `Invoice Issued` → Model Name: `Invoice Issued` → Physical Name: `invoice_issued`
