@@ -325,7 +325,6 @@
 <li><strong>Measure:</strong> <code>Total Sales Amount</code> — aggregated sum of sales transactions</li>
 <li><strong>Metric:</strong> <code>Average Order Value</code> — calculated as <code>Total Sales Amount / Order Count</code></li>
 </ul>
-<blockquote>
 <p><strong>Important:</strong> </p>
 <ul>
 <li><strong>Keep metric names dimension-agnostic</strong>: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use <code>Sales Amount</code> not <code>Sales Amount by Product by Time</code>). </li>
@@ -333,7 +332,6 @@
 <li><strong>Temporal metrics</strong>: Include time window qualifiers when the period defines the calculation logic (e.g., <code>Year-to-Date Sales Amount</code> accumulates from year start; <code>90-Day Rolling Average</code> uses a 90-day window).</li>
 <li><strong>Aggregation behavior</strong>: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.</li>
 </ul>
-</blockquote>
 <h3 id="keys-logical-models">Keys (Logical Models)</h3>
 <h4 id="key-types">Key Types</h4>
 <p><strong>Natural or Surrogate (implementation characteristic):</strong></p>
