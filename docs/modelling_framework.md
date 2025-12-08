@@ -3,41 +3,40 @@
 
 > Updated 5/12/2025
 
-See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
-
-## Overview
-
 This resource provides a lightweight framework for describing and developing data models. It draws from a range of suggested practices, with references provided where appropriate.
 
+See [Modelling Standards and Conventions](modelling_standards_and_conventions.md) for further detail on notation and modelling standards.
 
-## Quick Jump To
 
-**Core Model Types**
+## Table of Contents
+---
 
-- [Conceptual Models](#conceptual-information-models)
-- [Logical Models](#logical-information-models)
-- [Physical Models](#physical-data-models)
+  **Core Model Types**
 
-**Enterprise Context**
+  - [Conceptual Models](#conceptual-information-models)
+  - [Logical Models](#logical-information-models)
+  - [Physical Models](#physical-data-models)
 
-- [Domain Topology](#domain-topology)
-- [Domain Models](#domain-models)
-  - [Relationship to Business Processes and Functions](#relationship-to-business-processes-and-functions)
-  - [Relationship to Business Objects](#relationship-to-business-objects)
-- [Canonical Models](#canonical-models)
+  **Enterprise Context**
 
-**Specialised Model Types**
+  - [Domain Topology](#domain-topology)
+  - [Domain Models](#domain-models)
+    - [Relationship to Business Processes and Functions](#relationship-to-business-processes-and-functions)
+    - [Relationship to Business Objects](#relationship-to-business-objects)
+  - [Canonical Models](#canonical-models)
 
-- [Business Process Models](#business-process-models)
-- [Data Warehouse Models](#data-warehouse-models)
-  - [Data Vault Model](#data-vault-model)
-  - [Dimensional (Kimball) Model](#dimensional-kimball-model)
-  - [Canonical Models and Conformed Dimensions](#canonical-models-and-conformed-dimensions)
-  - [Dimensional Bus Matrix](#dimensional-bus-matrix)
-- [Semantic Layers](#semantic-layers)
-- [Reference Data](#reference-data)
-- [Hierarchies](#hierarchies)
-  - [Modelling Hierarchies: Subtypes vs. Relationships](#modelling-hierarchies-subtypes-vs-relationships)
+  **Specialised Model Types**
+
+  - [Business Process Models](#business-process-models)
+  - [Data Warehouse Models](#data-warehouse-models)
+    - [Data Vault Model](#data-vault-model)
+    - [Dimensional (Kimball) Model](#dimensional-kimball-model)
+    - [Canonical Models and Conformed Dimensions](#canonical-models-and-conformed-dimensions)
+    - [Dimensional Bus Matrix](#dimensional-bus-matrix)
+  - [Semantic Layers](#semantic-layers)
+  - [Reference Data](#reference-data)
+  - [Hierarchies](#hierarchies)
+    - [Modelling Hierarchies: Subtypes vs. Relationships](#modelling-hierarchies-subtypes-vs-relationships)
 
 ## Modelling Concepts
 
