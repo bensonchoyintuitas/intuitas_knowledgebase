@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Intuitas Data Modelling Standards and Conventions - Intuitas Data Intelligence Blueprint</title>
+        <title>Modelling Standards - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -48,7 +48,13 @@
                                 <a href="../level_2/" class="nav-link">Level 2</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../standards_and_conventions/" class="nav-link">Standards</a>
+                                <a href="../modelling_framework/" class="nav-link">Modelling Framework</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Modelling Standards</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../standards_and_conventions/" class="nav-link">Standards and Conventions</a>
                             </li>
                             <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
@@ -61,6 +67,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../modelling_framework/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../standards_and_conventions/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -131,16 +147,16 @@
 </ul>
 </li>
 <li><a href="./#conceptual-models">Conceptual Models</a><ul>
-<li><a href="./#entities">Entities</a></li>
-<li><a href="./#diagrammatic-representation">Diagrammatic Representation</a></li>
+<li><a href="./#entities-conceptual">Entities</a></li>
+<li><a href="./#diagrammatic-representation-conceptual">Diagrammatic Representation</a></li>
 </ul>
 </li>
 <li><a href="./#logical-models">Logical Models</a><ul>
-<li><a href="./#entities-1">Entities</a></li>
+<li><a href="./#entities-logical">Entities</a></li>
 <li><a href="./#attributes">Attributes</a></li>
 <li><a href="./#measures-and-metrics">Measures and Metrics</a></li>
 <li><a href="./#keys-logical-models">Keys (Logical Models)</a></li>
-<li><a href="./#diagrammatic-representation-1">Diagrammatic Representation</a></li>
+<li><a href="./#diagrammatic-representation-logical">Diagrammatic Representation</a></li>
 </ul>
 </li>
 <li><a href="./#physical-models">Physical Models</a><ul>
@@ -151,20 +167,13 @@
 </ul>
 </li>
 <li><a href="./#standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</a><ul>
-<li><a href="./#identity--keys">Identity &amp; Keys</a></li>
+<li><a href="./#identity-keys">Identity &amp; Keys</a></li>
 <li><a href="./#temporal-concepts">Temporal Concepts</a></li>
-<li><a href="./#state--classification">State &amp; Classification</a></li>
-<li><a href="./#quantities--measures">Quantities &amp; Measures</a></li>
+<li><a href="./#state-classification">State &amp; Classification</a></li>
+<li><a href="./#quantities-measures">Quantities &amp; Measures</a></li>
 <li><a href="./#boolean-indicators-prefix-convention">Boolean Indicators (Prefix Convention)</a></li>
-<li><a href="./#audit--control">Audit &amp; Control</a></li>
+<li><a href="./#audit-control">Audit &amp; Control</a></li>
 <li><a href="./#summary-of-naming-rules">Summary of Naming Rules</a></li>
-</ul>
-</li>
-<li><a href="./#examples">Examples</a><ul>
-<li><a href="./#keys">Keys</a></li>
-<li><a href="./#date-and-time">Date and Time</a></li>
-<li><a href="./#units">Units</a></li>
-<li><a href="./#events-and-transactions-examples">Events and Transactions (Examples)</a></li>
 </ul>
 </li>
 </ul>
@@ -261,12 +270,12 @@
 <blockquote>
 <p>For conceptual modelling framework and principles, see <a href="../modelling_framework/#conceptual-information-models">Conceptual Models</a> in the Modelling Framework.</p>
 </blockquote>
-<h3 id="entities">Entities</h3>
+<h3 id="entities-conceptual">Entities (Conceptual)</h3>
 <ul>
 <li>Business-Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
 <li>Optimised for clarity and business communication</li>
 </ul>
-<h3 id="diagrammatic-representation">Diagrammatic Representation</h3>
+<h3 id="diagrammatic-representation-conceptual">Diagrammatic Representation (Conceptual)</h3>
 <ul>
 <li>Boxes represent business concepts (entities)</li>
 <li>Lines represent relationships</li>
@@ -289,7 +298,7 @@
 <blockquote>
 <p>For logical modelling framework and principles, see <a href="../modelling_framework/#logical-information-models">Logical Models</a> in the Modelling Framework.</p>
 </blockquote>
-<h3 id="entities_1">Entities</h3>
+<h3 id="entities-logical">Entities (Logical)</h3>
 <ul>
 <li>Use the same format as conceptual models</li>
 <li>Business-Facing format with capitalised first letters and spaces (e.g., <code>Order Placed</code>, <code>Customer</code>, <code>Patient Encounter</code>)</li>
@@ -309,7 +318,7 @@
 <ul>
 <li>Use Business-Facing format with capitalised first letters and spaces (e.g., <code>Invoice Amount</code>, <code>Item Count</code>)</li>
 <li>Make names consistent with related entities and attributes</li>
-<li>Use semantic suffixes <a href="#quantities--measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
+<li>Use semantic suffixes <a href="#quantities-measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
 </ul>
 <p><strong>Example:</strong></p>
 <ul>
@@ -399,7 +408,7 @@
 <li><code>Daily Product Sales Key</code> (Surrogate PK) = <code>Product ID</code> + <code>Date Key (from DW)</code> + <code>Transaction Key (from DW)</code> — logical name for surrogate composite (at least one surrogate component)</li>
 <li><code>Customer Order Key</code> (Surrogate PK) = <code>Customer ID</code> + <code>Order Key (from DW)</code> — logical name for surrogate composite (mixed: surrogate + natural)</li>
 </ul>
-<h3 id="diagrammatic-representation_1">Diagrammatic Representation</h3>
+<h3 id="diagrammatic-representation-logical">Diagrammatic Representation (Logical)</h3>
 <ul>
 <li>Consistent with conceptual models, with additional details to show attributes, key types</li>
 <li>Show relationships as lines and cardinality as crows foot or multiplicity notation.</li>
@@ -443,7 +452,7 @@
 <li>B: separate value and unit type as separate columns</li>
 <li>Examples: <code>customer_id</code>, <code>invoice_number</code>, <code>order_datetime</code>, <code>total_amount</code>, <code>is_active</code></li>
 </ul>
-<h4 id="diagrammatic-representation_2">Diagrammatic Representation</h4>
+<h4 id="diagrammatic-representation">Diagrammatic Representation</h4>
 <ul>
 <li>Consistent with logical models</li>
 <li>Show relationships as lines and cardinality as crows foot or multiplicity notation.</li>
