@@ -387,7 +387,9 @@ Final products after staging:
 <br>
 
 **Reference Data**:
-Reference data objects that are aligned to business entities and broad requirements. These may also be staged in stg as per silver marts. These are typically not source-aligned but optionality for capturing sources exists.
+For further context refer to [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
+
+Our default position uses schemas to logically consolidate reference data (either across the enterprise or within domains) with clearly named schema for convenience:
 
 - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
 - Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel})`

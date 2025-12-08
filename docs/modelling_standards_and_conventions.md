@@ -6,6 +6,44 @@
 
 ---
 
+## Table of Contents
+
+- [General Naming Conventions](#general-naming-conventions)
+  - [Entity Naming (General Rules)](#entity-naming-general-rules)
+  - [Business Names vs Physical Names](#business-names-vs-physical-names)
+  - [Events and Transactions](#events-and-transactions)
+  - [Relationship Naming Conventions](#relationship-naming-conventions)
+  - [Relationship Directionality](#relationship-directionality)
+  - [Relationship Cardinality](#relationship-cardinality)
+- [Conceptual Models](#conceptual-models)
+  - [Entities](#entities)
+  - [Diagrammatic Representation](#diagrammatic-representation)
+- [Logical Models](#logical-models)
+  - [Entities](#entities-1)
+  - [Attributes](#attributes)
+  - [Keys (Logical Models)](#keys-logical-models)
+  - [Diagrammatic Representation](#diagrammatic-representation-1)
+- [Physical Models](#physical-models)
+  - [Relational Structures](#relational-structures)
+  - [Databricks Conventions](#databricks-conventions)
+  - [Dimensional Models](#dimensional-models)
+  - [Reference Data](#reference-data)
+- [Standard Suffix and Prefix Inventory](#standard-suffix-and-prefix-inventory)
+  - [Identity & Keys](#identity--keys)
+  - [Temporal Concepts](#temporal-concepts)
+  - [State & Classification](#state--classification)
+  - [Quantities & Measures](#quantities--measures)
+  - [Boolean Indicators (Prefix Convention)](#boolean-indicators-prefix-convention)
+  - [Audit & Control](#audit--control)
+  - [Summary of Naming Rules](#summary-of-naming-rules)
+- [Examples](#examples)
+  - [Keys (Business-facing)](#keys-business-facing)
+  - [Date and Time](#date-and-time)
+  - [Units](#units)
+  - [Events and Transactions](#events-and-transactions-1)
+
+---
+
 ## General Naming Conventions
 
 ### Entity Naming (General Rules)
@@ -300,6 +338,70 @@ For detailed conventions and examples including staging models see the Informati
 | `dbt_deleted` | (Optional) Boolean flag indicating if a record has been deleted from the source system |
 
 ---
+
+### Reference Data
+
+Reference data plays a critical role in conformance by providing standardised values that enable mapping of source-specific codes to canonical enterprise definitions.
+
+
+#### Logical Modelling
+
+Reference entities contain:
+- Natural keys (e.g., Country Code, Product Type Code)
+- Code and description attributes
+- Optional: effective dates, display sequences, parent references (hierarchies), business metadata
+- One-to-many relationships to domain entities
+
+**Example: Country Code Reference Entity**
+
+| Country_Code | Country_Name       | ISO_Code_3 | Display_Sequence | Effective_From_Date | Effective_To_Date |
+|--------------|--------------------|------------|------------------|---------------------|-------------------|
+| AU           | Australia          | AUS        | 10               | 2020-01-01          | 9999-12-31        |
+| GB           | United Kingdom     | GBR        | 20               | 2020-01-01          | 9999-12-31        |
+| US           | United States      | USA        | 30               | 2020-01-01          | 9999-12-31        |
+| NZ           | New Zealand        | NZL        | 40               | 2020-01-01          | 9999-12-31        |
+| CA           | Canada             | CAN        | 50               | 2020-01-01          | 9999-12-31        |
+
+*Note: Additional standard attributes (audit columns: created_timestamp, created_by, modified_timestamp, modified_by; optional: parent_code, version, source_system_id) would be included in the physical implementation.*
+
+
+#### Physical Implementation
+
+Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.
+
+- **Reference tables** are stored in Bronze/ODS layer for wide availability following the [reference data naming standard](standards_and_conventions.md#schema-and-object-conventions)
+
+        - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
+        - Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel}}`
+        
+        - e.g: intuitas_corporate.ref.account_code
+
+- Effectivity: `effective_from_date`, `effective_to_date`, (`is_active` is derivable)
+- Audit: `created_timestamp`, `created_by`, `modified_timestamp`, `modified_by`
+- Hierarchy: `parent_code`
+- Business: `description`
+- Technical: `version`, `source_system_id`
+
+
+- **Mapping logic** is applied in Silver/EDW layer staging models during transformation for domain/enterprise-wide application.
+- **Consumption** post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).
+
+
+- **As dimension attributes:** Reference values embedded directly in dimension tables (e.g., Product Type Code/Description in Product dimension) for filtering and grouping.
+
+
+**Change tracking:** 
+- Implement Type 1, 2, 4, or 6 slowly changing dimension strategies based on business requirements for point-in-time accuracy. When reference data changes frequently or has many attributes. 
+- Consider using mini-dimensions/outriggers—separate dimension tables linked via foreign keys—to efficiently track history without excessive row growth in the main dimension.
+
+
+**Recommended Practices:**
+- Store codes and descriptions in fact tables only when necessary for performance
+- Prefer dimension lookups to maintain single source of truth
+
+
+
+
 
 ## Standard Suffix and Prefix Inventory
 

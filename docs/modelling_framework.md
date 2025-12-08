@@ -396,4 +396,14 @@ Examples:
 - dbt Semantic Layer  
 
 
+### Hierarchies
 
+
+
+### Reference Data
+
+Reference data represents stable, standardised values used to categorise and classify other data (e.g., country codes, product types, status codes), ensuring consistency and shared meaning across systems. It may be standardised by external organisations (e.g., ISO), can be hierarchical, and may require mappings when multiple sets exist for the same domain. 
+
+Reference data objects are aligned to business entities and broad requirements, staged in stg as per silver marts, and are typically enterprise-wide rather than source-aligned (though optionality for capturing sources exists).
+
+For reference data modelling standards and guidelines [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
