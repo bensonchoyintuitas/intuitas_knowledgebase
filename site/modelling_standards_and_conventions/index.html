@@ -325,9 +325,7 @@
 <li><strong>Measure:</strong> <code>Total Sales Amount</code> — aggregated sum of sales transactions</li>
 <li><strong>Metric:</strong> <code>Average Order Value</code> — calculated as <code>Total Sales Amount / Order Count</code></li>
 </ul>
-<blockquote>
 <p><strong>Important:</strong> </p>
-</blockquote>
 <ul>
 <li><strong>Keep metric names dimension-agnostic</strong>: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use <code>Sales Amount</code> not <code>Sales Amount by Product by Time</code>). </li>
 <li><strong>Exception—Intrinsic dimensions</strong>: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., <code>Customer Lifetime Value</code> is calculated at customer grain by definition; <code>Monthly Revenue Growth Rate</code> compares month-to-month by definition).</li>
