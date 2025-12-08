@@ -34,9 +34,10 @@ See [Modelling Standards and Conventions](modelling_standards_and_conventions.md
     - [Canonical Models and Conformed Dimensions](#canonical-models-and-conformed-dimensions)
     - [Dimensional Bus Matrix](#dimensional-bus-matrix)
   - [Semantic Layers](#semantic-layers)
-  - [Reference Data](#reference-data)
+  - [Master Data, Reference Data and associated physical models](#master-data-reference-data-and-associated-physical-models)
   - [Hierarchies](#hierarchies)
     - [Modelling Hierarchies: Subtypes vs. Relationships](#modelling-hierarchies-subtypes-vs-relationships)
+
 
 ## Modelling Concepts
 
@@ -402,30 +403,122 @@ Examples:
 - Power BI semantic models (business logic layer)  
 - dbt Semantic Layer  
 
+#### Measures and Metrics
 
-### Reference Data
+In this framework, **measures** and **metrics** are first-class modelling concepts in the semantic layer. They sit on top of domain and canonical models and provide the vocabulary for how the business quantifies performance and outcomes.
 
-Reference data represents stable, standardised values used to categorise and classify other data (e.g., country codes, product types, status codes), ensuring consistency and shared meaning across systems. It may be standardised by external organisations (e.g., ISO), can be hierarchical (see [Hierarchies](#hierarchies)), and may require mappings when multiple sets exist for the same domain. 
+- **Measures**: Numeric values directly aggregated from data (e.g., `Sales Amount`, `Number of Encounters`, `Bed Days`). They are typically:
+  - Derived from fact-like events or transactions  
+  - Defined with a clear **grain** (e.g., per encounter, per invoice line, per day)  
+  - Aggregated using simple functions (SUM, COUNT, MIN/MAX, AVG)  
+  - Sensitive to filter context (e.g., time period, domain, customer segment)  
 
-Reference data objects are aligned to business entities and broad requirements, staged in stg as per silver marts, and are typically enterprise-wide rather than source-aligned (though optionality for capturing sources exists).
+- **Metrics**: Business expressions or ratios that **combine one or more measures** and sometimes reference data (e.g., `Readmission Rate`, `Average Length of Stay`, `Gross Margin %`). They:
+  - Express business performance or quality rather than raw volume  
+  - Often have more complex logic (conditional logic, windows, exclusions)  
+  - Require clear **definitions, assumptions, and exclusions** to avoid misinterpretation  
 
-#### On Dimensions, Master Data, and Reference Data
+**Additivity and aggregation behaviour** (additive, semi-additive, non-additive) applies **primarily to base measures**, but the resulting behaviour of derived metrics must also be understood:
 
-**Logical Representation:**
+- Classify **base measures** by how they aggregate across key dimensions (especially time):  
+  - *Additive*: safe to sum across all relevant dimensions (e.g., `Sales Amount`, `Encounter Count`)  
+  - *Semi-additive*: can be summed across some dimensions but **not** others (e.g., end-of-day `Inventory Level` is additive across products but not over time)  
+  - *Non-additive*: cannot be summed meaningfully (e.g., ratios like `Readmission Rate`, `Gross Margin %`)  
+- **Metrics built from measures** inherit these behaviours—ratios and rates are usually non-additive, and roll-ups must use appropriate aggregations (e.g., weighted averages rather than simple sums).  
+- In models and semantic layers, record additivity as explicit metadata for each governed measure/metric (e.g., in the business glossary or semantic model), and use it to constrain or guide which aggregations are allowed in marts and BI tools.  
 
-At the logical level, Master and Reference data is organised as:
+From a modelling perspective, semantic measures and metrics should be:
 
-**Master Data** - Core business entities:
+- **Logically defined** against domain and canonical models (e.g., "Bed Days = count of Encounter Days where Encounter Status = Admitted")  
+- **Described in the business glossary** with:
+  - Name, description, owning domain, and primary stakeholders  
+  - Formal definition and calculation rule  
+  - Input entities, attributes, and filters used  
+  - Validity period and version history (when the definition changed)  
+  - Related KPIs, dashboards, and reports  
+
+Physically, measures and metrics can appear in multiple layers while remaining **logically consistent**:
+
+
+
+- **Information marts / fact tables**:
+  - Base measures materialised as columns (e.g., `amount`, `quantity`, `length_of_stay_days`)  
+  - Sometimes pre-aggregated metrics for performance, with careful documentation  
+
+- **dbt models and semantic layer**:
+  - Base measures defined in dbt models and exposed via a dbt Semantic Layer or similar metadata  
+  - Centralised definitions reused across downstream tools, aligned to the business glossary  
+  - Version-controlled SQL logic, with tests to protect key metric behaviour  
+
+- **Power BI or BI tool semantic models**:
+  - Measures implemented as expressions (e.g., DAX), which:
+    - Apply semantic rules over imported or DirectQuery tables  
+    - Should align with central metric definitions rather than re-implementing ad hoc logic  
+  - Where possible, complex logic should be **pushed upstream** into governed semantic definitions (e.g., dbt metrics) to reduce local variation.
+
+**Placement principles**:
+
+- **Favour upstream definitions** (dbt/semantic layer) when a measure/metric:
+  - Is reused across many dashboards, domains, or products  
+  - Represents an enterprise KPI or is used in regulatory/contractual reporting  
+  - Has complex or subtle business rules that must be tested and versioned  
+  - Needs to be discoverable and governable as a shared asset  
+- **Allow BI-layer-only definitions** when:
+  - The metric is experimental, exploratory, or scoped to a single report/team  
+  - It is a simple presentation variant of an existing governed metric (e.g., reformatting, basic re-aggregation)  
+  - There is a clear understanding that the BI definition is **not** the system of record  
+- For each important metric, choose a **single system of record** (typically the upstream semantic/dbt layer) and avoid duplicating or re-implementing its logic in multiple tools.
+
+> **Example – DAX-only interactive metric**  
+> A governed upstream measure such as `Total Encounters` is defined and tested in dbt.  
+> In Power BI, a DAX measure can then express an interactive, filter-aware metric that only really makes sense in the BI layer:
+>
+> ```DAX
+> Readmission Rate (Current Filters) =
+> DIVIDE ( [Readmission Count], [Total Encounters] )
+> ```
+>
+> This measure always returns the readmission rate for **whatever filters and slicers are currently applied** (e.g., ward, clinician, date), while still relying on governed upstream definitions for the base measures.
+
+
+**Versioning and governance**:
+
+- Important measures and metrics should be **governed like reference data**:
+  - Changes to definitions follow a review and approval process  
+  - Effective dates and prior versions are retained  
+  - Consumers are notified when definitions change, especially where contractual or regulatory reporting is affected  
+- Metric definitions should be **discoverable** via catalog or glossary tooling so that analysts, engineers, and business stakeholders can easily see:
+  - How a number is calculated  
+  - Which tables/columns it depends on  
+  - Which products (dashboards, reports, APIs) use it  
+
+
+### Master Data, Reference Data and associated physical models
+
+#### Master Data
+
+Master Data refers to the core business entities that are critical to operations and are shared across multiple systems and processes (such as Customer, Product, Location, or Provider). From a modelling perspective, master data is modeled like any other key entity, but is distinct in that it is carefully governed, centrally managed, and intended to maintain consistency and quality across the enterprise.
+
+In data warehousing, well-governed master data typically forms the backbone of conformed dimensions, enabling consistent analytics and reporting across subject areas.
+
 - Central to business operations and shared across systems (e.g., Patient, Product, Provider, Location, Organization, Payer)
 - Managed as authoritative, "single source of truth" entities
 - Rich in descriptive attributes and relationships
 - Subject to governance and data quality processes
 
+#### Reference Data
 
-**Reference Data** - Standardised classification values:
+Reference data is a form of master data that provides stable, standardised values—such as country codes, product categories, or status codes—used for categorisation, classification, or validation. Its purpose is to ensure consistency and a shared understanding across systems, using externally or internally defined standards. Reference data may be externally standardised (e.g., ISO), hierarchical (see [Hierarchies](#hierarchies)), and sometimes requires mapping between sets if multiple exist for a domain.
+
+These data sets are aligned to business entities, staged in `stg` as for silver marts, and are generally managed enterprise-wide for broad applicability, though source-specific variants can optionally be captured if needed.
+
 - Used for categorisation, validation, and ensuring consistency (e.g., Status codes, Country codes, Product Categories)
 - May be externally standardised (e.g., ISO codes) or internally maintained
 - Can be simple (code/name pairs) or complex (hierarchical, with attributes)
+
+#### Logical Representation
+
+At the logical level, Master and Reference data is organised as:
 
 ```
 LOGICAL VIEW
@@ -441,24 +534,35 @@ Master Data Entities          Reference Data Entities
 └──────────────────┘         └─────────────────────────┘
 ```
 
-**Physical Implementation:**
 
-The same logical entities can take different physical forms depending on analytical requirements, query patterns, and performance needs:
+#### Physical Implementation
 
-**1. Dimension Tables** (Star Schema):
+The same logical entities can take different physical forms depending on analytical requirements, query patterns, and performance needs.
+
+The physical form depends on:
+- **Analytical use:** Will users filter, group, or aggregate by these attributes? → Dimension
+- **Query patterns:** Is this accessed in most queries? → Consider embedding in facts
+- **History requirements:** Do changes over time impact reporting? → Dimension with SCD Type 2
+- **Complexity:** Does it have rich attributes or hierarchies? → Dimension
+- **Simplicity:** Is it just code/name lookup? → Simple lookup table
+- **Performance:** Are join costs impacting query performance? → Consider denormalisation
+
+
+##### Physical Forms
+**1. Simple Lookup Tables**:
+- Used for basic code-to-description translation without analytical use
+- Minimal attributes (typically just code, name, description)
+- No history tracking required
+- Typical for: Simple reference data used only for validation or display
+- Example: `ref_status_code`, `ref_currency`, `ref_yes_no_indicator`
+
+**2. Dimension Tables** (Star Schema):
 - Used when attributes are needed for slicing, dicing, filtering, and grouping
 - Supports rich descriptive attributes and hierarchies
 - Enables history tracking through SCD (Slowly Changing Dimensions)
 - Typical for: Master data entities, complex reference data used analytically
 - Example: `dim_product`, `dim_provider`, `dim_location`, `dim_product_category`
 - Well-managed master data simplifies conformance, though minor alignment steps may still be needed.
-
-**2. Simple Lookup Tables**:
-- Used for basic code-to-description translation without analytical use
-- Minimal attributes (typically just code, name, description)
-- No history tracking required
-- Typical for: Simple reference data used only for validation or display
-- Example: `ref_status_code`, `ref_currency`, `ref_yes_no_indicator`
 
 **3. Embedded in Fact Tables** (Denormalised):
 - Reference data attributes embedded directly into facts for performance
@@ -487,17 +591,6 @@ PHYSICAL IMPLEMENTATION OPTIONS
 │ Hierarchies   │  │ No history      │  │                  │
 └───────────────┘  └─────────────────┘  └──────────────────┘
 ```
-
-**Decision Criteria:**
-
-The physical form depends on:
-- **Analytical use:** Will users filter, group, or aggregate by these attributes? → Dimension
-- **Query patterns:** Is this accessed in most queries? → Consider embedding in facts
-- **History requirements:** Do changes over time impact reporting? → Dimension with SCD Type 2
-- **Complexity:** Does it have rich attributes or hierarchies? → Dimension
-- **Simplicity:** Is it just code/name lookup? → Simple lookup table
-- **Performance:** Are join costs impacting query performance? → Consider denormalisation
-
 
 For reference data modelling standards and guidelines [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
 
