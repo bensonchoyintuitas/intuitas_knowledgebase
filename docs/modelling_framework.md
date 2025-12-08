@@ -398,12 +398,250 @@ Examples:
 
 ### Hierarchies
 
+**Hierarchies** are structured relationships between concepts or entities where a parent-child or ancestor-descendant arrangement exists. They represent natural groupings and levels of aggregation within data, reflecting how businesses organise and categorise information.
 
+#### Relationship to Data Models
+
+Hierarchies appear across all model types:
+
+- **Conceptual/Logical models:** Hierarchies represent business classifications and organisational structures (e.g., product categories, geographic regions, organisational units)
+- **Physical models:** Hierarchies may be implemented through self-referencing foreign keys, separate hierarchy tables, or path-based encodings depending on performance needs
+- **Dimensional models:** Hierarchies within dimensions enable drill-down and roll-up analysis (e.g., Day → Month → Quarter → Year in time dimensions)
+- **Reference data:** Many reference data sets are inherently hierarchical, providing standardised classification schemes
+
+
+#### Modelling Hierarchies: Subtypes vs. Relationships
+
+Not all hierarchies are modelled the same way. The choice depends on the nature of the relationship:
+
+**Use Subtypes/Supertypes for "Is A" Taxonomies:**
+
+When entities represent specialisations of the same fundamental concept, use subtype/supertype relationships (as described in [Subtypes and Supertypes](#on-levelling-subtypes-and-supertypes)). These hierarchies:
+
+- Express **type distinctions** with strict rules (mutually exclusive subtypes)
+- Represent "Is A" relationships (e.g., "Individual Customer *is a* Customer", "Inpatient Encounter *is an* Encounter")
+- Are used as the **primary classification dimension** to distinguish fundamentally different variants of a concept
+- Follow subtyping rules: mutually exclusive, optionally collectively exhaustive
+
+**Use Relationships for Other Hierarchies:**
+
+For compositional, organisational, or classification hierarchies that don't represent type specialisation, use standard relationships between entities. These hierarchies:
+
+- Express compositional (Part Of), categorical (Belongs To), and organisational (Reports To) relationships
+- Support multiple concurrent hierarchies
+
+**Examples:**
+
+- **Subtype approach:** Account can be specialised into Savings Account and Checking Account subtypes based on their fundamental account type
+- **Relationship approach:** Location entities (Room, Ward, Building, Campus) related through "Part Of" relationships to represent physical containment
+
+
+
+#### Examples
+
+**Relationship Hierarchy: Healthcare Facility Structure**
+
+A healthcare location hierarchy represents the physical hierarchy of location (types):
+
+```
+[facility] Hospital Campus
+├── [facility] Building A
+│   ├── [ward] Ward 1
+│   │   ├── [room] Room 101
+│   │   └── [room] Room 102
+│   └── [ward] Ward 2
+│       └── [room] Room 201
+└── [facility] Building B
+    └── [ward] Outpatient Clinic
+        └── [room] Consultation Room 1
+```
+This simplified hierarchy can be represented physically in two common ways:
+
+- **Parent-Child (Adjacency List) Table:** Each location record references its parent, enabling recursive traversal.
+
+    | location_id | location_name        | location_type | parent_location_id |
+    |-------------|---------------------|---------------|--------------------|
+    | 1           | Hospital Campus     | Facility      | NULL               |
+    | 2           | Building A          | Facility      | 1                  |
+    | 3           | Ward 1              | Ward          | 2                  |
+    | 4           | Room 101            | Room          | 3                  |
+    | 5           | Room 102            | Room          | 3                  |
+    | 6           | Ward 2              | Ward          | 2                  |
+    | 7           | Room 201            | Room          | 6                  |
+    | 8           | Building B          | Facility      | 1                  |
+    | 9           | Outpatient Clinic   | Ward          | 8                  |
+    | 10          | Consultation Room 1 | Room          | 9                  |
+
+- **Flattened Attributes in a Dimension Table:** Each row holds the lowest-grain entity with columns for each hierarchy level.
+
+
+    | room_key | campus_name      | building_name | ward_name         | room_name            | start_at            | end_at              | updated_at          |
+    |----------|------------------|---------------|-------------------|----------------------|---------------------|---------------------|---------------------|
+    | 1001     | Hospital Campus  | Building A    | Ward 1            | Room 101             | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+    | 1002     | Hospital Campus  | Building A    | Ward 1            | Room 102             | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+    | 1003     | Hospital Campus  | Building A    | Ward 2            | Room 201             | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+    | 1004     | Hospital Campus  | Building B    | Outpatient Clinic | Consultation Room 1  | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+
+
+
+This dimension attribute pattern is common for star schemas, enabling easy filtering and reporting by hierarchy level. The adjacency list enables flexible and dynamic hierarchy navigation, while the flattened structure optimizes for query performance in analytic scenarios.
+
+
+
+**Reference Data Hierarchy: Product Classification**
+
+A logical product classification hierarchy organises products from specific items to broader categories. 
+
+```
+All Products
+├── Medical Equipment
+│   ├── Diagnostic Equipment
+│   │   ├── Imaging Systems
+│   │   │   ├── MRI Scanners
+│   │   │   └── CT Scanners
+│   │   └── Laboratory Equipment
+│   └── Therapeutic Equipment
+└── Pharmaceuticals
+    ├── Prescription Drugs
+    └── Over-the-Counter
+```
+This hierarchy can be represented physically in two common ways:
+
+- As a parent-child relationship table, where each record references its parent (for example, a `product_classification` table with `product_classification_id` and `parent_classification_id` columns)
+- As attributes within a dimension table, such as a `dim_product` table with columns for each hierarchical level (e.g., `product_category`, `product_subcategory`, `product_type`)
+
+**Example: Product Classification Reference Table (Parent-Child and Flattened Forms)**
+
+*Parent-Child (Adjacency List) Table:*
+
+| product_classification_id | classification_name       | parent_classification_id |
+|--------------------------|--------------------------|-------------------------|
+| 1                        | All Products             | NULL                    |
+| 2                        | Medical Equipment        | 1                       |
+| 3                        | Diagnostic Equipment     | 2                       |
+| 4                        | Imaging Systems          | 3                       |
+| 5                        | MRI Scanners             | 4                       |
+| 6                        | CT Scanners              | 4                       |
+| 7                        | Laboratory Equipment     | 3                       |
+| 8                        | Therapeutic Equipment    | 2                       |
+| 9                        | Pharmaceuticals          | 1                       |
+| 10                       | Prescription Drugs       | 9                       |
+| 11                       | Over-the-Counter         | 9                       |
+
+*Flattened Dimension Table Representation (lowest-level rows, hierarchical attributes as columns):*
+
+| product_key | classification_lvl1      | classification_lvl2      | classification_lvl3   | classification_lvl4   | start_at            | end_at              | updated_at          |
+|-------------|-------------------------|--------------------------|-----------------------|-----------------------|---------------------|---------------------|---------------------|
+| 100         | Medical Equipment        | Diagnostic Equipment     | Imaging Systems       | MRI Scanners          | 2022-01-01 00:00:00 | 9999-12-31 23:59:59 | 2022-02-14 10:30:00 |
+| 101         | Medical Equipment        | Diagnostic Equipment     | Imaging Systems       | CT Scanners           | 2022-01-01 00:00:00 | 9999-12-31 23:59:59 | 2022-02-14 10:30:00 |
+| 102         | Pharmaceuticals          | Prescription Drugs       |                       |                       | 2022-01-01 00:00:00 | 9999-12-31 23:59:59 | 2022-02-14 10:30:00 |
+| 103         | Pharmaceuticals          | Over-the-Counter        |                       |                       | 2022-01-01 00:00:00 | 9999-12-31 23:59:59 | 2022-02-14 10:30:00 |
+
+*Note: This example conforms to standard naming conventions as described in [modelling standards](modelling_standards_and_conventions.md). Surrogate keys use `_key` suffix (`product_key`). Date columns for SCD Type 2 tracking use `start_at`, `end_at`, and `updated_at`. Naming is singular for entities, and hierarchy attributes use logical prefixes and incremental numbering (e.g., `classification_lvl1`). Codes and descriptions, if present, should use `_code` and `_description` suffixes, respectively.*
+
+| product_key | classification_lvl1 | classification_lvl2   | classification_lvl3     | classification_lvl4   | start_at            | end_at              | updated_at          |
+|-------------|---------------------|-----------------------|-------------------------|-----------------------|---------------------|---------------------|---------------------|
+| 100         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems         | MRI Scanners          | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+| 101         | Medical Equipment   | Diagnostic Equipment  | Imaging Systems         | CT Scanners           | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+| 102         | Pharmaceuticals     | Prescription Drugs    |                         |                       | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+| 103         | Pharmaceuticals     | Over-the-Counter      |                         |                       | 2024-01-01 00:00:00 | NULL                | 2024-01-01 00:00:00 |
+
+This approach allows joining facts by the appropriate key and filtering or grouping at any hierarchy level via the flattened columns, or traversing relationships via the parent-child structure.
 
 ### Reference Data
 
 Reference data represents stable, standardised values used to categorise and classify other data (e.g., country codes, product types, status codes), ensuring consistency and shared meaning across systems. It may be standardised by external organisations (e.g., ISO), can be hierarchical, and may require mappings when multiple sets exist for the same domain. 
 
 Reference data objects are aligned to business entities and broad requirements, staged in stg as per silver marts, and are typically enterprise-wide rather than source-aligned (though optionality for capturing sources exists).
+
+#### On Dimensions, Master Data, and Reference Data
+
+**Logical Representation:**
+
+At the logical level, Master and Reference data is organised as:
+
+**Master Data** - Core business entities:
+- Central to business operations and shared across systems (e.g., Patient, Product, Provider, Location, Organization, Payer)
+- Managed as authoritative, "single source of truth" entities
+- Rich in descriptive attributes and relationships
+- Subject to governance and data quality processes
+
+
+**Reference Data** - Standardised classification values:
+- Used for categorisation, validation, and ensuring consistency (e.g., Status codes, Country codes, Product Categories)
+- May be externally standardised (e.g., ISO codes) or internally maintained
+- Can be simple (code/name pairs) or complex (hierarchical, with attributes)
+
+```
+LOGICAL VIEW
+
+Master Data Entities          Reference Data Entities
+┌──────────────────┐         ┌─────────────────────────┐
+│ • Patient        │         │ • Status Code           │
+│ • Product        │         │ • Country Code          │
+│ • Provider       │         │ • Product Category      │
+│ • Location       │         │ • Location Type         │
+│ • Organization   │         │ • Therapeutic Class     │
+│ • Payer          │         │ • Unit of Measure       │
+└──────────────────┘         └─────────────────────────┘
+```
+
+**Physical Implementation:**
+
+The same logical entities can take different physical forms depending on analytical requirements, query patterns, and performance needs:
+
+**1. Dimension Tables** (Star Schema):
+- Used when attributes are needed for slicing, dicing, filtering, and grouping
+- Supports rich descriptive attributes and hierarchies
+- Enables history tracking through SCD (Slowly Changing Dimensions)
+- Typical for: Master data entities, complex reference data used analytically
+- Example: `dim_product`, `dim_provider`, `dim_location`, `dim_product_category`
+- Well-managed master data simplifies conformance, though minor alignment steps may still be needed.
+
+**2. Simple Lookup Tables**:
+- Used for basic code-to-description translation without analytical use
+- Minimal attributes (typically just code, name, description)
+- No history tracking required
+- Typical for: Simple reference data used only for validation or display
+- Example: `ref_status_code`, `ref_currency`, `ref_yes_no_indicator`
+
+**3. Embedded in Fact Tables** (Denormalised):
+- Reference data attributes embedded directly into facts for performance
+- Used when query patterns frequently filter/group by these attributes
+- Trades storage for query performance (avoids joins)
+- Typical for: Frequently used classifications, type codes, status values
+- Example: Fact table includes `status_code`, `status_name` columns rather than joining to a dimension
+
+```
+PHYSICAL IMPLEMENTATION OPTIONS
+
+┌─────────────────────────────────────────────────────────────┐
+│                     SAME LOGICAL ENTITY                     │
+│                  (e.g., Product Category)                   │
+└─────────────────────────────────────────────────────────────┘
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+┌───────────────┐  ┌─────────────────┐  ┌──────────────────┐
+│ Dimension     │  │ Lookup Table    │  │ Embedded in Fact │
+│ Table         │  │                 │  │                  │
+│               │  │                 │  │                  │
+│ Full SCD      │  │ Simple code/    │  │ Denormalised     │
+│ Rich attrs    │  │ name pairs      │  │ for performance  │
+│ Hierarchies   │  │ No history      │  │                  │
+└───────────────┘  └─────────────────┘  └──────────────────┘
+```
+
+**Decision Criteria:**
+
+The physical form depends on:
+- **Analytical use:** Will users filter, group, or aggregate by these attributes? → Dimension
+- **Query patterns:** Is this accessed in most queries? → Consider embedding in facts
+- **History requirements:** Do changes over time impact reporting? → Dimension with SCD Type 2
+- **Complexity:** Does it have rich attributes or hierarchies? → Dimension
+- **Simplicity:** Is it just code/name lookup? → Simple lookup table
+- **Performance:** Are join costs impacting query performance? → Consider denormalisation
+
 
 For reference data modelling standards and guidelines [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
