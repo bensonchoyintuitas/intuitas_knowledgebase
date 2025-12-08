@@ -196,10 +196,10 @@ There are two options:
 
 > **Important:** 
 
-> - **Keep metric names dimension-agnostic**: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use `Sales Amount` not `Sales Amount by Product by Time`). 
-> - **Exception—Intrinsic dimensions**: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., `Customer Lifetime Value` is calculated at customer grain by definition; `Monthly Revenue Growth Rate` compares month-to-month by definition).
-> - **Temporal metrics**: Include time window qualifiers when the period defines the calculation logic (e.g., `Year-to-Date Sales Amount` accumulates from year start; `90-Day Rolling Average` uses a 90-day window).
-> - **Aggregation behavior**: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.
+- **Keep metric names dimension-agnostic**: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use `Sales Amount` not `Sales Amount by Product by Time`). 
+- **Exception—Intrinsic dimensions**: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., `Customer Lifetime Value` is calculated at customer grain by definition; `Monthly Revenue Growth Rate` compares month-to-month by definition).
+- **Temporal metrics**: Include time window qualifiers when the period defines the calculation logic (e.g., `Year-to-Date Sales Amount` accumulates from year start; `90-Day Rolling Average` uses a 90-day window).
+- **Aggregation behavior**: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.
 
 ### Keys (Logical Models)
 

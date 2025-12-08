@@ -327,13 +327,13 @@
 </ul>
 <blockquote>
 <p><strong>Important:</strong> </p>
+</blockquote>
 <ul>
 <li><strong>Keep metric names dimension-agnostic</strong>: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use <code>Sales Amount</code> not <code>Sales Amount by Product by Time</code>). </li>
 <li><strong>Exception—Intrinsic dimensions</strong>: Include dimensional qualifiers only when the dimension is intrinsic to the calculation logic and defines how the metric works (e.g., <code>Customer Lifetime Value</code> is calculated at customer grain by definition; <code>Monthly Revenue Growth Rate</code> compares month-to-month by definition).</li>
 <li><strong>Temporal metrics</strong>: Include time window qualifiers when the period defines the calculation logic (e.g., <code>Year-to-Date Sales Amount</code> accumulates from year start; <code>90-Day Rolling Average</code> uses a 90-day window).</li>
 <li><strong>Aggregation behavior</strong>: Averages and ratios cannot be summed across periods; they must be recalculated at each grain. BI tools like Power BI default to SUM, producing incorrect results for non-additive metrics—define these explicitly with appropriate DAX measures (AVERAGE, DIVIDE) rather than column aggregations. Document additivity to prevent incorrect rollups.</li>
 </ul>
-</blockquote>
 <h3 id="keys-logical-models">Keys (Logical Models)</h3>
 <h4 id="key-types">Key Types</h4>
 <p><strong>Natural or Surrogate (implementation characteristic):</strong></p>
