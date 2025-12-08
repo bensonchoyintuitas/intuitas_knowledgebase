@@ -190,10 +190,12 @@
 <li>Physical names follow platform-specific conventions (e.g., <code>order_placed</code>)</li>
 <li>The business glossary is the semantic source of truth</li>
 </ul>
-<p><strong>Example:</strong>
-- Business Name: <code>Order Placed</code>
-- Internal Identifier: <code>GUID-1234-5678</code>
-- Physical Name: <code>order_placed</code></p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>Business Name: <code>Order Placed</code></li>
+<li>Internal Identifier: <code>GUID-1234-5678</code></li>
+<li>Physical Name: <code>order_placed</code></li>
+</ul>
 <h3 id="events-and-transactions">Events and Transactions</h3>
 <p>Business events and transactions may be modelled in two valid ways:</p>
 <ul>
@@ -212,18 +214,22 @@
 <li>Use domain-specific language</li>
 <li>Direction should be clear</li>
 </ul>
-<p><strong>Examples:</strong>
-- <code>Customer places Order</code>
-- <code>Policy covers Claim</code>
-- <code>Doctor refers Patient</code>
-- <code>Employer employs Worker</code>
-- <code>Patient receives Treatment</code>
-- <code>Supplier delivers Product</code></p>
-<p><strong>Avoid:</strong>
-- <code>has_fk</code>
-- <code>references</code>
-- <code>linked to</code>
-- <code>related to</code></p>
+<p><strong>Examples:</strong></p>
+<ul>
+<li><code>Customer places Order</code></li>
+<li><code>Policy covers Claim</code></li>
+<li><code>Doctor refers Patient</code></li>
+<li><code>Employer employs Worker</code></li>
+<li><code>Patient receives Treatment</code></li>
+<li><code>Supplier delivers Product</code></li>
+</ul>
+<p><strong>Avoid:</strong></p>
+<ul>
+<li><code>has_fk</code></li>
+<li><code>references</code></li>
+<li><code>linked to</code></li>
+<li><code>related to</code></li>
+</ul>
 <h4 id="relationship-directionality">Relationship Directionality</h4>
 <ul>
 <li>Every relationship has one authoritative direction and name</li>
@@ -232,16 +238,24 @@
 <li>If you need a different semantic perspective, model it as a separate relationship</li>
 </ul>
 <h3 id="relationship-cardinality">Relationship Cardinality</h3>
-<p>There are two options:
-- Use crow's foot notation (shows 'one' with a line, 'many' with a branching crow's foot; commonly denotes relationships such as one-to-many, many-to-many, etc.)
-- Use multiplicity notation (explicitly labels relationship ends with numbers or ranges, e.g., '0..1', '1', '0..<em>', '1..</em>', indicating how many entities participate in the relationship)</p>
-<p><strong>Single direction (preferred):</strong>
-- <code>Customer places Order</code> ✓</p>
-<p><strong>Avoid passive inversion (same relationship, just reversed grammar):</strong>
-- <code>Order is placed by Customer</code> ✗</p>
-<p><strong>Separate relationships (different business concepts):</strong>
-- <code>Customer places Order</code> (ordering action)
-- <code>Customer is billed for Order</code> (financial relationship)</p>
+<p>There are two options:</p>
+<ul>
+<li>Use crow's foot notation (shows 'one' with a line, 'many' with a branching crow's foot; commonly denotes relationships such as one-to-many, many-to-many, etc.)</li>
+<li>Use multiplicity notation (explicitly labels relationship ends with numbers or ranges, e.g., '0..1', '1', '0..<em>', '1..</em>', indicating how many entities participate in the relationship)</li>
+</ul>
+<p><strong>Single direction (preferred):</strong></p>
+<ul>
+<li><code>Customer places Order</code> ✓</li>
+</ul>
+<p><strong>Avoid passive inversion (same relationship, just reversed grammar):</strong></p>
+<ul>
+<li><code>Order is placed by Customer</code> ✗</li>
+</ul>
+<p><strong>Separate relationships (different business concepts):</strong></p>
+<ul>
+<li><code>Customer places Order</code> (ordering action)</li>
+<li><code>Customer is billed for Order</code> (financial relationship)</li>
+</ul>
 <hr />
 <h2 id="conceptual-models">Conceptual Models</h2>
 <blockquote>
@@ -257,15 +271,19 @@
 <li>Boxes represent business concepts (entities)</li>
 <li>Lines represent relationships</li>
 </ul>
-<p><strong>Show:</strong>
-- Core concepts
-- Key relationships
-- Major business rules</p>
-<p><strong>Do not show:</strong>
-- Keys
-- Data types
-- Technical constraints
-- Detailed cardinality beyond simple one-to-many</p>
+<p><strong>Show:</strong></p>
+<ul>
+<li>Core concepts</li>
+<li>Key relationships</li>
+<li>Major business rules</li>
+</ul>
+<p><strong>Do not show:</strong></p>
+<ul>
+<li>Keys</li>
+<li>Data types</li>
+<li>Technical constraints</li>
+<li>Detailed cardinality beyond simple one-to-many</li>
+</ul>
 <hr />
 <h2 id="logical-models">Logical Models</h2>
 <blockquote>
@@ -293,9 +311,11 @@
 <li>Make names consistent with related entities and attributes</li>
 <li>Use semantic suffixes <a href="#quantities--measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
 </ul>
-<p><strong>Example:</strong>
-- <strong>Measure:</strong> <code>Total Sales Amount</code> — aggregated sum of sales transactions
-- <strong>Metric:</strong> <code>Average Order Value</code> — calculated as <code>Total Sales Amount / Order Count</code></p>
+<p><strong>Example:</strong></p>
+<ul>
+<li><strong>Measure:</strong> <code>Total Sales Amount</code> — aggregated sum of sales transactions</li>
+<li><strong>Metric:</strong> <code>Average Order Value</code> — calculated as <code>Total Sales Amount / Order Count</code></li>
+</ul>
 <blockquote>
 <p><strong>Important:</strong> 
 - <strong>Keep metric names dimension-agnostic</strong>: Avoid including dimension references like "by Product" or "by Region" in metric names—the dimensional model handles slicing (e.g., use <code>Sales Amount</code> not <code>Sales Amount by Product by Time</code>). 
@@ -305,15 +325,19 @@
 </blockquote>
 <h3 id="keys-logical-models">Keys (Logical Models)</h3>
 <h4 id="key-types">Key Types</h4>
-<p><strong>Natural or Surrogate (implementation characteristic):</strong>
-- <strong>Natural Key</strong>: Uses a real-world business identifier (e.g., <code>Invoice Number</code>, <code>Medicare Number</code>)
-- <strong>Surrogate Key</strong>: System-generated identifier (e.g., auto-increment, UUID)
-- This is a metadata property, not encoded in the name</p>
-<p><strong>Primary or Alternate (role in the model):</strong>
-- <strong>Primary Key (PK)</strong>: The chosen unique identifier for the entity
-- <strong>Alternate Key (AK)</strong>: Any other unique identifier
-- Tag primary keys as <code>(PK)</code> in logical models
-- All other unique keys are considered alternate keys</p>
+<p><strong>Natural or Surrogate (implementation characteristic):</strong></p>
+<ul>
+<li><strong>Natural Key</strong>: Uses a real-world business identifier (e.g., <code>Invoice Number</code>, <code>Medicare Number</code>)</li>
+<li><strong>Surrogate Key</strong>: System-generated identifier (e.g., auto-increment, UUID)</li>
+<li>This is a metadata property, not encoded in the name</li>
+</ul>
+<p><strong>Primary or Alternate (role in the model):</strong></p>
+<ul>
+<li><strong>Primary Key (PK)</strong>: The chosen unique identifier for the entity</li>
+<li><strong>Alternate Key (AK)</strong>: Any other unique identifier</li>
+<li>Tag primary keys as <code>(PK)</code> in logical models</li>
+<li>All other unique keys are considered alternate keys</li>
+</ul>
 <h4 id="key-naming-pattern">Key Naming Pattern</h4>
 <p>Naming follows these patterns for readability, but metadata remains the source of truth for key roles. i.e Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. </p>
 <blockquote>
@@ -386,31 +410,39 @@
 <p>For physical modelling framework and common formats, see <a href="../modelling_framework/#physical-data-models">Physical Models</a> in the Modelling Framework.</p>
 </blockquote>
 <p>Physical models represent implemented storage structures and must follow deterministic, platform-safe naming conventions.</p>
-<p><strong>Singular vs Plural Naming:</strong>
-- <strong>Default</strong>: Use singular nouns for table names (e.g., <code>customer</code>, <code>invoice</code>, <code>payment</code>)
-- <strong>Exception - Dimensional Facts</strong>: Use plural nouns for fact tables (e.g., <code>fact_payments</code>, <code>fact_orders</code>)
-- <strong>Dimensional Dimensions</strong>: Use singular nouns (e.g., <code>dim_customer</code>, <code>dim_product</code>)</p>
+<p><strong>Singular vs Plural Naming:</strong></p>
+<ul>
+<li><strong>Default</strong>: Use singular nouns for table names (e.g., <code>customer</code>, <code>invoice</code>, <code>payment</code>)</li>
+<li><strong>Exception - Dimensional Facts</strong>: Use plural nouns for fact tables (e.g., <code>fact_payments</code>, <code>fact_orders</code>)</li>
+<li><strong>Dimensional Dimensions</strong>: Use singular nouns (e.g., <code>dim_customer</code>, <code>dim_product</code>)</li>
+</ul>
 <h3 id="relational-structures">Relational Structures</h3>
 <h4 id="naming">Naming</h4>
 <p>All physical objects must use <strong>lowercase with underscores</strong> (<code>snake_case</code>).</p>
-<p><strong>General Rules:</strong>
-- No mixed case
-- No spaces
-- Use singular table names (except for dimensional model facts - see below)
-- Prefer clarity over brevity
-- Avoid source-system naming where possible</p>
-<p><strong>Tables:</strong>
-- Express business meaning
-- Use prefixes where appropriate (e.g., <code>fact_</code>, <code>dim_</code>)
-- Examples: <code>customer</code>, <code>invoice</code>, <code>fact_orders</code> (dimensional fact), <code>dim_patient</code> (dimensional dimension)</p>
-<p><strong>Columns:</strong>
-- Map directly from logical attributes
-- Use semantic names
-- Do not encode data types or storage formats
-- There are two options for handling units:
-  - A: embed the unit in the column name
-  - B: separate value and unit type as separate columns
-- Examples: <code>customer_id</code>, <code>invoice_number</code>, <code>order_datetime</code>, <code>total_amount</code>, <code>is_active</code></p>
+<p><strong>General Rules:</strong></p>
+<ul>
+<li>No mixed case</li>
+<li>No spaces</li>
+<li>Use singular table names (except for dimensional model facts - see below)</li>
+<li>Prefer clarity over brevity</li>
+<li>Avoid source-system naming where possible</li>
+</ul>
+<p><strong>Tables:</strong></p>
+<ul>
+<li>Express business meaning</li>
+<li>Use prefixes where appropriate (e.g., <code>fact_</code>, <code>dim_</code>)</li>
+<li>Examples: <code>customer</code>, <code>invoice</code>, <code>fact_orders</code> (dimensional fact), <code>dim_patient</code> (dimensional dimension)</li>
+</ul>
+<p><strong>Columns:</strong></p>
+<ul>
+<li>Map directly from logical attributes</li>
+<li>Use semantic names</li>
+<li>Do not encode data types or storage formats</li>
+<li>There are two options for handling units:</li>
+<li>A: embed the unit in the column name</li>
+<li>B: separate value and unit type as separate columns</li>
+<li>Examples: <code>customer_id</code>, <code>invoice_number</code>, <code>order_datetime</code>, <code>total_amount</code>, <code>is_active</code></li>
+</ul>
 <h4 id="diagrammatic-representation_2">Diagrammatic Representation</h4>
 <ul>
 <li>Consistent with logical models</li>
@@ -418,47 +450,63 @@
 </ul>
 <h4 id="databricks-conventions">Databricks Conventions</h4>
 <p>For detailed conventions and examples see <a href="../standards_and_conventions/#databricks">Databricks</a></p>
-<p><strong>Catalogs:</strong>
-- Catalogs represent domain-level scope (e.g., <code>intuitas_engineering_dev</code>, <code>intuitas_corporate_dev</code>)
-- May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls
-- Naming is lowercase, underscore-separated, and meaningful
-- Pattern: <code>{domain_name}{_environment}</code> (e.g., <code>intuitas_corporate_dev</code>)</p>
-<p><strong>Schemas:</strong>
-- Schemas represent layers, stages, zones, or source systems within a catalog
-- Use double underscores (<code>__</code>) as separators for schema components
-- Pattern: <code>{stage}__{zone}__{source_system}__{schema}</code> (e.g., <code>bronze__ods__fhirhouse__dbo</code>)
-- Full example: <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></p>
-<p><strong>Tables and Views:</strong>
-- Tables for persisted data
-- Views for logical abstraction
-- Names reflect business meaning, not source-system terminology</p>
-<p><strong>Columns:</strong>
-- Use lowercase <code>snake_case</code>
-- No abbreviations unless standard</p>
+<p><strong>Catalogs:</strong></p>
+<ul>
+<li>Catalogs represent domain-level scope (e.g., <code>intuitas_engineering_dev</code>, <code>intuitas_corporate_dev</code>)</li>
+<li>May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls</li>
+<li>Naming is lowercase, underscore-separated, and meaningful</li>
+<li>Pattern: <code>{domain_name}{_environment}</code> (e.g., <code>intuitas_corporate_dev</code>)</li>
+</ul>
+<p><strong>Schemas:</strong></p>
+<ul>
+<li>Schemas represent layers, stages, zones, or source systems within a catalog</li>
+<li>Use double underscores (<code>__</code>) as separators for schema components</li>
+<li>Pattern: <code>{stage}__{zone}__{source_system}__{schema}</code> (e.g., <code>bronze__ods__fhirhouse__dbo</code>)</li>
+<li>Full example: <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></li>
+</ul>
+<p><strong>Tables and Views:</strong></p>
+<ul>
+<li>Tables for persisted data</li>
+<li>Views for logical abstraction</li>
+<li>Names reflect business meaning, not source-system terminology</li>
+</ul>
+<p><strong>Columns:</strong></p>
+<ul>
+<li>Use lowercase <code>snake_case</code></li>
+<li>No abbreviations unless standard</li>
+</ul>
 <hr />
 <h3 id="dimensional-models">Dimensional Models</h3>
 <blockquote>
 <p>For dimensional modelling framework, conformed dimensions, and dimensional bus matrix, see <a href="../modelling_framework/#dimensional-kimball-model">Dimensional (Kimball) Model</a> in the Modelling Framework.</p>
 </blockquote>
 <p>For detailed conventions and examples including staging models see the Information Marts sections of <a href="../standards_and_conventions/#schema-and-object-conventions">Schema and Object Conventions</a></p>
-<p><strong>Naming:</strong>
-- Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>) (pluralisation here is an exception in naming)
-- Dimension tables prefixed with <code>dim_</code> and use <strong>singular</strong> entity names (e.g., <code>dim_customer</code>, <code>dim_date</code>)
-- Warehouse dimension keys: <code>&lt;entity&gt;_key</code> (the surrogate key used for joins in the warehouse)
-- Business keys: <code>&lt;entity&gt;_id</code> (the identifier from the source system)</p>
+<p><strong>Naming:</strong></p>
+<ul>
+<li>Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>) (pluralisation here is an exception in naming)</li>
+<li>Dimension tables prefixed with <code>dim_</code> and use <strong>singular</strong> entity names (e.g., <code>dim_customer</code>, <code>dim_date</code>)</li>
+<li>Warehouse dimension keys: <code>&lt;entity&gt;_key</code> (the surrogate key used for joins in the warehouse)</li>
+<li>Business keys: <code>&lt;entity&gt;_id</code> (the identifier from the source system)</li>
+</ul>
 <p><strong>Gold Layer Examples:</strong></p>
-<p><em>Staging:</em>
-- <code>intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</code>
-- <code>intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</code>
-- <code>stg__dim_account__01_dedupe.sql</code></p>
-<p><em>Information Marts:</em>
-- <code>intuitas_corporate_dev.mart.fact_late_payments</code> — fact table
-- <code>intuitas_corporate_dev.mart.dim_customer</code> — dimension table
-- <code>mart__dim_account.sql</code> — dbt model file
-- <code>mart__dim_date.sql</code> — dbt model file</p>
-<p><strong>Keys:</strong>
-- <code>customer_key</code> — warehouse dimension key (surrogate key for joins)
-- <code>customer_id</code> — business identifier from source system</p>
+<p><em>Staging:</em></p>
+<ul>
+<li><code>intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</code></li>
+<li><code>intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</code></li>
+<li><code>stg__dim_account__01_dedupe.sql</code></li>
+</ul>
+<p><em>Information Marts:</em></p>
+<ul>
+<li><code>intuitas_corporate_dev.mart.fact_late_payments</code> — fact table</li>
+<li><code>intuitas_corporate_dev.mart.dim_customer</code> — dimension table</li>
+<li><code>mart__dim_account.sql</code> — dbt model file</li>
+<li><code>mart__dim_date.sql</code> — dbt model file</li>
+</ul>
+<p><strong>Keys:</strong></p>
+<ul>
+<li><code>customer_key</code> — warehouse dimension key (surrogate key for joins)</li>
+<li><code>customer_id</code> — business identifier from source system</li>
+</ul>
 <p><strong>SCD Type 2 Columns:</strong></p>
 <table>
 <thead>
@@ -524,11 +572,13 @@
 </blockquote>
 <p>Reference data plays a critical role in conformance by providing standardised values that enable mapping of source-specific codes to canonical enterprise definitions.</p>
 <h4 id="logical-modelling">Logical Modelling</h4>
-<p>Reference entities contain:
-- Natural keys (e.g., Country Code, Product Type Code)
-- Code and description attributes
-- Optional: effective dates, display sequences, parent references (hierarchies), business metadata
-- One-to-many relationships to domain entities</p>
+<p>Reference entities contain:</p>
+<ul>
+<li>Natural keys (e.g., Country Code, Product Type Code)</li>
+<li>Code and description attributes</li>
+<li>Optional: effective dates, display sequences, parent references (hierarchies), business metadata</li>
+<li>One-to-many relationships to domain entities</li>
+</ul>
 <p><strong>Example: Country Code Reference Entity</strong></p>
 <table>
 <thead>
