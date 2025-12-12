@@ -222,13 +222,13 @@ Catalog name:
 
 The choice of granularity depends on domain topology, stage/zone convention and desired level of segregation for access and sharing controls (i.e. catalog or schema level)
 
-   - Minimum granularity (domain level): `{domain_name}{_environment (dev/test/pat/prod)}` (prod is implied optional)   *e.g: intuitas_corporate_dev*
-   - Optional granularity (domain-data stage level): `{domain_name}{_data_stage: (bronze/silver/gold)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_bronze_dev*
-   - Optional granularity (domain-data stage and zone level): `{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/im)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_bronze_ods_dev*
-   - Optional granularity (domain-data zone level): `{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/im)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_ods_dev*
-   - Optional granularity (subdomain-data stage level): `{domain_name}{_descriptor (subdomain/subject/project*)}(bronze/silver/gold)}{_environment (dev/test/pat/prod)}`    *e.g: intuitas_corporate_finance_bronze_dev*
+   - Minimum granularity (domain level): `{domain_name}{__environment (dev/test/pat/prod)}` (prod is implied optional)   *e.g: corporate__dev*
+   - Optional granularity (domain-data stage level): `{domain_name}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_bronze__dev*
+   - Optional granularity (domain-data stage and zone level): `{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/mart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_bronze_ods__dev*
+   - Optional granularity (domain-data zone level): `{domain_name}{_data_zone: (ods/pds/edw/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
+   - Optional granularity (subdomain-data stage level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_bronze__dev*
 
-In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow`
+In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo(lakeflow).encounter`
 
 *Note that projects are temporary constructs, and hence are not recommended for naming*
 
@@ -236,8 +236,9 @@ In the examples provided - we have opted for domain level - with schema separati
 
 ### Externally mounted (lakehouse federation) Catalog Names
 
-- Foreign Catalog name: `{domain_name (owner)} _fc__{source_system}{optional:__other_useful_descriptors e.g:_environment}`
-- *e.g: intuitas_corporate_fc__sqlonpremsource*
+- Foreign Catalog name: `{domain_name (owner)}__fc__{source_system}{optional:__other_useful_descriptors e.g:__environment}`
+- *e.g: corporate__fc__sqlonpremsource*
+- *e.g: corporate__fc__sqlonpremsource__prod*
 
 ### Catalog Metadata tags:
 
@@ -258,7 +259,7 @@ Refer to [Physical Models](modelling_standards_and_conventions.md#physical-model
 
 Recommendations:
 
-- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/intuitas_engineering_dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
+- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/engineering__dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 - Ensure dbt's dbt_project.yml and environment variables align with storage locations.
 
@@ -270,9 +271,10 @@ Contains metadata that supports engineering and governance. This will vary depen
 
 **Engineering - ingestion framework**:
 
-- Schema naming convention:  `meta__{optional: function}`
+- Schema naming convention:  `meta {optional: __function}`
 - Naming convention: `{function/descriptor}`
-- *e.g: intuitas_corporate_dev.meta__ingestion.ingestion_control*
+- *e.g: corporate__dev.meta.ingestion_control*
+- *e.g: corporate__dev.meta__ingestion.ingestion_control*
 
 #### Bronze (Raw data according to systems)
 
@@ -280,7 +282,7 @@ The Bronze layer stores raw, immutable data as it is ingested from source system
 
 All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `bronze__`
 
-In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow`
+In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter`
 
 **Persistent Landing**:
 
@@ -293,8 +295,8 @@ Persistent Landing uses Unity Catalog Volumes for storing raw files and unstruct
   - `[__source_schema]`: Optional source schema or subsystem identifier
   - `(channel)`: Ingestion channel/method (e.g., `adf`, `fivetran`, `api`)
   - `[source_object/volume_name]`: Descriptive volume name or source object identifier
-- *e.g: corporate_dev.landing__workdayapi.schedule_volume*
-- *e.g: engineering_prod.landing__fhirapi__patients.raw_data*
+- *e.g: corporate__dev.landing__workdayapi.schedule_volume*
+- *e.g: engineering__prod.landing__fhirapi__patients.raw_data*
 
 **Operational Data Store (ODS)**:
 
@@ -359,7 +361,7 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.
 
-In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `intuitas_engineering_dev.silver__mart`
+In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.edw.dim_customer`
 
 - All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `silver__`
 - All `entity` names which align to facts should be named in plural.
@@ -464,7 +466,7 @@ Optional warehousing construct.
 
 - Schema naming convention: `edw_rv`
 - Object naming convention: `{vault object named as per data vault standards}`
-- *e.g: intuitas_corporate_dev.edw_rv.hs_payments__finance_system__adf*
+- *e.g: corporate__dev.edw_rv.hs_payments__finance_system__adf*
 
 <br>
 
@@ -473,7 +475,7 @@ Optional warehousing construct.
 
 - Schema naming convention: `edw_bv`
 - Object naming convention: `{vault object named as per data vault standards}`
-- *e.g: intuitas_corporate_dev.edw_bv.hs_late_payments__finance_system__adf*
+- *e.g: corporate__dev.edw_bv.hs_late_payments__finance_system__adf*
 
 <br>
 
@@ -601,7 +603,7 @@ Within each respective model folder (as needed)
 
 - Folder: models/sources/{bronze/silver/gold}
 - yml: {schema}__sources.yml (one for each source schema) 
-- *e.g: bronze__ods__ambo_sim__kafka__local__sources.yml*
+- *e.g: ods__ambo_sim__kafka__sources.yml*
 
 ### Model and Folder Names
 
@@ -625,9 +627,9 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 ```md
    *e.g:*
 
-      - *silver\new_finance_system__adf\stg\intuitas_corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
+      - *silver\new_finance_system__adf\stg\corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
       - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-      - materialises to: *intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed__new_finance_system__adf*
+      - materialises to: *corporate__dev.edw.stg_account__new_finance_system__adf__01_renamed*
 ```
 
 
@@ -636,16 +638,16 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim_/fact_}{__entity /_object_description} __{ordinal}_{transformation description} `
 
-      - *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
-      - *e.g: intuitas_corporate_dev.stg.accounts__02_business_validated* 
+      - *e.g: corporate__dev.edw.stg_account__01_deduped*
+      - *e.g: corporate__dev.edw.stg_account__02_validated* 
 
 
 ```md
    *e.g:*
 
-      - *silver\mart\accounts\stg\intuitas_corporate__silver__stg__accounts__01_deduped.sql*
+      - *silver\mart\accounts\stg\corporate__silver__stg__accounts__01_deduped.sql*
       - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
-      - materialises to: *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
+      - materialises to: *e.g: corporate__dev.edw.stg_account__01_deduped*
 ```
 
 **Mart Source-specific:** 
@@ -771,28 +773,29 @@ models:
         columns: true
 
     bronze:
-      +schema: bronze
+      ods:
+         +schema: ods
+      pds:
+         +schema: pds
 
     silver:
-      +schema: silver
-      source_system_1:
-        +schema: silver__source_system_1
-        base:
-          +materialized: view
-        staging:
-          +materialized: table
-      edw__domain_name:
-        +description: "Domain-centric EDW objects."
-        +schema: silver__edw__domain_name
+      ref:
+        +description: "Reference data"
+        +schema: ref
         +materialized: table
+      edw:
+        +description: "Enterprise data warehouse base marts"
+        +schema: edw
+        +materialized: table
+        staging:
+          +materialized: view
 
     gold:
       +materialized: view # default for speed
-      +schema: gold
-      domain_name:
-        +schema: gold__domain_name
-        subdomain_name:
-          +schema: gold__domain_name__subdomain_name
+      mart:
+        +description: "Product marts"
+        +schema: mart
+        +materialized: table
 ```
 
 <br>
