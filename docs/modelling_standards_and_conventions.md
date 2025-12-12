@@ -429,11 +429,10 @@ For detailed conventions and examples including staging models see the Informati
 
 ##### Key resolution
 
-Mappings of keys are often required to resolve and integrate heterogeneous identifiers originating from multiple source systems into a consistent warehouse-wide identifier.  
-Key mapping tables support integration by translating source-system identifiers into a common business key and/or surrogate key used by downstream dimensional models.
+Mappings of keys are often required to resolve and integrate heterogeneous identifiers originating from multiple source systems into a consistent warehouse-wide identifier. Key mapping tables support integration by translating source-system identifiers into a common business key and/or surrogate key used by downstream dimensional models.
 
 **Example:**
-- `corporate__prod.edw.keys_employee` — base mart keyset conforming SAP and Workday employee identifiers into a single enterprise employee key.
+- `corporate__prod.edw.keys_employee`  (base mart keyset conforming SAP and Workday employee identifiers into a single enterprise employee key)
 
 ---
 
@@ -441,12 +440,15 @@ Key mapping tables support integration by translating source-system identifiers 
 
 **Business keys (BKs)** represent the real-world identifier of an entity and are sourced from operational systems.
 
-- Business keys may be:
+Business keys may be:
+
   - Single-column or composite
   - Source-specific or enterprise-conformed
-- The basis of our conformed BK pattern is: `source_system`|`source_identifier` in string format
+
+The basis of our conformed BK pattern is: `source_system`|`source_identifier` in string format
 
 **Usage guidance:**
+
 - Business keys **may** be used directly as dimension primary keys (and fact foreign keys) for simple **Type 1** dimensions, however this creates inconsistency if other dimensions use surrogate keys for Type 2 tracking.
 - Business keys alone are insufficient for **Type 2** dimensions because they do not distinguish historical versions of the same entity. Hence the need for Surrogate Keys.
 
@@ -457,6 +459,7 @@ Key mapping tables support integration by translating source-system identifiers 
 **Surrogate keys (SKs)** are system-generated identifiers that uniquely represent a *specific version* of a dimensional entity.
 
 They are required for:
+
 - Type 2 (and higher) SCD dimensions
 - Stable fact-to-dimension joins
 - Decoupling fact tables from volatile or composite business keys
@@ -495,11 +498,13 @@ In Databricks, there are multiple approaches to creating surrogate keys.
   - Sequence- or merge-based incrementing keys
 
   Characteristics:
+
   - High performance for joins and aggregations
   - No collision risk
   - Environment-specific values (acceptable in most warehouse designs)
 
   Limitations:
+
   - Not compatible with dbt-managed tables
   - Concurrent writes to the table are not supported
 
@@ -521,10 +526,14 @@ dbt supports surrogate key generation using deterministic hashing constructs, su
 - Platform-specific numeric hashes (e.g. `xxhash64`) cast to `BIGINT`
 
 Usage guidance:
+
 - Hash-based SKs should include:
+
   - Business key
   - `effective_from_datetime` (for Type 2 dimensions)
+
 - Hash-based SKs enable deterministic keys across environments:
+
   - MD5 returns a 32-character hex string; xxhash64 returns a BIGINT
   - Numeric (BIGINT) keys offer better join performance
   - Consider SHA256 if hash collision risk is a concern
