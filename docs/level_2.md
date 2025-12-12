@@ -264,7 +264,7 @@ The Bronze layer stores raw, immutable data as it is ingested from source system
     - As these may be available in landing - may be realised through views over landing *subject to deduplication
 
 
-#### **Silver layer: Data according to business**
+#### **Silver/EDW layer: Data according to business**
 The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets. These datasets are aligned with broadly accepted business standards and models, making them suitable for a range of downstream requirements.
 
 While some interpretations consider Silver to be primarily *source-centric*, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources.
