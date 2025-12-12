@@ -593,13 +593,10 @@
 AND fact.event_timestamp &gt;= dim.effective_from_datetime
 AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '9999-12-31 00:00:00')
 </code></pre>
-<p>This resolution <strong>requires a lookup</strong> to the dimension (or a dimension version map). It cannot be inferred independently by the fact row.</p>
 <hr />
 <h5 id="databricks-surrogate-keys">Databricks Surrogate Keys</h5>
 <p>In Databricks, there are multiple approaches to creating surrogate keys.</p>
-<ul>
-<li><strong>IDENTITY</strong></li>
-</ul>
+<p><strong>IDENTITY</strong></p>
 <p>Databricks recommended approach <a href="https://www.databricks.com/blog/2022/08/08/identity-columns-to-generate-surrogate-keys-are-now-available-in-a-lakehouse-near-you.html">here</a>:</p>
 <ul>
 <li><code>BIGINT GENERATED ALWAYS AS IDENTITY</code></li>
@@ -617,14 +614,12 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li>Concurrent writes to the table are not supported</li>
 </ul>
 <p>Other valid approaches (depending on downstream requirements):</p>
-<ul>
-<li><strong>Natural key only (BK as PK/FK)</strong>: valid for <strong>Type 1</strong> dimensions; simplest, but typically wider keys and slower joins.</li>
-<li><strong>Type 2 composite key (string)</strong>: store <code>(business_key + effective_from_datetime)</code> as a single concatenated key; simple and transparent, but increases key width and join cost.</li>
-<li><strong>Deterministic hash key</strong>: hash <code>(business_key + effective_from_datetime)</code> into a fixed-width value (string or numeric) for smaller keys and cross-environment stability; manage collision risk by choosing an appropriate hash and store BK/effective_from_datetime alongside for traceability.</li>
-</ul>
+<p><strong>Natural key only (BK as PK/FK)</strong>: valid for <strong>Type 1</strong> dimensions; simplest, but typically wider keys and slower joins.</p>
+<p><strong>Type 2 composite key (string)</strong>: store <code>business_key</code> | <code>effective_from_datetime</code> as a single concatenated key; simple and human readable, but increases key width and join cost.</p>
+<p><strong>Deterministic hash key</strong>: hash <code>(business_key + effective_from_datetime)</code> into a fixed-width value (string or numeric) for smaller keys and cross-environment stability; manage collision risk by choosing an appropriate hash and store BK/effective_from_datetime alongside for traceability.</p>
 <hr />
 <h5 id="dbt-surrogate-keys">dbt Surrogate Keys</h5>
-<p>dbt supports surrogate key generation using deterministic hashing constructs, such as:</p>
+<p>dbt supports surrogate hash key generation out of the box:</p>
 <ul>
 <li><code>dbt_utils.surrogate_key(...)</code> (MD5 string hash)</li>
 <li>Platform-specific numeric hashes (e.g. <code>xxhash64</code>) cast to <code>BIGINT</code></li>
@@ -637,13 +632,13 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 </ul>
 <p>Hash-based SKs enable deterministic keys across environments:</p>
 <ul>
-<li>MD5 used by the dbt default macro returns a 32-character hex string / binary is more performant but it might require more tweaking</li>
-<li>Numeric (BIGINT) keys offer better join performance</li>
+<li>MD5 used by the dbt default macro returns a 32-character hex string. Binary is more performant but it requires tweaking.</li>
 <li>Consider SHA256 if hash collision risk is a concern (it is unlikely for dimensions however)</li>
 </ul>
 <hr />
 <h3 id="key-design-summary">Key Design Summary</h3>
 <ul>
+<li>Numeric (BIGINT) keys offer better join performance</li>
 <li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
 <li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
 <li>Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.</li>

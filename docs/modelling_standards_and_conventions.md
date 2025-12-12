@@ -482,7 +482,7 @@ AND fact.event_timestamp >= dim.effective_from_datetime
 AND fact.event_timestamp <  COALESCE(dim.effective_to_datetime, TIMESTAMP '9999-12-31 00:00:00')
 ```
 
-This resolution **requires a lookup** to the dimension (or a dimension version map). It cannot be inferred independently by the fact row.
+
 
 ---
 
@@ -490,7 +490,7 @@ This resolution **requires a lookup** to the dimension (or a dimension version m
 
 In Databricks, there are multiple approaches to creating surrogate keys.
 
-- **IDENTITY**
+**IDENTITY**
 
   Databricks recommended approach [here](https://www.databricks.com/blog/2022/08/08/identity-columns-to-generate-surrogate-keys-are-now-available-in-a-lakehouse-near-you.html):
 
@@ -512,15 +512,17 @@ In Databricks, there are multiple approaches to creating surrogate keys.
 
 Other valid approaches (depending on downstream requirements):
 
-- **Natural key only (BK as PK/FK)**: valid for **Type 1** dimensions; simplest, but typically wider keys and slower joins.
-- **Type 2 composite key (string)**: store `(business_key + effective_from_datetime)` as a single concatenated key; simple and transparent, but increases key width and join cost.
-- **Deterministic hash key**: hash `(business_key + effective_from_datetime)` into a fixed-width value (string or numeric) for smaller keys and cross-environment stability; manage collision risk by choosing an appropriate hash and store BK/effective_from_datetime alongside for traceability.
+**Natural key only (BK as PK/FK)**: valid for **Type 1** dimensions; simplest, but typically wider keys and slower joins.
+
+**Type 2 composite key (string)**: store `business_key` | `effective_from_datetime` as a single concatenated key; simple and human readable, but increases key width and join cost.
+
+**Deterministic hash key**: hash `(business_key + effective_from_datetime)` into a fixed-width value (string or numeric) for smaller keys and cross-environment stability; manage collision risk by choosing an appropriate hash and store BK/effective_from_datetime alongside for traceability.
 
 ---
 
 ##### dbt Surrogate Keys
 
-dbt supports surrogate key generation using deterministic hashing constructs, such as:
+dbt supports surrogate hash key generation out of the box:
 
 - `dbt_utils.surrogate_key(...)` (MD5 string hash)
 - Platform-specific numeric hashes (e.g. `xxhash64`) cast to `BIGINT`
@@ -534,14 +536,14 @@ Hash-based SKs should include:
 
 Hash-based SKs enable deterministic keys across environments:
 
-- MD5 used by the dbt default macro returns a 32-character hex string / binary is more performant but it might require more tweaking
-- Numeric (BIGINT) keys offer better join performance
+- MD5 used by the dbt default macro returns a 32-character hex string. Binary is more performant but it requires tweaking.
 - Consider SHA256 if hash collision risk is a concern (it is unlikely for dimensions however)
 
 ---
 
 ### Key Design Summary
 
+- Numeric (BIGINT) keys offer better join performance
 - Prefer **numeric** SKs for performance (especially with PowerBI); use **deterministic** SKs when cross-environment stability is required
 - **Date dimension tip**: Use integer with YYYYMMDD format as the surrogate key for optimal performance
 - Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.
