@@ -161,9 +161,22 @@
 </li>
 <li><a href="./#physical-models">Physical Models</a><ul>
 <li><a href="./#relational-structures">Relational Structures</a></li>
+<li><a href="./#naming">Naming</a></li>
+<li><a href="./#diagrammatic-representation">Diagrammatic Representation</a></li>
 <li><a href="./#databricks-conventions">Databricks Conventions</a></li>
 <li><a href="./#dimensional-models">Dimensional Models</a></li>
+<li><a href="./#data-warehouse-keys">Data Warehouse Keys</a><ul>
+<li><a href="./#key-resolution">Key resolution</a></li>
+<li><a href="./#business-keys">Business Keys</a></li>
+<li><a href="./#surrogate-keys">Surrogate Keys</a></li>
+<li><a href="./#type-2-fact-resolution">Type 2 Fact Resolution</a></li>
+<li><a href="./#databricks-surrogate-keys">Databricks Surrogate Keys</a></li>
+<li><a href="./#dbt-surrogate-keys">dbt Surrogate Keys</a></li>
+</ul>
+</li>
 <li><a href="./#reference-data">Reference Data</a></li>
+<li><a href="./#logical-modelling">Logical Modelling</a></li>
+<li><a href="./#physical-implementation">Physical Implementation</a></li>
 </ul>
 </li>
 <li><a href="./#standard-suffix-and-prefix-inventory">Standard Suffix and Prefix Inventory</a><ul>
@@ -496,26 +509,6 @@
 <li>Fact tables prefixed with <code>fact_</code> and use <strong>plural</strong> entity names (e.g., <code>fact_payments</code>, <code>fact_orders</code>) (pluralisation here is an exception in naming)</li>
 <li>Dimension tables prefixed with <code>dim_</code> and use <strong>singular</strong> entity names (e.g., <code>dim_customer</code>, <code>dim_date</code>)</li>
 <li>Warehouse dimension keys: <code>&lt;entity&gt;_key</code> (the surrogate key used for joins in the warehouse)</li>
-<li>Business keys: <code>&lt;entity&gt;_id</code> (the identifier from the source system)</li>
-</ul>
-<p><strong>Gold Layer Examples:</strong></p>
-<p><em>Staging:</em></p>
-<ul>
-<li><code>corporate__dev.mart.stg_late_payments__01_pivoted_by_order</code></li>
-<li><code>corporate__dev.mart.stg_downtime_by_region__01_pivoted</code></li>
-<li><code>stg_account__01_dedupe.sql</code> — dbt model file</li>
-</ul>
-<p><em>Information Marts:</em></p>
-<ul>
-<li><code>corporate__dev.mart.fact_late_payments</code> — fact table</li>
-<li><code>corporate__dev.mart.dim_customer</code> — dimension table</li>
-<li><code>mart__dim_account.sql</code> — dbt model file</li>
-<li><code>mart__dim_date.sql</code> — dbt model file</li>
-</ul>
-<p><strong>Keys:</strong></p>
-<ul>
-<li><code>customer_key</code> — warehouse dimension key (surrogate key for joins)</li>
-<li><code>customer_id</code> — business identifier from source system</li>
 </ul>
 <p><strong>SCD Type 2 Columns:</strong></p>
 <table>
