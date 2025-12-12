@@ -637,9 +637,9 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 </ul>
 <p>Hash-based SKs enable deterministic keys across environments:</p>
 <ul>
-<li>MD5 used by the dbt default macro returns a 32-character hex string</li>
+<li>MD5 used by the dbt default macro returns a 32-character hex string / binary is more performant but it might require more tweaking</li>
 <li>Numeric (BIGINT) keys offer better join performance</li>
-<li>Consider SHA256 if hash collision risk is a concern / When in doubt, just use SHA2 and a custom macro.</li>
+<li>Consider SHA256 if hash collision risk is a concern (it is unlikely for dimensions however)</li>
 </ul>
 <hr />
 <h3 id="key-design-summary">Key Design Summary</h3>
