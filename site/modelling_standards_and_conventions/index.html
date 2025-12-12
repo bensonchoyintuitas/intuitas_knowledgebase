@@ -318,7 +318,7 @@
 <ul>
 <li>Use Business-Facing format with capitalised first letters and spaces (e.g., <code>Invoice Amount</code>, <code>Item Count</code>)</li>
 <li>Make names consistent with related entities and attributes</li>
-<li>Use semantic suffixes <a href="#quantities-measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
+<li>Use semantic suffixes <a href="./#quantities-measures">Quantities &amp; Measures</a> in the Standard Suffix Inventory.</li>
 </ul>
 <p><strong>Example:</strong></p>
 <ul>
@@ -348,7 +348,7 @@
 <li>All other unique keys are considered alternate keys</li>
 </ul>
 <h4 id="key-naming-pattern">Key Naming Pattern</h4>
-<p>Naming follows these patterns for readability, but metadata remains the source of truth for key roles. i.e Metadata, and not naming, should be used to identify Primary Keys, Alternate Keys, and Foreign Keys. </p>
+<p>Naming follows these patterns for readability, but metadata remains the source of truth for key roles (i.e., metadata—not naming—should be used to identify Primary Keys, Alternate Keys, and Foreign Keys).</p>
 <blockquote>
 <p><strong>Default:</strong> When source systems or business glossaries explicitly define key names, preserve their terminology even if it deviates from this convention. Whether a key is natural or surrogate, primary or alternate is captured as metadata</p>
 <p><strong>Missing name:</strong> Where a name hasn't been provided, then preference <code>ID</code> suffix with natural/business keys and <code>Key</code> suffix with surrogate warehouse keys. </p>
@@ -461,17 +461,18 @@
 <p>For detailed conventions and examples see <a href="../standards_and_conventions/#databricks">Databricks</a></p>
 <p><strong>Catalogs:</strong></p>
 <ul>
-<li>Catalogs represent domain-level scope (e.g., <code>intuitas_engineering_dev</code>, <code>intuitas_corporate_dev</code>)</li>
+<li>Catalogs represent domain-level scope (e.g., <code>engineering__dev</code>, <code>corporate__dev</code>)</li>
 <li>May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls</li>
 <li>Naming is lowercase, underscore-separated, and meaningful</li>
-<li>Pattern: <code>{domain_name}{_environment}</code> (e.g., <code>intuitas_corporate_dev</code>)</li>
+<li>Pattern: <code>{domain}{__env}</code> (e.g., <code>corporate__dev</code>)</li>
 </ul>
 <p><strong>Schemas:</strong></p>
 <ul>
-<li>Schemas represent layers, stages, zones, or source systems within a catalog</li>
+<li>Schemas represent layers and source systems within a catalog</li>
 <li>Use double underscores (<code>__</code>) as separators for schema components</li>
-<li>Pattern: <code>{stage}__{zone}__{source_system}__{schema}</code> (e.g., <code>bronze__ods__fhirhouse__dbo</code>)</li>
-<li>Full example: <code>intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow</code></li>
+<li>Optional channel suffix as an additional <code>__</code>-separated component (avoid special characters in identifiers)</li>
+<li>Pattern: <code>{layer}{__source_system}{__source_schema}{__channel}</code> (e.g., <code>ods__fhirhouse__dbo__lakeflow</code>)</li>
+<li>Full example: <code>engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter</code></li>
 </ul>
 <p><strong>Tables and Views:</strong></p>
 <ul>
@@ -500,14 +501,14 @@
 <p><strong>Gold Layer Examples:</strong></p>
 <p><em>Staging:</em></p>
 <ul>
-<li><code>intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order</code></li>
-<li><code>intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order</code></li>
-<li><code>stg__dim_account__01_dedupe.sql</code></li>
+<li><code>corporate__dev.mart.stg_late_payments__01_pivoted_by_order</code></li>
+<li><code>corporate__dev.mart.stg_downtime_by_region__01_pivoted</code></li>
+<li><code>stg_account__01_dedupe.sql</code> — dbt model file</li>
 </ul>
 <p><em>Information Marts:</em></p>
 <ul>
-<li><code>intuitas_corporate_dev.mart.fact_late_payments</code> — fact table</li>
-<li><code>intuitas_corporate_dev.mart.dim_customer</code> — dimension table</li>
+<li><code>corporate__dev.mart.fact_late_payments</code> — fact table</li>
+<li><code>corporate__dev.mart.dim_customer</code> — dimension table</li>
 <li><code>mart__dim_account.sql</code> — dbt model file</li>
 <li><code>mart__dim_date.sql</code> — dbt model file</li>
 </ul>
@@ -574,6 +575,92 @@
 <ul>
 <li>Align to logical model naming but apply lowercase snake_case (e.g., invoice_amount)</li>
 </ul>
+<h4 id="data-warehouse-keys">Data Warehouse Keys</h4>
+<h5 id="key-resolution">Key resolution</h5>
+<p>Mappings of keys are often required to resolve and integrate heterogeneous identifiers originating from multiple source systems into a consistent warehouse-wide identifier.<br />
+Key mapping tables support integration by translating source-system identifiers into a common business key and/or surrogate key used by downstream dimensional models.</p>
+<p><strong>Example:</strong>
+- <code>corporate__prod.edw.keys_employee</code> — base mart keyset conforming SAP and Workday employee identifiers into a single enterprise employee key.</p>
+<hr />
+<h5 id="business-keys">Business Keys</h5>
+<p><strong>Business keys (BKs)</strong> represent the real-world identifier of an entity and are sourced from operational systems.</p>
+<ul>
+<li>Business keys may be:</li>
+<li>Single-column or composite</li>
+<li>Source-specific or enterprise-conformed</li>
+<li>The basis of our conformed BK pattern is: <code>source_system</code>|<code>source_identifier</code> in string format</li>
+</ul>
+<p><strong>Usage guidance:</strong>
+- Business keys <strong>may</strong> be used directly as dimension primary keys (and fact foreign keys) for simple <strong>Type 1</strong> dimensions, however this creates inconsistency if other dimensions use surrogate keys for Type 2 tracking.
+- Business keys alone are insufficient for <strong>Type 2</strong> dimensions because they do not distinguish historical versions of the same entity. Hence the need for Surrogate Keys.</p>
+<hr />
+<h5 id="surrogate-keys">Surrogate Keys</h5>
+<p><strong>Surrogate keys (SKs)</strong> are system-generated identifiers that uniquely represent a <em>specific version</em> of a dimensional entity.</p>
+<p>They are required for:
+- Type 2 (and higher) SCD dimensions
+- Stable fact-to-dimension joins
+- Decoupling fact tables from volatile or composite business keys</p>
+<p>For Type 2 dimensions, the <strong>logical version grain</strong> is:</p>
+<p><code>business_key</code> + <code>effective_from_datetime</code></p>
+<p>The surrogate key is the <strong>physical primary key</strong> representing this grain and is used by fact tables as the foreign key.</p>
+<hr />
+<h5 id="type-2-fact-resolution">Type 2 Fact Resolution</h5>
+<p>For Type 2 behaviour, facts must resolve the correct dimensional version using an effective-date window.</p>
+<pre><code class="language-sql">fact.business_key = dim.business_key
+AND fact.event_timestamp &gt;= dim.effective_from_datetime
+AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '9999-12-31 00:00:00')
+</code></pre>
+<p>This resolution <strong>requires a lookup</strong> to the dimension (or a dimension version map). It cannot be inferred independently by the fact row.</p>
+<hr />
+<h5 id="databricks-surrogate-keys">Databricks Surrogate Keys</h5>
+<p>In Databricks, there are multiple approaches to creating surrogate keys.</p>
+<ul>
+<li><strong>IDENTITY</strong></li>
+</ul>
+<p>Databricks recommended approach <a href="https://www.databricks.com/blog/2022/08/08/identity-columns-to-generate-surrogate-keys-are-now-available-in-a-lakehouse-near-you.html">here</a>:</p>
+<ul>
+<li><code>BIGINT GENERATED ALWAYS AS IDENTITY</code></li>
+<li>Sequence- or merge-based incrementing keys</li>
+</ul>
+<p>Characteristics:
+  - High performance for joins and aggregations
+  - No collision risk
+  - Environment-specific values (acceptable in most warehouse designs)</p>
+<p>Limitations:
+  - Not compatible with dbt-managed tables
+  - Concurrent writes to the table are not supported</p>
+<p>These keys are generated in the <strong>silver or gold layer</strong>.</p>
+<p>Other valid approaches (depending on downstream requirements):</p>
+<ul>
+<li><strong>Natural key only (BK as PK/FK)</strong>: valid for <strong>Type 1</strong> dimensions; simplest, but typically wider keys and slower joins.</li>
+<li><strong>Type 2 composite key (string)</strong>: store <code>(business_key + effective_from_datetime)</code> as a single concatenated key; simple and transparent, but increases key width and join cost.</li>
+<li><strong>Deterministic hash key</strong>: hash <code>(business_key + effective_from_datetime)</code> into a fixed-width value (string or numeric) for smaller keys and cross-environment stability; manage collision risk by choosing an appropriate hash and store BK/effective_from_datetime alongside for traceability.</li>
+</ul>
+<hr />
+<h5 id="dbt-surrogate-keys">dbt Surrogate Keys</h5>
+<p>dbt supports surrogate key generation using deterministic hashing constructs, such as:</p>
+<ul>
+<li><code>dbt_utils.surrogate_key(...)</code> (MD5 string hash)</li>
+<li>Platform-specific numeric hashes (e.g. <code>xxhash64</code>) cast to <code>BIGINT</code></li>
+</ul>
+<p>Usage guidance:
+- Hash-based SKs should include:
+  - Business key
+  - <code>effective_from_datetime</code> (for Type 2 dimensions)
+- Hash-based SKs enable deterministic keys across environments:
+  - MD5 returns a 32-character hex string; xxhash64 returns a BIGINT
+  - Numeric (BIGINT) keys offer better join performance
+  - Consider SHA256 if hash collision risk is a concern</p>
+<hr />
+<h3 id="key-design-summary">Key Design Summary</h3>
+<ul>
+<li>Business keys define <strong>entity identity</strong></li>
+<li><code>(business_key + effective_from_datetime)</code> defines <strong>Type 2 version identity</strong></li>
+<li>Surrogate keys provide the <strong>physical join mechanism</strong></li>
+<li>Type 2 correctness <strong>always requires a version lookup</strong></li>
+<li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
+<li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
+</ul>
 <hr />
 <h3 id="reference-data">Reference Data</h3>
 <blockquote>
@@ -585,7 +672,7 @@
 <ul>
 <li>Natural keys (e.g., Country Code, Product Type Code)</li>
 <li>Code and description attributes</li>
-<li>Optional: effective dates, display sequences, parent references (hierarchies), business metadata</li>
+<li>Optional: effective datetimes, display sequences, parent references (hierarchies), business metadata</li>
 <li>One-to-many relationships to domain entities</li>
 </ul>
 <p><strong>Example: Country Code Reference Entity</strong></p>
@@ -596,8 +683,8 @@
 <th>country_name</th>
 <th>iso_code_3</th>
 <th>display_sequence</th>
-<th>effective_from_date</th>
-<th>effective_to_date</th>
+<th>effective_from_datetime</th>
+<th>effective_to_datetime</th>
 </tr>
 </thead>
 <tbody>
@@ -606,40 +693,40 @@
 <td>Australia</td>
 <td>AUS</td>
 <td>10</td>
-<td>2020-01-01</td>
-<td>9999-12-31</td>
+<td>2020-01-01 00:00:00</td>
+<td>9999-12-31 00:00:00</td>
 </tr>
 <tr>
 <td>GB</td>
 <td>United Kingdom</td>
 <td>GBR</td>
 <td>20</td>
-<td>2020-01-01</td>
-<td>9999-12-31</td>
+<td>2020-01-01 00:00:00</td>
+<td>9999-12-31 00:00:00</td>
 </tr>
 <tr>
 <td>US</td>
 <td>United States</td>
 <td>USA</td>
 <td>30</td>
-<td>2020-01-01</td>
-<td>9999-12-31</td>
+<td>2020-01-01 00:00:00</td>
+<td>9999-12-31 00:00:00</td>
 </tr>
 <tr>
 <td>NZ</td>
 <td>New Zealand</td>
 <td>NZL</td>
 <td>40</td>
-<td>2020-01-01</td>
-<td>9999-12-31</td>
+<td>2020-01-01 00:00:00</td>
+<td>9999-12-31 00:00:00</td>
 </tr>
 <tr>
 <td>CA</td>
 <td>Canada</td>
 <td>CAN</td>
 <td>50</td>
-<td>2020-01-01</td>
-<td>9999-12-31</td>
+<td>2020-01-01 00:00:00</td>
+<td>9999-12-31 00:00:00</td>
 </tr>
 </tbody>
 </table>
@@ -647,18 +734,16 @@
 <h4 id="physical-implementation">Physical Implementation</h4>
 <p>Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.</p>
 <ul>
+<li><strong>Reference tables</strong> are stored in Bronze/ODS layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a></li>
+<li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>Object naming convention: <code>{reference_data_set_name}{optional:__source_system}{optional:__source_channel}</code></li>
 <li>
-<p><strong>Reference tables</strong> are stored in Bronze/ODS layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a></p>
-<pre><code>- Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
-- Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel}}`
-
-- e.g: intuitas_corporate.ref.account_code
-</code></pre>
+<p>e.g.: <code>corporate__dev.ref.account_code</code></p>
 </li>
 <li>
 <p>Effectivity: <code>effective_from_date</code>, <code>effective_to_date</code>, (<code>is_active</code> is derivable)</p>
 </li>
-<li>Audit: <code>created_timestamp</code>, <code>created_by</code>, <code>modified_timestamp</code>, <code>modified_by</code></li>
+<li>Audit: <code>created_datetime</code>, <code>created_by</code>, <code>updated_datetime</code>, <code>updated_by</code></li>
 <li>Hierarchy: <code>parent_code</code></li>
 <li>Business: <code>description</code></li>
 <li>Technical: <code>version</code>, <code>source_system_id</code></li>
@@ -671,7 +756,7 @@
 </ul>
 <p><strong>Change tracking:</strong></p>
 <ul>
-<li>Implement Type 1, 2, 4, or 6 slowly changing dimension strategies based on business requirements for point-in-time accuracy. When reference data changes frequently or has many attributes. </li>
+<li>Implement Type 1, 2, 4, or 6 slowly changing dimension strategies based on business requirements for point-in-time accuracy. This is especially important when reference data changes frequently or has many attributes.</li>
 <li>Consider using mini-dimensions/outriggers—separate dimension tables linked via foreign keys—to efficiently track history without excessive row growth in the main dimension.</li>
 </ul>
 <p><strong>Recommended Practices:</strong></p>

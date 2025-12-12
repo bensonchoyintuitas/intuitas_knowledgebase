@@ -29,9 +29,20 @@
     - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation-logical)
   - [Physical Models](modelling_standards_and_conventions.md#physical-models)
     - [Relational Structures](modelling_standards_and_conventions.md#relational-structures)
-    - [Databricks Conventions](modelling_standards_and_conventions.md#databricks-conventions)
+      - [Naming](modelling_standards_and_conventions.md#naming)
+      - [Diagrammatic Representation](modelling_standards_and_conventions.md#diagrammatic-representation)
+      - [Databricks Conventions](modelling_standards_and_conventions.md#databricks-conventions)
     - [Dimensional Models](modelling_standards_and_conventions.md#dimensional-models)
+      - [Data Warehouse Keys](modelling_standards_and_conventions.md#data-warehouse-keys)
+        - [Key resolution](modelling_standards_and_conventions.md#key-resolution)
+        - [Business Keys](modelling_standards_and_conventions.md#business-keys)
+        - [Surrogate Keys](modelling_standards_and_conventions.md#surrogate-keys)
+        - [Type 2 Fact Resolution](modelling_standards_and_conventions.md#type-2-fact-resolution)
+        - [Databricks Surrogate Keys](modelling_standards_and_conventions.md#databricks-surrogate-keys)
+        - [dbt Surrogate Keys](modelling_standards_and_conventions.md#dbt-surrogate-keys)
     - [Reference Data](modelling_standards_and_conventions.md#reference-data)
+      - [Logical Modelling](modelling_standards_and_conventions.md#logical-modelling)
+      - [Physical Implementation](modelling_standards_and_conventions.md#physical-implementation)
   - [Standard Suffix and Prefix Inventory](modelling_standards_and_conventions.md#standard-suffix-and-prefix-inventory)
     - [Identity & Keys](modelling_standards_and_conventions.md#identity-keys)
     - [Temporal Concepts](modelling_standards_and_conventions.md#temporal-concepts)
@@ -390,27 +401,7 @@ For detailed conventions and examples including staging models see the Informati
 - Fact tables prefixed with `fact_` and use **plural** entity names (e.g., `fact_payments`, `fact_orders`) (pluralisation here is an exception in naming)
 - Dimension tables prefixed with `dim_` and use **singular** entity names (e.g., `dim_customer`, `dim_date`)
 - Warehouse dimension keys: `<entity>_key` (the surrogate key used for joins in the warehouse)
-- Business keys: `<entity>_id` (the identifier from the source system)
 
-**Gold Layer Examples:**
-
-*Staging:*
-
-- `corporate__dev.mart.stg_late_payments__01_pivoted_by_order`
-- `corporate__dev.mart.stg_downtime_by_region__01_pivoted`
-- `stg_account__01_dedupe.sql` — dbt model file
-
-*Information Marts:*
-
-- `corporate__dev.mart.fact_late_payments` — fact table
-- `corporate__dev.mart.dim_customer` — dimension table
-- `mart__dim_account.sql` — dbt model file
-- `mart__dim_date.sql` — dbt model file
-
-**Keys:**
-
-- `customer_key` — warehouse dimension key (surrogate key for joins)
-- `customer_id` — business identifier from source system
 
 **SCD Type 2 Columns:**
 
@@ -435,7 +426,6 @@ For detailed conventions and examples including staging models see the Informati
 - Align to logical model naming but apply lowercase snake_case (e.g., invoice_amount)
 
 #### Data Warehouse Keys
-
 
 ##### Key resolution
 
