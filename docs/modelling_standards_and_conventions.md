@@ -508,7 +508,7 @@ In Databricks, there are multiple approaches to creating surrogate keys.
   - Not compatible with dbt-managed tables
   - Concurrent writes to the table are not supported
 
-  These keys are generated in the **silver or gold layer**.
+ 
 
 Other valid approaches (depending on downstream requirements):
 
@@ -525,18 +525,18 @@ dbt supports surrogate key generation using deterministic hashing constructs, su
 - `dbt_utils.surrogate_key(...)` (MD5 string hash)
 - Platform-specific numeric hashes (e.g. `xxhash64`) cast to `BIGINT`
 
-Usage guidance:
+**Usage guidance**
 
-- Hash-based SKs should include:
+Hash-based SKs should include:
 
-  - Business key
-  - `effective_from_datetime` (for Type 2 dimensions)
+- Business key
+- `effective_from_datetime` (for Type 2 dimensions)
 
-- Hash-based SKs enable deterministic keys across environments:
+Hash-based SKs enable deterministic keys across environments:
 
-  - MD5 returns a 32-character hex string; xxhash64 returns a BIGINT
-  - Numeric (BIGINT) keys offer better join performance
-  - Consider SHA256 if hash collision risk is a concern
+- MD5 used by the dbt default macro returns a 32-character hex string
+- Numeric (BIGINT) keys offer better join performance
+- Consider SHA256 if hash collision risk is a concern / When in doubt, just use SHA2 and a custom macro.
 
 ---
 
@@ -544,7 +544,7 @@ Usage guidance:
 
 - Prefer **numeric** SKs for performance (especially with PowerBI); use **deterministic** SKs when cross-environment stability is required
 - **Date dimension tip**: Use integer with YYYYMMDD format as the surrogate key for optimal performance
-- When in doubt, just use SHA2.
+- Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.
 
 
 

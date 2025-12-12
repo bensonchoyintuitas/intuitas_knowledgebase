@@ -629,7 +629,6 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li>Not compatible with dbt-managed tables</li>
 <li>Concurrent writes to the table are not supported</li>
 </ul>
-<p>These keys are generated in the <strong>silver or gold layer</strong>.</p>
 <p>Other valid approaches (depending on downstream requirements):</p>
 <ul>
 <li><strong>Natural key only (BK as PK/FK)</strong>: valid for <strong>Type 1</strong> dimensions; simplest, but typically wider keys and slower joins.</li>
@@ -643,32 +642,24 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li><code>dbt_utils.surrogate_key(...)</code> (MD5 string hash)</li>
 <li>Platform-specific numeric hashes (e.g. <code>xxhash64</code>) cast to <code>BIGINT</code></li>
 </ul>
-<p>Usage guidance:</p>
-<ul>
-<li>
+<p><strong>Usage guidance</strong></p>
 <p>Hash-based SKs should include:</p>
-</li>
-<li>
-<p>Business key</p>
-</li>
-<li>
-<p><code>effective_from_datetime</code> (for Type 2 dimensions)</p>
-</li>
-<li>
+<ul>
+<li>Business key</li>
+<li><code>effective_from_datetime</code> (for Type 2 dimensions)</li>
+</ul>
 <p>Hash-based SKs enable deterministic keys across environments:</p>
-</li>
-<li>
-<p>MD5 returns a 32-character hex string; xxhash64 returns a BIGINT</p>
-</li>
+<ul>
+<li>MD5 used by the dbt default macro returns a 32-character hex string</li>
 <li>Numeric (BIGINT) keys offer better join performance</li>
-<li>Consider SHA256 if hash collision risk is a concern</li>
+<li>Consider SHA256 if hash collision risk is a concern / When in doubt, just use SHA2 and a custom macro.</li>
 </ul>
 <hr />
 <h3 id="key-design-summary">Key Design Summary</h3>
 <ul>
 <li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
 <li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
-<li>When in doubt, just use SHA2.</li>
+<li>Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.</li>
 </ul>
 <hr />
 <h3 id="reference-data">Reference Data</h3>
