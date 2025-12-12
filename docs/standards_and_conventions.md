@@ -252,6 +252,8 @@ The following metadata should be added when creating a catalog:
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
+Refer to [Physical Models](modelling_standards_and_conventions.md#physical-models) for the standard relating to column naming, types, and conventions.
+
 #### Schema level external storage locations
 
 Recommendations:
@@ -281,7 +283,18 @@ All schemas  may be optionally prefixed with data stage if not already decompose
 In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__lakeflow`
 
 **Persistent Landing**:
-- N/A (see file naming)
+
+Persistent Landing uses Unity Catalog Volumes for storing raw files and unstructured data as they arrive from source systems.
+
+- Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+  - `[domain][__env]`: Domain and environment identifier (e.g., `corporate_dev`, `engineering_prod`)
+  - `[layer]`: Data layer identifier (e.g., `landing`)
+  - `[__source_system]`: Source system identifier (e.g., `workdayapi`, `saphr`)
+  - `[__source_schema]`: Optional source schema or subsystem identifier
+  - `(channel)`: Ingestion channel/method (e.g., `adf`, `fivetran`, `api`)
+  - `[source_object/volume_name]`: Descriptive volume name or source object identifier
+- *e.g: corporate_dev.landing__workdayapi.schedule_volume*
+- *e.g: engineering_prod.landing__fhirapi__patients.raw_data*
 
 **Operational Data Store (ODS)**:
 
@@ -289,30 +302,54 @@ The objective of raw layer conventions is to provide clarity over which zone and
 
 ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:
 
-Database replicated ODS (structured sources like SQL Server)::
-- Schema naming : `{optional: data_stage__: (bronze__)}{data_zone: (ods)}{__source_database}{if applicable:__source_schema}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow)}`
-- Table naming convention: `{named as per source}`
-- *e.g: intuitas_engineering_dev.bronze__ods__fhirhouse__dbo__sqlsvr-intuitas-engineering__adf.encounter*
+Database replicated ODS (structured sources like SQL Server):
+- Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+  - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
+  - `[layer]`: Data layer (e.g., `ods`)
+  - `[__source_system]`: Source system identifier
+  - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
+  - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
+  - `[source_object/volume_name]`: Table name as per source
+- *e.g: clinical__dev.ods__patientflowmanager01__reporting.patients*
+- *e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter*
 
-Prepped  semi/unstructured ODS data:
-- Schema naming : `{optional: data_stage__: (bronze__)}{data_zone: (ods)}{__source_descriptor}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow/kafka/dbrx pipeline)}`
-- Table naming convention: `{named as per source or other unique assigned name (e.g. topic/folder name)}`
-- *e.g: intuitas_engineering_dev.bronze__ods__ambosim__intuitas-confluent__databricks.encounter*
+Prepped semi/unstructured ODS data:
+- Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+  - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
+  - `[layer]`: Data layer (e.g., `ods`)
+  - `[__source_system]`: Source system identifier
+  - `[__source_descriptor]`: Source descriptor or subsystem identifier
+  - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
+  - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
+- *e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter*
+- *e.g: corporate__dev.ods__workdayapi__employees.raw_data*
 
 
 **Persistent Data Store (PDS)**:
 
 PDS conventions will mirror ODS conventions:
 
-Database replicated PDS (structured sources like SQL Server)::
-- Schema naming : `{optional: data_stage__: (bronze__)}{data_zone: (pds)}{__source_database}{if applicable:__source_schema}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow)}`
-- Table naming convention: `{named as per source}`
-- *e.g: intuitas_engineering_dev.bronze__pds__fhirhouse__dbo__sqlsvr-intuitas-engineering__adf.encounter*
+Database replicated PDS (structured sources like SQL Server):
+- Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+  - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
+  - `[layer]`: Data layer (e.g., `pds`)
+  - `[__source_system]`: Source system identifier
+  - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
+  - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
+  - `[source_object/volume_name]`: Table name as per source
+- *e.g: clinical__dev.pds__patientflowmanager01__reporting.patients*
+- *e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter*
 
-Prepped  semi/unstructured PDS data:
-- Schema naming : `{optional: data_stage__: (bronze__)}{data_zone: (pds)}{__source_descriptor}{__source_system_identifier}{__source_channel: (adf/fivetran/lakeflow/kafka/dbrx pipeline)}`
-- Table naming convention: `{named as per source or other unique assigned name (e.g. topic/folder name)}`
-- *e.g: intuitas_engineering_dev.bronze__pds__ambosim__intuitas-confluent__databricks.encounter*
+Prepped semi/unstructured PDS data:
+- Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+  - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
+  - `[layer]`: Data layer (e.g., `pds`)
+  - `[__source_system]`: Source system identifier
+  - `[__source_descriptor]`: Source descriptor or subsystem identifier
+  - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
+  - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
+- *e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter*
+- *e.g: corporate__dev.pds__workdayapi__employees.raw_data*
 
 #### Silver/EDW (Data according to business entities)
 
@@ -333,67 +370,92 @@ In the examples provided - we have opted for domain level catalogs - with schema
 **(Silver)/EDW Staging Objects**:
 Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
    
-These models exist to stage silver marts only.
+These models exist to stage silver marts (base marts in the EDW layer) and reference data (in the REF layer).
 
-- Source-specific (note at this stage, pre-normalisation - sourcing channels may still matter):
+**Naming Convention:**
 
-   - Schema naming convention: `{optional: data_stage__: (silver__)}{data_zone: (stg)}{__source_system_identifier}{optional:__source_channel}`
-   - Object naming convention: `{entity}{__object_description}{__n}{__transformation}{optional:__source_system_identifier}{optional:__source_channel}`
-   - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__01_renamed_and_typed*
-   - *e.g: intuitas_corporate_dev.stg__new_finance_system__adf.accounts__02_cleaned*
-   - *e.g: intuitas_corporate_dev.stg__old_finance_system__adf.accounts__01_renamed_and_typed*
+`[domain][__env] . [layer] . [object_type][_entity/descriptor](__source)(__channel)(__transformation)`
 
-- Non-source specific:
+Where:
+- `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `corporate__dev`)
+- `[layer]` - Data layer (e.g., `ref`, `edw`)
+- `[object_type]` - Object type prefix (e.g., `stg_`, `ref_`, `dim_`, `fact_`, `keys_`)
+- `[_entity/descriptor]` - Entity or object name
+- `(__source)` - Optional source system identifier (e.g., `__sap`, `__workday`, `__finance_system`)
+- `(__channel)` - Optional source channel (e.g., `__adf`, `__api`)
+- `(__transformation)` - Optional transformation step (e.g., `__01_typed`, `__02_cleaned`)
 
-   - Schema naming convention: `{optional: data_stage__: (silver__)}{data_zone: (stg)}{optional: __domain name}{optional: __subdomain name(s)}`
-   - Object naming convention to align with target mart: `stg__(optional:dim_/fact_){_entity}{__object_description}{__n}{__transformation}`
-   - *e.g: intuitas_corporate_dev.stg.accounts__01_deduped*
-   - *e.g: intuitas_corporate_dev.stg.accounts__02_business_validated* 
+**Reference Data Staging:**
 
-- Examples of transformations:
+- Source-specific staging (with transformations):
+   - *e.g: `corporate__prod.ref.stg_facility__sap__01_filtered`*
+   - *e.g: `corporate__prod.ref.stg_facility__sap__02_typed`*
+   - *e.g: `corporate__prod.ref.stg_account_code__finance_system__adf__01_renamed`*
+   - *e.g: `corporate__prod.ref.stg_location__workday__01_typed`*
 
-   - `01_renamed_and_typed`
-   - `02_deduped`
-   - `03_cleaned`
-   - `04_filtered/split`
-   - `05_column_selected`
-   - `06_business_validated`
-   - `07_desensitised`
-   - *e.g: intuitas_corporate_dev.stg__finance_system__adf.stg__finance_system__adf__account__01_renamed_and_typed*
+- Final reference data (cleaned and conformed):
+   - *e.g: `corporate__prod.ref.ref_facility`*
+   - *e.g: `corporate__prod.ref.ref_location`*
+   - *e.g: `corporate__prod.ref.ref_account_code`*
+   - *e.g: `corporate__dev.ref.ref_country_codes`*
 
-<br>
+**Base Mart (EDW) Staging:**
 
-**(Silver)/EDW Base Information Marts**:
+- Source-specific staging (with transformations):
+   - *e.g: `corporate__prod.edw.stg_employee__sap__01_typed`*
+   - *e.g: `corporate__prod.edw.stg_employee__workday__01_typed`*
+   - *e.g: `corporate__prod.edw.stg_employee__workday__02_cleaned`*
+   - *e.g: `corporate__prod.edw.stg_customer__crm__adf__01_renamed`*
+   - *e.g: `corporate__prod.edw.stg_customer__crm__adf__02_cleaned`*
+   - *e.g: `corporate__prod.edw.stg_payment__new_finance_system__adf__01_typed`*
+   - *e.g: `corporate__prod.edw.stg_payment__old_finance_system__adf__01_typed`*
+   - *e.g: `corporate__prod.edw.stg_account__finance_system__api__01_renamed`*
 
-Final products after staging:
+- Non-source specific staging (after combining/deduplicating):
+   - *e.g: `corporate__prod.edw.stg_employee__01_deduped`*
+   - *e.g: `corporate__prod.edw.stg_employee__02_validated`*
+   - *e.g: `corporate__prod.edw.stg_payment__01_unified`*
 
-- Source-specific (note at this stage, post-normalisation - sourcing channels should not differ so may need merging or unioning):
+**Base Mart Keysets:**
 
-   - Schema naming convention: `{optional: data_stage__: (silver__)}{data_zone: (mart)}{__source_system_identifier}{optional:__source_channel}`
-   - Object naming convention: `(optional:dim_/fact_){__entity / __object_description}{optional:__source_system_identifier}{optional:__source_channel}`
-   - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.payment*
-   - *e.g: intuitas_corporate_dev.mart__new_finance_system__adf.account*
-   - *e.g: intuitas_corporate_dev.mart__old_finance_system__adf.account*
+- Conforming/deduplicating keysets across multiple sources:
+   - *e.g: `corporate__prod.edw.keys_employee`* (conforms sap and workday)
+   - *e.g: `corporate__prod.edw.keys_customer`* (conforms multiple crm sources)
+   - *e.g: `corporate__prod.edw.keys_account`* (conforms finance systems)
+   - *e.g: `health__prod.edw.keys_patient`* (conforms clinical systems)
 
-- Non-source specific:
+**Base Marts (Final Dimensional Models):**
 
-   - Schema naming convention: `{optional: data_stage__: (silver__)}{data_zone: (mart)}{optional: __domain name}{optional: __subdomain name(s)}`
-   - Object naming convention: `(optional:dim_/fact_){__unified entity / __object_description}`
-   - *e.g: intuitas_corporate_dev.mart.account* (unified)
-   - *e.g: intuitas_corporate_dev.mart__corporate__finance.account* (unified)
-   - *e.g: intuitas_corporate_dev.mart__finance.account* (unified)
-   - *e.g: intuitas_corporate_dev.mart.account_join_with_payments* (joined across two systems)
+- Source-specific dimensions (preserving source identity):
+   - *e.g: `corporate__prod.edw.dim_employee__sap`*
+   - *e.g: `corporate__prod.edw.dim_employee__workday`*
+   - *e.g: `corporate__prod.edw.dim_account__old_finance_system`*
+   - *e.g: `corporate__prod.edw.dim_account__new_finance_system`*
 
-<br>
+- Conformed dimensions (unified, non-source specific):
+   - *e.g: `corporate__prod.edw.dim_employee`* (type 1 SCD implied)
+   - *e.g: `corporate__prod.edw.dim_employee__type2`* (with history)
+   - *e.g: `corporate__prod.edw.dim_customer`*
+   - *e.g: `corporate__prod.edw.dim_account`* (unified across finance systems)
 
-**Reference Data**:
-For further context refer to [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
+- Fact tables:
+   - *e.g: `corporate__prod.edw.fact_payment`*
+   - *e.g: `corporate__prod.edw.fact_transaction`*
+   - *e.g: `health__prod.edw.fact_encounter`*
 
-Our default position uses schemas to logically consolidate reference data (either across the enterprise or within domains) with clearly named schema for convenience:
+**Common Transformation Suffixes:**
 
-- Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
-- Object naming convention: `{reference data set name} (optional:__{source_system}__{source_channel})`
-- *e.g: intuitas_corporate_dev.ref.account_code*
+   - `__01_renamed` or `__01_typed`
+   - `__02_cleaned`
+   - `__03_deduped`
+   - `__04_filtered`
+   - `__05_split`
+   - `__06_validated`
+   - `__07_desensitised`
+
+**Additional Notes:**
+
+For further context on reference data modeling, refer to [Reference Data Standards and Conventions](modelling_standards_and_conventions.md#reference-data).
 
 <br>
 
@@ -417,55 +479,82 @@ Optional warehousing construct.
 
 #### Gold (Data according to requirements)
 
-The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists in case its needed.
+The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
-In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `intuitas_clinical_dev.gold__mart`
+**Naming Convention:**
 
-- All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `gold__`
-- All `entity` names which align to facts should be named in plural.
-- All `entity` names which align to dims should be named in singular.
+`[domain][__env] . mart . [object_type][product_name/descriptor](__source)(__transformation)`
+
+Where:
+- `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `health__dev`)
+- `mart` - Gold layer schema (product marts)
+- `[object_type]` - Object type prefix (e.g., `stg_`, `fact_`, `dim_`, `obt_`)
+- `[product_name/descriptor]` - Product or business-aligned name
+- `(__source)` - Optional source system identifier (only when source-specific view is needed)
+- `(__transformation)` - Optional transformation step (for staging only)
+
+**Naming Guidelines:**
+- All `entity` names which align to facts should be named in plural
+- All `entity` names which align to dimensions should be named in singular
+- Product marts are business/requirement-aligned, not technical constructs
 
 <br>
 
 **(Gold)/Product Mart Staging Models**:
 
-Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+Staging models serve as intermediary models that transform base marts (EDW) into requirement-aligned product marts. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
-These models exist to stage gold marts.
+These models exist to stage gold product marts with business-specific transformations:
 
-- Schema naming convention: `{optional: data_stage__: (gold__)}{data_zone: (stg)}{optional: __domain name}{optional: __subdomain name(s)}`
-- Dimension naming convention: `dim_{__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}`
-- Fact naming convention: `fact_{__entity / __product description} (optional: __{source_system_identifier}__{source_channel}){__n}{__transformation}`
-- Denormalized (One Big Table) Object naming convention: `{entity / product description} (optional: __{source_system}__{source_channel}){__n}{__transformation}`
-- *e.g: intuitas_corporate_dev.stg.fact__late_payments__01__pivoted_by_order*
-- *e.g: intuitas_corporate_dev.stg__corporate.fact__late_payments__01__pivoted_by_order*
-- *e.g: intuitas_corporate_dev.stg__corporate__finance.fact__late_payments__01__pivoted_by_order*
+**Common Transformations:**
+- Pivoting
+- Aggregation
+- Joining across multiple base marts
+- Business rule application
+- Desensitization
+- Complex calculations
+
+**Examples:**
+
+- *e.g: `corporate__prod.mart.stg_downtime_by_region__01_pivoted`*
+- *e.g: `corporate__prod.mart.stg_downtime_by_region__02_desensitised`*
+- *e.g: `corporate__prod.mart.stg_late_payments__01_aggregated`*
+- *e.g: `corporate__prod.mart.stg_late_payments__02_joined`*
+- *e.g: `corporate__prod.mart.stg_fte_calculations__01_pivoted`*
+- *e.g: `corporate__prod.mart.stg_fte_calculations__02_aggregated`*
+- *e.g: `health__prod.mart.stg_patient_outcomes__01_joined`*
+- *e.g: `health__prod.mart.stg_patient_outcomes__02_desensitised`*
 
 <br>
 
-**(Gold)/Product Marts**:
+**(Gold)/Product Marts (Final Products)**:
 
-- Schema naming convention: `{optional: data_stage__: (gold__)}{data_zone: (mart)}{optional: __domain name}{optional: __subdomain name(s)}`
-- Dimension naming convention: `dim_{__entity / __product description} (optional: __{source_system}__{source_channel})`
-- Fact naming convention: `fact_{__entity / __product description} (optional: __{source_system}__{source_channel})`
-- Denormalized (One Big Table) Object naming convention: `{entity / product description} (optional: __{source_system}__{source_channel})`
+Final business-aligned data products ready for consumption by analytics, reporting, and BI tools.
 
-- Required transformation: Business-specific transformations such as:
+**Examples:**
 
-   - `pivoting`
-   - `aggregation`
-   - `joining`
-   - `conformance`
-   - `desensitization`
+- Fact tables (aggregated/business-focused):
+   - *e.g: `corporate__prod.mart.fact_downtime_by_region`*
+   - *e.g: `corporate__prod.mart.fact_late_payments`*
+   - *e.g: `corporate__prod.mart.fact_regional_account_payments`*
+   - *e.g: `health__prod.mart.fact_patient_outcomes`*
 
-*e.g:*
+- Dimension tables (product-specific):
+   - *e.g: `corporate__prod.mart.dim_region`*
+   - *e.g: `corporate__prod.mart.dim_payment_category`*
 
-   - *intuitas_corporate_dev.mart.fact_late_payments*
-   - *intuitas_corporate_dev.mart.regionally_grouped_account_payments__old_finance_system__adf*
-   - *intuitas_corporate_dev.mart.regionally_grouped_account_payments__new_finance_system__adf*
-   - *intuitas_corporate_dev.mart.regionally_grouped_account_payments* (union of old and new)
+- One Big Tables (OBT) - Denormalized aggregates:
+   - *e.g: `corporate__prod.mart.obt_fte_calculations`*
+   - *e.g: `corporate__prod.mart.obt_financial_summary`*
+   - *e.g: `corporate__prod.mart.obt_executive_dashboard`*
+
+- Source-specific products (when needed):
+   - *e.g: `corporate__prod.mart.fact_account_payments__old_finance_system`*
+   - *e.g: `corporate__prod.mart.fact_account_payments__new_finance_system`*
+   - *e.g: `corporate__prod.mart.obt_employee_metrics__sap`*
+   - *e.g: `corporate__prod.mart.obt_employee_metrics__workday`*
 
 ### Delta Sharing
 
