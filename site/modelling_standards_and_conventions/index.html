@@ -570,29 +570,32 @@
 </ul>
 <h4 id="data-warehouse-keys">Data Warehouse Keys</h4>
 <h5 id="key-resolution">Key resolution</h5>
-<p>Mappings of keys are often required to resolve and integrate heterogeneous identifiers originating from multiple source systems into a consistent warehouse-wide identifier.<br />
-Key mapping tables support integration by translating source-system identifiers into a common business key and/or surrogate key used by downstream dimensional models.</p>
+<p>Mappings of keys are often required to resolve and integrate heterogeneous identifiers originating from multiple source systems into a consistent warehouse-wide identifier. Key mapping tables support integration by translating source-system identifiers into a common business key and/or surrogate key used by downstream dimensional models.</p>
 <p><strong>Example:</strong>
-- <code>corporate__prod.edw.keys_employee</code> — base mart keyset conforming SAP and Workday employee identifiers into a single enterprise employee key.</p>
+- <code>corporate__prod.edw.keys_employee</code>  (base mart keyset conforming SAP and Workday employee identifiers into a single enterprise employee key)</p>
 <hr />
 <h5 id="business-keys">Business Keys</h5>
 <p><strong>Business keys (BKs)</strong> represent the real-world identifier of an entity and are sourced from operational systems.</p>
+<p>Business keys may be:</p>
 <ul>
-<li>Business keys may be:</li>
 <li>Single-column or composite</li>
 <li>Source-specific or enterprise-conformed</li>
-<li>The basis of our conformed BK pattern is: <code>source_system</code>|<code>source_identifier</code> in string format</li>
 </ul>
-<p><strong>Usage guidance:</strong>
-- Business keys <strong>may</strong> be used directly as dimension primary keys (and fact foreign keys) for simple <strong>Type 1</strong> dimensions, however this creates inconsistency if other dimensions use surrogate keys for Type 2 tracking.
-- Business keys alone are insufficient for <strong>Type 2</strong> dimensions because they do not distinguish historical versions of the same entity. Hence the need for Surrogate Keys.</p>
+<p>The basis of our conformed BK pattern is: <code>source_system</code>|<code>source_identifier</code> in string format</p>
+<p><strong>Usage guidance:</strong></p>
+<ul>
+<li>Business keys <strong>may</strong> be used directly as dimension primary keys (and fact foreign keys) for simple <strong>Type 1</strong> dimensions, however this creates inconsistency if other dimensions use surrogate keys for Type 2 tracking.</li>
+<li>Business keys alone are insufficient for <strong>Type 2</strong> dimensions because they do not distinguish historical versions of the same entity. Hence the need for Surrogate Keys.</li>
+</ul>
 <hr />
 <h5 id="surrogate-keys">Surrogate Keys</h5>
 <p><strong>Surrogate keys (SKs)</strong> are system-generated identifiers that uniquely represent a <em>specific version</em> of a dimensional entity.</p>
-<p>They are required for:
-- Type 2 (and higher) SCD dimensions
-- Stable fact-to-dimension joins
-- Decoupling fact tables from volatile or composite business keys</p>
+<p>They are required for:</p>
+<ul>
+<li>Type 2 (and higher) SCD dimensions</li>
+<li>Stable fact-to-dimension joins</li>
+<li>Decoupling fact tables from volatile or composite business keys</li>
+</ul>
 <p>For Type 2 dimensions, the <strong>logical version grain</strong> is:</p>
 <p><code>business_key</code> + <code>effective_from_datetime</code></p>
 <p>The surrogate key is the <strong>physical primary key</strong> representing this grain and is used by fact tables as the foreign key.</p>
@@ -615,13 +618,17 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li><code>BIGINT GENERATED ALWAYS AS IDENTITY</code></li>
 <li>Sequence- or merge-based incrementing keys</li>
 </ul>
-<p>Characteristics:
-  - High performance for joins and aggregations
-  - No collision risk
-  - Environment-specific values (acceptable in most warehouse designs)</p>
-<p>Limitations:
-  - Not compatible with dbt-managed tables
-  - Concurrent writes to the table are not supported</p>
+<p>Characteristics:</p>
+<ul>
+<li>High performance for joins and aggregations</li>
+<li>No collision risk</li>
+<li>Environment-specific values (acceptable in most warehouse designs)</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Not compatible with dbt-managed tables</li>
+<li>Concurrent writes to the table are not supported</li>
+</ul>
 <p>These keys are generated in the <strong>silver or gold layer</strong>.</p>
 <p>Other valid approaches (depending on downstream requirements):</p>
 <ul>
@@ -636,14 +643,26 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li><code>dbt_utils.surrogate_key(...)</code> (MD5 string hash)</li>
 <li>Platform-specific numeric hashes (e.g. <code>xxhash64</code>) cast to <code>BIGINT</code></li>
 </ul>
-<p>Usage guidance:
-- Hash-based SKs should include:
-  - Business key
-  - <code>effective_from_datetime</code> (for Type 2 dimensions)
-- Hash-based SKs enable deterministic keys across environments:
-  - MD5 returns a 32-character hex string; xxhash64 returns a BIGINT
-  - Numeric (BIGINT) keys offer better join performance
-  - Consider SHA256 if hash collision risk is a concern</p>
+<p>Usage guidance:</p>
+<ul>
+<li>
+<p>Hash-based SKs should include:</p>
+</li>
+<li>
+<p>Business key</p>
+</li>
+<li>
+<p><code>effective_from_datetime</code> (for Type 2 dimensions)</p>
+</li>
+<li>
+<p>Hash-based SKs enable deterministic keys across environments:</p>
+</li>
+<li>
+<p>MD5 returns a 32-character hex string; xxhash64 returns a BIGINT</p>
+</li>
+<li>Numeric (BIGINT) keys offer better join performance</li>
+<li>Consider SHA256 if hash collision risk is a concern</li>
+</ul>
 <hr />
 <h3 id="key-design-summary">Key Design Summary</h3>
 <ul>
