@@ -666,12 +666,9 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <hr />
 <h3 id="key-design-summary">Key Design Summary</h3>
 <ul>
-<li>Business keys define <strong>entity identity</strong></li>
-<li><code>(business_key + effective_from_datetime)</code> defines <strong>Type 2 version identity</strong></li>
-<li>Surrogate keys provide the <strong>physical join mechanism</strong></li>
-<li>Type 2 correctness <strong>always requires a version lookup</strong></li>
 <li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
 <li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
+<li>When in doubt, just use SHA2.</li>
 </ul>
 <hr />
 <h3 id="reference-data">Reference Data</h3>
