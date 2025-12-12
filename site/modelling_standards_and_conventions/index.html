@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Modelling Standards - Intuitas Data Intelligence Blueprint</title>
+        <title>Intuitas Data Modelling Standards and Conventions - Intuitas Data Intelligence Blueprint</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -48,13 +48,10 @@
                                 <a href="../level_2/" class="nav-link">Level 2</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../modelling_framework/" class="nav-link">Modelling Framework</a>
+                                <a href="../modelling_framework/" class="nav-link">Models</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">Modelling Standards</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../standards_and_conventions/" class="nav-link">Standards and Conventions</a>
+                                <a href="../standards_and_conventions/" class="nav-link">Standards</a>
                             </li>
                             <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
@@ -67,16 +64,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="../modelling_framework/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="../standards_and_conventions/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -733,8 +720,8 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <p><em>Note: Additional standard attributes (audit columns: created_timestamp, created_by, modified_timestamp, modified_by; optional: parent_code, version, source_system_id) would be included in the physical implementation.</em></p>
 <h4 id="physical-implementation">Physical Implementation</h4>
 <p>Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.</p>
+<p><strong>Cleansed reference tables</strong> are stored in silver/edw layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a>:</p>
 <ul>
-<li><strong>Reference tables</strong> are stored in Bronze/ODS layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a></li>
 <li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference_data_set_name}{optional:__source_system}{optional:__source_channel}</code></li>
 <li>

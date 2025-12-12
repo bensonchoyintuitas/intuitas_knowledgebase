@@ -584,7 +584,8 @@ Reference entities contain:
 
 Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.
 
-- **Reference tables** are stored in Bronze/ODS layer for wide availability following the [reference data naming standard](standards_and_conventions.md#schema-and-object-conventions)
+**Cleansed reference tables** are stored in silver/edw layer for wide availability following the [reference data naming standard](standards_and_conventions.md#schema-and-object-conventions):
+
   - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
   - Object naming convention: `{reference_data_set_name}{optional:__source_system}{optional:__source_channel}`
   - e.g.: `corporate__dev.ref.account_code`
