@@ -534,9 +534,9 @@ Hash-based SKs should include:
 
 Hash-based SKs enable deterministic keys across environments:
 
-- MD5 used by the dbt default macro returns a 32-character hex string
+- MD5 used by the dbt default macro returns a 32-character hex string / binary is more performant but it might require more tweaking
 - Numeric (BIGINT) keys offer better join performance
-- Consider SHA256 if hash collision risk is a concern / When in doubt, just use SHA2 and a custom macro.
+- Consider SHA256 if hash collision risk is a concern (it is unlikely for dimensions however)
 
 ---
 
