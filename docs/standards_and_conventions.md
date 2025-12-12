@@ -314,7 +314,7 @@ Prepped  semi/unstructured PDS data:
 - Table naming convention: `{named as per source or other unique assigned name (e.g. topic/folder name)}`
 - *e.g: intuitas_engineering_dev.bronze__pds__ambosim__intuitas-confluent__databricks.encounter*
 
-#### Silver (Data according to business entities)
+#### Silver/EDW (Data according to business entities)
 
 The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
 
@@ -330,7 +330,7 @@ In the examples provided - we have opted for domain level catalogs - with schema
 
 <br>
 
-**(Silver) Staging Objects**:
+**(Silver)/EDW Staging Objects**:
 Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
    
 These models exist to stage silver marts only.
@@ -363,7 +363,7 @@ These models exist to stage silver marts only.
 
 <br>
 
-**(Silver) Base Information Marts**:
+**(Silver)/EDW Base Information Marts**:
 
 Final products after staging:
 
@@ -429,7 +429,7 @@ In the examples provided - we have opted for domain level catalogs - with schema
 
 <br>
 
-**(Gold) Staging Models**:
+**(Gold)/Product Mart Staging Models**:
 
 Staging models serve as intermediary models that transform source data into the target mart model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
@@ -445,7 +445,7 @@ These models exist to stage gold marts.
 
 <br>
 
-**(Gold) Information Marts**:
+**(Gold)/Product Marts**:
 
 - Schema naming convention: `{optional: data_stage__: (gold__)}{data_zone: (mart)}{optional: __domain name}{optional: __subdomain name(s)}`
 - Dimension naming convention: `dim_{__entity / __product description} (optional: __{source_system}__{source_channel})`
