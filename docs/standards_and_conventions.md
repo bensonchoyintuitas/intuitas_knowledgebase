@@ -288,13 +288,15 @@ In the examples provided - we have opted for domain level catalogs - with schema
 
 Persistent Landing uses Unity Catalog Volumes for storing raw files and unstructured data as they arrive from source systems.
 
-- Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+
   - `[domain][__env]`: Domain and environment identifier (e.g., `corporate_dev`, `engineering_prod`)
   - `[layer]`: Data layer identifier (e.g., `landing`)
   - `[__source_system]`: Source system identifier (e.g., `workdayapi`, `saphr`)
   - `[__source_schema]`: Optional source schema or subsystem identifier
   - `(channel)`: Ingestion channel/method (e.g., `adf`, `fivetran`, `api`)
   - `[source_object/volume_name]`: Descriptive volume name or source object identifier
+
 - *e.g: corporate__dev.landing__workdayapi.schedule_volume*
 - *e.g: engineering__prod.landing__fhirapi__patients.raw_data*
 
@@ -305,24 +307,30 @@ The objective of raw layer conventions is to provide clarity over which zone and
 ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:
 
 Database replicated ODS (structured sources like SQL Server):
-- Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+
+Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer (e.g., `ods`)
   - `[__source_system]`: Source system identifier
   - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
   - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
   - `[source_object/volume_name]`: Table name as per source
+
 - *e.g: clinical__dev.ods__patientflowmanager01__reporting.patients*
 - *e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter*
 
 Prepped semi/unstructured ODS data:
-- Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+
+Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer (e.g., `ods`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
   - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
   - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
+
 - *e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter*
 - *e.g: corporate__dev.ods__workdayapi__employees.raw_data*
 
@@ -332,24 +340,30 @@ Prepped semi/unstructured ODS data:
 PDS conventions will mirror ODS conventions:
 
 Database replicated PDS (structured sources like SQL Server):
-- Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+
+Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer (e.g., `pds`)
   - `[__source_system]`: Source system identifier
   - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
   - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
   - `[source_object/volume_name]`: Table name as per source
+
 - *e.g: clinical__dev.pds__patientflowmanager01__reporting.patients*
 - *e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter*
 
 Prepped semi/unstructured PDS data:
-- Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+
+Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer (e.g., `pds`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
   - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
   - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
+
 - *e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter*
 - *e.g: corporate__dev.pds__workdayapi__employees.raw_data*
 
@@ -379,6 +393,7 @@ These models exist to stage silver marts (base marts in the EDW layer) and refer
 `[domain][__env] . [layer] . [object_type][_entity/descriptor](__source)(__channel)(__transformation)`
 
 Where:
+
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `corporate__dev`)
 - `[layer]` - Data layer (e.g., `ref`, `edw`)
 - `[object_type]` - Object type prefix (e.g., `stg_`, `ref_`, `dim_`, `fact_`, `keys_`)
@@ -389,13 +404,15 @@ Where:
 
 **Reference Data Staging:**
 
-- Source-specific staging (with transformations):
+Source-specific staging (with transformations):
+
    - *e.g: `corporate__prod.ref.stg_facility__sap__01_filtered`*
    - *e.g: `corporate__prod.ref.stg_facility__sap__02_typed`*
    - *e.g: `corporate__prod.ref.stg_account_code__finance_system__adf__01_renamed`*
    - *e.g: `corporate__prod.ref.stg_location__workday__01_typed`*
 
-- Final reference data (cleaned and conformed):
+Final reference data (cleaned and conformed):
+
    - *e.g: `corporate__prod.ref.ref_facility`*
    - *e.g: `corporate__prod.ref.ref_location`*
    - *e.g: `corporate__prod.ref.ref_account_code`*
@@ -403,7 +420,8 @@ Where:
 
 **Base Mart (EDW) Staging:**
 
-- Source-specific staging (with transformations):
+Source-specific staging (with transformations):
+
    - *e.g: `corporate__prod.edw.stg_employee__sap__01_typed`*
    - *e.g: `corporate__prod.edw.stg_employee__workday__01_typed`*
    - *e.g: `corporate__prod.edw.stg_employee__workday__02_cleaned`*
@@ -413,14 +431,16 @@ Where:
    - *e.g: `corporate__prod.edw.stg_payment__old_finance_system__adf__01_typed`*
    - *e.g: `corporate__prod.edw.stg_account__finance_system__api__01_renamed`*
 
-- Non-source specific staging (after combining/deduplicating):
+Non-source specific staging (after combining/deduplicating):
+
    - *e.g: `corporate__prod.edw.stg_employee__01_deduped`*
    - *e.g: `corporate__prod.edw.stg_employee__02_validated`*
    - *e.g: `corporate__prod.edw.stg_payment__01_unified`*
 
 **Base Mart Keysets:**
 
-- Conforming/deduplicating keysets across multiple sources:
+Conforming/deduplicating keysets across multiple sources:
+
    - *e.g: `corporate__prod.edw.keys_employee`* (conforms sap and workday)
    - *e.g: `corporate__prod.edw.keys_customer`* (conforms multiple crm sources)
    - *e.g: `corporate__prod.edw.keys_account`* (conforms finance systems)
@@ -428,19 +448,22 @@ Where:
 
 **Base Marts (Final Dimensional Models):**
 
-- Source-specific dimensions (preserving source identity):
+Source-specific dimensions (preserving source identity):
+
    - *e.g: `corporate__prod.edw.dim_employee__sap`*
    - *e.g: `corporate__prod.edw.dim_employee__workday`*
    - *e.g: `corporate__prod.edw.dim_account__old_finance_system`*
    - *e.g: `corporate__prod.edw.dim_account__new_finance_system`*
 
-- Conformed dimensions (unified, non-source specific):
+Conformed dimensions (unified, non-source specific):
+
    - *e.g: `corporate__prod.edw.dim_employee`* (type 1 SCD implied)
    - *e.g: `corporate__prod.edw.dim_employee__type2`* (with history)
    - *e.g: `corporate__prod.edw.dim_customer`*
    - *e.g: `corporate__prod.edw.dim_account`* (unified across finance systems)
 
-- Fact tables:
+Fact tables:
+
    - *e.g: `corporate__prod.edw.fact_payment`*
    - *e.g: `corporate__prod.edw.fact_transaction`*
    - *e.g: `health__prod.edw.fact_encounter`*
@@ -490,6 +513,7 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 `[domain][__env] . mart . [object_type][product_name/descriptor](__source)(__transformation)`
 
 Where:
+
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `health__dev`)
 - `mart` - Gold layer schema (product marts)
 - `[object_type]` - Object type prefix (e.g., `stg_`, `fact_`, `dim_`, `obt_`)
@@ -498,6 +522,7 @@ Where:
 - `(__transformation)` - Optional transformation step (for staging only)
 
 **Naming Guidelines:**
+
 - All `entity` names which align to facts should be named in plural
 - All `entity` names which align to dimensions should be named in singular
 - Product marts are business/requirement-aligned, not technical constructs
@@ -511,6 +536,7 @@ Staging models serve as intermediary models that transform base marts (EDW) into
 These models exist to stage gold product marts with business-specific transformations:
 
 **Common Transformations:**
+
 - Pivoting
 - Aggregation
 - Joining across multiple base marts
@@ -537,22 +563,26 @@ Final business-aligned data products ready for consumption by analytics, reporti
 
 **Examples:**
 
-- Fact tables (aggregated/business-focused):
+Fact tables (aggregated/business-focused):
+
    - *e.g: `corporate__prod.mart.fact_downtime_by_region`*
    - *e.g: `corporate__prod.mart.fact_late_payments`*
    - *e.g: `corporate__prod.mart.fact_regional_account_payments`*
    - *e.g: `health__prod.mart.fact_patient_outcomes`*
 
-- Dimension tables (product-specific):
+Dimension tables (product-specific):
+
    - *e.g: `corporate__prod.mart.dim_region`*
    - *e.g: `corporate__prod.mart.dim_payment_category`*
 
-- One Big Tables (OBT) - Denormalized aggregates:
+One Big Tables (OBT) - Denormalized aggregates:
+
    - *e.g: `corporate__prod.mart.obt_fte_calculations`*
    - *e.g: `corporate__prod.mart.obt_financial_summary`*
    - *e.g: `corporate__prod.mart.obt_executive_dashboard`*
 
-- Source-specific products (when needed):
+Source-specific products (when needed):
+
    - *e.g: `corporate__prod.mart.fact_account_payments__old_finance_system`*
    - *e.g: `corporate__prod.mart.fact_account_payments__new_finance_system`*
    - *e.g: `corporate__prod.mart.obt_employee_metrics__sap`*

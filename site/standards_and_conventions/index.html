@@ -412,62 +412,90 @@
 <p>In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e <code>engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter</code></p>
 <p><strong>Persistent Landing</strong>:</p>
 <p>Persistent Landing uses Unity Catalog Volumes for storing raw files and unstructured data as they arrive from source systems.</p>
+<p>Volume naming convention: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
 <ul>
-<li>Volume naming convention: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></li>
 <li><code>[domain][__env]</code>: Domain and environment identifier (e.g., <code>corporate_dev</code>, <code>engineering_prod</code>)</li>
 <li><code>[layer]</code>: Data layer identifier (e.g., <code>landing</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier (e.g., <code>workdayapi</code>, <code>saphr</code>)</li>
 <li><code>[__source_schema]</code>: Optional source schema or subsystem identifier</li>
 <li><code>(channel)</code>: Ingestion channel/method (e.g., <code>adf</code>, <code>fivetran</code>, <code>api</code>)</li>
-<li><code>[source_object/volume_name]</code>: Descriptive volume name or source object identifier</li>
-<li><em>e.g: corporate__dev.landing__workdayapi.schedule_volume</em></li>
+<li>
+<p><code>[source_object/volume_name]</code>: Descriptive volume name or source object identifier</p>
+</li>
+<li>
+<p><em>e.g: corporate__dev.landing__workdayapi.schedule_volume</em></p>
+</li>
 <li><em>e.g: engineering__prod.landing__fhirapi__patients.raw_data</em></li>
 </ul>
 <p><strong>Operational Data Store (ODS)</strong>:</p>
 <p>The objective of raw layer conventions is to provide clarity over which zone and stage it belongs, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).</p>
 <p>ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:</p>
-<p>Database replicated ODS (structured sources like SQL Server):
-- Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code>
-  - <code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)
-  - <code>[layer]</code>: Data layer (e.g., <code>ods</code>)
-  - <code>[__source_system]</code>: Source system identifier
-  - <code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)
-  - <code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)
-  - <code>[source_object/volume_name]</code>: Table name as per source
-- <em>e.g: clinical__dev.ods__patientflowmanager01__reporting.patients</em>
-- <em>e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter</em></p>
-<p>Prepped semi/unstructured ODS data:
-- Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code>
-  - <code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)
-  - <code>[layer]</code>: Data layer (e.g., <code>ods</code>)
-  - <code>[__source_system]</code>: Source system identifier
-  - <code>[__source_descriptor]</code>: Source descriptor or subsystem identifier
-  - <code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)
-  - <code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)
-- <em>e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter</em>
-- <em>e.g: corporate__dev.ods__workdayapi__employees.raw_data</em></p>
+<p>Database replicated ODS (structured sources like SQL Server):</p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
+<ul>
+<li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
+<li><code>[layer]</code>: Data layer (e.g., <code>ods</code>)</li>
+<li><code>[__source_system]</code>: Source system identifier</li>
+<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)</li>
+<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)</li>
+<li>
+<p><code>[source_object/volume_name]</code>: Table name as per source</p>
+</li>
+<li>
+<p><em>e.g: clinical__dev.ods__patientflowmanager01__reporting.patients</em></p>
+</li>
+<li><em>e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter</em></li>
+</ul>
+<p>Prepped semi/unstructured ODS data:</p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code></p>
+<ul>
+<li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
+<li><code>[layer]</code>: Data layer (e.g., <code>ods</code>)</li>
+<li><code>[__source_system]</code>: Source system identifier</li>
+<li><code>[__source_descriptor]</code>: Source descriptor or subsystem identifier</li>
+<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)</li>
+<li>
+<p><code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)</p>
+</li>
+<li>
+<p><em>e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter</em></p>
+</li>
+<li><em>e.g: corporate__dev.ods__workdayapi__employees.raw_data</em></li>
+</ul>
 <p><strong>Persistent Data Store (PDS)</strong>:</p>
 <p>PDS conventions will mirror ODS conventions:</p>
-<p>Database replicated PDS (structured sources like SQL Server):
-- Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code>
-  - <code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)
-  - <code>[layer]</code>: Data layer (e.g., <code>pds</code>)
-  - <code>[__source_system]</code>: Source system identifier
-  - <code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)
-  - <code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)
-  - <code>[source_object/volume_name]</code>: Table name as per source
-- <em>e.g: clinical__dev.pds__patientflowmanager01__reporting.patients</em>
-- <em>e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter</em></p>
-<p>Prepped semi/unstructured PDS data:
-- Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code>
-  - <code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)
-  - <code>[layer]</code>: Data layer (e.g., <code>pds</code>)
-  - <code>[__source_system]</code>: Source system identifier
-  - <code>[__source_descriptor]</code>: Source descriptor or subsystem identifier
-  - <code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)
-  - <code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)
-- <em>e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter</em>
-- <em>e.g: corporate__dev.pds__workdayapi__employees.raw_data</em></p>
+<p>Database replicated PDS (structured sources like SQL Server):</p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
+<ul>
+<li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
+<li><code>[layer]</code>: Data layer (e.g., <code>pds</code>)</li>
+<li><code>[__source_system]</code>: Source system identifier</li>
+<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)</li>
+<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)</li>
+<li>
+<p><code>[source_object/volume_name]</code>: Table name as per source</p>
+</li>
+<li>
+<p><em>e.g: clinical__dev.pds__patientflowmanager01__reporting.patients</em></p>
+</li>
+<li><em>e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter</em></li>
+</ul>
+<p>Prepped semi/unstructured PDS data:</p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code></p>
+<ul>
+<li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
+<li><code>[layer]</code>: Data layer (e.g., <code>pds</code>)</li>
+<li><code>[__source_system]</code>: Source system identifier</li>
+<li><code>[__source_descriptor]</code>: Source descriptor or subsystem identifier</li>
+<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)</li>
+<li>
+<p><code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)</p>
+</li>
+<li>
+<p><em>e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter</em></p>
+</li>
+<li><em>e.g: corporate__dev.pds__workdayapi__employees.raw_data</em></li>
+</ul>
 <h4 id="silveredw-data-according-to-business-entities">Silver/EDW (Data according to business entities)</h4>
 <p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
@@ -484,34 +512,34 @@ Staging models serve as intermediary models that transform source data into the 
 <p>These models exist to stage silver marts (base marts in the EDW layer) and reference data (in the REF layer).</p>
 <p><strong>Naming Convention:</strong></p>
 <p><code>[domain][__env] . [layer] . [object_type][_entity/descriptor](__source)(__channel)(__transformation)</code></p>
-<p>Where:
-- <code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>corporate__dev</code>)
-- <code>[layer]</code> - Data layer (e.g., <code>ref</code>, <code>edw</code>)
-- <code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>ref_</code>, <code>dim_</code>, <code>fact_</code>, <code>keys_</code>)
-- <code>[_entity/descriptor]</code> - Entity or object name
-- <code>(__source)</code> - Optional source system identifier (e.g., <code>__sap</code>, <code>__workday</code>, <code>__finance_system</code>)
-- <code>(__channel)</code> - Optional source channel (e.g., <code>__adf</code>, <code>__api</code>)
-- <code>(__transformation)</code> - Optional transformation step (e.g., <code>__01_typed</code>, <code>__02_cleaned</code>)</p>
-<p><strong>Reference Data Staging:</strong></p>
+<p>Where:</p>
 <ul>
-<li>Source-specific staging (with transformations):</li>
+<li><code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>corporate__dev</code>)</li>
+<li><code>[layer]</code> - Data layer (e.g., <code>ref</code>, <code>edw</code>)</li>
+<li><code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>ref_</code>, <code>dim_</code>, <code>fact_</code>, <code>keys_</code>)</li>
+<li><code>[_entity/descriptor]</code> - Entity or object name</li>
+<li><code>(__source)</code> - Optional source system identifier (e.g., <code>__sap</code>, <code>__workday</code>, <code>__finance_system</code>)</li>
+<li><code>(__channel)</code> - Optional source channel (e.g., <code>__adf</code>, <code>__api</code>)</li>
+<li><code>(__transformation)</code> - Optional transformation step (e.g., <code>__01_typed</code>, <code>__02_cleaned</code>)</li>
+</ul>
+<p><strong>Reference Data Staging:</strong></p>
+<p>Source-specific staging (with transformations):</p>
+<ul>
 <li><em>e.g: <code>corporate__prod.ref.stg_facility__sap__01_filtered</code></em></li>
 <li><em>e.g: <code>corporate__prod.ref.stg_facility__sap__02_typed</code></em></li>
 <li><em>e.g: <code>corporate__prod.ref.stg_account_code__finance_system__adf__01_renamed</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.ref.stg_location__workday__01_typed</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.ref.stg_location__workday__01_typed</code></em></li>
+</ul>
 <p>Final reference data (cleaned and conformed):</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.ref.ref_facility</code></em></li>
 <li><em>e.g: <code>corporate__prod.ref.ref_location</code></em></li>
 <li><em>e.g: <code>corporate__prod.ref.ref_account_code</code></em></li>
 <li><em>e.g: <code>corporate__dev.ref.ref_country_codes</code></em></li>
 </ul>
 <p><strong>Base Mart (EDW) Staging:</strong></p>
+<p>Source-specific staging (with transformations):</p>
 <ul>
-<li>Source-specific staging (with transformations):</li>
 <li><em>e.g: <code>corporate__prod.edw.stg_employee__sap__01_typed</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_employee__workday__01_typed</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_employee__workday__02_cleaned</code></em></li>
@@ -519,45 +547,39 @@ Staging models serve as intermediary models that transform source data into the 
 <li><em>e.g: <code>corporate__prod.edw.stg_customer__crm__adf__02_cleaned</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_payment__new_finance_system__adf__01_typed</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_payment__old_finance_system__adf__01_typed</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.edw.stg_account__finance_system__api__01_renamed</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.edw.stg_account__finance_system__api__01_renamed</code></em></li>
+</ul>
 <p>Non-source specific staging (after combining/deduplicating):</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.edw.stg_employee__01_deduped</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_employee__02_validated</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.stg_payment__01_unified</code></em></li>
 </ul>
 <p><strong>Base Mart Keysets:</strong></p>
+<p>Conforming/deduplicating keysets across multiple sources:</p>
 <ul>
-<li>Conforming/deduplicating keysets across multiple sources:</li>
 <li><em>e.g: <code>corporate__prod.edw.keys_employee</code></em> (conforms sap and workday)</li>
 <li><em>e.g: <code>corporate__prod.edw.keys_customer</code></em> (conforms multiple crm sources)</li>
 <li><em>e.g: <code>corporate__prod.edw.keys_account</code></em> (conforms finance systems)</li>
 <li><em>e.g: <code>health__prod.edw.keys_patient</code></em> (conforms clinical systems)</li>
 </ul>
 <p><strong>Base Marts (Final Dimensional Models):</strong></p>
+<p>Source-specific dimensions (preserving source identity):</p>
 <ul>
-<li>Source-specific dimensions (preserving source identity):</li>
 <li><em>e.g: <code>corporate__prod.edw.dim_employee__sap</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.dim_employee__workday</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.dim_account__old_finance_system</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.edw.dim_account__new_finance_system</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.edw.dim_account__new_finance_system</code></em></li>
+</ul>
 <p>Conformed dimensions (unified, non-source specific):</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.edw.dim_employee</code></em> (type 1 SCD implied)</li>
 <li><em>e.g: <code>corporate__prod.edw.dim_employee__type2</code></em> (with history)</li>
 <li><em>e.g: <code>corporate__prod.edw.dim_customer</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.edw.dim_account</code></em> (unified across finance systems)</p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.edw.dim_account</code></em> (unified across finance systems)</li>
+</ul>
 <p>Fact tables:</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.edw.fact_payment</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.fact_transaction</code></em></li>
 <li><em>e.g: <code>health__prod.edw.fact_encounter</code></em></li>
@@ -596,28 +618,34 @@ Optional warehousing construct.</p>
 <p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
 <p><strong>Naming Convention:</strong></p>
 <p><code>[domain][__env] . mart . [object_type][product_name/descriptor](__source)(__transformation)</code></p>
-<p>Where:
-- <code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>health__dev</code>)
-- <code>mart</code> - Gold layer schema (product marts)
-- <code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>fact_</code>, <code>dim_</code>, <code>obt_</code>)
-- <code>[product_name/descriptor]</code> - Product or business-aligned name
-- <code>(__source)</code> - Optional source system identifier (only when source-specific view is needed)
-- <code>(__transformation)</code> - Optional transformation step (for staging only)</p>
-<p><strong>Naming Guidelines:</strong>
-- All <code>entity</code> names which align to facts should be named in plural
-- All <code>entity</code> names which align to dimensions should be named in singular
-- Product marts are business/requirement-aligned, not technical constructs</p>
+<p>Where:</p>
+<ul>
+<li><code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>health__dev</code>)</li>
+<li><code>mart</code> - Gold layer schema (product marts)</li>
+<li><code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>fact_</code>, <code>dim_</code>, <code>obt_</code>)</li>
+<li><code>[product_name/descriptor]</code> - Product or business-aligned name</li>
+<li><code>(__source)</code> - Optional source system identifier (only when source-specific view is needed)</li>
+<li><code>(__transformation)</code> - Optional transformation step (for staging only)</li>
+</ul>
+<p><strong>Naming Guidelines:</strong></p>
+<ul>
+<li>All <code>entity</code> names which align to facts should be named in plural</li>
+<li>All <code>entity</code> names which align to dimensions should be named in singular</li>
+<li>Product marts are business/requirement-aligned, not technical constructs</li>
+</ul>
 <p><br></p>
 <p><strong>(Gold)/Product Mart Staging Models</strong>:</p>
 <p>Staging models serve as intermediary models that transform base marts (EDW) into requirement-aligned product marts. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
 <p>These models exist to stage gold product marts with business-specific transformations:</p>
-<p><strong>Common Transformations:</strong>
-- Pivoting
-- Aggregation
-- Joining across multiple base marts
-- Business rule application
-- Desensitization
-- Complex calculations</p>
+<p><strong>Common Transformations:</strong></p>
+<ul>
+<li>Pivoting</li>
+<li>Aggregation</li>
+<li>Joining across multiple base marts</li>
+<li>Business rule application</li>
+<li>Desensitization</li>
+<li>Complex calculations</li>
+</ul>
 <p><strong>Examples:</strong></p>
 <ul>
 <li><em>e.g: <code>corporate__prod.mart.stg_downtime_by_region__01_pivoted</code></em></li>
@@ -633,32 +661,26 @@ Optional warehousing construct.</p>
 <p><strong>(Gold)/Product Marts (Final Products)</strong>:</p>
 <p>Final business-aligned data products ready for consumption by analytics, reporting, and BI tools.</p>
 <p><strong>Examples:</strong></p>
+<p>Fact tables (aggregated/business-focused):</p>
 <ul>
-<li>Fact tables (aggregated/business-focused):</li>
 <li><em>e.g: <code>corporate__prod.mart.fact_downtime_by_region</code></em></li>
 <li><em>e.g: <code>corporate__prod.mart.fact_late_payments</code></em></li>
 <li><em>e.g: <code>corporate__prod.mart.fact_regional_account_payments</code></em></li>
-<li>
-<p><em>e.g: <code>health__prod.mart.fact_patient_outcomes</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>health__prod.mart.fact_patient_outcomes</code></em></li>
+</ul>
 <p>Dimension tables (product-specific):</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.mart.dim_region</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.mart.dim_payment_category</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.mart.dim_payment_category</code></em></li>
+</ul>
 <p>One Big Tables (OBT) - Denormalized aggregates:</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.mart.obt_fte_calculations</code></em></li>
 <li><em>e.g: <code>corporate__prod.mart.obt_financial_summary</code></em></li>
-<li>
-<p><em>e.g: <code>corporate__prod.mart.obt_executive_dashboard</code></em></p>
-</li>
-<li>
+<li><em>e.g: <code>corporate__prod.mart.obt_executive_dashboard</code></em></li>
+</ul>
 <p>Source-specific products (when needed):</p>
-</li>
+<ul>
 <li><em>e.g: <code>corporate__prod.mart.fact_account_payments__old_finance_system</code></em></li>
 <li><em>e.g: <code>corporate__prod.mart.fact_account_payments__new_finance_system</code></em></li>
 <li><em>e.g: <code>corporate__prod.mart.obt_employee_metrics__sap</code></em></li>
