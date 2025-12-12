@@ -542,12 +542,9 @@ Usage guidance:
 
 ### Key Design Summary
 
-- Business keys define **entity identity**
-- `(business_key + effective_from_datetime)` defines **Type 2 version identity**
-- Surrogate keys provide the **physical join mechanism**
-- Type 2 correctness **always requires a version lookup**
 - Prefer **numeric** SKs for performance (especially with PowerBI); use **deterministic** SKs when cross-environment stability is required
 - **Date dimension tip**: Use integer with YYYYMMDD format as the surrogate key for optimal performance
+- When in doubt, just use SHA2.
 
 
 
