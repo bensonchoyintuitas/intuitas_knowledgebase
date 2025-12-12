@@ -629,7 +629,6 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li>Not compatible with dbt-managed tables</li>
 <li>Concurrent writes to the table are not supported</li>
 </ul>
-<p>These keys are generated in the <strong>silver or gold layer</strong>.</p>
 <p>Other valid approaches (depending on downstream requirements):</p>
 <ul>
 <li><strong>Natural key only (BK as PK/FK)</strong>: valid for <strong>Type 1</strong> dimensions; simplest, but typically wider keys and slower joins.</li>
@@ -669,6 +668,7 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
 <li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
 <li>When in doubt, just use SHA2.</li>
+<li>Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.</li>
 </ul>
 <hr />
 <h3 id="reference-data">Reference Data</h3>
