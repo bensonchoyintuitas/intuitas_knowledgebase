@@ -1,7 +1,7 @@
 # Standards and Conventions
 [Return to home](README.md)
 
-These standards are opinionated and designed to ensure consistency, governance, and automation across an organisation. They largely reflect an Azure Databricks environment, however can be adapted to other platforms. Organisations should adapt these standards to fit their existing internal conventions.
+These standards are opinionated and designed to ensure consistency, governance, and automation across an organisation. They largely reflect an Azure Databricks environment, however can be adapted to other platforms. Organisations should adapt these standards to fit their existing internal conventions. 
 <br>
 
 ## Table of Contents
