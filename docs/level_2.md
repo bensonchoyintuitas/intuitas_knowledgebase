@@ -273,6 +273,7 @@ While some interpretations consider Silver to be primarily *source-centric*, thi
 **Silver/EDW Staging**
 
 Transformations used to shape source data into standardised, conformed, and fit-for-use Reference Data, Data Vault and Base Information Mart objects.
+Staging is source-centric, with a view to progressively align to concept/entity-centric conventions in the EDW Mart.
 
 - Examples of transformations:
     - `01_renamed_and_typed`
@@ -294,6 +295,8 @@ Reference data, being a common asset and provided for broad consumption should b
 **EDW (base) Marts**
 
 The term *base* or *edw* is used to distinguish these marts from the product/requirement-specific marts found in the Gold layer. Base marts are designed for broad usability across multiple downstream use cases—for example, a conformed customer dimension.
+
+Marts here are source-agnostic and concept/entity-centric, however source-centric decompositions of these may exist if required by the business.
 
 Mappings of keys may be created to resolve and map system keys to universal surrogate keys or business keys. These can then be reused downstream for integration.
 

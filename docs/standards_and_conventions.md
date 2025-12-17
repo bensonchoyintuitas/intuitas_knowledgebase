@@ -385,31 +385,51 @@ In the examples provided - we have opted for domain level catalogs - with schema
 
 **(Silver)/EDW Staging Objects**:
 Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
-   
-These models exist to stage silver marts (base marts in the EDW layer) and reference data (in the REF layer).
+
+**Source-Centric Staging Approach:**
+
+Staging objects are organized around source systems and source objects, cleaning and normalizing data according to expectations/standards. This approach:
+- Cleans and normalizes data from each source independently
+- May feed data quality test results to reports for actioning
+- Prepares reference data for broad use and maps it for mart conformance
+- Creates mappings of keys to resolve and map system keys to universal surrogate keys or business keys, which can then be reused downstream for integration
 
 **Naming Convention:**
 
-`[domain][__env] . [layer] . [object_type][_entity/descriptor](__source)(__channel)(__transformation)`
+`[domain][__env] . [layer] . stg__[source_system](optional__[source_channel])__[source_object](optional__[other_descriptors])__[id]__[transformation_descriptors]`
 
 Where:
 
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `corporate__dev`)
 - `[layer]` - Data layer (e.g., `ref`, `edw`)
-- `[object_type]` - Object type prefix (e.g., `stg_`, `ref_`, `dim_`, `fact_`, `keys_`)
-- `[_entity/descriptor]` - Entity or object name
-- `(__source)` - Optional source system identifier (e.g., `__sap`, `__workday`, `__finance_system`)
-- `(__channel)` - Optional source channel (e.g., `__adf`, `__api`)
-- `(__transformation)` - Optional transformation step (e.g., `__01_typed`, `__02_cleaned`)
+- `stg__` - Staging object prefix
+- `[source_system]` - Source system identifier (e.g., `sap`, `workday`, `finance_system`)
+- `(optional__[source_channel])` - Optional source channel (e.g., `__adf`, `__api`)
+- `[source_object]` - Source object/table name
+- `(optional__[other_descriptors])` - Optional additional descriptors
+- `[id]` - Unique identifier suffix
+- `[transformation_descriptors]` - Numbered transformation step(s)
+
+**Standard Transformation Steps (optional, applied as needed):**
+
+- `00_keyed` - Key assignment/generation
+- `01_renamed_and_typed` - Column renaming and type casting
+- `02_deduped` - Deduplication
+- `03_cleaned` - Data cleaning
+- `04_filtered` or `04_split` - Filtering or splitting data
+- `05_column_selected` - Column selection
+- `06_business_validated` - Business rule validation
+- `07_desensitised` - Sensitive data masking/removal
 
 **Reference Data Staging:**
 
 Source-specific staging (with transformations):
 
-   - *e.g: `corporate__prod.ref.stg_facility__sap__01_filtered`*
-   - *e.g: `corporate__prod.ref.stg_facility__sap__02_typed`*
-   - *e.g: `corporate__prod.ref.stg_account_code__finance_system__adf__01_renamed`*
-   - *e.g: `corporate__prod.ref.stg_location__workday__01_typed`*
+   - *e.g: `corporate__prod.ref.stg__sap__facilities__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.ref.stg__sap__facilities__02_cleaned`*
+   - *e.g: `corporate__prod.ref.stg__finance_system__adf__account_codes__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.ref.stg__workday__locations__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.ref.stg__workday__locations__02_deduped`*
 
 Final reference data (cleaned and conformed):
 
@@ -422,29 +442,23 @@ Final reference data (cleaned and conformed):
 
 Source-specific staging (with transformations):
 
-   - *e.g: `corporate__prod.edw.stg_employee__sap__01_typed`*
-   - *e.g: `corporate__prod.edw.stg_employee__workday__01_typed`*
-   - *e.g: `corporate__prod.edw.stg_employee__workday__02_cleaned`*
-   - *e.g: `corporate__prod.edw.stg_customer__crm__adf__01_renamed`*
-   - *e.g: `corporate__prod.edw.stg_customer__crm__adf__02_cleaned`*
-   - *e.g: `corporate__prod.edw.stg_payment__new_finance_system__adf__01_typed`*
-   - *e.g: `corporate__prod.edw.stg_payment__old_finance_system__adf__01_typed`*
-   - *e.g: `corporate__prod.edw.stg_account__finance_system__api__01_renamed`*
-
-Non-source specific staging (after combining/deduplicating):
-
-   - *e.g: `corporate__prod.edw.stg_employee__01_deduped`*
-   - *e.g: `corporate__prod.edw.stg_employee__02_validated`*
-   - *e.g: `corporate__prod.edw.stg_payment__01_unified`*
+   - *e.g: `corporate__prod.edw.stg__sap__employees__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw.stg__workday__employees__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw.stg__workday__employees__02_cleaned`*
+   - *e.g: `corporate__prod.edw.stg__crm__adf__customers__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw.stg__crm__adf__customers__02_cleaned`*
+   - *e.g: `corporate__prod.edw.stg__new_finance_system__adf__payments__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw.stg__old_finance_system__adf__payments__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw.stg__finance_system__api__accounts__01_renamed_and_typed`*
 
 **Base Mart Keysets:**
 
-Conforming/deduplicating keysets across multiple sources:
+Keysets are created to resolve and map system keys to universal surrogate keys or business keys. These can be reused downstream for integration and conforming/deduplicating entities across multiple sources:
 
-   - *e.g: `corporate__prod.edw.keys_employee`* (conforms sap and workday)
-   - *e.g: `corporate__prod.edw.keys_customer`* (conforms multiple crm sources)
-   - *e.g: `corporate__prod.edw.keys_account`* (conforms finance systems)
-   - *e.g: `health__prod.edw.keys_patient`* (conforms clinical systems)
+   - *e.g: `corporate__prod.edw.keys__employee`* (conforms sap and workday employee keys)
+   - *e.g: `corporate__prod.edw.keys__customer`* (conforms multiple crm source keys)
+   - *e.g: `corporate__prod.edw.keys__account`* (conforms finance system keys)
+   - *e.g: `health__prod.edw.keys__patient`* (conforms clinical system keys)
 
 **Base Marts (Final Dimensional Models):**
 
@@ -652,32 +666,14 @@ dbt model names are verbose (inclusive of zone and domain) to ensure global uniq
 **Staging Source-specific:** 
 
    - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg__{source_system} __{source_channel} __{source_object} __{ordinal}_{transformation description}`
 
 ```md
    *e.g:*
 
-      - *silver\new_finance_system__adf\stg\corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-      - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-      - materialises to: *corporate__dev.edw.stg_account__new_finance_system__adf__01_renamed*
-```
-
-
-**Staging Non-source-specific (entity centric):**
-
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim_/fact_}{__entity /_object_description} __{ordinal}_{transformation description} `
-
-      - *e.g: corporate__dev.edw.stg_account__01_deduped*
-      - *e.g: corporate__dev.edw.stg_account__02_validated* 
-
-
-```md
-   *e.g:*
-
-      - *silver\mart\accounts\stg\corporate__silver__stg__accounts__01_deduped.sql*
-      - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
-      - materialises to: *e.g: corporate__dev.edw.stg_account__01_deduped*
+      - *silver\new_finance_system__adf\stg\corporate__silver__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - or *silver\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - materialises to: *corporate__dev.edw.stg__new_finance_system__adf__accounts__01_renamed_and_typed*
 ```
 
 **Mart Source-specific:** 
@@ -744,48 +740,54 @@ The model structure below reflects a single catalog for domain+environment and s
 │   └── custom_macro.sql
 │   ├── utilities
 │       └── all_dates.sql
-├── models/bronze
+├── models/bronze  <bronze>
 │   /{optional: domain and subdomains}
 │   └── _bronze.md
 ├── models/silver/{optional: domain and subdomains}
 │   /{optional: domain and subdomains}
 │   ├── _silver.md
-│   ├── mart  (entity centric objects)
+│   ├── mart  (entity centric objects) <edw>
 │   |    └── account
-│   |    |   └── mart__dim_account.sql
+│   |    |   └── mart__dim_account.sql  <e.g: corporate__dev.edw.mart__dim_account>
 │   |    |       └── stg
-│   |    |           └── stg__dim_account__01_dedupe.sql
-│   |    |           └── stg__dim_account__02_filter.sql
+│   |    |           └── stg__dim_account__01_dedupe.sql  <e.g: corporate__dev.edw.stg__dim_account__01_dedupe>
+│   |    |           └── stg__dim_account__02_filter.sql  <e.g: corporate__dev.edw.stg__dim_account__02_filter>
 │   |    └── date
-│   |        └── mart__dim_date.sql
-│   └── ref
+│   |        └── mart__dim_date.sql  <e.g: corporate__dev.edw.mart__dim_date>
+│   └── ref  <ref>
 │       ├── _reference_data__models.yml
 │       ├── _reference_data__sources.yml
-│       └── ref_{entity}.sql
-│   ├── stg (source centric staging objects)
-│   |   └── source_system_1 
-│   |       ├── _source_system_1__docs.md
-│   |       ├── _source_system_1__models.yml
-│   |       ├── stg__object__source_system_1.sql
-│   |       ├── stg__(new object)__source_system_1.sql
-│   |       ├── stg__object_desensitised__source_system_1.sql
+│       └── ref_{entity}.sql  <e.g: corporate__dev.ref.ref_facility>
+│   ├── stg (source centric staging objects) <edw>
+│   |   ├── source_system_1 
+│   |   |   ├── _source_system_1__docs.md
+│   |   |   ├── _source_system_1__models.yml
+│   |   |   ├── stg__source_system_1__object.sql  <e.g: corporate__dev.edw.stg__source_system_1__object>
+│   |   |   ├── stg__source_system_1__new_object.sql  <e.g: corporate__dev.edw.stg__source_system_1__new_object>
+│   |   |   └── stg
+│   |   |       ├── stg__source_system_1__object__01_renamed_and_typed.sql  <e.g: corporate__dev.edw.stg__source_system_1__object__01_renamed_and_typed>
+│   |   |       └── stg__source_system_1__object__02_cleaned.sql  <e.g: corporate__dev.edw.stg__source_system_1__object__02_cleaned>
+│   |   └── source_system_2__adf
+│   |       ├── _source_system_2__adf__docs.md
+│   |       ├── _source_system_2__adf__models.yml
+│   |       ├── stg__source_system_2__adf__accounts.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts>
 │   |       └── stg
-│   |           ├── stg__object__01_step__source_system_1.sql
-│   |           └── stg__object__02_step__source_system_1.sql
+│   |           ├── stg__source_system_2__adf__accounts__01_renamed_and_typed.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts__01_renamed_and_typed>
+│   |           └── stg__source_system_2__adf__accounts__02_cleaned.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts__02_cleaned>
 │   ├── sources
 │        └── {optional: domain}
 │        └── {optional: bronze/silver/gold}
 │             └── _source_system_1__sources.yml 
-├── models/gold
+├── models/gold  <mart>
 │   /{optional: domain and subdomains}
 │   ├── _gold.md
 │   └── domain_name e.g: finance 
 │       └── mart
 │           ├── _finance__models.yml
-│           ├── orders.sql
-│           └── payments.sql
+│           ├── orders.sql  <e.g: corporate__dev.mart.orders>
+│           └── payments.sql  <e.g: corporate__dev.mart.payments>
 │               └── stg
-│                   └── stg_payments_pivoted_to_orders.sql
+│                   └── stg_payments_pivoted_to_orders.sql  <e.g: corporate__dev.mart.stg_payments_pivoted_to_orders>
 ├── packages.yml
 ├── snapshots
 └── tests
