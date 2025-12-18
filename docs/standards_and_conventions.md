@@ -126,8 +126,8 @@ The section describes naming standards and conventions for cloud storage resourc
 - Name: `{environment} (dev/test/preprod/prod)`
 
 ##### Lakehouse storage folders
-- Level 1 Name: `{layer} (raw/edw/infomart)` // (bronze/silver/gold)` if using medallion approach
-- Level 2 Name: `{stage_name}`
+- Level 1 Name: `{zone} (raw/edw/infomart)` // (bronze/silver/gold)` if using medallion approach
+- Level 2 Name: `{layer_name}`
 - *e.g:*
 
    - *raw/landing*
@@ -176,17 +176,17 @@ This section provides naming standards and conventions for Databricks.
 #### Job names
 ---
 
-- Job names: `{domain}__{layer}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}`
-- *e.g. clinical__bronze__ingest__fhircdr__dev*
+- Job names: `{domain}__{zone}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}`
+- *e.g. clinical__raw__ingest__fhircdr__dev*
 
 #### For Delta Live Table (DLT) Pipelines
 ---
-- Pipeline names: `{domain_name}__{layer}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}`
+- Pipeline names: `{domain_name}__{zone}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}`
 - *e.g. clinical__raw__pipeline__fhircdr__dev*
 - *e.g. supplychain__infomart__pipeline__inventorymart__prod* 
 
-- Note on {layer}: If the 'business outcome' is Infomart, you call it Infomart, even if it produces Raw + EDW on the way.
-*i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated infomart-layer dataset called Inventory Mart"*
+- Note on {zone}: If the 'business outcome' is Infomart, you call it Infomart, even if it produces Raw + EDW on the way.
+*i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated Infomart zone dataset called Inventory Mart"*
 
 - Include pipeline so it’s distinguishable from ad hoc jobs.
 - Dataset can be a logical grouping (e.g., patient, encounter, claims).
@@ -220,13 +220,13 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 Catalog name: 
 
-The choice of granularity depends on domain topology, stage/zone convention and desired level of segregation for access and sharing controls (i.e. catalog or schema level)
+The choice of granularity depends on domain topology, zone and layer conventions, and desired level of segregation for access and sharing controls (i.e. catalog or layer level)
 
    - Minimum granularity (domain level): `{domain_name}{__environment (dev/test/pat/prod)}` (prod is implied optional)   *e.g: corporate__dev*
-   - Optional granularity (domain-data stage level): `{domain_name}{_data_stage: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw__dev*
-   - Optional granularity (domain-data stage and zone level): `{domain_name}{_data_stage: (raw/edw/infomart)}{_data_zone: (ods/pds/edw_stg/edw_ref/edw/im_stg/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw_ods__dev*
-   - Optional granularity (domain-data zone level): `{domain_name}{_data_zone: (ods/pds/edw_stg/edw_ref/edw/im_stg/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
-   - Optional granularity (subdomain-data stage level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_data_stage: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_raw__dev*
+   - Optional granularity (domain-zone level): `{domain_name}{_zone: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw__dev*
+   - Optional granularity (domain-zone and layer level): `{domain_name}{_zone: (raw/edw/infomart)}{_layer: (ods/pds/stg/ref/mart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw_ods__dev*
+   - Optional granularity (domain-layer level): `{domain_name}{_layer: (ods/pds/stg/ref/mart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
+   - Optional granularity (subdomain-zone level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_zone: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_raw__dev*
 
 In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo(lakeflow).encounter`
 
@@ -255,6 +255,17 @@ Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further
 
 Refer to [Physical Models](modelling_standards_and_conventions.md#physical-models) for the standard relating to column naming, types, and conventions.
 
+**Terminology Hierarchy:**
+
+Data is organized in a three-level hierarchy:
+- **Zone** = Top-level organizational boundary (Raw, EDW, Infomart)
+  - *Within each zone, data flows through...*
+- **Layer** = Processing layers within a zone (landing, ods, pds, stg, ref, mart, etc.)
+  - *Each layer typically maps to...*
+- **Schema** = Unity Catalog schema that stores objects (ods, pds, edw_stg, edw_ref, edw, im_stg, im)
+
+Example: The **Raw zone** contains the **ODS layer** which maps to the **ods schema**.
+
 #### Schema level external storage locations
 
 Recommendations:
@@ -278,9 +289,9 @@ Contains metadata that supports engineering and governance. This will vary depen
 
 #### Raw (aka Bronze) (Data according to systems)
 
-The Raw layer stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
+The Raw zone stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
 
-The Raw layer uses two primary schemas:
+The Raw zone uses two primary schemas:
 - **`ods`** - Operational Data Store (current state)
 - **`pds`** - Persistent Data Store (historical snapshots)
 
@@ -293,7 +304,7 @@ Persistent Landing uses Unity Catalog Volumes for storing raw files and unstruct
 Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment identifier (e.g., `corporate_dev`, `engineering_prod`)
-  - `[layer]`: Data layer identifier (e.g., `landing`)
+  - `[layer]`: Data layer identifier within the Raw zone (e.g., `landing`)
   - `[__source_system]`: Source system identifier (e.g., `workdayapi`, `saphr`)
   - `[__source_schema]`: Optional source schema or subsystem identifier
   - `(channel)`: Ingestion channel/method (e.g., `adf`, `fivetran`, `api`)
@@ -304,7 +315,7 @@ Volume naming convention: `[domain][__env].[layer][__source_system][__source_sch
 
 **Operational Data Store (ODS)**:
 
-The objective of raw layer conventions is to provide clarity over which zone and stage it belongs, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).
+The objective of raw zone conventions is to provide clarity over which zone, layer, and schema it belongs to, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).
 
 ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:
 
@@ -313,7 +324,7 @@ Database replicated ODS (structured sources like SQL Server):
 Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
-  - `[layer]`: Data layer (e.g., `ods`)
+  - `[layer]`: Data layer within the Raw zone (e.g., `ods`)
   - `[__source_system]`: Source system identifier
   - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
   - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
@@ -327,7 +338,7 @@ Prepped semi/unstructured ODS data:
 Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
-  - `[layer]`: Data layer (e.g., `ods`)
+  - `[layer]`: Data layer within the Raw zone (e.g., `ods`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
   - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
@@ -346,7 +357,7 @@ Database replicated PDS (structured sources like SQL Server):
 Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
-  - `[layer]`: Data layer (e.g., `pds`)
+  - `[layer]`: Data layer within the Raw zone (e.g., `pds`)
   - `[__source_system]`: Source system identifier
   - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
   - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
@@ -360,7 +371,7 @@ Prepped semi/unstructured PDS data:
 Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
-  - `[layer]`: Data layer (e.g., `pds`)
+  - `[layer]`: Data layer within the Raw zone (e.g., `pds`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
   - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
@@ -371,11 +382,11 @@ Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).
 
 #### EDW (aka Silver) (Data according to business entities)
 
-The EDW (Enterprise Data Warehouse) layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
+The EDW (Enterprise Data Warehouse) zone focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
-The EDW layer uses three primary schemas:
+The EDW zone uses three primary schemas:
 - **`edw_stg`** - Source-centric staging objects (transformations, cleaning, normalization)
 - **`edw_ref`** - Reference data (conformed lookups, master data)
 - **`edw`** - Base marts (dimensions, facts - curated entities)
@@ -384,7 +395,7 @@ These marts are objects that are aligned to business entities and broad requirem
 
 In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.edw.dim_customer`
 
-- All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `edw_stg__`, `edw_ref__`, `edw__`
+- All schemas may be optionally prefixed with additional descriptors if not already decomposed at domain-level i.e. `edw_stg__`, `edw_ref__`, `edw__`
 - All `entity` names which align to facts should be named in plural.
 - All `entity` names which align to dims should be named in singular.
 
@@ -525,11 +536,11 @@ Optional warehousing construct.
 
 #### Infomart (aka Gold) (Data according to requirements)
 
-The Infomart layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
+The Infomart zone focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
-The Infomart layer uses two primary schemas:
+The Infomart zone uses two primary schemas:
 - **`im_stg`** - Product mart staging (intermediate transformations)
 - **`im`** - Information marts (final business-aligned products)
 
@@ -540,7 +551,7 @@ The Infomart layer uses two primary schemas:
 Where:
 
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `health__dev`)
-- `[schema]` - Infomart layer schema (`im_stg` for staging, `im` for final products)
+- `[schema]` - Infomart zone schema (`im_stg` for staging, `im` for final products)
 - `[object_type]` - Object type prefix (e.g., `stg_`, `fact_`, `dim_`, `obt_`)
 - `[product_name/descriptor]` - Product or business-aligned name
 - `(__source)` - Optional source system identifier (only when source-specific view is needed)
@@ -662,11 +673,11 @@ Within each respective model folder (as needed)
 
 ### Model and Folder Names
 
-dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.
+dbt model names are verbose (inclusive of schema and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.
 
 #### Raw
 
-*Raw layer contains operational data store (ODS) for current state and persistent data store (PDS) for historical tracking*
+*Raw zone contains operational data store (ODS) for current state and persistent data store (PDS) for historical tracking*
 
 **ODS (Operational Data Store) - Current State:**
 - Folder: `seeds/{optional: domain name}{optional: __subdomain name(s)}/`  → materializes to `[domain__env].ods`
@@ -758,7 +769,7 @@ These models typically reference their corresponding seeds from ODS and add hist
 
 
 #### Example dbt model structure:
-The model structure below reflects a single catalog for domain+environment and schema separation for layers and stages:
+The model structure below reflects a single catalog for domain+environment and schema separation for zones and layers:
 
 ```md
 {{domain/enterprise} _project_name}
@@ -832,7 +843,7 @@ The model structure below reflects a single catalog for domain+environment and s
 ```
 
 ### dbt_project.yml
-The yml structure below reflects a single catalog for domain+environment and schema separation for layers and stages:
+The yml structure below reflects a single catalog for domain+environment and schema separation for zones and layers:
 
 ```yml
 models:
