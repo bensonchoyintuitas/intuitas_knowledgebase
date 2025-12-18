@@ -397,9 +397,9 @@ The EDW (Enterprise Data Warehouse) zone focuses on transforming raw data into c
 Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 The EDW zone uses three primary schemas:
-- **`edw_stg`** - Source-centric staging objects (transformations, cleaning, normalization)
-- **`edw_ref`** - Reference data (conformed lookups, master data)
-- **`edw`** - Base marts (dimensions, facts - curated entities)
+- **`edw_stg`** - Source-centric and entity-centric staging objects (transformations, cleaning, normalization, integration)
+- **`edw_ref`** - Reference data (curated, conformed reference entities and code sets intended for broad reuse)
+- **`edw`** - Base marts (full-featured dimensions with SCD logic, facts - curated entities)
 
 These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.
 
@@ -472,7 +472,15 @@ Where:
 
 **Reference Data Staging:**
 
-Source-specific staging (with transformations in `edw_stg` schema):
+Reference data follows the same two-stage approach as marts when coming from multiple sources.
+
+Use **Entity-Centric Staging** when:
+- Multiple source systems provide the *same* business entity/code set, and you need a single conformed view
+- You need cross-source mapping, hierarchy standardisation, or conflict resolution (e.g., code collisions, different naming, different rollups)
+
+**Source-Centric Staging** (with transformations in `edw_stg` schema):
+
+Cleans individual source system reference data:
 
    - *e.g: `corporate__prod.edw_stg.stg__sap__facilities__01_renamed_and_typed`*
    - *e.g: `corporate__prod.edw_stg.stg__sap__facilities__02_cleaned`*
@@ -480,12 +488,45 @@ Source-specific staging (with transformations in `edw_stg` schema):
    - *e.g: `corporate__prod.edw_stg.stg__workday__locations__01_renamed_and_typed`*
    - *e.g: `corporate__prod.edw_stg.stg__workday__locations__02_deduped`*
 
-Final reference data (cleaned and conformed in `edw_ref` schema):
+**Entity-Centric Staging** (when unifying across sources in `edw_stg` schema):
 
-   - *e.g: `corporate__prod.edw_ref.ref_facility`*
-   - *e.g: `corporate__prod.edw_ref.ref_location`*
-   - *e.g: `corporate__prod.edw_ref.ref_account_code`*
-   - *e.g: `corporate__dev.edw_ref.ref_country_codes`*
+Integrates reference data from multiple sources:
+
+   - *e.g: `corporate__prod.edw_stg.stg__facility__01_unified`* (combines SAP and Workday facilities)
+   - *e.g: `corporate__prod.edw_stg.stg__facility__02_mapped`* (standardizes codes/hierarchies)
+   - *e.g: `corporate__prod.edw_stg.stg__account_code__01_unified`* (combines old/new finance systems)
+   - *e.g: `corporate__prod.edw_stg.stg__location__01_unified`* (integrates location references)
+
+**Final Reference Data** (cleaned and conformed in `edw_ref` schema):
+
+Reference data in `edw_ref` is materialized as **curated, conformed, reusable reference entities and code sets**.
+
+Typically, `edw_ref` models:
+- Are keyed by **natural/business keys** (and may also include stable internal IDs where useful)
+- Are **lightweight and broadly reusable** (avoid mart-specific denormalisation and calculations)
+- Are often **current-state**, but may include **effective dating** / limited historisation where the reference itself changes over time (e.g., organisational hierarchies)
+
+   - *e.g: `corporate__prod.edw_ref.ref_facility`* (facility_id, facility_name, facility_code, location_key - simple key-value)
+   - *e.g: `corporate__prod.edw_ref.ref_location`* (location_id, location_name, country_code - basic attributes)
+   - *e.g: `corporate__prod.edw_ref.ref_account_code`* (account_code, account_name, hierarchy_level - minimal structure)
+   - *e.g: `corporate__prod.edw_ref.ref_country_codes`* (country_code, country_name - simple lookup)
+
+**Note on Reference Data vs Dimensions:**
+
+Reference data in `edw_ref` serves as a foundation and can be **shaped into dimensions** in the `edw` (marts) schema:
+
+- **`edw_ref.ref_*`** - Conformed reference entities/code sets intended for broad reuse (generally natural/business keys, minimal mart-specific logic)
+- **`edw.dim_*`** - Analytics-facing dimensional models that may add:
+  - Surrogate keys (and persisted natural/business keys as attributes)
+  - SCD Type 1 and/or Type 2 behaviour **as required** (e.g., `valid_from`, `valid_to`, `is_current`)
+  - Denormalisation, role-playing dimensions, and mart-specific hierarchies/business rules
+
+Examples of the relationship:
+
+   - `edw_ref.ref_facility` (conformed reference) → `edw.dim_facility` (often Type 1 if facility attributes are treated as current-state)
+   - `edw_ref.ref_account_code` (conformed codes/hierarchy) → `edw.dim_account` (often Type 2 if names/rollups change over time)
+   - `edw_ref.ref_product_category` (conformed categories) → `edw.dim_product` (often Type 2 if classifications change over time)
+
 
 **Base Mart (EDW) Staging:**
 
@@ -542,6 +583,8 @@ Keysets are created in the `edw` schema to resolve and map system keys to univer
 
 **Base Marts (Final Dimensional Models):**
 
+Base marts represent full-featured dimensional models with SCD logic, business rules, and complete attributes. These may be built from entity-centric staging, source-centric staging, or by shaping reference data from `edw_ref`.
+
 Source-specific dimensions (preserving source identity):
 
    - *e.g: `corporate__prod.edw.dim_employee__sap`*
@@ -551,10 +594,16 @@ Source-specific dimensions (preserving source identity):
 
 Conformed dimensions (unified, non-source specific):
 
-   - *e.g: `corporate__prod.edw.dim_employee`* (type 1 SCD implied)
-   - *e.g: `corporate__prod.edw.dim_employee__type2`* (with history)
+   - *e.g: `corporate__prod.edw.dim_employee`* (Type 1 SCD - current state only)
+   - *e.g: `corporate__prod.edw.dim_employee__type2`* (Type 2 SCD - with historical tracking)
    - *e.g: `corporate__prod.edw.dim_customer`*
    - *e.g: `corporate__prod.edw.dim_account`* (unified across finance systems)
+
+Dimensions built from reference data (shaped with SCD logic):
+
+   - *e.g: `corporate__prod.edw.dim_facility`* (built from `edw_ref.ref_facility`, adds Type 1 or Type 2 SCD logic)
+   - *e.g: `corporate__prod.edw.dim_product_category`* (built from `edw_ref.ref_product_category`, with hierarchies)
+   - *e.g: `corporate__prod.edw.dim_location`* (built from `edw_ref.ref_location`, with geographic hierarchies)
 
 Fact tables:
 
@@ -828,8 +877,16 @@ Base marts are organized by business entity. Entity-centric staging (if needed) 
 
 **Reference Data:** 
 
-   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} ref{__optional:dim_/fact_} {__reference data set name} {optional:__{source_system}__{source_channel}}`
+Reference data follows the same pattern as marts - organized by reference entity with optional entity-centric staging.
+
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/ref/{reference_entity}/`
+   - Entity-centric staging subfolder: `models/edw/.../ref/{reference_entity}/stg/` (when unifying multiple sources)
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} ref_{__reference data set name} {optional:__{source_system}__{source_channel}}`
+
+Examples:
+   - *e.g: `models/edw/ref/facility/ref_facility.sql`* → `corporate__dev.edw_ref.ref_facility`
+   - *e.g: `models/edw/ref/facility/stg/stg__facility__01_unified.sql`* → `corporate__dev.edw_stg.stg__facility__01_unified` (combines SAP + Workday)
+   - *e.g: `models/edw/ref/account_code/ref_account_code.sql`* → `corporate__dev.edw_ref.ref_account_code`
 
 **Raw Vault:** 
 
@@ -919,10 +976,17 @@ The model structure below reflects a single catalog for domain+environment and s
 │   |       └── dim_account.sql  <e.g: corporate__dev.edw.dim_account>
 │   |   └── date
 │   |       └── dim_date.sql  <e.g: corporate__dev.edw.dim_date>
-│   ├── ref  (reference data) <edw_ref>
-│   |   ├── _reference_data__models.yml
-│   |   ├── _reference_data__sources.yml
-│   |   └── ref_{entity}.sql  <e.g: corporate__dev.edw_ref.ref_facility>
+│   ├── ref  (reference data with optional entity-centric staging) <edw_ref> and <edw_stg>
+│   |   ├── _reference_data__docs.md
+│   |   ├── facility
+│   |   |   ├── _facility__models.yml
+│   |   |   ├── ref_facility.sql  <e.g: corporate__dev.edw_ref.ref_facility>
+│   |   |   └── stg  (entity-centric staging when unifying multiple sources) <edw_stg>
+│   |   |       ├── stg__facility__01_unified.sql  <e.g: corporate__dev.edw_stg.stg__facility__01_unified>
+│   |   |       └── stg__facility__02_mapped.sql  <e.g: corporate__dev.edw_stg.stg__facility__02_mapped>
+│   |   └── country_code
+│   |       ├── _country_code__models.yml
+│   |       └── ref_country_code.sql  <e.g: corporate__dev.edw_ref.ref_country_code (single source, no staging)>
 │   └── sources
 │        └── {optional: domain}
 │        └── {optional: raw/edw/infomart}
@@ -968,6 +1032,10 @@ models:
         +description: "Reference data (conformed lookups, master data)"
         +schema: edw_ref
         +materialized: table
+        stg:
+          +description: "Entity-centric reference staging (when unifying multiple sources)"
+          +schema: edw_stg
+          +materialized: view
       source:
         +description: "Source-centric staging organized by source system"
         +schema: edw_stg
