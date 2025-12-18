@@ -267,7 +267,9 @@ The Raw (Bronze) zone stores raw, immutable data as it is ingested from source s
 #### **EDW (Silver) zone: Data according to business**
 The EDW (Silver) zone focuses on transforming raw data into cleaned, enriched, and validated datasets. These datasets are aligned with broadly accepted business standards and models, making them suitable for a range of downstream requirements.
 
-While some interpretations consider EDW (Silver) to be primarily *source-centric*, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources.
+Models and metadata here reflect Enterprise as well as Domain-specific definitions (with Domains recognised as the owner of definitions within their boundary).
+
+While some interpretations consider EDW (Silver) to be primarily *source-centric*, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources - hence upstream areas are source-centric while exposed assets may be entity-centric, with options for source-oriented partitioning.
 
 
 **EDW (Silver) Staging**
