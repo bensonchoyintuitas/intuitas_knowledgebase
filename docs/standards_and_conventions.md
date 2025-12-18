@@ -18,7 +18,7 @@ These standards are opinionated and designed to ensure consistency, governance, 
       - [Key vault](standards_and_conventions.md#key-vault)
       - [Secrets](standards_and_conventions.md#secrets)
       - [Entra Group Names](standards_and_conventions.md#entra-group-names)
-      - [Azure Data Factory (standards_and_conventions.mdADF)](standards_and_conventions.md#azure-data-factory-adf)
+      - [Azure Data Factory (ADF)](standards_and_conventions.md#azure-data-factory-adf)
       - [SQL Server](standards_and_conventions.md#sql-server)
       - [SQL Database](standards_and_conventions.md#sql-database)
       - [Storage](standards_and_conventions.md#storage)
@@ -65,13 +65,13 @@ All lower case: `{optional:organisation_}{functional area/domain}_{subdomain}`
 
 ### Environment
 
-- Environment name: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)
+- Environment name: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as preferred)
 
 
 ### VNET
 
 - Name: `vn-{organisation_name}-{domain_name}`
-= *e.g: vn-intuitas-corporate*
+- *e.g: vn-intuitas-corporate*
 
 ### Resource Groups
 
@@ -95,7 +95,7 @@ All lower case: `{optional:organisation_}{functional area/domain}_{subdomain}`
 ### Entra Group Names
 
 - Name: `eg-{organisation_name}-{domain_name}`
-= *e.g: eg-intuitas-corporate*
+- *e.g: eg-intuitas-corporate*
 
 
 ### Azure Data Factory (ADF)
@@ -183,7 +183,15 @@ This section provides naming standards and conventions for Databricks.
 ---
 - Pipeline names: `{domain_name}__{zone}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}`
 - *e.g. clinical__raw__pipeline__fhircdr__dev*
-- *e.g. supplychain__infomart__pipeline__inventorymart__prod* 
+- *e.g. supplychain__infomart__pipeline__inventorymart__prod*
+
+**Note on zone terminology:**
+- This framework uses `raw/edw/infomart` terminology (aligns with enterprise data warehousing concepts)
+- Databricks documentation uses `bronze/silver/gold` terminology (medallion architecture)
+- Both are valid; choose one and use consistently:
+  - `raw` = `bronze` (raw ingested data)
+  - `edw` = `silver` (cleaned, conformed data)
+  - `infomart` = `gold` (business-ready aggregated data)
 
 - Note on {zone}: If the 'business outcome' is Infomart, you call it Infomart, even if it produces Raw + EDW on the way.
 *i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated Infomart zone dataset called Inventory Mart"*
@@ -199,9 +207,9 @@ This section provides naming standards and conventions for Databricks.
 
 which then orchestrates: 
 
-- *clinical__bronze__pipeline__fhircdr__prod*
-- *clinical__silver__pipeline__fhirclean__prod*
-- *clinical__gold__pipeline__clinicalmart__prod*
+- *clinical__raw__pipeline__fhircdr__prod* (or `clinical__bronze__pipeline__fhircdr__prod` if using medallion terminology)
+- *clinical__edw__pipeline__fhirclean__prod* (or `clinical__silver__pipeline__fhirclean__prod` if using medallion terminology)
+- *clinical__infomart__pipeline__clinicalmart__prod* (or `clinical__gold__pipeline__clinicalmart__prod` if using medallion terminology)
 
 #### Job logging
 
@@ -228,7 +236,7 @@ The choice of granularity depends on domain topology, zone and layer conventions
    - Optional granularity (domain-layer level): `{domain_name}{_layer: (ods/pds/stg/ref/mart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
    - Optional granularity (subdomain-zone level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_zone: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_raw__dev*
 
-In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo(lakeflow).encounter`
+In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter`
 
 *Note that projects are temporary constructs, and hence are not recommended for naming*
 
@@ -270,7 +278,7 @@ Example: The **Raw zone** contains the **ODS layer** which maps to the **ods sch
 
 Recommendations:
 
-- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/engineering__dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
+- For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. *e.g: abfss://dev@dlintuitas{domain}.dfs.core.windows.net/engineering__dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid*
 - For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.
 - Ensure dbt's dbt_project.yml and environment variables align with storage locations.
 
@@ -297,17 +305,19 @@ The Raw zone uses two primary schemas:
 
 In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter`
 
+*Note: Using consistent double underscore (`__`) delimiters throughout ensures compatibility with Databricks and avoids parsing issues. Parentheses notation (e.g., `dbo(adf)`) should be avoided in schema and object names.*
+
 **Persistent Landing**:
 
 Persistent Landing uses Unity Catalog Volumes for storing raw files and unstructured data as they arrive from source systems.
 
-Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+Volume naming convention: `[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment identifier (e.g., `corporate_dev`, `engineering_prod`)
   - `[layer]`: Data layer identifier within the Raw zone (e.g., `landing`)
   - `[__source_system]`: Source system identifier (e.g., `workdayapi`, `saphr`)
   - `[__source_schema]`: Optional source schema or subsystem identifier
-  - `(channel)`: Ingestion channel/method (e.g., `adf`, `fivetran`, `api`)
+  - `[__channel]`: Optional ingestion channel/method (e.g., `__adf`, `__fivetran`, `__api`)
   - `[source_object/volume_name]`: Descriptive volume name or source object identifier
 
 - *e.g: corporate__dev.landing__workdayapi.schedule_volume*
@@ -321,30 +331,30 @@ ODS can be replicated from source systems, or prepared for use from semi/unstruc
 
 Database replicated ODS (structured sources like SQL Server):
 
-Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+Format: `[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer within the Raw zone (e.g., `ods`)
   - `[__source_system]`: Source system identifier
-  - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
-  - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
+  - `[__source_schema]`: Source schema (if applicable, e.g., `__dbo`, `__reporting`)
+  - `[__channel]`: Optional ingestion channel (e.g., `__adf`, `__fivetran`, `__lakeflow`)
   - `[source_object/volume_name]`: Table name as per source
 
 - *e.g: clinical__dev.ods__patientflowmanager01__reporting.patients*
-- *e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter*
+- *e.g: clinical__dev.ods__fhirhouse__dbo__adf.encounter*
 
 Prepped semi/unstructured ODS data:
 
-Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+Format: `[domain][__env].[layer][__source_system][__source_descriptor][__channel].[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer within the Raw zone (e.g., `ods`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
-  - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
+  - `[__channel]`: Optional ingestion channel (e.g., `__kafka`, `__databricks`, `__api`)
   - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
 
-- *e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter*
+- *e.g: clinical__dev.ods__ambosim__confluent__kafka.encounter*
 - *e.g: corporate__dev.ods__workdayapi__employees.raw_data*
 
 
@@ -354,30 +364,30 @@ PDS conventions will mirror ODS conventions:
 
 Database replicated PDS (structured sources like SQL Server):
 
-Format: `[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]`
+Format: `[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer within the Raw zone (e.g., `pds`)
   - `[__source_system]`: Source system identifier
-  - `[__source_schema]`: Source schema (if applicable, e.g., `dbo`, `reporting`)
-  - `(channel)`: Optional ingestion channel (e.g., `adf`, `fivetran`, `lakeflow`)
+  - `[__source_schema]`: Source schema (if applicable, e.g., `__dbo`, `__reporting`)
+  - `[__channel]`: Optional ingestion channel (e.g., `__adf`, `__fivetran`, `__lakeflow`)
   - `[source_object/volume_name]`: Table name as per source
 
 - *e.g: clinical__dev.pds__patientflowmanager01__reporting.patients*
-- *e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter*
+- *e.g: clinical__dev.pds__fhirhouse__dbo__adf.encounter*
 
 Prepped semi/unstructured PDS data:
 
-Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]`
+Format: `[domain][__env].[layer][__source_system][__source_descriptor][__channel].[source_object/volume_name]`
 
   - `[domain][__env]`: Domain and environment (e.g., `clinical__dev`)
   - `[layer]`: Data layer within the Raw zone (e.g., `pds`)
   - `[__source_system]`: Source system identifier
   - `[__source_descriptor]`: Source descriptor or subsystem identifier
-  - `(channel)`: Optional ingestion channel (e.g., `kafka`, `databricks`, `api`)
+  - `[__channel]`: Optional ingestion channel (e.g., `__kafka`, `__databricks`, `__api`)
   - `[source_object/volume_name]`: Named as per source or unique assigned name (e.g., topic/folder name)
 
-- *e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter*
+- *e.g: clinical__dev.pds__ambosim__confluent__kafka.encounter*
 - *e.g: corporate__dev.pds__workdayapi__employees.raw_data*
 
 #### EDW (aka Silver) (Data according to business entities)
@@ -403,6 +413,27 @@ In the examples provided - we have opted for domain level catalogs - with schema
 
 **EDW Staging Objects**:
 Staging models serve as intermediary models that transform source data into EDW models. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+
+**Two Complementary Staging Approaches:**
+
+EDW staging supports two patterns that work together:
+
+1. **Source-Centric Staging** - Organized by source system:
+   - Cleans and normalizes data from each source independently
+   - May feed data quality test results to reports for actioning
+   - Prepares reference data for broad use and maps it for mart conformance
+   - Creates mappings of keys to resolve system keys to universal surrogate or business keys
+
+2. **Entity-Centric Staging** - Organized by business entity:
+   - Integrates data across multiple source-centric staging models
+   - Applies cross-source deduplication and conflict resolution
+   - Establishes unified entity keys and relationships
+   - Creates a single, conformed view of each business entity
+
+**Typical Flow:**
+```
+Raw Sources → Source-Centric Staging → Entity-Centric Staging → Base Marts (Dimensions/Facts)
+```
 
 **Source-Centric Staging Approach:**
 
@@ -458,7 +489,14 @@ Final reference data (cleaned and conformed in `edw_ref` schema):
 
 **Base Mart (EDW) Staging:**
 
-Source-specific staging (with transformations in `edw_stg` schema):
+EDW staging can follow two complementary patterns:
+
+1. **Source-Centric Staging**: Cleans and transforms data from individual sources
+2. **Entity-Centric Staging**: Integrates and unifies data across multiple sources for a business entity
+
+**Source-Centric Staging** (with transformations in `edw_stg` schema):
+
+Focused on cleaning individual source systems:
 
    - *e.g: `corporate__prod.edw_stg.stg__sap__employees__01_renamed_and_typed`*
    - *e.g: `corporate__prod.edw_stg.stg__workday__employees__01_renamed_and_typed`*
@@ -468,6 +506,30 @@ Source-specific staging (with transformations in `edw_stg` schema):
    - *e.g: `corporate__prod.edw_stg.stg__new_finance_system__adf__payments__01_renamed_and_typed`*
    - *e.g: `corporate__prod.edw_stg.stg__old_finance_system__adf__payments__01_renamed_and_typed`*
    - *e.g: `corporate__prod.edw_stg.stg__finance_system__api__accounts__01_renamed_and_typed`*
+
+**Entity-Centric Staging** (with transformations in `edw_stg` schema):
+
+Focused on integrating and unifying data across sources for a specific business entity. These models:
+- Union, join, or merge data from multiple source-centric staging models
+- Apply cross-source deduplication and conflict resolution
+- Establish entity-level keys and relationships
+- Prepare unified entity views for final base marts
+
+**Naming Convention for Entity-Centric Staging:**
+
+`[domain][__env] . [schema] . stg__[entity]__[transformation_descriptors]`
+
+Examples:
+
+   - *e.g: `corporate__prod.edw_stg.stg__employee__01_unified`* (unions SAP and Workday employees)
+   - *e.g: `corporate__prod.edw_stg.stg__employee__02_deduped`* (resolves duplicates across sources)
+   - *e.g: `corporate__prod.edw_stg.stg__employee__03_keyed`* (applies unified business keys)
+   - *e.g: `corporate__prod.edw_stg.stg__customer__01_unified`* (merges multiple CRM sources)
+   - *e.g: `corporate__prod.edw_stg.stg__customer__02_conflict_resolved`* (resolves conflicting attributes)
+   - *e.g: `corporate__prod.edw_stg.stg__payment__01_unified`* (combines old and new finance systems)
+   - *e.g: `health__prod.edw_stg.stg__patient__01_unified`* (integrates patient data across clinical systems)
+
+These entity-centric staging models then feed into the final base marts (dimensions and facts).
 
 **Base Mart Keysets:**
 
@@ -705,28 +767,64 @@ These models typically reference their corresponding seeds from ODS and add hist
 
 #### EDW
 
-**Staging Source-specific:** 
+EDW staging follows two complementary patterns:
 
-   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
+1. **Source-Centric Staging**: Organized by source system, cleaning individual sources
+2. **Entity-Centric Staging**: Organized by business entity, integrating across sources
+
+**Staging Source-Centric:** 
+
+Focused on cleaning and transforming data from individual source systems:
+
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/source/{source_system}{optional:__{source_channel}}/stg/`
    - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} stg__{source_system} __{source_channel} __{source_object} __{ordinal}_{transformation description}`
 
 ```md
    *e.g:*
 
-      - *edw\new_finance_system__adf\stg\corporate__edw__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
-      - or *edw\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - *edw\source\new_finance_system__adf\stg\corporate__edw__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - or *edw\source\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
       - materialises to: *corporate__dev.edw_stg.stg__new_finance_system__adf__accounts__01_renamed_and_typed*
 ```
 
-**Mart Source-specific:** 
+**Staging Entity-Centric:**
 
-   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} mart{__optional:dim_/fact_}{__entity /_object_description}__{source_system}__{source_channel}`
+Focused on integrating and unifying data across multiple sources for a specific business entity:
 
-**Mart Non-source specific:** 
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg/`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} stg__{entity} __{ordinal}_{transformation description}`
 
-   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} mart{__optional:dim_/fact_}{__unified entity /_object_description}`
+These models:
+- Union, join, or merge data from multiple source-centric staging models
+- Apply cross-source deduplication and conflict resolution
+- Establish unified entity keys
+
+```md
+   *e.g:*
+
+      - *edw\mart\employee\stg\stg__employee__01_unified.sql* (unions SAP and Workday)
+      - *edw\mart\employee\stg\stg__employee__02_deduped.sql* (resolves duplicates)
+      - *edw\mart\employee\stg\stg__employee__03_keyed.sql* (applies unified keys)
+      - materialises to: *corporate__dev.edw_stg.stg__employee__01_unified*
+```
+
+**Mart (Entity-Centric Base Marts):** 
+
+Base marts are organized by business entity. Entity-centric staging (if needed) lives in a nested `stg/` folder within each entity folder.
+
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/`
+   - Entity-centric staging subfolder: `models/edw/.../mart/{entity}/stg/`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} {dim_/fact_}{__entity /_object_description}{optional:__{source_system}__{source_channel}}`
+
+**Source-specific marts** (when preserving source identity):
+
+   - Models: `{optional:__edw__} dim_{entity}__{source_system}`
+   - *e.g: dim_employee__sap.sql, dim_employee__workday.sql*
+
+**Non-source specific (unified) marts**:
+
+   - Models: `{optional:__edw__} dim_{entity}` or `fact_{entity_plural}`
+   - *e.g: dim_employee.sql, fact_payments.sql*
 
 **Reference Data:** 
 
@@ -793,36 +891,39 @@ The model structure below reflects a single catalog for domain+environment and s
 │       └── config_holidays_snapshot.sql  <e.g: corporate__dev.pds.config_holidays_snapshot>
 ├── models/edw/
 │   ├── _edw.md
-│   ├── mart  (entity centric base marts) <edw> {optional: domain, subdomains and or subject areas}
-│   /{optional: domain and subdomains}
-│   |    └── account
-│   |    |   └── dim_account.sql  <e.g: corporate__dev.edw.dim_account>
-│   |    |       └── stg
-│   |    |           └── stg__dim_account__01_dedupe.sql  <e.g: corporate__dev.edw.stg__dim_account__01_dedupe>
-│   |    |           └── stg__dim_account__02_filter.sql  <e.g: corporate__dev.edw.stg__dim_account__02_filter>
-│   |    └── date
-│   |        └── dim_date.sql  <e.g: corporate__dev.edw.dim_date>
-│   ├── ref  (reference data) <edw_ref>
-│       ├── _reference_data__models.yml
-│       ├── _reference_data__sources.yml
-│       └── ref_{entity}.sql  <e.g: corporate__dev.edw_ref.ref_facility>
-│   ├── stg (source centric staging objects) <edw_stg>
-│   |   ├── source_system_1 
+│   ├── source  (source-centric staging - organized by source system) <edw_stg>
+│   |   /{optional: domain and subdomains}
+│   |   ├── source_system_1
 │   |   |   ├── _source_system_1__docs.md
 │   |   |   ├── _source_system_1__models.yml
-│   |   |   ├── stg__source_system_1__object.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object>
-│   |   |   ├── stg__source_system_1__new_object.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__new_object>
 │   |   |   └── stg
 │   |   |       ├── stg__source_system_1__object__01_renamed_and_typed.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object__01_renamed_and_typed>
 │   |   |       └── stg__source_system_1__object__02_cleaned.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object__02_cleaned>
 │   |   └── source_system_2__adf
 │   |       ├── _source_system_2__adf__docs.md
 │   |       ├── _source_system_2__adf__models.yml
-│   |       ├── stg__source_system_2__adf__accounts.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts>
 │   |       └── stg
 │   |           ├── stg__source_system_2__adf__accounts__01_renamed_and_typed.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__01_renamed_and_typed>
 │   |           └── stg__source_system_2__adf__accounts__02_cleaned.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__02_cleaned>
-│   ├── sources
+│   ├── mart  (entity centric base marts and entity-centric staging) <edw> and <edw_stg>
+│   |   /{optional: domain and subdomains}
+│   |   └── employee
+│   |       ├── _employee__docs.md
+│   |       ├── _employee__models.yml
+│   |       ├── dim_employee.sql  <e.g: corporate__dev.edw.dim_employee (built from stg__employee__03_keyed)>
+│   |       └── stg  (entity-centric staging) <edw_stg>
+│   |           ├── stg__employee__01_unified.sql  <e.g: corporate__dev.edw_stg.stg__employee__01_unified (unions source_system_1 & source_system_2)>
+│   |           ├── stg__employee__02_deduped.sql  <e.g: corporate__dev.edw_stg.stg__employee__02_deduped>
+│   |           └── stg__employee__03_keyed.sql  <e.g: corporate__dev.edw_stg.stg__employee__03_keyed>
+│   |   └── account
+│   |       └── dim_account.sql  <e.g: corporate__dev.edw.dim_account>
+│   |   └── date
+│   |       └── dim_date.sql  <e.g: corporate__dev.edw.dim_date>
+│   ├── ref  (reference data) <edw_ref>
+│   |   ├── _reference_data__models.yml
+│   |   ├── _reference_data__sources.yml
+│   |   └── ref_{entity}.sql  <e.g: corporate__dev.edw_ref.ref_facility>
+│   └── sources
 │        └── {optional: domain}
 │        └── {optional: raw/edw/infomart}
 │             └── _source_system_1__sources.yml 
@@ -867,8 +968,8 @@ models:
         +description: "Reference data (conformed lookups, master data)"
         +schema: edw_ref
         +materialized: table
-      stg:
-        +description: "Source-centric staging objects"
+      source:
+        +description: "Source-centric staging organized by source system"
         +schema: edw_stg
         +materialized: view
       mart:
@@ -876,8 +977,8 @@ models:
         +schema: edw
         +materialized: table
         stg:
-          +description: "Entity-centric staging (intermediate transformations)"
-          +schema: edw
+          +description: "Entity-centric staging (integrates across sources)"
+          +schema: edw_stg
           +materialized: view
 
     infomart:
