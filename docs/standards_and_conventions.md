@@ -216,7 +216,7 @@ which then orchestrates:
 ### Catalog naming and conventions
 ---
 
-Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 Catalog name: 
 
@@ -251,7 +251,7 @@ The following metadata should be added when creating a catalog:
 ### Schema and object conventions
 ---
 
-Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 Refer to [Physical Models](modelling_standards_and_conventions.md#physical-models) for the standard relating to column naming, types, and conventions.
 
@@ -276,7 +276,7 @@ Recommendations:
 
 #### Metadata Schemas and Objects
 
-Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets
 
@@ -289,7 +289,7 @@ Contains metadata that supports engineering and governance. This will vary depen
 
 #### Raw (aka Bronze) (Data according to systems)
 
-The Raw zone stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
+The Raw zone stores raw, immutable data as it is ingested from source systems. See [Data zones and layers](level_2.md#data-zones-and-layers) for definitions and context.
 
 The Raw zone uses two primary schemas:
 - **`ods`** - Operational Data Store (current state)
@@ -384,7 +384,7 @@ Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).
 
 The EDW (Enterprise Data Warehouse) zone focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
 
-Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 The EDW zone uses three primary schemas:
 - **`edw_stg`** - Source-centric staging objects (transformations, cleaning, normalization)
@@ -538,7 +538,7 @@ Optional warehousing construct.
 
 The Infomart zone focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
 
-Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+Refer to [Data zones and layers](level_2.md#data-zones-and-layers) for further context and definitions applicable to this section.
 
 The Infomart zone uses two primary schemas:
 - **`im_stg`** - Product mart staging (intermediate transformations)

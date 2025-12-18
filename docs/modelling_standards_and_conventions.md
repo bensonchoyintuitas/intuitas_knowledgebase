@@ -362,7 +362,7 @@ For detailed conventions and examples see [Databricks](standards_and_conventions
 **Catalogs:**
 
 - Catalogs represent domain-level scope (e.g., `engineering__dev`, `corporate__dev`)
-- May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls
+- May optionally include zone, layer, or subdomain in the catalog name depending on desired granularity for access and sharing controls
 - Naming is lowercase, underscore-separated, and meaningful
 - Pattern: `{domain}{__env}` (e.g., `corporate__dev`)
 
@@ -546,7 +546,7 @@ Hash-based SKs enable deterministic keys across environments:
 - Numeric (BIGINT) keys offer better join performance
 - Prefer **numeric** SKs for performance (especially with PowerBI); use **deterministic** SKs when cross-environment stability is required
 - **Date dimension tip**: Use integer with YYYYMMDD format as the surrogate key for optimal performance
-- Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.
+- Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the EDW (Silver) zone. However, if Type 2 semantics are applied later (e.g. in Infomart (Gold)), then surrogate keys must be created there instead.
 
 
 
@@ -586,11 +586,11 @@ Reference entities contain:
 
 Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.
 
-**Cleansed reference tables** are stored in silver/edw layer for wide availability following the [reference data naming standard](standards_and_conventions.md#schema-and-object-conventions):
+**Cleansed reference tables** are stored in EDW (Silver) zone for wide availability following the [reference data naming standard](standards_and_conventions.md#schema-and-object-conventions):
 
-  - Schema naming convention: `ref{optional: __domain name}{optional: __subdomain name(s)}`
+  - Schema naming convention: `edw_ref{optional: __domain name}{optional: __subdomain name(s)}`
   - Object naming convention: `{reference_data_set_name}{optional:__source_system}{optional:__source_channel}`
-  - e.g.: `corporate__dev.ref.account_code`
+  - e.g.: `corporate__dev.edw_ref.account_code`
 
 - Effectivity: `effective_from_date`, `effective_to_date`, (`is_active` is derivable)
 - Audit: `created_datetime`, `created_by`, `updated_datetime`, `updated_by`
@@ -600,8 +600,8 @@ Raw Reference Data sourced from upstream systems may require their own staging a
 
 **Usage:**
 
-- **Mapping logic** is applied in Silver/EDW layer staging models during transformation for domain/enterprise-wide application.
-- **Consumption:** Post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).
+- **Mapping logic** is applied in EDW (Silver) zone staging models during transformation for domain/enterprise-wide application.
+- **Consumption:** Post-mapped data are exposed in marts in EDW or indirectly in Infomart (Gold) (having passed through EDW).
 - **As dimension attributes:** Reference values embedded directly in dimension tables (e.g., Product Type Code/Description in Product dimension) for filtering and grouping.
 
 **Change tracking:**

@@ -185,7 +185,7 @@ Business process models illustrate activity sequences, decision points, particip
 
 ### Data Warehouse Models
 
-Data warehouses transform data through stages optimised for performance and analysis while preserving conceptual and logical semantics:
+Data warehouses transform data through layers optimised for performance and analysis while preserving conceptual and logical semantics:
 
 - Conform to [canonical standards](#canonical-models)
 - Apply reference data and business terminology
@@ -195,7 +195,7 @@ Data warehouses transform data through stages optimised for performance and anal
 - Optimise for consumption ([dimensional](#dimensional-kimball-model), [data vault](#data-vault-model))
 - Aggregate for analytical use
 
-Each stage has distinct physical structures aligned to underlying logical models.
+Each layer has distinct physical structures aligned to underlying logical models.
 
 #### Data Vault Model
 
@@ -305,7 +305,7 @@ Measures/metrics should be defined against domain and canonical models and docum
 
 **Placement Principles:**
 
-*Favour upstream (mart / dbt layer) when:*
+*Favour upstream (mart / dbt zone) when:*
 
 - Reused across dashboards/domains
 - Enterprise KPI or regulatory use

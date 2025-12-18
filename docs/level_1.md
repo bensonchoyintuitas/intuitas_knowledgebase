@@ -188,7 +188,7 @@ Centralizing engineering tasks related to source data processing allows for spec
 
 **Distributed Local engineering**
 
-Maintaining a local bronze/raw layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.
+Maintaining a local Raw (Bronze) zone for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.
 
 **Cross-Domain Access**
 
@@ -224,6 +224,15 @@ An enterprise logical data warehouse retains the core properties of a traditiona
 
 This approach combines the scalability and agility of decentralised ownership with the trust and coherence of an enterprise-wide data platform.
 
+
+**Two-tier Mart Model** 
+
+In this approach, we establish a two-tier mart structure: the EDW (Enterprise Data Warehouse) marts and the Infomart (IM) marts. 
+
+- EDW marts provide standardised, reusable datasets for enterprise-wide consistency. 
+- Infomart marts deliver domain and business-requirement specific assets. 
+
+Using both are available for enterprise-aligned, and domain oriented reporting and analytics.
 
 <div align="center">
 
