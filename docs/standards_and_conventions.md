@@ -126,17 +126,17 @@ The section describes naming standards and conventions for cloud storage resourc
 - Name: `{environment} (dev/test/preprod/prod)`
 
 ##### Lakehouse storage folders
-- Level 1 Name: `{layer} (bronze/silver/gold)` // if using medallion approach
+- Level 1 Name: `{layer} (raw/edw/infomart)` // (bronze/silver/gold)` if using medallion approach
 - Level 2 Name: `{stage_name}`
 - *e.g:*
 
-   - *bronze/landing*
-   - *bronze/ods*
-   - *bronze/pds*
-   - *bronze/schema* (for autoloader metadata)
-   - *bronze/checkpoints* (for autoloader metadata)
-   - *silver/automatically determined by unity catalog*
-   - *gold/automatically determined by unity catalog*
+   - *raw/landing*
+   - *raw/ods*
+   - *raw/pds*
+   - *raw/schema* (for autoloader metadata)
+   - *raw/checkpoints* (for autoloader metadata)
+   - *edw/automatically determined by unity catalog*
+   - *infomart/automatically determined by unity catalog*
 
 #### Generic Blob storage
 
@@ -182,11 +182,11 @@ This section provides naming standards and conventions for Databricks.
 #### For Delta Live Table (DLT) Pipelines
 ---
 - Pipeline names: `{domain_name}__{layer}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}`
-- *e.g. clinical__bronze__pipeline__fhircdr__dev*
-- *e.g. supplychain__gold__pipeline__inventorymart__prod* 
+- *e.g. clinical__raw__pipeline__fhircdr__dev*
+- *e.g. supplychain__infomart__pipeline__inventorymart__prod* 
 
-- Note on {layer}: If the 'business outcome' is Gold, you call it Gold, even if it produces Bronze + Silver on the way.
-*i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated gold-layer dataset called Inventory Mart"*
+- Note on {layer}: If the 'business outcome' is Infomart, you call it Infomart, even if it produces Raw + EDW on the way.
+*i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated infomart-layer dataset called Inventory Mart"*
 
 - Include pipeline so it’s distinguishable from ad hoc jobs.
 - Dataset can be a logical grouping (e.g., patient, encounter, claims).
@@ -223,10 +223,10 @@ Catalog name:
 The choice of granularity depends on domain topology, stage/zone convention and desired level of segregation for access and sharing controls (i.e. catalog or schema level)
 
    - Minimum granularity (domain level): `{domain_name}{__environment (dev/test/pat/prod)}` (prod is implied optional)   *e.g: corporate__dev*
-   - Optional granularity (domain-data stage level): `{domain_name}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_bronze__dev*
-   - Optional granularity (domain-data stage and zone level): `{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/mart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_bronze_ods__dev*
-   - Optional granularity (domain-data zone level): `{domain_name}{_data_zone: (ods/pds/edw/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
-   - Optional granularity (subdomain-data stage level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_bronze__dev*
+   - Optional granularity (domain-data stage level): `{domain_name}{_data_stage: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw__dev*
+   - Optional granularity (domain-data stage and zone level): `{domain_name}{_data_stage: (raw/edw/infomart)}{_data_zone: (ods/pds/edw_stg/edw_ref/edw/im_stg/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_raw_ods__dev*
+   - Optional granularity (domain-data zone level): `{domain_name}{_data_zone: (ods/pds/edw_stg/edw_ref/edw/im_stg/im)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_ods__dev*
+   - Optional granularity (subdomain-data stage level): `{domain_name}{_descriptor (subdomain/subject/project*)}{_data_stage: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}`    *e.g: corporate_finance_raw__dev*
 
 In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo(lakeflow).encounter`
 
@@ -276,11 +276,13 @@ Contains metadata that supports engineering and governance. This will vary depen
 - *e.g: corporate__dev.meta.ingestion_control*
 - *e.g: corporate__dev.meta__ingestion.ingestion_control*
 
-#### Bronze (Raw data according to systems)
+#### Raw (aka Bronze) (Data according to systems)
 
-The Bronze layer stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
+The Raw layer stores raw, immutable data as it is ingested from source systems. See [Data layers and stages](level_2.md#data-layers-and-stages) for definitions and context.
 
-All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `bronze__`
+The Raw layer uses two primary schemas:
+- **`ods`** - Operational Data Store (current state)
+- **`pds`** - Persistent Data Store (historical snapshots)
 
 In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter`
 
@@ -367,24 +369,29 @@ Format: `[domain][__env].[layer][__source_system][__source_descriptor](channel).
 - *e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter*
 - *e.g: corporate__dev.pds__workdayapi__employees.raw_data*
 
-#### Silver/EDW (Data according to business entities)
+#### EDW (aka Silver) (Data according to business entities)
 
-The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
+The EDW (Enterprise Data Warehouse) layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
+
+The EDW layer uses three primary schemas:
+- **`edw_stg`** - Source-centric staging objects (transformations, cleaning, normalization)
+- **`edw_ref`** - Reference data (conformed lookups, master data)
+- **`edw`** - Base marts (dimensions, facts - curated entities)
 
 These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.
 
 In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e `engineering__dev.edw.dim_customer`
 
-- All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `silver__`
+- All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. `edw_stg__`, `edw_ref__`, `edw__`
 - All `entity` names which align to facts should be named in plural.
 - All `entity` names which align to dims should be named in singular.
 
 <br>
 
-**(Silver)/EDW Staging Objects**:
-Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+**EDW Staging Objects**:
+Staging models serve as intermediary models that transform source data into EDW models. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
 **Source-Centric Staging Approach:**
 
@@ -396,12 +403,12 @@ Staging objects are organized around source systems and source objects, cleaning
 
 **Naming Convention:**
 
-`[domain][__env] . [layer] . stg__[source_system](optional__[source_channel])__[source_object](optional__[other_descriptors])__[id]__[transformation_descriptors]`
+`[domain][__env] . [schema] . stg__[source_system](optional__[source_channel])__[source_object](optional__[other_descriptors])__[id]__[transformation_descriptors]`
 
 Where:
 
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `corporate__dev`)
-- `[layer]` - Data layer (e.g., `ref`, `edw`)
+- `[schema]` - EDW schema (`edw_stg` for staging, `edw_ref` for reference staging)
 - `stg__` - Staging object prefix
 - `[source_system]` - Source system identifier (e.g., `sap`, `workday`, `finance_system`)
 - `(optional__[source_channel])` - Optional source channel (e.g., `__adf`, `__api`)
@@ -423,37 +430,37 @@ Where:
 
 **Reference Data Staging:**
 
-Source-specific staging (with transformations):
+Source-specific staging (with transformations in `edw_stg` schema):
 
-   - *e.g: `corporate__prod.ref.stg__sap__facilities__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.ref.stg__sap__facilities__02_cleaned`*
-   - *e.g: `corporate__prod.ref.stg__finance_system__adf__account_codes__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.ref.stg__workday__locations__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.ref.stg__workday__locations__02_deduped`*
+   - *e.g: `corporate__prod.edw_stg.stg__sap__facilities__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__sap__facilities__02_cleaned`*
+   - *e.g: `corporate__prod.edw_stg.stg__finance_system__adf__account_codes__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__workday__locations__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__workday__locations__02_deduped`*
 
-Final reference data (cleaned and conformed):
+Final reference data (cleaned and conformed in `edw_ref` schema):
 
-   - *e.g: `corporate__prod.ref.ref_facility`*
-   - *e.g: `corporate__prod.ref.ref_location`*
-   - *e.g: `corporate__prod.ref.ref_account_code`*
-   - *e.g: `corporate__dev.ref.ref_country_codes`*
+   - *e.g: `corporate__prod.edw_ref.ref_facility`*
+   - *e.g: `corporate__prod.edw_ref.ref_location`*
+   - *e.g: `corporate__prod.edw_ref.ref_account_code`*
+   - *e.g: `corporate__dev.edw_ref.ref_country_codes`*
 
 **Base Mart (EDW) Staging:**
 
-Source-specific staging (with transformations):
+Source-specific staging (with transformations in `edw_stg` schema):
 
-   - *e.g: `corporate__prod.edw.stg__sap__employees__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.edw.stg__workday__employees__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.edw.stg__workday__employees__02_cleaned`*
-   - *e.g: `corporate__prod.edw.stg__crm__adf__customers__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.edw.stg__crm__adf__customers__02_cleaned`*
-   - *e.g: `corporate__prod.edw.stg__new_finance_system__adf__payments__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.edw.stg__old_finance_system__adf__payments__01_renamed_and_typed`*
-   - *e.g: `corporate__prod.edw.stg__finance_system__api__accounts__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__sap__employees__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__workday__employees__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__workday__employees__02_cleaned`*
+   - *e.g: `corporate__prod.edw_stg.stg__crm__adf__customers__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__crm__adf__customers__02_cleaned`*
+   - *e.g: `corporate__prod.edw_stg.stg__new_finance_system__adf__payments__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__old_finance_system__adf__payments__01_renamed_and_typed`*
+   - *e.g: `corporate__prod.edw_stg.stg__finance_system__api__accounts__01_renamed_and_typed`*
 
 **Base Mart Keysets:**
 
-Keysets are created to resolve and map system keys to universal surrogate keys or business keys. These can be reused downstream for integration and conforming/deduplicating entities across multiple sources:
+Keysets are created in the `edw` schema to resolve and map system keys to universal surrogate keys or business keys. These can be reused downstream for integration and conforming/deduplicating entities across multiple sources:
 
    - *e.g: `corporate__prod.edw.keys__employee`* (conforms sap and workday employee keys)
    - *e.g: `corporate__prod.edw.keys__customer`* (conforms multiple crm source keys)
@@ -516,20 +523,24 @@ Optional warehousing construct.
 
 <br>
 
-#### Gold (Data according to requirements)
+#### Infomart (aka Gold) (Data according to requirements)
 
-The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
+The Infomart layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.
 
 Refer to [Data layers and stages](level_2.md#data-layers-and-stages) for further context and definitions applicable to this section.
 
+The Infomart layer uses two primary schemas:
+- **`im_stg`** - Product mart staging (intermediate transformations)
+- **`im`** - Information marts (final business-aligned products)
+
 **Naming Convention:**
 
-`[domain][__env] . mart . [object_type][product_name/descriptor](__source)(__transformation)`
+`[domain][__env] . [schema] . [object_type][product_name/descriptor](__source)(__transformation)`
 
 Where:
 
 - `[domain][__env]` - Domain and environment (e.g., `corporate__prod`, `health__dev`)
-- `mart` - Gold layer schema (product marts)
+- `[schema]` - Infomart layer schema (`im_stg` for staging, `im` for final products)
 - `[object_type]` - Object type prefix (e.g., `stg_`, `fact_`, `dim_`, `obt_`)
 - `[product_name/descriptor]` - Product or business-aligned name
 - `(__source)` - Optional source system identifier (only when source-specific view is needed)
@@ -543,11 +554,11 @@ Where:
 
 <br>
 
-**(Gold)/Product Mart Staging Models**:
+**Infomart Staging Models**:
 
 Staging models serve as intermediary models that transform base marts (EDW) into requirement-aligned product marts. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. [Reference](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
-These models exist to stage gold product marts with business-specific transformations:
+These models exist in the `im_stg` schema to stage information marts with business-specific transformations:
 
 **Common Transformations:**
 
@@ -560,47 +571,47 @@ These models exist to stage gold product marts with business-specific transforma
 
 **Examples:**
 
-- *e.g: `corporate__prod.mart.stg_downtime_by_region__01_pivoted`*
-- *e.g: `corporate__prod.mart.stg_downtime_by_region__02_desensitised`*
-- *e.g: `corporate__prod.mart.stg_late_payments__01_aggregated`*
-- *e.g: `corporate__prod.mart.stg_late_payments__02_joined`*
-- *e.g: `corporate__prod.mart.stg_fte_calculations__01_pivoted`*
-- *e.g: `corporate__prod.mart.stg_fte_calculations__02_aggregated`*
-- *e.g: `health__prod.mart.stg_patient_outcomes__01_joined`*
-- *e.g: `health__prod.mart.stg_patient_outcomes__02_desensitised`*
+- *e.g: `corporate__prod.im_stg.stg_downtime_by_region__01_pivoted`*
+- *e.g: `corporate__prod.im_stg.stg_downtime_by_region__02_desensitised`*
+- *e.g: `corporate__prod.im_stg.stg_late_payments__01_aggregated`*
+- *e.g: `corporate__prod.im_stg.stg_late_payments__02_joined`*
+- *e.g: `corporate__prod.im_stg.stg_fte_calculations__01_pivoted`*
+- *e.g: `corporate__prod.im_stg.stg_fte_calculations__02_aggregated`*
+- *e.g: `health__prod.im_stg.stg_patient_outcomes__01_joined`*
+- *e.g: `health__prod.im_stg.stg_patient_outcomes__02_desensitised`*
 
 <br>
 
-**(Gold)/Product Marts (Final Products)**:
+**Information Marts (Final Products)**:
 
-Final business-aligned data products ready for consumption by analytics, reporting, and BI tools.
+Final business-aligned data products ready for consumption by analytics, reporting, and BI tools in the `im` schema.
 
 **Examples:**
 
 Fact tables (aggregated/business-focused):
 
-   - *e.g: `corporate__prod.mart.fact_downtime_by_region`*
-   - *e.g: `corporate__prod.mart.fact_late_payments`*
-   - *e.g: `corporate__prod.mart.fact_regional_account_payments`*
-   - *e.g: `health__prod.mart.fact_patient_outcomes`*
+   - *e.g: `corporate__prod.im.fact_downtime_by_region`*
+   - *e.g: `corporate__prod.im.fact_late_payments`*
+   - *e.g: `corporate__prod.im.fact_regional_account_payments`*
+   - *e.g: `health__prod.im.fact_patient_outcomes`*
 
 Dimension tables (product-specific):
 
-   - *e.g: `corporate__prod.mart.dim_region`*
-   - *e.g: `corporate__prod.mart.dim_payment_category`*
+   - *e.g: `corporate__prod.im.dim_region`*
+   - *e.g: `corporate__prod.im.dim_payment_category`*
 
 One Big Tables (OBT) - Denormalized aggregates:
 
-   - *e.g: `corporate__prod.mart.obt_fte_calculations`*
-   - *e.g: `corporate__prod.mart.obt_financial_summary`*
-   - *e.g: `corporate__prod.mart.obt_executive_dashboard`*
+   - *e.g: `corporate__prod.im.obt_fte_calculations`*
+   - *e.g: `corporate__prod.im.obt_financial_summary`*
+   - *e.g: `corporate__prod.im.obt_executive_dashboard`*
 
 Source-specific products (when needed):
 
-   - *e.g: `corporate__prod.mart.fact_account_payments__old_finance_system`*
-   - *e.g: `corporate__prod.mart.fact_account_payments__new_finance_system`*
-   - *e.g: `corporate__prod.mart.obt_employee_metrics__sap`*
-   - *e.g: `corporate__prod.mart.obt_employee_metrics__workday`*
+   - *e.g: `corporate__prod.im.fact_account_payments__old_finance_system`*
+   - *e.g: `corporate__prod.im.fact_account_payments__new_finance_system`*
+   - *e.g: `corporate__prod.im.obt_employee_metrics__sap`*
+   - *e.g: `corporate__prod.im.obt_employee_metrics__workday`*
 
 ### Delta Sharing
 
@@ -637,15 +648,15 @@ The following standards and conventions relate to dbt projects.
 
 Within each respective model folder (as needed)
 
-- md: _{path to model folder using _ separators}__docs.md 
-- *e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md*
+- md: _{path to model folder using _ separators}__docs.md
+- *e.g: models/edw/ambo_sim__kafka__local/_edw__ambo_sim__kafka__local__docs.md*
 
-- model yml: _{path to model folder using _ separators}__models.yml 
-- *e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml*
+- model yml: _{path to model folder using _ separators}__models.yml
+- *e.g: models/edw/ambo_sim__kafka__local/_edw__ambo_sim__kafka__local__models.yml*
 
 ### Sources
 
-- Folder: models/sources/{bronze/silver/gold}
+- Folder: models/sources/{raw/edw/infomart}
 - yml: {schema}__sources.yml (one for each source schema) 
 - *e.g: ods__ambo_sim__kafka__sources.yml*
 
@@ -653,75 +664,95 @@ Within each respective model folder (as needed)
 
 dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.
 
-#### Bronze
+#### Raw
 
-*Bronze objects are likely to be referenced in sources/bronze or as seeds*
+*Raw layer contains operational data store (ODS) for current state and persistent data store (PDS) for historical tracking*
 
-- Folder: `models/bronze/{optional: domain name}{optional: __subdomain name(s)}/`
-- Folder: `sources/bronze/{optional: domain name}{optional: __subdomain name(s)}/`
-- Folder: `seeds/{optional: domain name}{optional: __subdomain name(s)}/`
+**ODS (Operational Data Store) - Current State:**
+- Folder: `seeds/{optional: domain name}{optional: __subdomain name(s)}/`  → materializes to `[domain__env].ods`
+- Folder: `sources/raw/{optional: domain name}{optional: __subdomain name(s)}/`  → references external sources to `[domain__env].ods`
 
-#### Silver
+**Seed Naming Convention:**
+
+Seeds (CSV files) should follow a descriptive naming pattern and materialize to the ODS schema:
+- `ref_[entity]_[descriptor].csv` for reference/lookup data
+- `config_[descriptor].csv` for configuration data
+- *e.g: `ref_country_codes.csv`* → `corporate__dev.ods.ref_country_codes`
+- *e.g: `ref_currency_rates.csv`* → `corporate__dev.ods.ref_currency_rates`
+- *e.g: `config_holidays.csv`* → `corporate__dev.ods.config_holidays`
+
+**PDS (Persistent Data Store) - Historical Tracking:**
+- Folder: `models/raw/{optional: domain name}{optional: __subdomain name(s)}/pds/`  → materializes to `[domain__env].pds`
+- Models in PDS capture type 2 SCD (slowly changing dimensions) or snapshots of ODS data
+
+**Type 2 Snapshot Model Examples:**
+- *e.g: `models/raw/pds/ref_country_codes_snapshot.sql`* → `corporate__dev.pds.ref_country_codes_snapshot`
+- *e.g: `models/raw/pds/ref_currency_rates_snapshot.sql`* → `corporate__dev.pds.ref_currency_rates_snapshot`
+- *e.g: `models/raw/pds/config_holidays_snapshot.sql`* → `corporate__dev.pds.config_holidays_snapshot`
+
+These models typically reference their corresponding seeds from ODS and add historical tracking columns (valid_from, valid_to, is_current, etc.)
+
+#### EDW
 
 **Staging Source-specific:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg__{source_system} __{source_channel} __{source_object} __{ordinal}_{transformation description}`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} stg__{source_system} __{source_channel} __{source_object} __{ordinal}_{transformation description}`
 
 ```md
    *e.g:*
 
-      - *silver\new_finance_system__adf\stg\corporate__silver__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
-      - or *silver\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
-      - materialises to: *corporate__dev.edw.stg__new_finance_system__adf__accounts__01_renamed_and_typed*
+      - *edw\new_finance_system__adf\stg\corporate__edw__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - or *edw\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - materialises to: *corporate__dev.edw_stg.stg__new_finance_system__adf__accounts__01_renamed_and_typed*
 ```
 
 **Mart Source-specific:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__entity /_object_description}__{source_system}__{source_channel}`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} mart{__optional:dim_/fact_}{__entity /_object_description}__{source_system}__{source_channel}`
 
 **Mart Non-source specific:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__unified entity /_object_description}`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} mart{__optional:dim_/fact_}{__unified entity /_object_description}`
 
 **Reference Data:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim_/fact_} {__reference data set name} {optional:__{source_system}__{source_channel}}`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} ref{__optional:dim_/fact_} {__reference data set name} {optional:__{source_system}__{source_channel}}`
 
 **Raw Vault:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/edw/rv`
    - Models: `edw_rv__{vault object named as per data vault standards}`
 
-- Schema naming convention:** 
+**Business Vault:** 
 
-   - Folder: `models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/bv`
+   - Folder: `models/edw/{optional: domain name}{optional: __subdomain name(s)}/edw/bv`
    - Models: `edw_bv__{vault object named as per data vault standards}`
 
-#### Gold
+#### Infomart
 
--  Staging:**
+**Staging:**
 
-   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
+   - Folder: `models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}`
 
--  Dimensions: 
+**Dimensions:** 
 
-   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim_{__entity / product description} (optional: __{source_system} __{source_channel})`
+   - Folder: `models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} dim_{__entity / product description} (optional: __{source_system} __{source_channel})`
 
--  Facts: 
+**Facts:** 
 
-   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact_{__entity / product description} (optional: __{source_system} __{source_channel})`
+   - Folder: `models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} fact_{__entity / product description} (optional: __{source_system} __{source_channel})`
 
--  Denormalized (One Big Table): 
+**Denormalized (One Big Table):** 
 
-   - Folder: `models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
-   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}`
+   - Folder: `models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}`
+   - Models: `{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} obt_{__entity / product description} {optional: __{source_system} __{source_channel}}`
 
 
 
@@ -733,61 +764,67 @@ The model structure below reflects a single catalog for domain+environment and s
 {{domain/enterprise} _project_name}
 ├── README.md
 ├── analyses
-├── seeds
-│   └── ref_entity_data_file.csv
+├── seeds  <ods>
+│   └── ref_country_codes.csv  <e.g: corporate__dev.ods.ref_country_codes>
+│   └── config_holidays.csv  <e.g: corporate__dev.ods.config_holidays>
 ├── dbt_project.yml
 ├── macros
 │   └── custom_macro.sql
 │   ├── utilities
 │       └── all_dates.sql
-├── models/bronze  <bronze>
+├── models/raw
 │   /{optional: domain and subdomains}
-│   └── _bronze.md
-├── models/silver/{optional: domain and subdomains}
+│   ├── _raw.md
+│   ├── ods  <ods>
+│   |   └── (typically empty - ODS populated by seeds/sources)
+│   └── pds  <pds>
+│       └── ref_country_codes_snapshot.sql  <e.g: corporate__dev.pds.ref_country_codes_snapshot>
+│       └── config_holidays_snapshot.sql  <e.g: corporate__dev.pds.config_holidays_snapshot>
+├── models/edw/
+│   ├── _edw.md
+│   ├── mart  (entity centric base marts) <edw> {optional: domain, subdomains and or subject areas}
 │   /{optional: domain and subdomains}
-│   ├── _silver.md
-│   ├── mart  (entity centric objects) <edw>
 │   |    └── account
-│   |    |   └── mart__dim_account.sql  <e.g: corporate__dev.edw.mart__dim_account>
+│   |    |   └── dim_account.sql  <e.g: corporate__dev.edw.dim_account>
 │   |    |       └── stg
 │   |    |           └── stg__dim_account__01_dedupe.sql  <e.g: corporate__dev.edw.stg__dim_account__01_dedupe>
 │   |    |           └── stg__dim_account__02_filter.sql  <e.g: corporate__dev.edw.stg__dim_account__02_filter>
 │   |    └── date
-│   |        └── mart__dim_date.sql  <e.g: corporate__dev.edw.mart__dim_date>
-│   └── ref  <ref>
+│   |        └── dim_date.sql  <e.g: corporate__dev.edw.dim_date>
+│   ├── ref  (reference data) <edw_ref>
 │       ├── _reference_data__models.yml
 │       ├── _reference_data__sources.yml
-│       └── ref_{entity}.sql  <e.g: corporate__dev.ref.ref_facility>
-│   ├── stg (source centric staging objects) <edw>
+│       └── ref_{entity}.sql  <e.g: corporate__dev.edw_ref.ref_facility>
+│   ├── stg (source centric staging objects) <edw_stg>
 │   |   ├── source_system_1 
 │   |   |   ├── _source_system_1__docs.md
 │   |   |   ├── _source_system_1__models.yml
-│   |   |   ├── stg__source_system_1__object.sql  <e.g: corporate__dev.edw.stg__source_system_1__object>
-│   |   |   ├── stg__source_system_1__new_object.sql  <e.g: corporate__dev.edw.stg__source_system_1__new_object>
+│   |   |   ├── stg__source_system_1__object.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object>
+│   |   |   ├── stg__source_system_1__new_object.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__new_object>
 │   |   |   └── stg
-│   |   |       ├── stg__source_system_1__object__01_renamed_and_typed.sql  <e.g: corporate__dev.edw.stg__source_system_1__object__01_renamed_and_typed>
-│   |   |       └── stg__source_system_1__object__02_cleaned.sql  <e.g: corporate__dev.edw.stg__source_system_1__object__02_cleaned>
+│   |   |       ├── stg__source_system_1__object__01_renamed_and_typed.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object__01_renamed_and_typed>
+│   |   |       └── stg__source_system_1__object__02_cleaned.sql  <e.g: corporate__dev.edw_stg.stg__source_system_1__object__02_cleaned>
 │   |   └── source_system_2__adf
 │   |       ├── _source_system_2__adf__docs.md
 │   |       ├── _source_system_2__adf__models.yml
-│   |       ├── stg__source_system_2__adf__accounts.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts>
+│   |       ├── stg__source_system_2__adf__accounts.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts>
 │   |       └── stg
-│   |           ├── stg__source_system_2__adf__accounts__01_renamed_and_typed.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts__01_renamed_and_typed>
-│   |           └── stg__source_system_2__adf__accounts__02_cleaned.sql  <e.g: corporate__dev.edw.stg__source_system_2__adf__accounts__02_cleaned>
+│   |           ├── stg__source_system_2__adf__accounts__01_renamed_and_typed.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__01_renamed_and_typed>
+│   |           └── stg__source_system_2__adf__accounts__02_cleaned.sql  <e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__02_cleaned>
 │   ├── sources
 │        └── {optional: domain}
-│        └── {optional: bronze/silver/gold}
+│        └── {optional: raw/edw/infomart}
 │             └── _source_system_1__sources.yml 
-├── models/gold  <mart>
+├── models/infomart  <im>
 │   /{optional: domain and subdomains}
-│   ├── _gold.md
+│   ├── _infomart.md
 │   └── domain_name e.g: finance 
 │       └── mart
 │           ├── _finance__models.yml
-│           ├── orders.sql  <e.g: corporate__dev.mart.orders>
-│           └── payments.sql  <e.g: corporate__dev.mart.payments>
-│               └── stg
-│                   └── stg_payments_pivoted_to_orders.sql  <e.g: corporate__dev.mart.stg_payments_pivoted_to_orders>
+│           ├── orders.sql  <e.g: corporate__dev.im.orders>
+│           └── payments.sql  <e.g: corporate__dev.im.payments>
+│               └── stg  <im_stg>
+│                   └── stg_payments_pivoted_to_orders.sql  <e.g: corporate__dev.im_stg.stg_payments_pivoted_to_orders>
 ├── packages.yml
 ├── snapshots
 └── tests
@@ -804,30 +841,49 @@ models:
         relation: true
         columns: true
 
-    bronze:
+    raw:
       ods:
-         +schema: ods
-      pds:
-         +schema: pds
-
-    silver:
-      ref:
-        +description: "Reference data"
-        +schema: ref
+        +description: "Operational data store - current state"
+        +schema: ods
         +materialized: table
-      edw:
-        +description: "Enterprise data warehouse base marts"
+      pds:
+        +description: "Persistent data store - historical snapshots (Type 2 SCD)"
+        +schema: pds
+        +materialized: table
+
+    edw:
+      ref:
+        +description: "Reference data (conformed lookups, master data)"
+        +schema: edw_ref
+        +materialized: table
+      stg:
+        +description: "Source-centric staging objects"
+        +schema: edw_stg
+        +materialized: view
+      mart:
+        +description: "Entity-centric base marts (dimensions, facts)"
         +schema: edw
         +materialized: table
-        staging:
+        stg:
+          +description: "Entity-centric staging (intermediate transformations)"
+          +schema: edw
           +materialized: view
 
-    gold:
+    infomart:
       +materialized: view # default for speed
       mart:
-        +description: "Product marts"
-        +schema: mart
+        +description: "Information marts (business-aligned products)"
+        +schema: im
         +materialized: table
+        stg:
+          +description: "Information mart staging (intermediate transformations)"
+          +schema: im_stg
+          +materialized: view
+
+seeds:
+  health_lakehouse__engineering__dbt:
+    +schema: ods
+    +description: "Static reference and configuration data loaded from CSV files to ODS"
 ```
 
 <br>
