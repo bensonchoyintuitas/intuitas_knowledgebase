@@ -156,7 +156,7 @@
 <li><a href="./#key-vault">Key vault</a></li>
 <li><a href="./#secrets">Secrets</a></li>
 <li><a href="./#entra-group-names">Entra Group Names</a></li>
-<li><a href="./#azure-data-factory-adf">Azure Data Factory (standards_and_conventions.mdADF)</a></li>
+<li><a href="./#azure-data-factory-adf">Azure Data Factory (ADF)</a></li>
 <li><a href="./#sql-server">SQL Server</a></li>
 <li><a href="./#sql-database">SQL Database</a></li>
 <li><a href="./#storage">Storage</a><ul>
@@ -209,12 +209,12 @@
 <h2 id="platform">Platform</h2>
 <h3 id="environment">Environment</h3>
 <ul>
-<li>Environment name: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as prepred)</li>
+<li>Environment name: dev/test/prod/sandbox/poc (pat - production acceptance testing is optional as preferred)</li>
 </ul>
 <h3 id="vnet">VNET</h3>
 <ul>
-<li>Name: <code>vn-{organisation_name}-{domain_name}</code>
-= <em>e.g: vn-intuitas-corporate</em></li>
+<li>Name: <code>vn-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: vn-intuitas-corporate</em></li>
 </ul>
 <h3 id="resource-groups">Resource Groups</h3>
 <ul>
@@ -237,8 +237,8 @@
 </ul>
 <h3 id="entra-group-names">Entra Group Names</h3>
 <ul>
-<li>Name: <code>eg-{organisation_name}-{domain_name}</code>
-= <em>e.g: eg-intuitas-corporate</em></li>
+<li>Name: <code>eg-{organisation_name}-{domain_name}</code></li>
+<li><em>e.g: eg-intuitas-corporate</em></li>
 </ul>
 <h3 id="azure-data-factory-adf">Azure Data Factory (ADF)</h3>
 <ul>
@@ -267,20 +267,20 @@
 </ul>
 <h5 id="lakehouse-storage-folders">Lakehouse storage folders</h5>
 <ul>
-<li>Level 1 Name: <code>{layer} (bronze/silver/gold)</code> // if using medallion approach</li>
-<li>Level 2 Name: <code>{stage_name}</code></li>
+<li>Level 1 Name: <code>{zone} (raw/edw/infomart)</code> // (bronze/silver/gold)` if using medallion approach</li>
+<li>Level 2 Name: <code>{layer_name}</code></li>
 <li>
 <p><em>e.g:</em></p>
 </li>
 <li>
-<p><em>bronze/landing</em></p>
+<p><em>raw/landing</em></p>
 </li>
-<li><em>bronze/ods</em></li>
-<li><em>bronze/pds</em></li>
-<li><em>bronze/schema</em> (for autoloader metadata)</li>
-<li><em>bronze/checkpoints</em> (for autoloader metadata)</li>
-<li><em>silver/automatically determined by unity catalog</em></li>
-<li><em>gold/automatically determined by unity catalog</em></li>
+<li><em>raw/ods</em></li>
+<li><em>raw/pds</em></li>
+<li><em>raw/schema</em> (for autoloader metadata)</li>
+<li><em>raw/checkpoints</em> (for autoloader metadata)</li>
+<li><em>edw/automatically determined by unity catalog</em></li>
+<li><em>infomart/automatically determined by unity catalog</em></li>
 </ul>
 <h4 id="generic-blob-storage">Generic Blob storage</h4>
 <p>Generic Blob storage can be used for all non-lakehouse data; or alternatively within the lakehouse storage account in the appropriate container and folder.</p>
@@ -313,20 +313,27 @@
 <h4 id="job-names">Job names</h4>
 <hr />
 <ul>
-<li>Job names: <code>{domain}__{layer}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}</code></li>
-<li><em>e.g. clinical__bronze__ingest__fhircdr__dev</em></li>
+<li>Job names: <code>{domain}__{zone}__{purpose}__{source}{optional: __target}{optional: __schedule}{optional: __version}__{env}</code></li>
+<li><em>e.g. clinical__raw__ingest__fhircdr__dev</em></li>
 </ul>
 <h4 id="for-delta-live-table-dlt-pipelines">For Delta Live Table (DLT) Pipelines</h4>
 <hr />
 <ul>
-<li>Pipeline names: <code>{domain_name}__{layer}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}</code></li>
-<li><em>e.g. clinical__bronze__pipeline__fhircdr__dev</em></li>
+<li>Pipeline names: <code>{domain_name}__{zone}__pipeline__{dataset}{optional: __schedule}{optional: __version}__{env}</code></li>
+<li><em>e.g. clinical__raw__pipeline__fhircdr__dev</em></li>
+<li><em>e.g. supplychain__infomart__pipeline__inventorymart__prod</em></li>
+</ul>
+<p><strong>Note on zone terminology:</strong>
+- This framework uses <code>raw/edw/infomart</code> terminology (aligns with enterprise data warehousing concepts)
+- Databricks documentation uses <code>bronze/silver/gold</code> terminology (medallion architecture)
+- Both are valid; choose one and use consistently:
+  - <code>raw</code> = <code>bronze</code> (raw ingested data)
+  - <code>edw</code> = <code>silver</code> (cleaned, conformed data)
+  - <code>infomart</code> = <code>gold</code> (business-ready aggregated data)</p>
+<ul>
 <li>
-<p><em>e.g. supplychain__gold__pipeline__inventorymart__prod</em> </p>
-</li>
-<li>
-<p>Note on {layer}: If the 'business outcome' is Gold, you call it Gold, even if it produces Bronze + Silver on the way.
-<em>i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated gold-layer dataset called Inventory Mart"</em></p>
+<p>Note on {zone}: If the 'business outcome' is Infomart, you call it Infomart, even if it produces Raw + EDW on the way.
+<em>i.e "This is the production DLT pipeline in the supply chain domain, which builds and maintains the curated Infomart zone dataset called Inventory Mart"</em></p>
 </li>
 <li>
 <p>Include pipeline so it’s distinguishable from ad hoc jobs.</p>
@@ -341,9 +348,9 @@
 </ul>
 <p>which then orchestrates: </p>
 <ul>
-<li><em>clinical__bronze__pipeline__fhircdr__prod</em></li>
-<li><em>clinical__silver__pipeline__fhirclean__prod</em></li>
-<li><em>clinical__gold__pipeline__clinicalmart__prod</em></li>
+<li><em>clinical__raw__pipeline__fhircdr__prod</em> (or <code>clinical__bronze__pipeline__fhircdr__prod</code> if using medallion terminology)</li>
+<li><em>clinical__edw__pipeline__fhirclean__prod</em> (or <code>clinical__silver__pipeline__fhirclean__prod</code> if using medallion terminology)</li>
+<li><em>clinical__infomart__pipeline__clinicalmart__prod</em> (or <code>clinical__gold__pipeline__clinicalmart__prod</code> if using medallion terminology)</li>
 </ul>
 <h4 id="job-logging">Job logging</h4>
 <ul>
@@ -357,17 +364,17 @@
 </ul>
 <h3 id="catalog-naming-and-conventions">Catalog naming and conventions</h3>
 <hr />
-<p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<p>Refer to <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for further context and definitions applicable to this section.</p>
 <p>Catalog name: </p>
-<p>The choice of granularity depends on domain topology, stage/zone convention and desired level of segregation for access and sharing controls (i.e. catalog or schema level)</p>
+<p>The choice of granularity depends on domain topology, zone and layer conventions, and desired level of segregation for access and sharing controls (i.e. catalog or layer level)</p>
 <ul>
 <li>Minimum granularity (domain level): <code>{domain_name}{__environment (dev/test/pat/prod)}</code> (prod is implied optional)   <em>e.g: corporate__dev</em></li>
-<li>Optional granularity (domain-data stage level): <code>{domain_name}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_bronze__dev</em></li>
-<li>Optional granularity (domain-data stage and zone level): <code>{domain_name}{_data_stage: (bronze/silver/gold)}{_data_zone: (ods/pds/edw/mart)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_bronze_ods__dev</em></li>
-<li>Optional granularity (domain-data zone level): <code>{domain_name}{_data_zone: (ods/pds/edw/im)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_ods__dev</em></li>
-<li>Optional granularity (subdomain-data stage level): <code>{domain_name}{_descriptor (subdomain/subject/project*)}{_data_stage: (bronze/silver/gold)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_finance_bronze__dev</em></li>
+<li>Optional granularity (domain-zone level): <code>{domain_name}{_zone: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_raw__dev</em></li>
+<li>Optional granularity (domain-zone and layer level): <code>{domain_name}{_zone: (raw/edw/infomart)}{_layer: (ods/pds/stg/ref/mart)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_raw_ods__dev</em></li>
+<li>Optional granularity (domain-layer level): <code>{domain_name}{_layer: (ods/pds/stg/ref/mart)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_ods__dev</em></li>
+<li>Optional granularity (subdomain-zone level): <code>{domain_name}{_descriptor (subdomain/subject/project*)}{_zone: (raw/edw/infomart)}{__environment (dev/test/pat/prod)}</code>    <em>e.g: corporate_finance_raw__dev</em></li>
 </ul>
-<p>In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e <code>engineering__dev.ods__fhirhouse__dbo(lakeflow).encounter</code></p>
+<p>In the examples provided - we have opted for domain level - with schema separation for the lower levels of grain via prefixes. i.e <code>engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter</code></p>
 <p><em>Note that projects are temporary constructs, and hence are not recommended for naming</em></p>
 <ul>
 <li>Catalog storage root: <code>abfss://{environment}@dl{organisation_name}{domain_name}.dfs.core.windows.net/{domain_name}_{environment}_catalog</code></li>
@@ -387,17 +394,25 @@
 </ul>
 <h3 id="schema-and-object-conventions">Schema and object conventions</h3>
 <hr />
-<p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<p>Refer to <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for further context and definitions applicable to this section.</p>
 <p>Refer to <a href="../modelling_standards_and_conventions/#physical-models">Physical Models</a> for the standard relating to column naming, types, and conventions.</p>
+<p><strong>Terminology Hierarchy:</strong></p>
+<p>Data is organized in a three-level hierarchy:
+- <strong>Zone</strong> = Top-level organizational boundary (Raw, EDW, Infomart)
+  - <em>Within each zone, data flows through...</em>
+- <strong>Layer</strong> = Processing layers within a zone (landing, ods, pds, stg, ref, mart, etc.)
+  - <em>Each layer typically maps to...</em>
+- <strong>Schema</strong> = Unity Catalog schema that stores objects (ods, pds, edw_stg, edw_ref, edw, im_stg, im)</p>
+<p>Example: The <strong>Raw zone</strong> contains the <strong>ODS layer</strong> which maps to the <strong>ods schema</strong>.</p>
 <h4 id="schema-level-external-storage-locations">Schema level external storage locations</h4>
 <p>Recommendations:</p>
 <ul>
-<li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. <em>e.g: abfss://dev@dlintutiasengineering.dfs.core.windows.net/engineering__dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></li>
+<li>For managed tables (default): do nothing.  Let dbt create schemas without additional configuration. Databricks will manage storage and metadata.Objects will then be stored in the catalog storage root. <em>e.g: abfss://dev@dlintuitas{domain}.dfs.core.windows.net/engineering__dev_catalog/__unitystorage/catalogs/catalog-guid/tables/object-guid</em></li>
 <li>For granular control over schema-level storage locations: Pre-create schemas with LOCATION mapped to external paths or configure the catalog-level location.</li>
 <li>Ensure dbt's dbt_project.yml and environment variables align with storage locations.</li>
 </ul>
 <h4 id="metadata-schemas-and-objects">Metadata Schemas and Objects</h4>
-<p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<p>Refer to <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for further context and definitions applicable to this section.</p>
 <p>Contains metadata that supports engineering and governance. This will vary depending on engineering and governance toolsets</p>
 <p><strong>Engineering - ingestion framework</strong>:</p>
 <ul>
@@ -406,19 +421,22 @@
 <li><em>e.g: corporate__dev.meta.ingestion_control</em></li>
 <li><em>e.g: corporate__dev.meta__ingestion.ingestion_control</em></li>
 </ul>
-<h4 id="bronze-raw-data-according-to-systems">Bronze (Raw data according to systems)</h4>
-<p>The Bronze layer stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for definitions and context.</p>
-<p>All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. <code>bronze__</code></p>
+<h4 id="raw-aka-bronze-data-according-to-systems">Raw (aka Bronze) (Data according to systems)</h4>
+<p>The Raw zone stores raw, immutable data as it is ingested from source systems. See <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for definitions and context.</p>
+<p>The Raw zone uses two primary schemas:
+- <strong><code>ods</code></strong> - Operational Data Store (current state)
+- <strong><code>pds</code></strong> - Persistent Data Store (historical snapshots)</p>
 <p>In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e <code>engineering__dev.ods__fhirhouse__dbo__lakeflow.encounter</code></p>
+<p><em>Note: Using consistent double underscore (<code>__</code>) delimiters throughout ensures compatibility with Databricks and avoids parsing issues. Parentheses notation (e.g., <code>dbo(adf)</code>) should be avoided in schema and object names.</em></p>
 <p><strong>Persistent Landing</strong>:</p>
 <p>Persistent Landing uses Unity Catalog Volumes for storing raw files and unstructured data as they arrive from source systems.</p>
-<p>Volume naming convention: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
+<p>Volume naming convention: <code>[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]</code></p>
 <ul>
 <li><code>[domain][__env]</code>: Domain and environment identifier (e.g., <code>corporate_dev</code>, <code>engineering_prod</code>)</li>
-<li><code>[layer]</code>: Data layer identifier (e.g., <code>landing</code>)</li>
+<li><code>[layer]</code>: Data layer identifier within the Raw zone (e.g., <code>landing</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier (e.g., <code>workdayapi</code>, <code>saphr</code>)</li>
 <li><code>[__source_schema]</code>: Optional source schema or subsystem identifier</li>
-<li><code>(channel)</code>: Ingestion channel/method (e.g., <code>adf</code>, <code>fivetran</code>, <code>api</code>)</li>
+<li><code>[__channel]</code>: Optional ingestion channel/method (e.g., <code>__adf</code>, <code>__fivetran</code>, <code>__api</code>)</li>
 <li>
 <p><code>[source_object/volume_name]</code>: Descriptive volume name or source object identifier</p>
 </li>
@@ -428,142 +446,239 @@
 <li><em>e.g: engineering__prod.landing__fhirapi__patients.raw_data</em></li>
 </ul>
 <p><strong>Operational Data Store (ODS)</strong>:</p>
-<p>The objective of raw layer conventions is to provide clarity over which zone and stage it belongs, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).</p>
+<p>The objective of raw zone conventions is to provide clarity over which zone, layer, and schema it belongs to, what the data relates to, where it was sourced from, and via what channel it arrived (as there may be nuances in data depending on its channel).</p>
 <p>ODS can be replicated from source systems, or prepared for use from semi/unstructured data via hard-transformation and hence will have these associated conventions:</p>
 <p>Database replicated ODS (structured sources like SQL Server):</p>
-<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]</code></p>
 <ul>
 <li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
-<li><code>[layer]</code>: Data layer (e.g., <code>ods</code>)</li>
+<li><code>[layer]</code>: Data layer within the Raw zone (e.g., <code>ods</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier</li>
-<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)</li>
-<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)</li>
+<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>__dbo</code>, <code>__reporting</code>)</li>
+<li><code>[__channel]</code>: Optional ingestion channel (e.g., <code>__adf</code>, <code>__fivetran</code>, <code>__lakeflow</code>)</li>
 <li>
 <p><code>[source_object/volume_name]</code>: Table name as per source</p>
 </li>
 <li>
 <p><em>e.g: clinical__dev.ods__patientflowmanager01__reporting.patients</em></p>
 </li>
-<li><em>e.g: clinical__dev.ods__fhirhouse__dbo(adf).encounter</em></li>
+<li><em>e.g: clinical__dev.ods__fhirhouse__dbo__adf.encounter</em></li>
 </ul>
 <p>Prepped semi/unstructured ODS data:</p>
-<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code></p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor][__channel].[source_object/volume_name]</code></p>
 <ul>
 <li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
-<li><code>[layer]</code>: Data layer (e.g., <code>ods</code>)</li>
+<li><code>[layer]</code>: Data layer within the Raw zone (e.g., <code>ods</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier</li>
 <li><code>[__source_descriptor]</code>: Source descriptor or subsystem identifier</li>
-<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)</li>
+<li><code>[__channel]</code>: Optional ingestion channel (e.g., <code>__kafka</code>, <code>__databricks</code>, <code>__api</code>)</li>
 <li>
 <p><code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)</p>
 </li>
 <li>
-<p><em>e.g: clinical__dev.ods__ambosim__confluent(kafka).encounter</em></p>
+<p><em>e.g: clinical__dev.ods__ambosim__confluent__kafka.encounter</em></p>
 </li>
 <li><em>e.g: corporate__dev.ods__workdayapi__employees.raw_data</em></li>
 </ul>
 <p><strong>Persistent Data Store (PDS)</strong>:</p>
 <p>PDS conventions will mirror ODS conventions:</p>
 <p>Database replicated PDS (structured sources like SQL Server):</p>
-<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema](channel).[source_object/volume_name]</code></p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_schema][__channel].[source_object/volume_name]</code></p>
 <ul>
 <li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
-<li><code>[layer]</code>: Data layer (e.g., <code>pds</code>)</li>
+<li><code>[layer]</code>: Data layer within the Raw zone (e.g., <code>pds</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier</li>
-<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>dbo</code>, <code>reporting</code>)</li>
-<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>adf</code>, <code>fivetran</code>, <code>lakeflow</code>)</li>
+<li><code>[__source_schema]</code>: Source schema (if applicable, e.g., <code>__dbo</code>, <code>__reporting</code>)</li>
+<li><code>[__channel]</code>: Optional ingestion channel (e.g., <code>__adf</code>, <code>__fivetran</code>, <code>__lakeflow</code>)</li>
 <li>
 <p><code>[source_object/volume_name]</code>: Table name as per source</p>
 </li>
 <li>
 <p><em>e.g: clinical__dev.pds__patientflowmanager01__reporting.patients</em></p>
 </li>
-<li><em>e.g: clinical__dev.pds__fhirhouse__dbo(adf).encounter</em></li>
+<li><em>e.g: clinical__dev.pds__fhirhouse__dbo__adf.encounter</em></li>
 </ul>
 <p>Prepped semi/unstructured PDS data:</p>
-<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor](channel).[source_object/volume_name]</code></p>
+<p>Format: <code>[domain][__env].[layer][__source_system][__source_descriptor][__channel].[source_object/volume_name]</code></p>
 <ul>
 <li><code>[domain][__env]</code>: Domain and environment (e.g., <code>clinical__dev</code>)</li>
-<li><code>[layer]</code>: Data layer (e.g., <code>pds</code>)</li>
+<li><code>[layer]</code>: Data layer within the Raw zone (e.g., <code>pds</code>)</li>
 <li><code>[__source_system]</code>: Source system identifier</li>
 <li><code>[__source_descriptor]</code>: Source descriptor or subsystem identifier</li>
-<li><code>(channel)</code>: Optional ingestion channel (e.g., <code>kafka</code>, <code>databricks</code>, <code>api</code>)</li>
+<li><code>[__channel]</code>: Optional ingestion channel (e.g., <code>__kafka</code>, <code>__databricks</code>, <code>__api</code>)</li>
 <li>
 <p><code>[source_object/volume_name]</code>: Named as per source or unique assigned name (e.g., topic/folder name)</p>
 </li>
 <li>
-<p><em>e.g: clinical__dev.pds__ambosim__confluent(kafka).encounter</em></p>
+<p><em>e.g: clinical__dev.pds__ambosim__confluent__kafka.encounter</em></p>
 </li>
 <li><em>e.g: corporate__dev.pds__workdayapi__employees.raw_data</em></li>
 </ul>
-<h4 id="silveredw-data-according-to-business-entities">Silver/EDW (Data according to business entities)</h4>
-<p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
-<p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<h4 id="edw-aka-silver-data-according-to-business-entities">EDW (aka Silver) (Data according to business entities)</h4>
+<p>The EDW (Enterprise Data Warehouse) zone focuses on transforming raw data into cleaned, enriched, and validated datasets that are the building blocks for downstream consumption and analysis.</p>
+<p>Refer to <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for further context and definitions applicable to this section.</p>
+<p>The EDW zone uses three primary schemas:
+- <strong><code>edw_stg</code></strong> - Source-centric and entity-centric staging objects (transformations, cleaning, normalization, integration)
+- <strong><code>edw_ref</code></strong> - Reference data (curated, conformed reference entities and code sets intended for broad reuse)
+- <strong><code>edw</code></strong> - Base marts (full-featured dimensions with SCD logic, facts - curated entities)</p>
 <p>These marts are objects that are aligned to business entities and broad requirements, hence they must contain source-specific objects at the lowest grain. There may be further enrichment and joins applied across sources.</p>
 <p>In the examples provided - we have opted for domain level catalogs - with schema separation for the lower levels of grain via prefixes. i.e <code>engineering__dev.edw.dim_customer</code></p>
 <ul>
-<li>All schemas  may be optionally prefixed with data stage if not already decomposed at domain-level i.e. <code>silver__</code></li>
+<li>All schemas may be optionally prefixed with additional descriptors if not already decomposed at domain-level i.e. <code>edw_stg__</code>, <code>edw_ref__</code>, <code>edw__</code></li>
 <li>All <code>entity</code> names which align to facts should be named in plural.</li>
 <li>All <code>entity</code> names which align to dims should be named in singular.</li>
 </ul>
 <p><br></p>
-<p><strong>(Silver)/EDW Staging Objects</strong>:
-Staging models serve as intermediary models that transform source data into the target silver model. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
-<p>These models exist to stage silver marts (base marts in the EDW layer) and reference data (in the REF layer).</p>
+<p><strong>EDW Staging Objects</strong>:
+Staging models serve as intermediary models that transform source data into EDW models. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
+<p><strong>Two Complementary Staging Approaches:</strong></p>
+<p>EDW staging supports two patterns that work together:</p>
+<ol>
+<li><strong>Source-Centric Staging</strong> - Organized by source system:</li>
+<li>Cleans and normalizes data from each source independently</li>
+<li>May feed data quality test results to reports for actioning</li>
+<li>Prepares reference data for broad use and maps it for mart conformance</li>
+<li>
+<p>Creates mappings of keys to resolve system keys to universal surrogate or business keys</p>
+</li>
+<li>
+<p><strong>Entity-Centric Staging</strong> - Organized by business entity:</p>
+</li>
+<li>Integrates data across multiple source-centric staging models</li>
+<li>Applies cross-source deduplication and conflict resolution</li>
+<li>Establishes unified entity keys and relationships</li>
+<li>Creates a single, conformed view of each business entity</li>
+</ol>
+<p><strong>Typical Flow:</strong></p>
+<pre><code>Raw Sources → Source-Centric Staging → Entity-Centric Staging → Base Marts (Dimensions/Facts)
+</code></pre>
+<p><strong>Source-Centric Staging Approach:</strong></p>
+<p>Staging objects are organized around source systems and source objects, cleaning and normalizing data according to expectations/standards. This approach:
+- Cleans and normalizes data from each source independently
+- May feed data quality test results to reports for actioning
+- Prepares reference data for broad use and maps it for mart conformance
+- Creates mappings of keys to resolve and map system keys to universal surrogate keys or business keys, which can then be reused downstream for integration</p>
 <p><strong>Naming Convention:</strong></p>
-<p><code>[domain][__env] . [layer] . [object_type][_entity/descriptor](__source)(__channel)(__transformation)</code></p>
+<p><code>[domain][__env] . [schema] . stg__[source_system](optional__[source_channel])__[source_object](optional__[other_descriptors])__[id]__[transformation_descriptors]</code></p>
 <p>Where:</p>
 <ul>
 <li><code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>corporate__dev</code>)</li>
-<li><code>[layer]</code> - Data layer (e.g., <code>ref</code>, <code>edw</code>)</li>
-<li><code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>ref_</code>, <code>dim_</code>, <code>fact_</code>, <code>keys_</code>)</li>
-<li><code>[_entity/descriptor]</code> - Entity or object name</li>
-<li><code>(__source)</code> - Optional source system identifier (e.g., <code>__sap</code>, <code>__workday</code>, <code>__finance_system</code>)</li>
-<li><code>(__channel)</code> - Optional source channel (e.g., <code>__adf</code>, <code>__api</code>)</li>
-<li><code>(__transformation)</code> - Optional transformation step (e.g., <code>__01_typed</code>, <code>__02_cleaned</code>)</li>
+<li><code>[schema]</code> - EDW schema (<code>edw_stg</code> for staging, <code>edw_ref</code> for reference staging)</li>
+<li><code>stg__</code> - Staging object prefix</li>
+<li><code>[source_system]</code> - Source system identifier (e.g., <code>sap</code>, <code>workday</code>, <code>finance_system</code>)</li>
+<li><code>(optional__[source_channel])</code> - Optional source channel (e.g., <code>__adf</code>, <code>__api</code>)</li>
+<li><code>[source_object]</code> - Source object/table name</li>
+<li><code>(optional__[other_descriptors])</code> - Optional additional descriptors</li>
+<li><code>[id]</code> - Unique identifier suffix</li>
+<li><code>[transformation_descriptors]</code> - Numbered transformation step(s)</li>
+</ul>
+<p><strong>Standard Transformation Steps (optional, applied as needed):</strong></p>
+<ul>
+<li><code>00_keyed</code> - Key assignment/generation</li>
+<li><code>01_renamed_and_typed</code> - Column renaming and type casting</li>
+<li><code>02_deduped</code> - Deduplication</li>
+<li><code>03_cleaned</code> - Data cleaning</li>
+<li><code>04_filtered</code> or <code>04_split</code> - Filtering or splitting data</li>
+<li><code>05_column_selected</code> - Column selection</li>
+<li><code>06_business_validated</code> - Business rule validation</li>
+<li><code>07_desensitised</code> - Sensitive data masking/removal</li>
 </ul>
 <p><strong>Reference Data Staging:</strong></p>
-<p>Source-specific staging (with transformations):</p>
+<p>Reference data follows the same two-stage approach as marts when coming from multiple sources.</p>
+<p>Use <strong>Entity-Centric Staging</strong> when:
+- Multiple source systems provide the <em>same</em> business entity/code set, and you need a single conformed view
+- You need cross-source mapping, hierarchy standardisation, or conflict resolution (e.g., code collisions, different naming, different rollups)</p>
+<p><strong>Source-Centric Staging</strong> (with transformations in <code>edw_stg</code> schema):</p>
+<p>Cleans individual source system reference data:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.ref.stg_facility__sap__01_filtered</code></em></li>
-<li><em>e.g: <code>corporate__prod.ref.stg_facility__sap__02_typed</code></em></li>
-<li><em>e.g: <code>corporate__prod.ref.stg_account_code__finance_system__adf__01_renamed</code></em></li>
-<li><em>e.g: <code>corporate__prod.ref.stg_location__workday__01_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__sap__facilities__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__sap__facilities__02_cleaned</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__finance_system__adf__account_codes__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__workday__locations__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__workday__locations__02_deduped</code></em></li>
 </ul>
-<p>Final reference data (cleaned and conformed):</p>
+<p><strong>Entity-Centric Staging</strong> (when unifying across sources in <code>edw_stg</code> schema):</p>
+<p>Integrates reference data from multiple sources:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.ref.ref_facility</code></em></li>
-<li><em>e.g: <code>corporate__prod.ref.ref_location</code></em></li>
-<li><em>e.g: <code>corporate__prod.ref.ref_account_code</code></em></li>
-<li><em>e.g: <code>corporate__dev.ref.ref_country_codes</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__facility__01_unified</code></em> (combines SAP and Workday facilities)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__facility__02_mapped</code></em> (standardizes codes/hierarchies)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__account_code__01_unified</code></em> (combines old/new finance systems)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__location__01_unified</code></em> (integrates location references)</li>
+</ul>
+<p><strong>Final Reference Data</strong> (cleaned and conformed in <code>edw_ref</code> schema):</p>
+<p>Reference data in <code>edw_ref</code> is materialized as <strong>curated, conformed, reusable reference entities and code sets</strong>.</p>
+<p>Typically, <code>edw_ref</code> models:
+- Are keyed by <strong>natural/business keys</strong> (and may also include stable internal IDs where useful)
+- Are <strong>lightweight and broadly reusable</strong> (avoid mart-specific denormalisation and calculations)
+- Are often <strong>current-state</strong>, but may include <strong>effective dating</strong> / limited historisation where the reference itself changes over time (e.g., organisational hierarchies)</p>
+<ul>
+<li><em>e.g: <code>corporate__prod.edw_ref.ref_facility</code></em> (facility_id, facility_name, facility_code, location_key - simple key-value)</li>
+<li><em>e.g: <code>corporate__prod.edw_ref.ref_location</code></em> (location_id, location_name, country_code - basic attributes)</li>
+<li><em>e.g: <code>corporate__prod.edw_ref.ref_account_code</code></em> (account_code, account_name, hierarchy_level - minimal structure)</li>
+<li><em>e.g: <code>corporate__prod.edw_ref.ref_country_codes</code></em> (country_code, country_name - simple lookup)</li>
+</ul>
+<p><strong>Note on Reference Data vs Dimensions:</strong></p>
+<p>Reference data in <code>edw_ref</code> serves as a foundation and can be <strong>shaped into dimensions</strong> in the <code>edw</code> (marts) schema:</p>
+<ul>
+<li><strong><code>edw_ref.ref_*</code></strong> - Conformed reference entities/code sets intended for broad reuse (generally natural/business keys, minimal mart-specific logic)</li>
+<li><strong><code>edw.dim_*</code></strong> - Analytics-facing dimensional models that may add:</li>
+<li>Surrogate keys (and persisted natural/business keys as attributes)</li>
+<li>SCD Type 1 and/or Type 2 behaviour <strong>as required</strong> (e.g., <code>valid_from</code>, <code>valid_to</code>, <code>is_current</code>)</li>
+<li>Denormalisation, role-playing dimensions, and mart-specific hierarchies/business rules</li>
+</ul>
+<p>Examples of the relationship:</p>
+<ul>
+<li><code>edw_ref.ref_facility</code> (conformed reference) → <code>edw.dim_facility</code> (often Type 1 if facility attributes are treated as current-state)</li>
+<li><code>edw_ref.ref_account_code</code> (conformed codes/hierarchy) → <code>edw.dim_account</code> (often Type 2 if names/rollups change over time)</li>
+<li><code>edw_ref.ref_product_category</code> (conformed categories) → <code>edw.dim_product</code> (often Type 2 if classifications change over time)</li>
 </ul>
 <p><strong>Base Mart (EDW) Staging:</strong></p>
-<p>Source-specific staging (with transformations):</p>
+<p>EDW staging can follow two complementary patterns:</p>
+<ol>
+<li><strong>Source-Centric Staging</strong>: Cleans and transforms data from individual sources</li>
+<li><strong>Entity-Centric Staging</strong>: Integrates and unifies data across multiple sources for a business entity</li>
+</ol>
+<p><strong>Source-Centric Staging</strong> (with transformations in <code>edw_stg</code> schema):</p>
+<p>Focused on cleaning individual source systems:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.edw.stg_employee__sap__01_typed</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_employee__workday__01_typed</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_employee__workday__02_cleaned</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_customer__crm__adf__01_renamed</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_customer__crm__adf__02_cleaned</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_payment__new_finance_system__adf__01_typed</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_payment__old_finance_system__adf__01_typed</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_account__finance_system__api__01_renamed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__sap__employees__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__workday__employees__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__workday__employees__02_cleaned</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__crm__adf__customers__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__crm__adf__customers__02_cleaned</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__new_finance_system__adf__payments__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__old_finance_system__adf__payments__01_renamed_and_typed</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__finance_system__api__accounts__01_renamed_and_typed</code></em></li>
 </ul>
-<p>Non-source specific staging (after combining/deduplicating):</p>
+<p><strong>Entity-Centric Staging</strong> (with transformations in <code>edw_stg</code> schema):</p>
+<p>Focused on integrating and unifying data across sources for a specific business entity. These models:
+- Union, join, or merge data from multiple source-centric staging models
+- Apply cross-source deduplication and conflict resolution
+- Establish entity-level keys and relationships
+- Prepare unified entity views for final base marts</p>
+<p><strong>Naming Convention for Entity-Centric Staging:</strong></p>
+<p><code>[domain][__env] . [schema] . stg__[entity]__[transformation_descriptors]</code></p>
+<p>Examples:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.edw.stg_employee__01_deduped</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_employee__02_validated</code></em></li>
-<li><em>e.g: <code>corporate__prod.edw.stg_payment__01_unified</code></em></li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__employee__01_unified</code></em> (unions SAP and Workday employees)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__employee__02_deduped</code></em> (resolves duplicates across sources)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__employee__03_keyed</code></em> (applies unified business keys)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__customer__01_unified</code></em> (merges multiple CRM sources)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__customer__02_conflict_resolved</code></em> (resolves conflicting attributes)</li>
+<li><em>e.g: <code>corporate__prod.edw_stg.stg__payment__01_unified</code></em> (combines old and new finance systems)</li>
+<li><em>e.g: <code>health__prod.edw_stg.stg__patient__01_unified</code></em> (integrates patient data across clinical systems)</li>
 </ul>
+<p>These entity-centric staging models then feed into the final base marts (dimensions and facts).</p>
 <p><strong>Base Mart Keysets:</strong></p>
-<p>Conforming/deduplicating keysets across multiple sources:</p>
+<p>Keysets are created in the <code>edw</code> schema to resolve and map system keys to universal surrogate keys or business keys. These can be reused downstream for integration and conforming/deduplicating entities across multiple sources:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.edw.keys_employee</code></em> (conforms sap and workday)</li>
-<li><em>e.g: <code>corporate__prod.edw.keys_customer</code></em> (conforms multiple crm sources)</li>
-<li><em>e.g: <code>corporate__prod.edw.keys_account</code></em> (conforms finance systems)</li>
-<li><em>e.g: <code>health__prod.edw.keys_patient</code></em> (conforms clinical systems)</li>
+<li><em>e.g: <code>corporate__prod.edw.keys__employee</code></em> (conforms sap and workday employee keys)</li>
+<li><em>e.g: <code>corporate__prod.edw.keys__customer</code></em> (conforms multiple crm source keys)</li>
+<li><em>e.g: <code>corporate__prod.edw.keys__account</code></em> (conforms finance system keys)</li>
+<li><em>e.g: <code>health__prod.edw.keys__patient</code></em> (conforms clinical system keys)</li>
 </ul>
 <p><strong>Base Marts (Final Dimensional Models):</strong></p>
+<p>Base marts represent full-featured dimensional models with SCD logic, business rules, and complete attributes. These may be built from entity-centric staging, source-centric staging, or by shaping reference data from <code>edw_ref</code>.</p>
 <p>Source-specific dimensions (preserving source identity):</p>
 <ul>
 <li><em>e.g: <code>corporate__prod.edw.dim_employee__sap</code></em></li>
@@ -573,10 +688,16 @@ Staging models serve as intermediary models that transform source data into the 
 </ul>
 <p>Conformed dimensions (unified, non-source specific):</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.edw.dim_employee</code></em> (type 1 SCD implied)</li>
-<li><em>e.g: <code>corporate__prod.edw.dim_employee__type2</code></em> (with history)</li>
+<li><em>e.g: <code>corporate__prod.edw.dim_employee</code></em> (Type 1 SCD - current state only)</li>
+<li><em>e.g: <code>corporate__prod.edw.dim_employee__type2</code></em> (Type 2 SCD - with historical tracking)</li>
 <li><em>e.g: <code>corporate__prod.edw.dim_customer</code></em></li>
 <li><em>e.g: <code>corporate__prod.edw.dim_account</code></em> (unified across finance systems)</li>
+</ul>
+<p>Dimensions built from reference data (shaped with SCD logic):</p>
+<ul>
+<li><em>e.g: <code>corporate__prod.edw.dim_facility</code></em> (built from <code>edw_ref.ref_facility</code>, adds Type 1 or Type 2 SCD logic)</li>
+<li><em>e.g: <code>corporate__prod.edw.dim_product_category</code></em> (built from <code>edw_ref.ref_product_category</code>, with hierarchies)</li>
+<li><em>e.g: <code>corporate__prod.edw.dim_location</code></em> (built from <code>edw_ref.ref_location</code>, with geographic hierarchies)</li>
 </ul>
 <p>Fact tables:</p>
 <ul>
@@ -613,15 +734,18 @@ Optional warehousing construct.</p>
 <li><em>e.g: corporate__dev.edw_bv.hs_late_payments__finance_system__adf</em></li>
 </ul>
 <p><br></p>
-<h4 id="gold-data-according-to-requirements">Gold (Data according to requirements)</h4>
-<p>The Gold layer focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.</p>
-<p>Refer to <a href="../level_2/#data-layers-and-stages">Data layers and stages</a> for further context and definitions applicable to this section.</p>
+<h4 id="infomart-aka-gold-data-according-to-requirements">Infomart (aka Gold) (Data according to requirements)</h4>
+<p>The Infomart zone focuses on requirement-aligned products (datasets, aggregations, and reporting structures). Products are predominantly source agnostic, however optionality exists when source-specific views are needed.</p>
+<p>Refer to <a href="../level_2/#data-zones-and-layers">Data zones and layers</a> for further context and definitions applicable to this section.</p>
+<p>The Infomart zone uses two primary schemas:
+- <strong><code>im_stg</code></strong> - Product mart staging (intermediate transformations)
+- <strong><code>im</code></strong> - Information marts (final business-aligned products)</p>
 <p><strong>Naming Convention:</strong></p>
-<p><code>[domain][__env] . mart . [object_type][product_name/descriptor](__source)(__transformation)</code></p>
+<p><code>[domain][__env] . [schema] . [object_type][product_name/descriptor](__source)(__transformation)</code></p>
 <p>Where:</p>
 <ul>
 <li><code>[domain][__env]</code> - Domain and environment (e.g., <code>corporate__prod</code>, <code>health__dev</code>)</li>
-<li><code>mart</code> - Gold layer schema (product marts)</li>
+<li><code>[schema]</code> - Infomart zone schema (<code>im_stg</code> for staging, <code>im</code> for final products)</li>
 <li><code>[object_type]</code> - Object type prefix (e.g., <code>stg_</code>, <code>fact_</code>, <code>dim_</code>, <code>obt_</code>)</li>
 <li><code>[product_name/descriptor]</code> - Product or business-aligned name</li>
 <li><code>(__source)</code> - Optional source system identifier (only when source-specific view is needed)</li>
@@ -634,9 +758,9 @@ Optional warehousing construct.</p>
 <li>Product marts are business/requirement-aligned, not technical constructs</li>
 </ul>
 <p><br></p>
-<p><strong>(Gold)/Product Mart Staging Models</strong>:</p>
+<p><strong>Infomart Staging Models</strong>:</p>
 <p>Staging models serve as intermediary models that transform base marts (EDW) into requirement-aligned product marts. According to dbt best practices, there is a distinction between Staging and Intermediate models. Under this blueprint the use of Intermediate models is optional. <a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">Reference</a></p>
-<p>These models exist to stage gold product marts with business-specific transformations:</p>
+<p>These models exist in the <code>im_stg</code> schema to stage information marts with business-specific transformations:</p>
 <p><strong>Common Transformations:</strong></p>
 <ul>
 <li>Pivoting</li>
@@ -648,43 +772,43 @@ Optional warehousing construct.</p>
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li><em>e.g: <code>corporate__prod.mart.stg_downtime_by_region__01_pivoted</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.stg_downtime_by_region__02_desensitised</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.stg_late_payments__01_aggregated</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.stg_late_payments__02_joined</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.stg_fte_calculations__01_pivoted</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.stg_fte_calculations__02_aggregated</code></em></li>
-<li><em>e.g: <code>health__prod.mart.stg_patient_outcomes__01_joined</code></em></li>
-<li><em>e.g: <code>health__prod.mart.stg_patient_outcomes__02_desensitised</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_downtime_by_region__01_pivoted</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_downtime_by_region__02_desensitised</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_late_payments__01_aggregated</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_late_payments__02_joined</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_fte_calculations__01_pivoted</code></em></li>
+<li><em>e.g: <code>corporate__prod.im_stg.stg_fte_calculations__02_aggregated</code></em></li>
+<li><em>e.g: <code>health__prod.im_stg.stg_patient_outcomes__01_joined</code></em></li>
+<li><em>e.g: <code>health__prod.im_stg.stg_patient_outcomes__02_desensitised</code></em></li>
 </ul>
 <p><br></p>
-<p><strong>(Gold)/Product Marts (Final Products)</strong>:</p>
-<p>Final business-aligned data products ready for consumption by analytics, reporting, and BI tools.</p>
+<p><strong>Information Marts (Final Products)</strong>:</p>
+<p>Final business-aligned data products ready for consumption by analytics, reporting, and BI tools in the <code>im</code> schema.</p>
 <p><strong>Examples:</strong></p>
 <p>Fact tables (aggregated/business-focused):</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.mart.fact_downtime_by_region</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.fact_late_payments</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.fact_regional_account_payments</code></em></li>
-<li><em>e.g: <code>health__prod.mart.fact_patient_outcomes</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.fact_downtime_by_region</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.fact_late_payments</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.fact_regional_account_payments</code></em></li>
+<li><em>e.g: <code>health__prod.im.fact_patient_outcomes</code></em></li>
 </ul>
 <p>Dimension tables (product-specific):</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.mart.dim_region</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.dim_payment_category</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.dim_region</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.dim_payment_category</code></em></li>
 </ul>
 <p>One Big Tables (OBT) - Denormalized aggregates:</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.mart.obt_fte_calculations</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.obt_financial_summary</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.obt_executive_dashboard</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.obt_fte_calculations</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.obt_financial_summary</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.obt_executive_dashboard</code></em></li>
 </ul>
 <p>Source-specific products (when needed):</p>
 <ul>
-<li><em>e.g: <code>corporate__prod.mart.fact_account_payments__old_finance_system</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.fact_account_payments__new_finance_system</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.obt_employee_metrics__sap</code></em></li>
-<li><em>e.g: <code>corporate__prod.mart.obt_employee_metrics__workday</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.fact_account_payments__old_finance_system</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.fact_account_payments__new_finance_system</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.obt_employee_metrics__sap</code></em></li>
+<li><em>e.g: <code>corporate__prod.im.obt_employee_metrics__workday</code></em></li>
 </ul>
 <h3 id="delta-sharing">Delta Sharing</h3>
 <ul>
@@ -711,216 +835,273 @@ Optional warehousing construct.</p>
 <h3 id="documentation-and-model-metadata">Documentation and model metadata</h3>
 <p>Within each respective model folder (as needed)</p>
 <ul>
-<li>md: _{path to model folder using _ separators}__docs.md </li>
+<li>md: _{path to model folder using _ separators}__docs.md</li>
 <li>
-<p><em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__docs.md</em></p>
+<p><em>e.g: models/edw/ambo_sim__kafka__local/_edw__ambo_sim__kafka__local__docs.md</em></p>
 </li>
 <li>
-<p>model yml: _{path to model folder using _ separators}__models.yml </p>
+<p>model yml: _{path to model folder using _ separators}__models.yml</p>
 </li>
-<li><em>e.g: models/silver/ambo_sim__kafka__local/_silver__ambo_sim__kafka__local__models.yml</em></li>
+<li><em>e.g: models/edw/ambo_sim__kafka__local/_edw__ambo_sim__kafka__local__models.yml</em></li>
 </ul>
 <h3 id="sources">Sources</h3>
 <ul>
-<li>Folder: models/sources/{bronze/silver/gold}</li>
+<li>Folder: models/sources/{raw/edw/infomart}</li>
 <li>yml: {schema}__sources.yml (one for each source schema) </li>
 <li><em>e.g: ods__ambo_sim__kafka__sources.yml</em></li>
 </ul>
 <h3 id="model-and-folder-names">Model and Folder Names</h3>
-<p>dbt model names are verbose (inclusive of zone and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
-<h4 id="bronze">Bronze</h4>
-<p><em>Bronze objects are likely to be referenced in sources/bronze or as seeds</em></p>
+<p>dbt model names are verbose (inclusive of schema and domain) to ensure global uniqueness and better traceability to folders. Actual object names should be aliased to match object naming standards.</p>
+<h4 id="raw">Raw</h4>
+<p><em>Raw zone contains operational data store (ODS) for current state and persistent data store (PDS) for historical tracking</em></p>
+<p><strong>ODS (Operational Data Store) - Current State:</strong>
+- Folder: <code>seeds/{optional: domain name}{optional: __subdomain name(s)}/</code>  → materializes to <code>[domain__env].ods</code>
+- Folder: <code>sources/raw/{optional: domain name}{optional: __subdomain name(s)}/</code>  → references external sources to <code>[domain__env].ods</code></p>
+<p><strong>Seed Naming Convention:</strong></p>
+<p>Seeds (CSV files) should follow a descriptive naming pattern and materialize to the ODS schema:
+- <code>ref_[entity]_[descriptor].csv</code> for reference/lookup data
+- <code>config_[descriptor].csv</code> for configuration data
+- <em>e.g: <code>ref_country_codes.csv</code></em> → <code>corporate__dev.ods.ref_country_codes</code>
+- <em>e.g: <code>ref_currency_rates.csv</code></em> → <code>corporate__dev.ods.ref_currency_rates</code>
+- <em>e.g: <code>config_holidays.csv</code></em> → <code>corporate__dev.ods.config_holidays</code></p>
+<p><strong>PDS (Persistent Data Store) - Historical Tracking:</strong>
+- Folder: <code>models/raw/{optional: domain name}{optional: __subdomain name(s)}/pds/</code>  → materializes to <code>[domain__env].pds</code>
+- Models in PDS capture type 2 SCD (slowly changing dimensions) or snapshots of ODS data</p>
+<p><strong>Type 2 Snapshot Model Examples:</strong>
+- <em>e.g: <code>models/raw/pds/ref_country_codes_snapshot.sql</code></em> → <code>corporate__dev.pds.ref_country_codes_snapshot</code>
+- <em>e.g: <code>models/raw/pds/ref_currency_rates_snapshot.sql</code></em> → <code>corporate__dev.pds.ref_currency_rates_snapshot</code>
+- <em>e.g: <code>models/raw/pds/config_holidays_snapshot.sql</code></em> → <code>corporate__dev.pds.config_holidays_snapshot</code></p>
+<p>These models typically reference their corresponding seeds from ODS and add historical tracking columns (valid_from, valid_to, is_current, etc.)</p>
+<h4 id="edw">EDW</h4>
+<p>EDW staging follows two complementary patterns:</p>
+<ol>
+<li><strong>Source-Centric Staging</strong>: Organized by source system, cleaning individual sources</li>
+<li><strong>Entity-Centric Staging</strong>: Organized by business entity, integrating across sources</li>
+</ol>
+<p><strong>Staging Source-Centric:</strong> </p>
+<p>Focused on cleaning and transforming data from individual source systems:</p>
 <ul>
-<li>Folder: <code>models/bronze/{optional: domain name}{optional: __subdomain name(s)}/</code></li>
-<li>Folder: <code>sources/bronze/{optional: domain name}{optional: __subdomain name(s)}/</code></li>
-<li>Folder: <code>seeds/{optional: domain name}{optional: __subdomain name(s)}/</code></li>
-</ul>
-<h4 id="silver">Silver</h4>
-<p><strong>Staging Source-specific:</strong> </p>
-<ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/stg/{source_system}__{source_channel}/</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver} __stg{__entity /_object_description} __{ordinal}_{transformation description} __{source_system} __{source_channel}</code></li>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/source/{source_system}{optional:__{source_channel}}/stg/</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} stg__{source_system} __{source_channel} __{source_object} __{ordinal}_{transformation description}</code></li>
 </ul>
 <pre><code class="language-md">   *e.g:*
 
-      - *silver\new_finance_system__adf\stg\corporate__silver__stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-      - or *silver\new_finance_system__adf\stg\stg__accounts__01_renamed_and_typed__new_finance_system__adf.sql*
-      - materialises to: *corporate__dev.edw.stg_account__new_finance_system__adf__01_renamed*
+      - *edw\source\new_finance_system__adf\stg\corporate__edw__stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - or *edw\source\new_finance_system__adf\stg\stg__new_finance_system__adf__accounts__01_renamed_and_typed.sql*
+      - materialises to: *corporate__dev.edw_stg.stg__new_finance_system__adf__accounts__01_renamed_and_typed*
 </code></pre>
-<p><strong>Staging Non-source-specific (entity centric):</strong></p>
+<p><strong>Staging Entity-Centric:</strong></p>
+<p>Focused on integrating and unifying data across multiple sources for a specific business entity:</p>
 <ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg</code></li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} stg{__optional:dim_/fact_}{__entity /_object_description} __{ordinal}_{transformation description}</code></p>
-<ul>
-<li><em>e.g: corporate__dev.edw.stg_account__01_deduped</em></li>
-<li><em>e.g: corporate__dev.edw.stg_account__02_validated</em> </li>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/stg/</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} stg__{entity} __{ordinal}_{transformation description}</code></li>
 </ul>
-</li>
-</ul>
+<p>These models:
+- Union, join, or merge data from multiple source-centric staging models
+- Apply cross-source deduplication and conflict resolution
+- Establish unified entity keys</p>
 <pre><code class="language-md">   *e.g:*
 
-      - *silver\mart\accounts\stg\corporate__silver__stg__accounts__01_deduped.sql*
-      - or *silver\mart\accounts\stg\stg__accounts__01_deduped.sql*
-      - materialises to: *e.g: corporate__dev.edw.stg_account__01_deduped*
+      - *edw\mart\employee\stg\stg__employee__01_unified.sql* (unions SAP and Workday)
+      - *edw\mart\employee\stg\stg__employee__02_deduped.sql* (resolves duplicates)
+      - *edw\mart\employee\stg\stg__employee__03_keyed.sql* (applies unified keys)
+      - materialises to: *corporate__dev.edw_stg.stg__employee__01_unified*
 </code></pre>
-<p><strong>Mart Source-specific:</strong> </p>
+<p><strong>Mart (Entity-Centric Base Marts):</strong> </p>
+<p>Base marts are organized by business entity. Entity-centric staging (if needed) lives in a nested <code>stg/</code> folder within each entity folder.</p>
 <ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__entity /_object_description}__{source_system}__{source_channel}</code></li>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}/</code></li>
+<li>Entity-centric staging subfolder: <code>models/edw/.../mart/{entity}/stg/</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} {dim_/fact_}{__entity /_object_description}{optional:__{source_system}__{source_channel}}</code></li>
 </ul>
-<p><strong>Mart Non-source specific:</strong> </p>
+<p><strong>Source-specific marts</strong> (when preserving source identity):</p>
 <ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} mart{__optional:dim_/fact_}{__unified entity /_object_description}</code></li>
+<li>Models: <code>{optional:__edw__} dim_{entity}__{source_system}</code></li>
+<li><em>e.g: dim_employee__sap.sql, dim_employee__workday.sql</em></li>
+</ul>
+<p><strong>Non-source specific (unified) marts</strong>:</p>
+<ul>
+<li>Models: <code>{optional:__edw__} dim_{entity}</code> or <code>fact_{entity_plural}</code></li>
+<li><em>e.g: dim_employee.sql, fact_payments.sql</em></li>
 </ul>
 <p><strong>Reference Data:</strong> </p>
+<p>Reference data follows the same pattern as marts - organized by reference entity with optional entity-centric staging.</p>
 <ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/ref/{entity}</code></li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__silver__} ref{__optional:dim_/fact_} {__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/ref/{reference_entity}/</code></li>
+<li>Entity-centric staging subfolder: <code>models/edw/.../ref/{reference_entity}/stg/</code> (when unifying multiple sources)</li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__edw__} ref_{__reference data set name} {optional:__{source_system}__{source_channel}}</code></li>
 </ul>
+<p>Examples:
+   - <em>e.g: <code>models/edw/ref/facility/ref_facility.sql</code></em> → <code>corporate__dev.edw_ref.ref_facility</code>
+   - <em>e.g: <code>models/edw/ref/facility/stg/stg__facility__01_unified.sql</code></em> → <code>corporate__dev.edw_stg.stg__facility__01_unified</code> (combines SAP + Workday)
+   - <em>e.g: <code>models/edw/ref/account_code/ref_account_code.sql</code></em> → <code>corporate__dev.edw_ref.ref_account_code</code></p>
 <p><strong>Raw Vault:</strong> </p>
 <ul>
-<li>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/rv</code></li>
-<li>
-<p>Models: <code>edw_rv__{vault object named as per data vault standards}</code></p>
-</li>
-<li>
-<p>Schema naming convention:** </p>
-</li>
-<li>
-<p>Folder: <code>models/silver/{optional: domain name}{optional: __subdomain name(s)}/edw/bv</code></p>
-</li>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/edw/rv</code></li>
+<li>Models: <code>edw_rv__{vault object named as per data vault standards}</code></li>
+</ul>
+<p><strong>Business Vault:</strong> </p>
+<ul>
+<li>Folder: <code>models/edw/{optional: domain name}{optional: __subdomain name(s)}/edw/bv</code></li>
 <li>Models: <code>edw_bv__{vault object named as per data vault standards}</code></li>
 </ul>
-<h4 id="gold">Gold</h4>
+<h4 id="infomart">Infomart</h4>
+<p><strong>Staging:</strong></p>
 <ul>
-<li>
-<p>Staging:**</p>
-</li>
-<li>
-<p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></p>
-</li>
-<li>
-<p>Dimensions: </p>
-</li>
-<li>
-<p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__}  mart__dim_{__entity / product description} (optional: __{source_system} __{source_channel})</code></p>
-</li>
-<li>
-<p>Facts: </p>
-</li>
-<li>
-<p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></p>
-</li>
-<li>
-<p>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__fact_{__entity / product description} (optional: __{source_system} __{source_channel})</code></p>
-</li>
-<li>
-<p>Denormalized (One Big Table): </p>
-</li>
-<li>
-<p>Folder: <code>models/gold/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></p>
-</li>
-<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__gold__} mart__{entity / product description} {optional: __{source_system} __{source_channel}}</code></li>
+<li>Folder: <code>models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}/stg</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} stg{__entity / product description} __{ordinal}_{transformation description} {optional: __{source_system} __{source_channel}}</code></li>
+</ul>
+<p><strong>Dimensions:</strong> </p>
+<ul>
+<li>Folder: <code>models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} dim_{__entity / product description} (optional: __{source_system} __{source_channel})</code></li>
+</ul>
+<p><strong>Facts:</strong> </p>
+<ul>
+<li>Folder: <code>models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} fact_{__entity / product description} (optional: __{source_system} __{source_channel})</code></li>
+</ul>
+<p><strong>Denormalized (One Big Table):</strong> </p>
+<ul>
+<li>Folder: <code>models/infomart/{optional: domain name}{optional: __subdomain name(s)}/mart/{entity / product description}</code></li>
+<li>Models: <code>{optional: domain name} {optional: __subdomain name(s)} {optional:__im__} obt_{__entity / product description} {optional: __{source_system} __{source_channel}}</code></li>
 </ul>
 <h4 id="example-dbt-model-structure">Example dbt model structure:</h4>
-<p>The model structure below reflects a single catalog for domain+environment and schema separation for layers and stages:</p>
+<p>The model structure below reflects a single catalog for domain+environment and schema separation for zones and layers:</p>
 <pre><code class="language-md">{{domain/enterprise} _project_name}
 ├── README.md
 ├── analyses
-├── seeds
-│   └── ref_entity_data_file.csv
+├── seeds  &lt;ods&gt;
+│   └── ref_country_codes.csv  &lt;e.g: corporate__dev.ods.ref_country_codes&gt;
+│   └── config_holidays.csv  &lt;e.g: corporate__dev.ods.config_holidays&gt;
 ├── dbt_project.yml
 ├── macros
 │   └── custom_macro.sql
 │   ├── utilities
 │       └── all_dates.sql
-├── models/bronze
+├── models/raw
 │   /{optional: domain and subdomains}
-│   └── _bronze.md
-├── models/silver/{optional: domain and subdomains}
-│   /{optional: domain and subdomains}
-│   ├── _silver.md
-│   ├── mart  (entity centric objects)
-│   |    └── account
-│   |    |   └── mart__dim_account.sql
-│   |    |       └── stg
-│   |    |           └── stg__dim_account__01_dedupe.sql
-│   |    |           └── stg__dim_account__02_filter.sql
-│   |    └── date
-│   |        └── mart__dim_date.sql
-│   └── ref
-│       ├── _reference_data__models.yml
-│       ├── _reference_data__sources.yml
-│       └── ref_{entity}.sql
-│   ├── stg (source centric staging objects)
-│   |   └── source_system_1 
-│   |       ├── _source_system_1__docs.md
-│   |       ├── _source_system_1__models.yml
-│   |       ├── stg__object__source_system_1.sql
-│   |       ├── stg__(new object)__source_system_1.sql
-│   |       ├── stg__object_desensitised__source_system_1.sql
+│   ├── _raw.md
+│   ├── ods  &lt;ods&gt;
+│   |   └── (typically empty - ODS populated by seeds/sources)
+│   └── pds  &lt;pds&gt;
+│       └── ref_country_codes_snapshot.sql  &lt;e.g: corporate__dev.pds.ref_country_codes_snapshot&gt;
+│       └── config_holidays_snapshot.sql  &lt;e.g: corporate__dev.pds.config_holidays_snapshot&gt;
+├── models/edw/
+│   ├── _edw.md
+│   ├── source  (source-centric staging - organized by source system) &lt;edw_stg&gt;
+│   |   /{optional: domain and subdomains}
+│   |   ├── source_system_1
+│   |   |   ├── _source_system_1__docs.md
+│   |   |   ├── _source_system_1__models.yml
+│   |   |   └── stg
+│   |   |       ├── stg__source_system_1__object__01_renamed_and_typed.sql  &lt;e.g: corporate__dev.edw_stg.stg__source_system_1__object__01_renamed_and_typed&gt;
+│   |   |       └── stg__source_system_1__object__02_cleaned.sql  &lt;e.g: corporate__dev.edw_stg.stg__source_system_1__object__02_cleaned&gt;
+│   |   └── source_system_2__adf
+│   |       ├── _source_system_2__adf__docs.md
+│   |       ├── _source_system_2__adf__models.yml
 │   |       └── stg
-│   |           ├── stg__object__01_step__source_system_1.sql
-│   |           └── stg__object__02_step__source_system_1.sql
-│   ├── sources
+│   |           ├── stg__source_system_2__adf__accounts__01_renamed_and_typed.sql  &lt;e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__01_renamed_and_typed&gt;
+│   |           └── stg__source_system_2__adf__accounts__02_cleaned.sql  &lt;e.g: corporate__dev.edw_stg.stg__source_system_2__adf__accounts__02_cleaned&gt;
+│   ├── mart  (entity centric base marts and entity-centric staging) &lt;edw&gt; and &lt;edw_stg&gt;
+│   |   /{optional: domain and subdomains}
+│   |   └── employee
+│   |       ├── _employee__docs.md
+│   |       ├── _employee__models.yml
+│   |       ├── dim_employee.sql  &lt;e.g: corporate__dev.edw.dim_employee (built from stg__employee__03_keyed)&gt;
+│   |       └── stg  (entity-centric staging) &lt;edw_stg&gt;
+│   |           ├── stg__employee__01_unified.sql  &lt;e.g: corporate__dev.edw_stg.stg__employee__01_unified (unions source_system_1 &amp; source_system_2)&gt;
+│   |           ├── stg__employee__02_deduped.sql  &lt;e.g: corporate__dev.edw_stg.stg__employee__02_deduped&gt;
+│   |           └── stg__employee__03_keyed.sql  &lt;e.g: corporate__dev.edw_stg.stg__employee__03_keyed&gt;
+│   |   └── account
+│   |       └── dim_account.sql  &lt;e.g: corporate__dev.edw.dim_account&gt;
+│   |   └── date
+│   |       └── dim_date.sql  &lt;e.g: corporate__dev.edw.dim_date&gt;
+│   ├── ref  (reference data with optional entity-centric staging) &lt;edw_ref&gt; and &lt;edw_stg&gt;
+│   |   ├── _reference_data__docs.md
+│   |   ├── facility
+│   |   |   ├── _facility__models.yml
+│   |   |   ├── ref_facility.sql  &lt;e.g: corporate__dev.edw_ref.ref_facility&gt;
+│   |   |   └── stg  (entity-centric staging when unifying multiple sources) &lt;edw_stg&gt;
+│   |   |       ├── stg__facility__01_unified.sql  &lt;e.g: corporate__dev.edw_stg.stg__facility__01_unified&gt;
+│   |   |       └── stg__facility__02_mapped.sql  &lt;e.g: corporate__dev.edw_stg.stg__facility__02_mapped&gt;
+│   |   └── country_code
+│   |       ├── _country_code__models.yml
+│   |       └── ref_country_code.sql  &lt;e.g: corporate__dev.edw_ref.ref_country_code (single source, no staging)&gt;
+│   └── sources
 │        └── {optional: domain}
-│        └── {optional: bronze/silver/gold}
+│        └── {optional: raw/edw/infomart}
 │             └── _source_system_1__sources.yml 
-├── models/gold
+├── models/infomart  &lt;im&gt;
 │   /{optional: domain and subdomains}
-│   ├── _gold.md
+│   ├── _infomart.md
 │   └── domain_name e.g: finance 
 │       └── mart
 │           ├── _finance__models.yml
-│           ├── orders.sql
-│           └── payments.sql
-│               └── stg
-│                   └── stg_payments_pivoted_to_orders.sql
+│           ├── orders.sql  &lt;e.g: corporate__dev.im.orders&gt;
+│           └── payments.sql  &lt;e.g: corporate__dev.im.payments&gt;
+│               └── stg  &lt;im_stg&gt;
+│                   └── stg_payments_pivoted_to_orders.sql  &lt;e.g: corporate__dev.im_stg.stg_payments_pivoted_to_orders&gt;
 ├── packages.yml
 ├── snapshots
 └── tests
     └── assert_positive_value_for_total_amount.sql
 </code></pre>
 <h3 id="dbt_projectyml">dbt_project.yml</h3>
-<p>The yml structure below reflects a single catalog for domain+environment and schema separation for layers and stages:</p>
+<p>The yml structure below reflects a single catalog for domain+environment and schema separation for zones and layers:</p>
 <pre><code class="language-yml">models:
   health_lakehouse__engineering__dbt:
     +persist_docs: #enables injection of metadata into unity catalog
         relation: true
         columns: true
 
-    bronze:
+    raw:
       ods:
-         +schema: ods
-      pds:
-         +schema: pds
-
-    silver:
-      ref:
-        +description: &quot;Reference data&quot;
-        +schema: ref
+        +description: &quot;Operational data store - current state&quot;
+        +schema: ods
         +materialized: table
-      edw:
-        +description: &quot;Enterprise data warehouse base marts&quot;
+      pds:
+        +description: &quot;Persistent data store - historical snapshots (Type 2 SCD)&quot;
+        +schema: pds
+        +materialized: table
+
+    edw:
+      ref:
+        +description: &quot;Reference data (conformed lookups, master data)&quot;
+        +schema: edw_ref
+        +materialized: table
+        stg:
+          +description: &quot;Entity-centric reference staging (when unifying multiple sources)&quot;
+          +schema: edw_stg
+          +materialized: view
+      source:
+        +description: &quot;Source-centric staging organized by source system&quot;
+        +schema: edw_stg
+        +materialized: view
+      mart:
+        +description: &quot;Entity-centric base marts (dimensions, facts)&quot;
         +schema: edw
         +materialized: table
-        staging:
+        stg:
+          +description: &quot;Entity-centric staging (integrates across sources)&quot;
+          +schema: edw_stg
           +materialized: view
 
-    gold:
+    infomart:
       +materialized: view # default for speed
       mart:
-        +description: &quot;Product marts&quot;
-        +schema: mart
+        +description: &quot;Information marts (business-aligned products)&quot;
+        +schema: im
         +materialized: table
+        stg:
+          +description: &quot;Information mart staging (intermediate transformations)&quot;
+          +schema: im_stg
+          +materialized: view
+
+seeds:
+  health_lakehouse__engineering__dbt:
+    +schema: ods
+    +description: &quot;Static reference and configuration data loaded from CSV files to ODS&quot;
 </code></pre>
 <p><br></p>
 <h2 id="cicd">CI/CD</h2>

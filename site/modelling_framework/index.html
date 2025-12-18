@@ -287,7 +287,7 @@
 <h3 id="business-process-models">Business Process Models</h3>
 <p>Business process models illustrate activity sequences, decision points, participants, and work flows within and across domains. They define <strong>business objects</strong> (e.g., Customer, Order, Invoice) that form the basis of <strong>conceptual models</strong> within <a href="#domain-models">Domain Models</a> and <a href="#dimensional-kimball-model">Fact Tables and Business Processes in Dimensional Modeling</a>.</p>
 <h3 id="data-warehouse-models">Data Warehouse Models</h3>
-<p>Data warehouses transform data through stages optimised for performance and analysis while preserving conceptual and logical semantics:</p>
+<p>Data warehouses transform data through layers optimised for performance and analysis while preserving conceptual and logical semantics:</p>
 <ul>
 <li>Conform to <a href="#canonical-models">canonical standards</a></li>
 <li>Apply reference data and business terminology</li>
@@ -297,7 +297,7 @@
 <li>Optimise for consumption (<a href="#dimensional-kimball-model">dimensional</a>, <a href="#data-vault-model">data vault</a>)</li>
 <li>Aggregate for analytical use</li>
 </ul>
-<p>Each stage has distinct physical structures aligned to underlying logical models.</p>
+<p>Each layer has distinct physical structures aligned to underlying logical models.</p>
 <h4 id="data-vault-model">Data Vault Model</h4>
 <p>Data Vault models centre on business concepts and associations from Enterprise/Domain Conceptual Models. Refer to Data Vault 2.0 standards for guidance.</p>
 <h4 id="dimensional-kimball-model">Dimensional (Kimball) Model</h4>
@@ -413,7 +413,7 @@ Measures/metrics should be defined against domain and canonical models and docum
 <li><strong>BI tools (Power BI):</strong> Expressions (DAX) aligned with central definitions; push complex logic upstream when possible</li>
 </ul>
 <p><strong>Placement Principles:</strong></p>
-<p><em>Favour upstream (mart / dbt layer) when:</em></p>
+<p><em>Favour upstream (mart / dbt zone) when:</em></p>
 <ul>
 <li>Reused across dashboards/domains</li>
 <li>Enterprise KPI or regulatory use</li>

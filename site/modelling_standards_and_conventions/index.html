@@ -462,7 +462,7 @@
 <p><strong>Catalogs:</strong></p>
 <ul>
 <li>Catalogs represent domain-level scope (e.g., <code>engineering__dev</code>, <code>corporate__dev</code>)</li>
-<li>May optionally include data stage, zone, or subdomain in the catalog name depending on desired granularity for access and sharing controls</li>
+<li>May optionally include zone, layer, or subdomain in the catalog name depending on desired granularity for access and sharing controls</li>
 <li>Naming is lowercase, underscore-separated, and meaningful</li>
 <li>Pattern: <code>{domain}{__env}</code> (e.g., <code>corporate__dev</code>)</li>
 </ul>
@@ -641,7 +641,7 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <li>Numeric (BIGINT) keys offer better join performance</li>
 <li>Prefer <strong>numeric</strong> SKs for performance (especially with PowerBI); use <strong>deterministic</strong> SKs when cross-environment stability is required</li>
 <li><strong>Date dimension tip</strong>: Use integer with YYYYMMDD format as the surrogate key for optimal performance</li>
-<li>Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the Silver / EDW layer.However, if Type 2 semantics are applied later (e.g. in Gold), then surrogate keys must be created there instead.</li>
+<li>Create keys at the layer that owns their grain and semantics i.e where are business keys resolved and where is Type-2 first defined? In most architectures, this will be the EDW (Silver) zone. However, if Type 2 semantics are applied later (e.g. in Infomart (Gold)), then surrogate keys must be created there instead.</li>
 </ul>
 <hr />
 <h3 id="reference-data">Reference Data</h3>
@@ -715,12 +715,12 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 <p><em>Note: Additional standard attributes (audit columns: created_timestamp, created_by, modified_timestamp, modified_by; optional: parent_code, version, source_system_id) would be included in the physical implementation.</em></p>
 <h4 id="physical-implementation">Physical Implementation</h4>
 <p>Raw Reference Data sourced from upstream systems may require their own staging and transformation pipelines in order to conform them to standard, preserve change history and capture required metadata.</p>
-<p><strong>Cleansed reference tables</strong> are stored in silver/edw layer for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a>:</p>
+<p><strong>Cleansed reference tables</strong> are stored in EDW (Silver) zone for wide availability following the <a href="../standards_and_conventions/#schema-and-object-conventions">reference data naming standard</a>:</p>
 <ul>
-<li>Schema naming convention: <code>ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
+<li>Schema naming convention: <code>edw_ref{optional: __domain name}{optional: __subdomain name(s)}</code></li>
 <li>Object naming convention: <code>{reference_data_set_name}{optional:__source_system}{optional:__source_channel}</code></li>
 <li>
-<p>e.g.: <code>corporate__dev.ref.account_code</code></p>
+<p>e.g.: <code>corporate__dev.edw_ref.account_code</code></p>
 </li>
 <li>
 <p>Effectivity: <code>effective_from_date</code>, <code>effective_to_date</code>, (<code>is_active</code> is derivable)</p>
@@ -732,8 +732,8 @@ AND fact.event_timestamp &lt;  COALESCE(dim.effective_to_datetime, TIMESTAMP '99
 </ul>
 <p><strong>Usage:</strong></p>
 <ul>
-<li><strong>Mapping logic</strong> is applied in Silver/EDW layer staging models during transformation for domain/enterprise-wide application.</li>
-<li><strong>Consumption:</strong> Post-mapped data are exposed in marts in Silver or indirectly in Gold (having passed through Silver).</li>
+<li><strong>Mapping logic</strong> is applied in EDW (Silver) zone staging models during transformation for domain/enterprise-wide application.</li>
+<li><strong>Consumption:</strong> Post-mapped data are exposed in marts in EDW or indirectly in Infomart (Gold) (having passed through EDW).</li>
 <li><strong>As dimension attributes:</strong> Reference values embedded directly in dimension tables (e.g., Product Type Code/Description in Product dimension) for filtering and grouping.</li>
 </ul>
 <p><strong>Change tracking:</strong></p>

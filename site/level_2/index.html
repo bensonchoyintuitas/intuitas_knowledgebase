@@ -154,7 +154,7 @@
 <li><a href="./#data-and-information-models">Data and information models</a></li>
 <li><a href="./#domain-glossary">Domain glossary</a></li>
 <li><a href="./#domain-data-and-warehouse-models">Domain data and warehouse models</a></li>
-<li><a href="./#data-layers-and-stages">Data layers and stages</a></li>
+<li><a href="./#data-zones-and-layers">Data zones and layers</a></li>
 <li><a href="./#lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</a></li>
 </ul>
 </li>
@@ -315,27 +315,27 @@
 <li>Domain-level data and warehouse models reflect domain-specific scope, requirements and semantics as expressed in models and glossaries.</li>
 <li>Conformed dimensions may serve as a bridge between domains for common entities.</li>
 </ul>
-<h3 id="data-layers-and-stages">Data layers and stages</h3>
+<h3 id="data-zones-and-layers">Data zones and layers</h3>
 <hr />
-<p>Data and analytics pipelines flow through data layers and stages. Conventions vary across organisations, however the following is an effective approach:</p>
+<p>Data and analytics pipelines flow through data zones and layers. Conventions vary across organisations, however the following is an effective approach:</p>
 <ul>
-<li>Within each layer, data is transformed through a series of stages.</li>
+<li>Within each zone, data flows through a series of processing layers.</li>
 <li>
-<p>Top level layers follow the <a href="https://www.databricks.com/glossary/medallion-architecture">Medallion architecture</a>.</p>
+<p>Top level zones follow the <a href="https://www.databricks.com/glossary/medallion-architecture">Medallion architecture</a>.</p>
 <ul>
-<li><strong>Bronze: Data according to source.</strong></li>
-<li><strong>Silver: Data according to business.</strong> (<a href="./#data-and-information-models">see Data and information models</a>)</li>
-<li><strong>Gold: Data according to requirements.</strong></li>
+<li><strong>Raw (Bronze): Data according to source.</strong></li>
+<li><strong>EDW (Silver): Data according to business.</strong> (<a href="./#data-and-information-models">see Data and information models</a>)</li>
+<li><strong>Infomart (Gold): Data according to requirements.</strong></li>
 </ul>
 </li>
 </ul>
 <div align="center">
 
-<em>Data layers and stages</em>
+<em>Data zones and layers</em>
 <br>
 
-<a href="../img/data_layers_and_stages.png" target="_blank">
-    <img src="../img/data_layers_and_stages.png"  alt="Data layers and stages">
+<a href="../img/data_zones_and_layers.png" target="_blank">
+    <img src="../img/data_zones_and_layers.png"  alt="Data zones and layers">
 </a>
 
 <br>
@@ -344,8 +344,8 @@
 <p>These map to naming standards and conventions for <a href="../standards_and_conventions/#catalog-naming-and-conventions">Catalog</a>, <a href="../standards_and_conventions/#schema-and-object-conventions">Schemas</a> and <a href="../standards_and_conventions/#dbt">dbt</a>.</p>
 <h4 id="metadata-layer"><strong>Metadata layer</strong></h4>
 <p>Contains engineering and governance of data managed within the platform. The format of this will vary depending on the choice of engineering and governance toolsets and associated metamodels within the solution as well as across the broader enterprise.  <a href="../level_1/#enterprise-metadata-architecture">see Enterprise Metadata Architecture</a> </p>
-<h4 id="bronze-raw-layer-data-according-to-source"><strong>Bronze/ Raw layer: Data according to source</strong></h4>
-<p>The Bronze layer stores raw, immutable data as it is ingested from source systems. The choice of persistence level will depend on requirements.</p>
+<h4 id="raw-bronze-zone-data-according-to-source"><strong>Raw (Bronze) zone: Data according to source</strong></h4>
+<p>The Raw (Bronze) zone stores raw, immutable data as it is ingested from source systems. The choice of persistence level will depend on requirements.</p>
 <p><strong>(Persistent) Landing</strong></p>
 <ul>
 <li>Initial storage area for raw data from source systems.</li>
@@ -380,11 +380,12 @@
 </ul>
 </li>
 </ul>
-<h4 id="silveredw-layer-data-according-to-business"><strong>Silver/EDW layer: Data according to business</strong></h4>
-<p>The Silver layer focuses on transforming raw data into cleaned, enriched, and validated datasets. These datasets are aligned with broadly accepted business standards and models, making them suitable for a range of downstream requirements.</p>
-<p>While some interpretations consider Silver to be primarily <em>source-centric</em>, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources.</p>
-<p><strong>Silver/EDW Staging</strong></p>
-<p>Transformations used to shape source data into standardised, conformed, and fit-for-use Reference Data, Data Vault and Base Information Mart objects.</p>
+<h4 id="edw-silver-zone-data-according-to-business"><strong>EDW (Silver) zone: Data according to business</strong></h4>
+<p>The EDW (Silver) zone focuses on transforming raw data into cleaned, enriched, and validated datasets. These datasets are aligned with broadly accepted business standards and models, making them suitable for a range of downstream requirements.</p>
+<p>While some interpretations consider EDW (Silver) to be primarily <em>source-centric</em>, this blueprint adopts a more flexible approach—allowing for integration and harmonization of assets across multiple data sources.</p>
+<p><strong>EDW (Silver) Staging</strong></p>
+<p>Transformations used to shape source data into standardised, conformed, and fit-for-use Reference Data, Data Vault and Base Information Mart objects.
+Staging is source-centric, with a view to progressively align to concept/entity-centric conventions in the EDW Mart.</p>
 <ul>
 <li>Examples of transformations:<ul>
 <li><code>01_renamed_and_typed</code></li>
@@ -402,14 +403,15 @@
 <p><strong>Reference Data</strong></p>
 <p>Reference data, being a common asset and provided for broad consumption should be aligned to standards and downstream needs. Historical versioning requirements of reference data may need to be considered.</p>
 <p><strong>EDW (base) Marts</strong></p>
-<p>The term <em>base</em> or <em>edw</em> is used to distinguish these marts from the product/requirement-specific marts found in the Gold layer. Base marts are designed for broad usability across multiple downstream use cases—for example, a conformed customer dimension.</p>
+<p>The term <em>base</em> or <em>edw</em> is used to distinguish these marts from the product/requirement-specific marts found in the Infomart (Gold) zone. Base marts are designed for broad usability across multiple downstream use cases—for example, a conformed customer dimension.</p>
+<p>Marts here are source-agnostic and concept/entity-centric, however source-centric decompositions of these may exist if required by the business.</p>
 <p>Mappings of keys may be created to resolve and map system keys to universal surrogate keys or business keys. These can then be reused downstream for integration.</p>
 <p>In some scenarios, it may be beneficial to maintain <em>source-centric</em> base marts alongside a final <em>consolidation</em> (UNION) mart—all conforming to a common logical model. This approach supports decoupled pipelining across multiple sources, improving modularity and maintainability.</p>
 <p>These marts may be implemented as <strong>Kimball-style</strong> dimensional models or <strong>denormalized</strong> flat tables, depending on performance and reporting requirements. However, dimensional modelling is generally encouraged for its clarity, reusability, and alignment with analytic workloads.</p>
-<h4 id="gold-mart-layer-data-according-to-requirements"><strong>Gold/ Mart layer: Data according to requirements</strong></h4>
-<p>The Gold layer focuses on delivering business-ready datasets, including aggregations and reporting structures that directly reflect specific business requirements.</p>
-<p>In some instances, Gold assets may be reused across multiple use cases or domains—blurring the line with Silver. While this is not inherently problematic, it is important to consider supportability and scalability to ensure these assets remain trustworthy, maintainable, and accessible over time. </p>
-<p>Consider shifting logic left into the Silver layer—such as common aggregations, reusable business rules, or conformed dimensions. This improves consistency, reduces duplication, and enables faster development of Gold-layer assets by building on stronger, more standardized foundations.</p>
+<h4 id="infomart-gold-zone-data-according-to-requirements"><strong>Infomart (Gold) zone: Data according to requirements</strong></h4>
+<p>The Infomart (Gold) zone focuses on delivering business-ready datasets, including aggregations and reporting structures that directly reflect specific business requirements.</p>
+<p>In some instances, Infomart assets may be reused across multiple use cases or domains—blurring the line with EDW. While this is not inherently problematic, it is important to consider supportability and scalability to ensure these assets remain trustworthy, maintainable, and accessible over time.</p>
+<p>Consider shifting logic left into the EDW (Silver) zone—such as common aggregations, reusable business rules, or conformed dimensions. This improves consistency, reduces duplication, and enables faster development of Infomart zone assets by building on stronger, more standardized foundations.</p>
 <p><strong>Mart Staging</strong></p>
 <p>Transformations used to shape source data into business-ready datasets, aligned to business requirements.</p>
 <ul>
@@ -428,11 +430,11 @@
 </li>
 </ul>
 <p><em><em>Product (Requirement Specific) Marts **
-The term 'business' here is use to distinguish marts in this layer from marts in the Silver layer. These marts are designed for a defined requirement. </em>e.g. sales fact aggregated by region.</em></p>
+The term 'business' here is use to distinguish marts in this zone from marts in the EDW (Silver) zone. These marts are designed for a defined requirement. </em>e.g. sales fact aggregated by region.</em></p>
 <p>These marts may be Kimball or denormalised flat tables depending on requirements; although Kimball dimensional models are encouraged.</p>
-<p>A solution served to the consumption layer is likely to contain a mix of Silver and Gold mart objects. e.g:
-- silver.dim_customer
-- gold.fact_sales_aggregated_by_region</p>
+<p>A solution served to the consumption layer is likely to contain a mix of EDW and Infomart objects. e.g:
+- edw.dim_customer
+- im.fact_sales_aggregated_by_region</p>
 <p><br>
 <br></p>
 <h3 id="lakehouse-catalog-to-storage-mapping">Lakehouse Catalog to Storage Mapping</h3>
@@ -441,8 +443,8 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <ul>
 <li>Storage accounts</li>
 <li>Environments (containers: dev, test, prod)</li>
-<li>Layers (Level 1 folders: dev.bronze, dev.silver, dev.gold, etc)</li>
-<li>Stages (Level 2 folders: dev.bronze\landing, dev.bronze\ods, dev.silver\base, dev.silver\staging etc)</li>
+<li>Zones (Level 1 folders: dev.raw, dev.edw, dev.infomart, etc)</li>
+<li>Layers (Level 2 folders: dev.raw\landing, dev.raw\ods, dev.edw\stg, dev.edw\mart etc)</li>
 </ul>
 <p><br></p>
 <div align="center">
@@ -463,7 +465,7 @@ The term 'business' here is use to distinguish marts in this layer from marts in
 <h3 id="ingestion">Ingestion</h3>
 <hr />
 <p><em>Note: These patterns and findings reflect GA functionality only as as at the date of publication and research. Refer to respective product roadmaps and documentation for the latest guidance on functionality.</em></p>
-<p>Ingestion is the process of acquiring data from external sources and landing it in the platform landing layer.</p>
+<p>Ingestion is the process of acquiring data from external sources and landing it in the platform Raw zone landing layer.</p>
 <p>It should be:</p>
 <ul>
 <li>Scalable, Resilient, Maintainable, Governed</li>
@@ -941,7 +943,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 <ul>
 <li>Each domain (e.g., business units or specific applications) operates independently within a single workspace that houses multiple environments. </li>
 <li><strong>PROD</strong>, <strong>TEST</strong>, and <strong>DEV</strong> storage containers within a single lakehouse storage account for domain-specific data management.</li>
-<li>Local <strong>Bronze</strong> for domain-specific engineering of domain-local data (not managed by enterprise engineering)</li>
+<li>Local <strong>Raw (Bronze)</strong> for domain-specific engineering of domain-local data (not managed by enterprise engineering)</li>
 <li>Data from prod catalogs can be <strong>shared</strong> to other domains.</li>
 </ul>
 <p><strong>Data Catalog</strong></p>
@@ -964,7 +966,7 @@ While work can be achieved within a single workspace and lakehouse storage accou
 <h3 id="storage">Storage</h3>
 <hr />
 <h4 id="lakehouse-storage">Lakehouse storage</h4>
-<p>Lakehouse data for all environments and layers, by default, share a single storage account with LRS or GRS redundancy.
+<p>Lakehouse data for all environments and zones, by default, share a single storage account with LRS or GRS redundancy.
 This can then be modified according to costs, requirements, policies, projected workload and resource limits from both Azure and Databricks.</p>
 <ul>
 <li>Resource: ADLSGen2</li>

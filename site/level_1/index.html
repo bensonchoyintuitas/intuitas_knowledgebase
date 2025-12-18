@@ -304,7 +304,7 @@
 <p><strong>Centralising engineering</strong></p>
 <p>Centralizing engineering tasks related to source data processing allows for specialized teams to efficiently manage data ingestion, quality checks, and initial transformations. This specialization ensures consistency and reliability across the organisation.</p>
 <p><strong>Distributed Local engineering</strong></p>
-<p>Maintaining a local bronze/raw layer for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.</p>
+<p>Maintaining a local Raw (Bronze) zone for non-enterprise-distributed data enables domains to handle their specific raw data requirements, supporting use cases that are not yet enterprise-wide.</p>
 <p><strong>Cross-Domain Access</strong></p>
 <p>Allowing domains to access 'gold' data from other domains and, where appropriate, 'silver' or 'bronze', facilitates reuse, cross-domain analytics and collaboration, ensuring data mesh interoperability.</p>
 <p><br></p>
@@ -330,6 +330,13 @@
 <li>Enterprise metadata – consistent definitions, lineage, and discovery across all domains via shared catalog.</li>
 </ul>
 <p>This approach combines the scalability and agility of decentralised ownership with the trust and coherence of an enterprise-wide data platform.</p>
+<p><strong>Two-tier Mart Model</strong> </p>
+<p>In this approach, we establish a two-tier mart structure: the EDW (Enterprise Data Warehouse) marts and the Infomart (IM) marts. </p>
+<ul>
+<li>EDW marts provide standardised, reusable datasets for enterprise-wide consistency. </li>
+<li>Infomart marts deliver domain and business-requirement specific assets. </li>
+</ul>
+<p>Using both are available for enterprise-aligned, and domain oriented reporting and analytics.</p>
 <div align="center">
 
 <em>Example logical data warehouse topology</em>

@@ -94,7 +94,7 @@ Contact us at [office@intuitas.com](mailto:office@intuitas.com) to:
     - [Domain Glossary](level_2.md#domain-glossary)
     - [Domain Data & Warehouse Models](level_2.md#domain-data-and-warehouse-models)
 - **[Data Architecture](level_2.md#data-architecture)**
-    - [Data Layers and Stages](level_2.md#data-layers-and-stages)
+    - [Data zones and layers](level_2.md#data-zones-and-layers)
     - [Lakehouse Catalog to Storage Mapping](level_2.md#lakehouse-catalog-to-storage-mapping)
 - **[Data Engineering](level_2.md#data-engineering)**
     - [Ingestion](level_2.md#ingestion)
