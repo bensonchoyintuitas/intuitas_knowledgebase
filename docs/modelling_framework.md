@@ -66,6 +66,7 @@ Concepts may be organised from multiple architectural perspectives and expressed
 - For governance purposes, each concept must have one and only one domain owner
 - Domain ownership establishes accountability for definition, quality, and change
 - See: [Domain Models](modelling_framework.md#domain-models)
+- See: [Level 2: Domain Architecture](level_2.md)
 
 **Subject areas**  describe the enterprise information space, organised by broad information topics.
 
@@ -80,11 +81,13 @@ The **Enterprise** Data Model (EDM) describes concepts that are materially relev
 - Implemented across multiple systems
 - Required for enterprise-wide integration and reporting
 - The EDM forms a primary foundation for interoperability, consistency, and reuse
+- See [Level 1: Enterprise Architecture](level_1.md)
 
 A **Solution (or System)** Architecture is scoped to a specific business context, process set, and delivery objective.
-Solutions refine and apply concepts within a defined scope
-They frequently act as a validation and elaboration point for subject areas and enterprise concepts
-Solution models must align to, and not redefine, enterprise and domain concepts
+
+- Solutions refine and apply concepts within a defined scope
+- They frequently act as a validation and elaboration point for subject areas and enterprise concepts
+- Solution models must align to, and not redefine, enterprise and domain concepts
 
 ### Modelling levels
 
