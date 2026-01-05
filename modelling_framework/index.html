@@ -102,6 +102,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#modelling-lifecycle" class="nav-link">Modelling Lifecycle</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#enterprise-context" class="nav-link">Enterprise Context</a>
               <ul class="nav flex-column">
               </ul>
@@ -127,29 +131,44 @@
 <p><strong>Note:</strong> See <a href="../modelling_standards_and_conventions/">Modelling Standards and Conventions</a> for notation and modelling standards.</p>
 </blockquote>
 <h2 id="table-of-contents">Table of Contents</h2>
-<p><strong>Core Model Types</strong></p>
 <ul>
+<li><a href="./#modelling-concepts">Modelling Concepts</a></li>
+<li><a href="./#concepts-entities">Concepts (Entities)</a></li>
+<li><a href="./#perspectives">Perspectives</a></li>
+<li><a href="./#modelling-levels">Modelling levels</a><ul>
 <li><a href="./#conceptual-information-models">Conceptual (Information) Models</a></li>
+<li><a href="./#subtypes-and-supertypes">Subtypes and Supertypes</a></li>
 <li><a href="./#logical-information-models">Logical (Information) Models</a></li>
 <li><a href="./#physical-data-models">Physical (Data) Models</a></li>
 </ul>
-<p><strong>Enterprise Context</strong></p>
-<ul>
+</li>
+<li><a href="./#modelling-lifecycle">Modelling Lifecycle</a></li>
+<li><a href="./#enterprise-context">Enterprise Context</a></li>
 <li><a href="./#domain-topology">Domain Topology</a></li>
 <li><a href="./#domain-models">Domain Models</a></li>
 <li><a href="./#canonical-models">Canonical Models</a></li>
-</ul>
-<p><strong>Specialised Model Types</strong></p>
-<ul>
+<li><a href="./#specialised-model-types">Specialised Model Types</a></li>
 <li><a href="./#business-process-models">Business Process Models</a></li>
-<li><a href="./#data-warehouse-models">Data Warehouse Models</a></li>
+<li><a href="./#data-warehouse-models">Data Warehouse Models</a><ul>
 <li><a href="./#data-vault-model">Data Vault Model</a></li>
 <li><a href="./#dimensional-kimball-model">Dimensional (Kimball) Model</a></li>
 <li><a href="./#dimensional-bus-matrix">Dimensional Bus Matrix</a></li>
-<li><a href="./#semantic-layers">Semantic Layers</a></li>
+</ul>
+</li>
+<li><a href="./#semantic-layers">Semantic Layers</a><ul>
 <li><a href="./#measures-and-metrics">Measures and Metrics</a></li>
-<li><a href="./#master-data-and-reference-data">Master Data and Reference Data</a></li>
-<li><a href="./#hierarchies">Hierarchies</a></li>
+</ul>
+</li>
+<li><a href="./#master-data-and-reference-data">Master Data and Reference Data</a><ul>
+<li><a href="./#logical-representation">Logical Representation</a></li>
+<li><a href="./#physical-implementation">Physical Implementation</a></li>
+</ul>
+</li>
+<li><a href="./#hierarchies">Hierarchies</a><ul>
+<li><a href="./#modelling-hierarchies-subtypes-vs-relationships">Modelling Hierarchies: Subtypes vs. Relationships</a></li>
+<li><a href="./#examples">Examples</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="modelling-concepts">Modelling Concepts</h2>
 <p>We distinguish between business information design and technical data implementation:</p>
@@ -160,7 +179,43 @@
 <blockquote>
 <p>Some organisations use "data model" as an umbrella term for all three layers, which is also acceptable.</p>
 </blockquote>
-<h3 id="conceptual-information-models">Conceptual (Information) Models</h3>
+<h3 id="concepts-entities">Concepts (Entities)</h3>
+<p><strong>Concept (Entity)</strong> – The foundational unit of information modelling is the Core Business Concept, often referred to as an Entity.
+- A concept represents a real or abstract thing of business significance and is defined by:
+- A clear glossary definition
+- A set of attributes or properties
+- Relationships to other concepts, where applicable</p>
+<p>Concepts may be organised from multiple architectural perspectives and expressed in different types of models, each serving a distinct purpose.</p>
+<h3 id="perspectives">Perspectives</h3>
+<p><strong>Domains</strong> decompose the enterprise into functional or capability-based areas of responsibility.</p>
+<ul>
+<li>Concepts may be referenced within the scope of one or more domains</li>
+<li>For governance purposes, each concept must have one and only one domain owner</li>
+<li>Domain ownership establishes accountability for definition, quality, and change</li>
+<li>See: <a href="./#domain-models">Domain Models</a></li>
+</ul>
+<p><strong>Subject areas</strong>  describe the enterprise information space, organised by broad information topics.</p>
+<ul>
+<li>Subject areas cut across domains and systems</li>
+<li>They may loosely align to business functions in some cases, but are not synonymous with functions or organisational structures</li>
+<li>Subject areas are primarily an information classification construct, not a governance boundary</li>
+</ul>
+<p>The <strong>Enterprise</strong> Data Model (EDM) describes concepts that are materially relevant across the organisation.</p>
+<ul>
+<li>Focus is placed on concepts, definitions, and standards that are:</li>
+<li>Used by multiple domains</li>
+<li>Implemented across multiple systems</li>
+<li>Required for enterprise-wide integration and reporting</li>
+<li>The EDM forms a primary foundation for interoperability, consistency, and reuse</li>
+</ul>
+<p>A <strong>Solution (or System)</strong> Architecture is scoped to a specific business context, process set, and delivery objective.
+Solutions refine and apply concepts within a defined scope
+They frequently act as a validation and elaboration point for subject areas and enterprise concepts
+Solution models must align to, and not redefine, enterprise and domain concepts</p>
+<h3 id="modelling-levels">Modelling levels</h3>
+<p>Concepts may be expressed at multiple modelling levels, depending on intent and audience.
+Conceptual and logical modelling are informational in nature, even when labelled “data models”. Physical models are data models</p>
+<h4 id="conceptual-information-models">Conceptual (Information) Models</h4>
 <blockquote>
 <p>For naming standards and conventions, see <a href="../modelling_standards_and_conventions/#conceptual-models">Conceptual Models</a> in Modelling Standards and Conventions.</p>
 </blockquote>
@@ -180,7 +235,7 @@
 <blockquote>
 <p>Use the <strong>business glossary</strong> to map domain-specific terms as synonyms to canonical enterprise terms.</p>
 </blockquote>
-<h4 id="subtypes-and-supertypes">Subtypes and Supertypes</h4>
+<h5 id="subtypes-and-supertypes">Subtypes and Supertypes</h5>
 <p><strong>Choosing the Right Level:</strong></p>
 <ul>
 <li><strong>Too abstract:</strong> Not practical (e.g., "Thing")</li>
@@ -195,7 +250,7 @@
 <blockquote>
 <p>Avoid multiple classification hierarchies; choose the primary classification dimension.</p>
 </blockquote>
-<h3 id="logical-information-models">Logical (Information) Models</h3>
+<h4 id="logical-information-models">Logical (Information) Models</h4>
 <blockquote>
 <p>For naming standards and conventions, see <a href="../modelling_standards_and_conventions/#logical-models">Logical Models</a> in Modelling Standards and Conventions.</p>
 </blockquote>
@@ -208,7 +263,7 @@
 <li><strong>Attribute definitions:</strong> Clear definitions and business rules</li>
 <li><strong>Normalisation:</strong> Applied where relevant for data integrity</li>
 </ul>
-<h3 id="physical-data-models">Physical (Data) Models</h3>
+<h4 id="physical-data-models">Physical (Data) Models</h4>
 <blockquote>
 <p>For naming standards and conventions, see <a href="../modelling_standards_and_conventions/#physical-models">Physical Models</a> in Modelling Standards and Conventions.</p>
 </blockquote>
@@ -224,6 +279,32 @@
 <blockquote>
 <p><strong>Note:</strong> Physical models often exist without documented conceptual/logical models, but these can be reverse-engineered to understand business meaning.</p>
 </blockquote>
+<h2 id="modelling-lifecycle">Modelling Lifecycle</h2>
+<p>Recommended approach:</p>
+<ul>
+<li>Enterprise and domain models define the authoritative concepts, meaning, ownership, and standards for the organisation</li>
+<li>Solution models apply and extend those concepts to meet specific project needs</li>
+<li>Solutions depend on enterprise and domain models for consistency, reuse, and interoperability</li>
+<li>Enterprise and domain models depend on solutions to validate, refine, and evolve based on real delivery experience</li>
+<li>Governance controls the feedback loop, promoting solution learnings to domain or enterprise level where they are materially reusable</li>
+<li>The relationship is iterative and cumulative: each project strengthens the enterprise baseline over time</li>
+</ul>
+<p><strong>Top down:</strong></p>
+<ul>
+<li>Start with industry reference model</li>
+<li>Engage business domains to refine domain models</li>
+<li>Review existing reports and documentation</li>
+</ul>
+<p><strong>Middle out:</strong></p>
+<ul>
+<li>Start with use case requirements</li>
+<li>Deep dive business processes and associated concepts</li>
+<li>Reconcile business concepts with actual source data</li>
+</ul>
+<p><strong>Bottom up:</strong></p>
+<ul>
+<li>Infer logical and conceptual models from applications, data and metadata</li>
+</ul>
 <h2 id="enterprise-context">Enterprise Context</h2>
 <p>Enterprise-wide modelling is challenging due to semantic differences across functional areas. Instead, we focus on common touch points using Domain Models and Canonical Models where systems and domains integrate.</p>
 <h3 id="domain-topology">Domain Topology</h3>
