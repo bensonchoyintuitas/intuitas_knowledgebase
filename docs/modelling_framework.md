@@ -9,29 +9,33 @@ This resource provides a lightweight framework for describing and developing dat
 
 ## Table of Contents
 
-**Core Model Types**
-
-- [Conceptual (Information) Models](modelling_framework.md#conceptual-information-models)
-- [Logical (Information) Models](modelling_framework.md#logical-information-models)
-- [Physical (Data) Models](modelling_framework.md#physical-data-models)
-
-**Enterprise Context**
-
-- [Domain Topology](modelling_framework.md#domain-topology)
-- [Domain Models](modelling_framework.md#domain-models)
-- [Canonical Models](modelling_framework.md#canonical-models)
-
-**Specialised Model Types**
-
-- [Business Process Models](modelling_framework.md#business-process-models)
-- [Data Warehouse Models](modelling_framework.md#data-warehouse-models)
-  - [Data Vault Model](modelling_framework.md#data-vault-model)
-  - [Dimensional (Kimball) Model](modelling_framework.md#dimensional-kimball-model)
-  - [Dimensional Bus Matrix](modelling_framework.md#dimensional-bus-matrix)
-- [Semantic Layers](modelling_framework.md#semantic-layers)
-  - [Measures and Metrics](modelling_framework.md#measures-and-metrics)
-- [Master Data and Reference Data](modelling_framework.md#master-data-and-reference-data)
-- [Hierarchies](modelling_framework.md#hierarchies)
+- [Modelling Concepts](modelling_framework.md#modelling-concepts)
+  - [Concepts (Entities)](modelling_framework.md#concepts-entities)
+  - [Perspectives](modelling_framework.md#perspectives)
+  - [Modelling levels](modelling_framework.md#modelling-levels)
+    - [Conceptual (Information) Models](modelling_framework.md#conceptual-information-models)
+      - [Subtypes and Supertypes](modelling_framework.md#subtypes-and-supertypes)
+    - [Logical (Information) Models](modelling_framework.md#logical-information-models)
+    - [Physical (Data) Models](modelling_framework.md#physical-data-models)
+- [Modelling Lifecycle](modelling_framework.md#modelling-lifecycle)
+- [Enterprise Context](modelling_framework.md#enterprise-context)
+  - [Domain Topology](modelling_framework.md#domain-topology)
+  - [Domain Models](modelling_framework.md#domain-models)
+  - [Canonical Models](modelling_framework.md#canonical-models)
+- [Specialised Model Types](modelling_framework.md#specialised-model-types)
+  - [Business Process Models](modelling_framework.md#business-process-models)
+  - [Data Warehouse Models](modelling_framework.md#data-warehouse-models)
+    - [Data Vault Model](modelling_framework.md#data-vault-model)
+    - [Dimensional (Kimball) Model](modelling_framework.md#dimensional-kimball-model)
+    - [Dimensional Bus Matrix](modelling_framework.md#dimensional-bus-matrix)
+  - [Semantic Layers](modelling_framework.md#semantic-layers)
+    - [Measures and Metrics](modelling_framework.md#measures-and-metrics)
+  - [Master Data and Reference Data](modelling_framework.md#master-data-and-reference-data)
+    - [Logical Representation](modelling_framework.md#logical-representation)
+    - [Physical Implementation](modelling_framework.md#physical-implementation)
+  - [Hierarchies](modelling_framework.md#hierarchies)
+    - [Modelling Hierarchies: Subtypes vs. Relationships](modelling_framework.md#modelling-hierarchies-subtypes-vs-relationships)
+    - [Examples](modelling_framework.md#examples)
 
 
 ## Modelling Concepts
@@ -43,7 +47,51 @@ We distinguish between business information design and technical data implementa
 
 > Some organisations use "data model" as an umbrella term for all three layers, which is also acceptable.
 
-### Conceptual (Information) Models
+
+### Concepts (Entities)
+
+**Concept (Entity)** – The foundational unit of information modelling is the Core Business Concept, often referred to as an Entity.
+- A concept represents a real or abstract thing of business significance and is defined by:
+- A clear glossary definition
+- A set of attributes or properties
+- Relationships to other concepts, where applicable
+
+Concepts may be organised from multiple architectural perspectives and expressed in different types of models, each serving a distinct purpose.
+
+### Perspectives
+
+**Domains** decompose the enterprise into functional or capability-based areas of responsibility.
+
+- Concepts may be referenced within the scope of one or more domains
+- For governance purposes, each concept must have one and only one domain owner
+- Domain ownership establishes accountability for definition, quality, and change
+- See: [Domain Models](modelling_framework.md#domain-models)
+
+**Subject areas**  describe the enterprise information space, organised by broad information topics.
+
+- Subject areas cut across domains and systems
+- They may loosely align to business functions in some cases, but are not synonymous with functions or organisational structures
+- Subject areas are primarily an information classification construct, not a governance boundary
+
+The **Enterprise** Data Model (EDM) describes concepts that are materially relevant across the organisation.
+
+- Focus is placed on concepts, definitions, and standards that are:
+- Used by multiple domains
+- Implemented across multiple systems
+- Required for enterprise-wide integration and reporting
+- The EDM forms a primary foundation for interoperability, consistency, and reuse
+
+A **Solution (or System)** Architecture is scoped to a specific business context, process set, and delivery objective.
+Solutions refine and apply concepts within a defined scope
+They frequently act as a validation and elaboration point for subject areas and enterprise concepts
+Solution models must align to, and not redefine, enterprise and domain concepts
+
+### Modelling levels
+
+Concepts may be expressed at multiple modelling levels, depending on intent and audience.
+Conceptual and logical modelling are informational in nature, even when labelled “data models”. Physical models are data models
+
+#### Conceptual (Information) Models
 
 > For naming standards and conventions, see [Conceptual Models](modelling_standards_and_conventions.md#conceptual-models) in Modelling Standards and Conventions.
 
@@ -63,7 +111,7 @@ Conceptual models represent business meaning without implementation concerns.
 
 > Use the **business glossary** to map domain-specific terms as synonyms to canonical enterprise terms.
 
-#### Subtypes and Supertypes
+##### Subtypes and Supertypes
 
 **Choosing the Right Level:**
 
@@ -79,7 +127,7 @@ Conceptual models represent business meaning without implementation concerns.
 > Avoid multiple classification hierarchies; choose the primary classification dimension.
 
 
-### Logical (Information) Models
+#### Logical (Information) Models
 
 > For naming standards and conventions, see [Logical Models](modelling_standards_and_conventions.md#logical-models) in Modelling Standards and Conventions.
 
@@ -93,7 +141,7 @@ Logical models extend conceptual models with structure and precision while remai
 - **Attribute definitions:** Clear definitions and business rules
 - **Normalisation:** Applied where relevant for data integrity
 
-### Physical (Data) Models 
+#### Physical (Data) Models 
 
 > For naming standards and conventions, see [Physical Models](modelling_standards_and_conventions.md#physical-models) in Modelling Standards and Conventions.
 
@@ -108,6 +156,34 @@ Physical models implement conceptual and logical models in specific technologies
 - **Key-Value:** Simple stores optimised for speed and scale. Used in DynamoDB, Cosmos DB, Redis.
 
 > **Note:** Physical models often exist without documented conceptual/logical models, but these can be reverse-engineered to understand business meaning.
+
+## Modelling Lifecycle
+
+Recommended approach:
+
+- Enterprise and domain models define the authoritative concepts, meaning, ownership, and standards for the organisation
+- Solution models apply and extend those concepts to meet specific project needs
+- Solutions depend on enterprise and domain models for consistency, reuse, and interoperability
+- Enterprise and domain models depend on solutions to validate, refine, and evolve based on real delivery experience
+- Governance controls the feedback loop, promoting solution learnings to domain or enterprise level where they are materially reusable
+- The relationship is iterative and cumulative: each project strengthens the enterprise baseline over time
+
+**Top down:**
+
+- Start with industry reference model
+- Engage business domains to refine domain models
+- Review existing reports and documentation
+
+**Middle out:**
+
+- Start with use case requirements
+- Deep dive business processes and associated concepts
+- Reconcile business concepts with actual source data
+
+**Bottom up:**
+
+- Infer logical and conceptual models from applications, data and metadata
+
 
 ## Enterprise Context
 
